@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.search" >
+
+	<!-- 아이디 찾기 -->
+	<select id="selectUserId"
+		resultType="kr.co.sist.user.search.domain.SearchIdDomain"
+		parameterType="kr.co.sist.user.search.vo.SearchIdVO" >
+		<choose>
+			<when test='searchType == "M"'>
+				select m_id, M_REGISTRATION_DATE from member
+				where m_name = #{ M_NAME } and m_email= #{ M_EMAIL }
+			</when>
+			<otherwise>
+				select cm_id, CM_CO_REGISTRATION_DATE from company_member
+				where cm_name = #{ CO_NAME } and CM_CO_REGISTRATION_NUM = #{ CO_WORKNUM }
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="selectUser"
+		resultType="String"
+		parameterType="kr.co.sist.user.search.vo.SearchPassVO" >
+		<choose>
+			<when test='searchType == "M"'>
+				select m_id from member
+				where m_id = #{ M_ID } and m_name = #{ M_NAME } and m_email= #{ M_EMAIL }
+			</when>
+			<otherwise>
+				select cm_id from company_member
+				where cm_id = #{ CO_ID } and cm_name = #{ CO_NAME } and CM_CO_REGISTRATION_NUM= #{ CO_WORKNUM }
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!-- 새 비밀번호 설정 -->
+	<update id="updatePass"
+		parameterType="kr.co.sist.user.search.vo.NewPassVO" >
+		<choose>
+			<when test='searchType == "M"'>
+				update member
+				set m_pw = #{ M_PASS }
+				where m_id = #{ M_ID }
+			</when>
+			<otherwise>
+				update company_member
+				set cm_pw = #{ M_PASS }
+				where cm_id = #{ M_ID }
+			</otherwise>
+		</choose>
+	</update>
+</mapper>

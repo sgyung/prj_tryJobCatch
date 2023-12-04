@@ -52,9 +52,4 @@ public class MyBatisHandler {
 		
 	}//closeHandler
 	
-	public static void main(String[] args) {
-		MyBatisHandler mbh = MyBatisHandler.getInstance();
-		System.out.println(mbh.getMyBatisHandler("kr/co/sist/dao/mybatis-config.xml", false));
-	}
-	
 }

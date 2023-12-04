@@ -47,7 +47,6 @@ $(function(){
 <script type="text/javascript" src="/Scripts/User/Mict.js?202311091400"></script>
 
 
-
     <div id="point">
         <div class="pointWrap">
             <div class="point-left point-box">

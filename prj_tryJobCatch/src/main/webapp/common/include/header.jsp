@@ -166,7 +166,7 @@
 
     <ul class="userNav">
         <li class="userNav-item login">
-            <a href="/Login/Login_Tot.asp?rDBName=GG&amp;re_url=/" class="txt-button login-button" onclick="GA_Event('공통_PC', 'gnb', '로그인');">로그인</a>
+            <a href="member/loginFrm.do" class="txt-button login-button" onclick="GA_Event('공통_PC', 'gnb', '로그인');">로그인</a>
         </li>
         <li class="userNav-item join">
             <a href="/Join/M_Regist" class="txt-button join-button" onclick="GA_Event('공통_PC', 'gnb', '회원가입');">회원가입</a>
