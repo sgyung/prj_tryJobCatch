@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.user.recruitment">
+<!-- 채용 총 레코드 수 구하기 & 검색 후 레코드 수 구하기 -->
+<select id="recruitmentTotalCount" resultType="int" parameterType="pVO">
+select 	count(*) cnt
+from	recruitment
+<where>
+	<if test="keyword neq null">
+		 <if test="field eq 'cm_co_name'">
+        cm_id IN (SELECT cm_id FROM company_member WHERE cm_co_name LIKE '%' || #{keyword} || '%')
+      </if>
+		<if test="field eq 'r_title'">
+		r_title like '%'|| #{ keyword } ||'%'
+		</if>
+	</if>
+</where>	
+</select>
+
+<select id="selectSearchRecruitment" resultType="red" parameterType="pVO">
+SELECT cm_co_name, cm_id, r_title, r_id, r_sal, r_end_date, LISTAGG(rf_field, ', ') WITHIN GROUP (ORDER BY rf_field) AS rf_field,
+       d_name, ind_name, education, et_name, wa_name, rec_name, cm_co_type
+FROM (
+    SELECT c.cm_co_name, c.cm_id, r.r_title, r.r_id, r.r_sal, r.r_end_date, rf.rf_field, c.cm_co_type,
+           d.d_name, ind.ind_name,
+           e.education, et.et_name,
+           wa.wa_name, rec.rec_name,
+           ROW_NUMBER() OVER (ORDER BY r.r_registration_date DESC, r.r_id DESC) AS rnum
+    FROM recruitment r
+    JOIN company_member c ON r.cm_id = c.cm_id
+    JOIN recruitment_field rf ON r.r_id = rf.r_id
+    LEFT JOIN duty d ON r.d_id = d.d_id
+    LEFT JOIN industry ind ON r.ind_id = ind.ind_id
+    LEFT JOIN education e ON r.e_id = e.e_id
+    LEFT JOIN employment_type et ON r.et_id = et.et_id
+    LEFT JOIN working_area wa ON r.wa_id = wa.wa_id
+    LEFT JOIN re_career rec ON r.rec_id = rec.rec_id
+    <if test="d_id != null || ind_id != null || e_id != null || et_id != null || wa_id != null || rec_id != null || keyword != null">
+    WHERE 
+        <if test="d_id != null">
+            r.d_id = #{d_id}
+        </if>
+        <if test="ind_id != null">
+            AND r.ind_id = #{ind_id}
+        </if>
+        <if test="e_id != null">
+            AND r.e_id = #{e_id}
+        </if>
+        <if test="et_id != null">
+            AND r.et_id = #{et_id}
+        </if>
+        <if test="wa_id != null">
+            AND r.wa_id = #{wa_id}
+        </if>
+        <if test="rec_id != null">
+            AND r.rec_id = #{rec_id}
+        </if>
+        <if test="keyword != null">
+            AND 
+            <choose>
+                <when test="field eq 'cm_co_name'">
+                    c.cm_co_name LIKE '%' || #{keyword} || '%'
+                </when>
+                <when test="field eq 'r_title'">
+                    r.r_title LIKE '%' || #{keyword} || '%'
+                </when>
+            </choose>
+        </if>
+    </if>
+) numbered_recruitment
+WHERE rnum BETWEEN #{startNum} AND #{endNum}
+GROUP BY cm_co_name, cm_id, r_title, r_id, r_sal, r_end_date, d_name, ind_name, education, et_name, wa_name, rec_name,cm_co_type
+</select>
+
+<!-- 채용상세 쿼리 -->
+<select id="selectOneRecruitment" resultType="red" parameterType="String">
+SELECT
+    r.r_id, c.cm_co_name, r.r_title, r.r_sal, r.r_start_date,
+    r.r_end_date, r.r_time, c.cm_homepage, c.cm_co_logo, c.cm_co_type, c.cm_emp_num, c.cm_establishment_year,r.r_info, 
+     LISTAGG(NVL(rf.rf_field,''), ', ') WITHIN GROUP (ORDER BY rf.rf_field) AS rf_field,
+    LISTAGG(NVL(rs.rs_name, ''), ', ') WITHIN GROUP (ORDER BY rs.rs_name) AS rs_name,
+    r.r_registration_date, r.r_registration_state,
+    r.r_recruitment_volume, d.d_name, ind.ind_name, e.education, et.et_name, wa.wa_name, rec.rec_name
+FROM recruitment r
+JOIN company_member c ON r.cm_id = c.cm_id
+JOIN recruitment_field rf ON r.r_id = rf.r_id
+JOIN recruitment_skill rs ON r.r_id = rs.r_id
+LEFT JOIN duty d ON r.d_id = d.d_id
+LEFT JOIN industry ind ON r.ind_id = ind.ind_id
+LEFT JOIN education e ON r.e_id = e.e_id
+LEFT JOIN employment_type et ON r.et_id = et.et_id
+LEFT JOIN working_area wa ON r.wa_id = wa.wa_id
+LEFT JOIN re_career rec ON r.rec_id = rec.rec_id
+WHERE r.r_id = #{r_id}
+GROUP BY
+    r.r_id, c.cm_co_name, r.r_title, r.r_sal, r.r_start_date,
+    r.r_end_date, r.r_time, c.cm_homepage, c.cm_co_logo, c.cm_co_type, c.cm_emp_num, c.cm_establishment_year, 
+    r.r_registration_date, r.r_registration_state,
+    r.r_recruitment_volume, d.d_name, ind.ind_name, e.education, et.et_name, wa.wa_name, rec.rec_name, r.r_info
+</select>
+
+<!-- 직무 조회 쿼리 -->
+<select id="selectAllDuty" resultType="dd"> 
+select d.d_id, d.d_name,count(r.d_id) as d_cnt
+from duty d
+left join recruitment r on d.d_id = r.d_id
+group by d.d_id, d.d_name
+</select>
+
+<!-- 지역 조회 쿼리 -->
+<select id="selectAllArea" resultType="ad">
+select wa.wa_id, wa.wa_name,count(r.wa_id) as wa_cnt
+from working_area wa
+left join recruitment r on wa.wa_id = r.wa_id
+group by wa.wa_id, wa.wa_name 
+</select>
+
+<!-- 경력 조회 쿼리 -->
+<select id="selectAllCareer" resultType="cd">
+select rc.rc_id, rc.rc_name, count(r.rc_id) as rc_cnt
+from re_career rc
+left join recruitment r on rc.rc_id = r.rc_id
+group by rc.rc_id, rc.rc_name 
+</select>
+
+<!-- 산업 조회 쿼리 -->
+<select id="selectAllIndustry" resultType="id">
+select ind.ind_id, ind.ind_name,count(r.ind_id) as ind_cnt
+from industry ind
+left join recruitment r on ind.ind_id = r.ind_id
+group by ind.ind_id, ind.ind_name 
+</select>
+
+<!-- 학력 조회 쿼리 -->
+<select id="selectAllEducation" resultType="ed">
+select e.e_id, e.education,count(r.e_id) as e_cnt
+from education e
+left join recruitment r on e.e_id = r.e_id
+group by e.e_id, e.education 
+</select>
+
+<!-- 고용형태 조회 쿼리 -->
+<select id="selectAllEmploymentType" resultType="etd">
+select et.et_id, et.et_name,count(r.et_id) as et_cnt
+from employment_type et
+left join recruitment r on et.et_id = r.et_id
+group by et.et_id, et.et_name 
+</select>
+
+</mapper>

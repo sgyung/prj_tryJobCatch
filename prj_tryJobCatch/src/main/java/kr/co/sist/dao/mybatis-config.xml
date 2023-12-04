@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<properties resource="properties/database.properties"/>
+<typeAliases>
+<!-- 사용자 Main -->
+<typeAlias type="kr.co.sist.user.main.domain.MainDomain" alias="md"/>
+<typeAlias type="kr.co.sist.user.main.domain.MainNoticeDomain" alias="mnd"/>
+
+<!-- 사용자 채용정보  -->
+<typeAlias type="kr.co.sist.user.recruitment.domain.AreaDomain" alias="ad"/>
+<typeAlias type="kr.co.sist.user.recruitment.domain.CareerDomain" alias="cd"/>
+<typeAlias type="kr.co.sist.user.recruitment.domain.DutyDomain" alias="dd"/>
+<typeAlias type="kr.co.sist.user.recruitment.domain.EducationDomain" alias="ed"/>
+<typeAlias type="kr.co.sist.user.recruitment.domain.EmployeeTypeDomain" alias="etd"/>
+<typeAlias type="kr.co.sist.user.recruitment.domain.IndustryDomain" alias="id"/>
+<typeAlias type="kr.co.sist.user.recruitment.domain.RecruitmentDomain" alias="red"/>
+<typeAlias type="kr.co.sist.user.recruitment.domain.ResumeDomain" alias="rd"/>
+
+<typeAlias type="kr.co.sist.user.recruitment.vo.PageVO" alias="pVO"/>
+
+</typeAliases>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+  <!-- 선경 mapping -->
+  <mapper resource="kr/co/sist/user/main/dao/user_main_mapper.xml"/>
+  <mapper resource="kr/co/sist/user/recruitment/dao/user_recruitment_mapper.xml"/>
+  
+	<!-- 용석 mapping -->
+   <!-- <mapper resource="kr/co/sist/user/login/mapper/LoginMapper.xml"/>
+   <mapper resource="kr/co/sist/user/search/mapper/SearchMapper.xml"/> -->
+   
+  </mappers>
+</configuration>
