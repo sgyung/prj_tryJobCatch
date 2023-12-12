@@ -11,4 +11,5 @@ public class EducationDomain {
 
 	private String e_id;
 	private String education;
+	private int e_cnt;
 }

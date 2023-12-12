@@ -10,4 +10,5 @@ import lombok.ToString;
 public class AreaDomain {
 	private String wa_id;
 	private String wa_name;
+	private int wa_cnt;
 }

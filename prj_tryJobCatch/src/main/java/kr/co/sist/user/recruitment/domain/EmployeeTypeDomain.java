@@ -10,4 +10,5 @@ import lombok.ToString;
 public class EmployeeTypeDomain {
 	private String et_id;
 	private String et_name;
+	private int et_cnt;
 }

@@ -14,7 +14,7 @@ public class SearchDAO {
 	private String configPath;
 	
 	private SearchDAO() {
-		configPath = "kr/co/sist/dao/mybatis-config.xml";
+		
 	}//TestDAO
 	
 	public static SearchDAO getInstance() {
@@ -28,7 +28,7 @@ public class SearchDAO {
 	public SearchIdDomain selectUserId(SearchIdVO searchIdVO) {
 		
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
-		SqlSession ss = mbh.getMyBatisHandler(configPath, false);
+		SqlSession ss = mbh.getMyBatisHandler(false);
 		SearchIdDomain result = ss.selectOne("kr.co.sist.search.selectUserId", searchIdVO);
 		
 		mbh.closeHandler(ss);
@@ -39,7 +39,7 @@ public class SearchDAO {
 	public String selectUser(SearchPassVO searchPassVO) {
 		
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
-		SqlSession ss = mbh.getMyBatisHandler(configPath, false);
+		SqlSession ss = mbh.getMyBatisHandler(false);
 		String result = ss.selectOne("kr.co.sist.search.selectUser", searchPassVO);
 		
 		mbh.closeHandler(ss);
@@ -50,7 +50,7 @@ public class SearchDAO {
 	public int updateNewPass(NewPassVO newPassVO) {
 		
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
-		SqlSession ss = mbh.getMyBatisHandler(configPath, false);
+		SqlSession ss = mbh.getMyBatisHandler(false);
 		int result = ss.update("kr.co.sist.search.updatePass", newPassVO);
 		
 		ss.commit();

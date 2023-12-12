@@ -9,7 +9,8 @@ import lombok.ToString;
 @ToString
 public class PageVO {
 	private int startNum;
-	private int endNum;
+	private int endNum, pageNumber, endPage, startPage, totalPage;
+	private String currentPage;
 	private String field;
 	private String keyword;
 	private String d_id;
@@ -18,4 +19,6 @@ public class PageVO {
 	private String et_id;
 	private String rec_id;
 	private String wa_id;
+	private String cm_co_type;
+
 }

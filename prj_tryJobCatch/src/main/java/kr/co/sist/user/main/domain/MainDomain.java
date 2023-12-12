@@ -10,6 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class MainDomain {
+	private String r_id;
 	private String r_title;
 	private String cm_co_name;
 	private Date r_end_date;

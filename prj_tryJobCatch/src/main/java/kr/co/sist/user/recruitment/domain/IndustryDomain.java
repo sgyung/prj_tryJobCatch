@@ -11,4 +11,5 @@ public class IndustryDomain {
 
 	private String ind_id;
 	private String ind_name;
+	private int ind_cnt;
 }

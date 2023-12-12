@@ -11,7 +11,7 @@
 
 <!-- 사용자 채용정보  -->
 <typeAlias type="kr.co.sist.user.recruitment.domain.AreaDomain" alias="ad"/>
-<typeAlias type="kr.co.sist.user.recruitment.domain.CareerDomain" alias="cd"/>
+<typeAlias type="kr.co.sist.user.recruitment.domain.RecruitmentCareerDomain" alias="cd"/>
 <typeAlias type="kr.co.sist.user.recruitment.domain.DutyDomain" alias="dd"/>
 <typeAlias type="kr.co.sist.user.recruitment.domain.EducationDomain" alias="ed"/>
 <typeAlias type="kr.co.sist.user.recruitment.domain.EmployeeTypeDomain" alias="etd"/>
@@ -19,7 +19,10 @@
 <typeAlias type="kr.co.sist.user.recruitment.domain.RecruitmentDomain" alias="red"/>
 <typeAlias type="kr.co.sist.user.recruitment.domain.ResumeDomain" alias="rd"/>
 
+<typeAlias type="kr.co.sist.user.review.domain.CorperationDomain" alias="cod"/>
+
 <typeAlias type="kr.co.sist.user.recruitment.vo.PageVO" alias="pVO"/>
+<typeAlias type="kr.co.sist.user.review.vo.ReviewPageVO" alias="rpVO"/>
 
 </typeAliases>
   <environments default="development">
@@ -37,6 +40,7 @@
   <!-- 선경 mapping -->
   <mapper resource="kr/co/sist/user/main/dao/user_main_mapper.xml"/>
   <mapper resource="kr/co/sist/user/recruitment/dao/user_recruitment_mapper.xml"/>
+  <mapper resource="kr/co/sist/user/review/dao/user_review_mapper.xml"/>
   
   <!-- 용석 mapping -->
   <mapper resource="kr/co/sist/user/login/mapper/LoginMapper.xml"/>

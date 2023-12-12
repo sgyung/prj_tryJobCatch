@@ -6,8 +6,9 @@
 
 <!-- 메인 채용 공고 리스트 -->
 <select id="selectAllRecruitment" resultType="md">
-select cm_id,cm_name,cm_establishment_year,cm_co_pic,cm_co_logo
-from company_member
+select c.cm_id, c.cm_co_name, r.r_end_date, c.cm_co_pic, c.cm_co_logo, r.r_id, r.r_title
+from company_member c
+join recruitment r on c.cm_id = r.cm_id
 </select>
 
 <!-- 메인 공지사항 -->
@@ -16,20 +17,20 @@ select n_id, n_title
 from 
 	(select n_id, n_title, row_number() over (order by n_date desc) as rnum
    from notice)
-where rnum &lt;= 10
+where rnum &lt;= 5
 </select>
 
 <!-- 메인 배너 채용공고 리스트 -->
 <select id="selectRecruitmentBanner" resultType="md">
 select
-	r.r_title, c.cm_co_name, r.r_end_date, c.cm_co_pic, c.cm_co_logo,
+	r.r_id, r.r_title, c.cm_co_name, r.r_end_date, c.cm_co_pic, c.cm_co_logo,
 	case
     when r.r_end_date - sysdate >= 0
-        then 'd-' || to_char(r.r_end_date - sysdate, 'fm999')
+        then 'D-' || to_char(r.r_end_date - sysdate, 'fm999')
         else '마감'
     end as d_day
 from (select * from recruitment order by r_end_date asc) r join company_member c on r.cm_id = c.cm_id
-where rownum &lt;= 12
+where rownum &lt;= 8
 order by r.r_end_date asc
 </select>
 

@@ -12,10 +12,9 @@ import kr.co.sist.user.main.domain.MainNoticeDomain;
 public class UserMainDAO {
 	private static UserMainDAO umDAO;
 	
-	private String configPath;
 	
 	private UserMainDAO() {
-		configPath="kr/co/sist/dao/mybatis-config.xml";
+		
 	}
 	
 	public static UserMainDAO getInstance() {
@@ -30,7 +29,7 @@ public class UserMainDAO {
 		
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		
-		SqlSession ss = mbh.getMyBatisHandler(configPath, false);
+		SqlSession ss = mbh.getMyBatisHandler(false);
 		
 		list = ss.selectList("kr.co.sist.user.main.selectAllRecruitment");
 		mbh.closeHandler(ss);
@@ -43,7 +42,7 @@ public class UserMainDAO {
 		
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		
-		SqlSession ss = mbh.getMyBatisHandler(configPath, false);
+		SqlSession ss = mbh.getMyBatisHandler(false);
 		
 		list = ss.selectList("kr.co.sist.user.main.selectAllNotice");
 		mbh.closeHandler(ss);
@@ -51,12 +50,12 @@ public class UserMainDAO {
 		return list;
 	}
 	
-	public List<MainNoticeDomain> selectRecruitmentBanner() throws PersistenceException{
-		List<MainNoticeDomain> list = null;
+	public List<MainDomain> selectRecruitmentBanner() throws PersistenceException{
+		List<MainDomain> list = null;
 		
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		
-		SqlSession ss = mbh.getMyBatisHandler(configPath, false);
+		SqlSession ss = mbh.getMyBatisHandler(false);
 		
 		list = ss.selectList("kr.co.sist.user.main.selectRecruitmentBanner");
 		mbh.closeHandler(ss);
@@ -66,6 +65,6 @@ public class UserMainDAO {
 	
 	public static void main(String[] args) {
 		UserMainDAO.getInstance().selectAllRecruitment();
-		System.out.println(UserMainDAO.getInstance().selectRecruitmentBanner().toString());
+		System.out.println(UserMainDAO.getInstance().selectRecruitmentBanner());
 	}
 }

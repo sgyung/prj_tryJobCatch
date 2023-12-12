@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.user.review">
+<select id="reviewTotalCount" resultType="int" parameterType="java.util.HashMap">
+    SELECT COUNT(*) FROM (
+        SELECT
+            cm.cm_co_name, cm.cm_co_logo, cm.cm_industry, cm.cm_id,
+            rec.r_title, rec.r_id, rec.r_start_date, rec.r_end_date, r.rv_id,
+            ROW_NUMBER() OVER (ORDER BY r.rv_id) AS rnum
+        FROM
+            review r
+        JOIN
+            company_member cm ON r.cm_id = cm.cm_id
+        LEFT JOIN
+            career_growth_evaluation cge ON r.rv_id = cge.rv_id
+        LEFT JOIN
+            career_growth cg ON cge.cg_id = cg.cg_id
+        LEFT JOIN
+            organizational_cltr_evltn oce ON r.rv_id = oce.rv_id
+        LEFT JOIN
+            organizational_culture oc ON oce.oc_id = oc.oc_id
+        LEFT JOIN
+            welfare_eval we ON r.rv_id = we.rv_id
+        LEFT JOIN
+            welfare w ON we.w_id = w.w_id
+        LEFT JOIN
+            work_life_balance_evaluation wlbe ON r.rv_id = wlbe.rv_id
+        LEFT JOIN
+            work_life_balance wlb ON wlbe.wlb_id = wlb.wlb_id
+        LEFT JOIN
+            annual_salary_evaluation ase ON r.rv_id = ase.rv_id
+        LEFT JOIN
+            annual_salary asa ON ase.as_id = asa.as_id
+        LEFT JOIN
+            job_stability_eval jse ON r.rv_id = jse.rv_id
+        LEFT JOIN
+            job_stability js ON jse.js_id = js.js_id
+        INNER JOIN
+            recruitment rec ON cm.cm_id = rec.cm_id
+ <if test="annual_salary != null || work_life_balance != null || organizational_culture != null || welfareList != null || job_stability != null || career_growth != null">
+            <where>
+                <trim prefixOverrides="AND">
+                    <if test="annual_salary != null">
+                        <foreach collection="annual_salary" item="salary" separator="AND">
+                            ${salary} = 'Y'
+                        </foreach>
+                    </if>
+                    
+                    <if test="work_life_balance != null">
+                        <foreach collection="work_life_balance" item="balance" separator="AND">
+                            ${balance} = 'Y'
+                        </foreach>
+                    </if>
+                    
+                    <if test="organizational_culture != null">
+                        <foreach collection="organizational_culture" item="culture" separator="AND">
+                            ${culture} = 'Y'
+                        </foreach>
+                    </if>
+                    
+                    <if test="welfareList != null">
+                        <foreach collection="welfareList" item="welfare" separator="AND">
+                            ${welfare} = 'Y'
+                        </foreach>
+                    </if>
+                    
+                    <if test="job_stability != null">
+                        <foreach collection="job_stability" item="stability" separator="AND">
+                            ${stability} = 'Y'
+                        </foreach>
+                    </if>
+                    
+                    <if test="career_growth != null">
+                        <foreach collection="career_growth" item="career" separator="AND">
+                            ${career} = 'Y'
+                        </foreach>
+                    </if>
+                </trim>
+            </where>
+        </if>
+    ) total
+</select>
+
+<select id="selectSearchReview" resultType="cod" parameterType="java.util.HashMap">
+    SELECT
+        numbered_data.r_id, numbered_data.cm_id, numbered_data.r_title,
+        numbered_data.r_start_date, numbered_data.r_end_date,
+        numbered_data.cm_co_name, numbered_data.cm_industry, numbered_data.cm_co_logo
+    FROM (
+        SELECT
+            cm.cm_co_name, cm.cm_co_logo, cm.cm_industry, cm.cm_id,
+            rec.r_title, rec.r_id, rec.r_start_date, rec.r_end_date,r.rv_id,
+            ROW_NUMBER() OVER (ORDER BY r.rv_id) AS rnum
+        FROM
+            review r
+        JOIN
+            company_member cm ON r.cm_id = cm.cm_id
+        LEFT JOIN
+            career_growth_evaluation cge ON r.rv_id = cge.rv_id
+        LEFT JOIN
+            career_growth cg ON cge.cg_id = cg.cg_id
+        LEFT JOIN
+            organizational_cltr_evltn oce ON r.rv_id = oce.rv_id
+        LEFT JOIN
+            organizational_culture oc ON oce.oc_id = oc.oc_id
+        LEFT JOIN
+            welfare_eval we ON r.rv_id = we.rv_id
+        LEFT JOIN
+            welfare w ON we.w_id = w.w_id
+        LEFT JOIN
+            work_life_balance_evaluation wlbe ON r.rv_id = wlbe.rv_id
+        LEFT JOIN
+            work_life_balance wlb ON wlbe.wlb_id = wlb.wlb_id
+        LEFT JOIN
+            annual_salary_evaluation ase ON r.rv_id = ase.rv_id
+        LEFT JOIN
+            annual_salary asa ON ase.as_id = asa.as_id
+        LEFT JOIN
+            job_stability_eval jse ON r.rv_id = jse.rv_id
+        LEFT JOIN
+            job_stability js ON jse.js_id = js.js_id
+        INNER JOIN
+            recruitment rec ON cm.cm_id = rec.cm_id
+        <if test="annual_salary != null || work_life_balance != null || organizational_culture != null || welfareList != null || job_stability != null || career_growth != null">
+            <where>
+                <if test="annual_salary != null">
+                        <foreach collection="annual_salary" item="salary" separator="AND">
+                            ${salary} = 'Y'
+                        </foreach>
+                </if>
+                    
+                    <if test="work_life_balance != null">
+                        <foreach collection="work_life_balance" item="balance" separator="AND">
+                            ${balance} = 'Y'
+                        </foreach>
+                    </if>
+                    
+                    <if test="organizational_culture != null">
+                        <foreach collection="organizational_culture" item="culture" separator="AND">
+                            ${culture} = 'Y'
+                        </foreach>
+                    </if>
+                    
+                    <if test="welfareList != null">
+                        <foreach collection="welfareList" item="welfare" separator="AND">
+                            ${welfare} = 'Y'
+                        </foreach>
+                    </if>
+                    
+                    <if test="job_stability != null">
+                        <foreach collection="job_stability" item="stability" separator="AND">
+                            ${stability} = 'Y'
+                        </foreach>
+                    </if>
+                    
+                    <if test="career_growth != null">
+                        <foreach collection="career_growth" item="career" separator="AND">
+                            ${career} = 'Y'
+                        </foreach>
+                    </if>
+            </where>
+        </if>
+    ) numbered_data
+    WHERE numbered_data.rnum BETWEEN #{startNum} AND #{endNum}
+</select>
+<select id="selectSalaryNum" resultType="kr.co.sist.user.review.domain.SalaryDomain" parameterType="String">
+SELECT
+        cm.cm_co_name,
+    COUNT(DISTINCT r.rv_id) AS total_review,
+    COUNT(DISTINCT ae.as_id) AS total_evaluations,
+  	SUM(CASE WHEN asal.as_sal = 'Y' THEN 1 ELSE 0 END)*100 /
+    (COUNT(r.rv_id) * 4) sal_num,
+    SUM(CASE WHEN asal.as_first_sal = 'Y' THEN 1 ELSE 0 END)*100 /
+    (COUNT(r.rv_id) * 4) firstsal_num,
+    SUM(CASE WHEN asal.as_retirement_pay = 'Y' THEN 1 ELSE 0 END)*100 /
+    (COUNT(r.rv_id) * 4) retirementpay_num,
+    SUM(CASE WHEN asal.as_bonus = 'Y' THEN 1 ELSE 0 END)*100 /
+    (COUNT(r.rv_id) * 4) bonus_num,
+    TRUNC(
+		(SUM(CASE WHEN asal.as_sal = 'Y' THEN 1 ELSE 0 END) +
+     SUM(CASE WHEN asal.as_first_sal = 'Y' THEN 1 ELSE 0 END) +
+     SUM(CASE WHEN asal.as_retirement_pay = 'Y' THEN 1 ELSE 0 END) +
+     SUM(CASE WHEN asal.as_bonus = 'Y' THEN 1 ELSE 0 END))*100 /
+    (COUNT(r.rv_id) * 4)
+		)AS total_sum
+FROM
+    company_member cm
+LEFT JOIN
+    review r ON cm.cm_id = r.cm_id
+LEFT JOIN
+    annual_salary_evaluation ae ON r.rv_id = ae.rv_id
+LEFT JOIN
+    annual_salary asal ON ae.as_id = asal.as_id
+WHERE
+    cm.cm_id = #{ cm_id }
+GROUP BY
+    cm.cm_co_name
+</select>
+
+<select id="selectBalanceNum" resultType="kr.co.sist.user.review.domain.BalanceDomain" parameterType="String">
+SELECT
+    cm.cm_co_name,
+    COUNT(DISTINCT r.rv_id) AS total_review,
+    COUNT(DISTINCT we.wlb_id) AS total_evaluation,
+    SUM(CASE WHEN w.wlb_provide = 'Y' THEN 1 ELSE 0 END)*100 /
+    (COUNT(r.rv_id) * 3) AS provide_count,
+    SUM(CASE WHEN w.wlb_gohome = 'Y' THEN 1 ELSE 0 END)*100 /
+    (COUNT(r.rv_id) * 3) AS gohome_count,
+    SUM(CASE WHEN w.wlb_break = 'Y' THEN 1 ELSE 0 END)*100 /
+    (COUNT(r.rv_id) * 3) AS break_count,
+     TRUNC(
+		(SUM(CASE WHEN w.wlb_provide = 'Y' THEN 1 ELSE 0 END) +
+     SUM(CASE WHEN w.wlb_gohome = 'Y' THEN 1 ELSE 0 END) +
+     SUM(CASE WHEN w.wlb_break = 'Y' THEN 1 ELSE 0 END))*100 /
+    (COUNT(r.rv_id) * 3) 
+		) AS total_sum
+FROM
+    company_member cm
+LEFT JOIN
+    review r ON cm.cm_id = r.cm_id
+LEFT JOIN
+    work_life_balance_evaluation we ON r.rv_id = we.rv_id
+LEFT JOIN
+    work_life_balance w ON we.wlb_id = w.wlb_id
+WHERE
+    cm.cm_id = #{ cm_id }
+GROUP BY
+    cm.cm_co_name
+</select>
+
+<select id="selectCultureNum" resultType="kr.co.sist.user.review.domain.CultureDomain" parameterType="String">
+SELECT
+    cm.cm_co_name,
+    COUNT(DISTINCT r.rv_id) AS total_review,
+    COUNT(DISTINCT oce.oc_id) AS total_oc_evaluation,
+    SUM(CASE WHEN oc.oc_team = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 6) AS team_count,
+    SUM(CASE WHEN oc.oc_clothes = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 6) AS clothes_count,
+    SUM(CASE WHEN oc.oc_meeting = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 6) AS meeting_count,
+    SUM(CASE WHEN oc.oc_work = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 6) AS work_count,
+    SUM(CASE WHEN oc.oc_system = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 6) AS system_count,
+    SUM(CASE WHEN oc.oc_culture = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 6) AS culture_count,
+     TRUNC(
+        (SUM(CASE WHEN oc.oc_team = 'Y' THEN 1 ELSE 0 END) +
+         SUM(CASE WHEN oc.oc_clothes = 'Y' THEN 1 ELSE 0 END) +
+         SUM(CASE WHEN oc.oc_meeting = 'Y' THEN 1 ELSE 0 END) +
+         SUM(CASE WHEN oc.oc_work = 'Y' THEN 1 ELSE 0 END)+
+         SUM(CASE WHEN oc.oc_system = 'Y' THEN 1 ELSE 0 END)+
+         SUM(CASE WHEN oc.oc_culture = 'Y' THEN 1 ELSE 0 END)) * 100 /
+        (COUNT(r.rv_id) * 6)
+    ) AS total_sum
+FROM
+    company_member cm
+LEFT JOIN
+    review r ON cm.cm_id = r.cm_id
+LEFT JOIN
+    organizational_cltr_evltn oce ON r.rv_id = oce.rv_id
+LEFT JOIN
+    organizational_culture oc ON oce.oc_id = oc.oc_id
+WHERE
+    cm.cm_id = #{ cm_id }
+GROUP BY
+    cm.cm_co_name
+
+</select>
+
+<select id="selectStabilityNum" resultType="kr.co.sist.user.review.domain.StabilityDomain" parameterType="String">
+SELECT
+    cm.cm_co_name,
+    COUNT(DISTINCT r.rv_id) AS total_review,
+    COUNT(DISTINCT jse.js_id) AS total_evaluation,
+    SUM(CASE WHEN js.js_grow_co = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 3) AS grow_co_count,
+    SUM(CASE WHEN js.js_mgmt_vision = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 3) AS mgmt_vision_count,
+    SUM(CASE WHEN js.js_best = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 3) AS best_count,
+    TRUNC(
+        (SUM(CASE WHEN js.js_grow_co = 'Y' THEN 1 ELSE 0 END) +
+         SUM(CASE WHEN js.js_mgmt_vision = 'Y' THEN 1 ELSE 0 END) +
+         SUM(CASE WHEN js.js_best = 'Y' THEN 1 ELSE 0 END)) * 100 /
+        (COUNT(r.rv_id) * 3)
+    ) AS total_sum
+FROM
+    company_member cm
+LEFT JOIN
+    review r ON cm.cm_id = r.cm_id
+LEFT JOIN
+    job_stability_eval jse ON r.rv_id = jse.rv_id
+LEFT JOIN
+    job_stability js ON jse.js_id = js.js_id
+WHERE
+    cm.cm_id = #{ cm_id }
+GROUP BY
+    cm.cm_co_name
+
+</select>
+
+<select id="selectWelfareNum" resultType="kr.co.sist.user.review.domain.WelfareDomain" parameterType="String">
+SELECT
+    cm.cm_co_name,
+    COUNT(DISTINCT r.rv_id) AS total_review,
+    COUNT(DISTINCT we.w_id) AS total_evaluation,
+    SUM(CASE WHEN w.w_study = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 5) AS study_count,
+    SUM(CASE WHEN w.w_spply = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 5) AS spply_count,
+    SUM(CASE WHEN w.w_holiday_bonus = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 5) AS holiday_bonus_count,
+    SUM(CASE WHEN w.w_vacation_bonus = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 5) AS vacation_bonus_count,
+    SUM(CASE WHEN w.w_stock_option = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 5) AS stock_option_count,
+    TRUNC(
+        (SUM(CASE WHEN w.w_study = 'Y' THEN 1 ELSE 0 END) +
+         SUM(CASE WHEN w.w_spply = 'Y' THEN 1 ELSE 0 END) +
+         SUM(CASE WHEN w.w_holiday_bonus = 'Y' THEN 1 ELSE 0 END) +
+         SUM(CASE WHEN w.w_vacation_bonus = 'Y' THEN 1 ELSE 0 END) +
+         SUM(CASE WHEN w.w_stock_option = 'Y' THEN 1 ELSE 0 END)) * 100 /
+        (COUNT(r.rv_id) * 5)
+    ) AS total_sum
+FROM
+    company_member cm
+LEFT JOIN
+    review r ON cm.cm_id = r.cm_id
+LEFT JOIN
+    welfare_eval we ON r.rv_id = we.rv_id
+LEFT JOIN
+    welfare w ON we.w_id = w.w_id
+WHERE
+    cm.cm_id = #{ cm_id }
+GROUP BY
+    cm.cm_co_name
+</select>
+
+<select id="selectReviewCareerNum" resultType="kr.co.sist.user.review.domain.ReviewCareerDomain" parameterType="String">
+SELECT
+    cm.cm_co_name,
+    COUNT(DISTINCT r.rv_id) AS total_review,
+    COUNT(DISTINCT cge.cg_id) AS total_evaluation,
+    SUM(CASE WHEN cg.cg_fair_evaluation = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 3) AS fair_evaluation_count,
+    SUM(CASE WHEN cg.cg = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 3) AS career_growth_count,
+    SUM(CASE WHEN cg.cg_capable_colleague = 'Y' THEN 1 ELSE 0 END) * 100 /
+        (COUNT(r.rv_id) * 3) AS capable_colleague_count,
+     TRUNC(
+        (SUM(CASE WHEN cg.cg_fair_evaluation = 'Y' THEN 1 ELSE 0 END) +
+         SUM(CASE WHEN cg.cg = 'Y' THEN 1 ELSE 0 END) +
+         SUM(CASE WHEN cg.cg_capable_colleague = 'Y' THEN 1 ELSE 0 END)) * 100 /
+        (COUNT(r.rv_id) * 3)
+    ) AS total_sum
+FROM
+    company_member cm
+LEFT JOIN
+    review r ON cm.cm_id = r.cm_id
+LEFT JOIN
+    career_growth_evaluation cge ON r.rv_id = cge.rv_id
+LEFT JOIN
+    career_growth cg ON cge.cg_id = cg.cg_id
+WHERE
+    cm.cm_id = #{ cm_id }
+GROUP BY
+    cm.cm_co_name
+</select>
+
+<select id="selectCorperation" resultType="kr.co.sist.user.review.domain.CorperationDomain" parameterType="String">
+SELECT
+    cm_co_name,
+    cm_industry,
+    cm_co_logo
+FROM company_member
+WHERE
+    cm_id = #{ cm_id }  
+</select>
+
+<select id="selectRecruitment" resultType="kr.co.sist.user.review.domain.CorperationDomain" parameterType="String">
+SELECT
+    COUNT(r.r_id) AS recruitmentcount,
+    r.r_id,
+    r.r_title,
+    r.r_end_date
+FROM
+    company_member cm
+LEFT JOIN
+    recruitment r ON cm.cm_id = r.cm_id AND r.r_registration_state = 'Y'
+WHERE
+    cm.cm_id = #{cm_id}
+GROUP BY
+	r.r_id, r.r_title,r.r_end_date
+</select>
+</mapper>

@@ -1,5 +1,6 @@
 package kr.co.sist.user.recruitment.domain;
 
+import java.sql.Clob;
 import java.sql.Date;
 
 import lombok.Getter;
@@ -31,8 +32,8 @@ public class RecruitmentDomain {
 	private String cm_homepage;
 	private int cm_emp_num;
 	private Date cm_establishment_year;
-	private String[] rf_field;
-	private String[] rs_name;
-	private Date r_registration_date;
+	private String rf_field;
+	private String rs_name;
+	private String r_registration_date;
 	private String r_registration_state;
 }

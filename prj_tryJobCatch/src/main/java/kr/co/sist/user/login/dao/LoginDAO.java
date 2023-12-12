@@ -11,10 +11,9 @@ import kr.co.sist.user.login.vo.LoginVO;
 public class LoginDAO {
 	private static LoginDAO lDAO;
 	
-	private String configPath;
 	
 	private LoginDAO() {
-		configPath = "kr/co/sist/dao/mybatis-config.xml";
+		
 	}//TestDAO
 	
 	public static LoginDAO getInstance() {
@@ -28,7 +27,7 @@ public class LoginDAO {
 	
 	public LoginDomain selectMebmer(LoginVO loginVO) throws PersistenceException {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
-		SqlSession ss = mbh.getMyBatisHandler(configPath, false);
+		SqlSession ss = mbh.getMyBatisHandler(false);
 		
 		LoginDomain loginDomain = new LoginDomain();
 		loginDomain = ss.selectOne("kr.co.sist.login.selectMember", loginVO);
