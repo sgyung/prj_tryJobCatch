@@ -12,6 +12,7 @@ public class MyBatisHandler {
 	private static MyBatisHandler mbH;
 	private static SqlSessionFactory ssf;
 	
+	
 	private MyBatisHandler() {
 		org.apache.ibatis.logging.LogFactory.useLog4J2Logging();
 	}
@@ -39,10 +40,10 @@ public class MyBatisHandler {
 		return ssf;
 	}
 
-	public SqlSession getMyBatisHandler(String config, boolean autoCommit) {
+	public SqlSession getMyBatisHandler(boolean autoCommit) {
 		SqlSession ss = null;
 		
-		ss = myBatisBuilder(config).openSession(autoCommit);
+		ss = myBatisBuilder("kr/co/sist/dao/mybatis-config.xml").openSession(autoCommit);
 		
 		return ss;
 	}//getMyBatisHandler

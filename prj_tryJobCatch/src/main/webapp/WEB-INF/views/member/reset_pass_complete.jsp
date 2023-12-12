@@ -54,7 +54,7 @@ $(function(){
 		<!-- Include virtual = "/Include/Menu/Sub/Gnb_Bar.asp" //-->
 		<div id="gnb">
 			
-				<h1><a class="logo" href="https://www.jobkorea.co.kr"><img alt="잡코리아" src="//i.jobkorea.kr/content/images/2023/common/gnb/h_logo.png"></a>
+				<h1><a class="logo" href="http://localhost/prj_tryJobCatch/main.do"><img alt="잡코리아" src="//i.jobkorea.kr/content/images/2023/common/gnb/h_logo.png"></a>
 					<span class="bar">
 						<span class="title">
 							<img src="https://www.jobkorea.co.kr/img/member/h_cc_schpwd.gif" alt="아이디 찾기">
@@ -64,10 +64,10 @@ $(function(){
 				
 			<div class="secNav">
 				<ol>
-					<li class="mn1"><a href="searchIdFrm.do"><span style="
+					<li class="mn1"><a href="http://localhost/prj_tryJobCatch/member/searchIdFrm.do"><span style="
     background-position: 0 -54px;
 "></span>아이디 찾기</a></li>
-					<li class="mn2"><a href="searchPassFrm.do"><span style="
+					<li class="mn2"><a href="http://localhost/prj_tryJobCatch/member/searchPassFrm.do"><span style="
     background-position: -143px -4px;
 "></span>비밀번호 찾기</a></li>
 					<!-- <li class="mn3"><a href="/Customer_C/ETC/CC_Inquiry.asp?OEM_No=1"><span></span>고객상담</a></li>
@@ -107,7 +107,7 @@ $(function(){
 					</div>
 				</div>
 				
-				<p class="mbrBtnFunc"><span class="mbrBtn mbrBtnLogin_1"><a href="loginFrm.do">로그인</a></span> </p>
+				<p class="mbrBtnFunc"><span class="mbrBtn mbrBtnLogin_1"><a href="http://localhost/prj_tryJobCatch/member/loginFrm.do">로그인</a></span> </p>
 			</div>
 	
 			<!--// 고객센터 문의 -->

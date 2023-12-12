@@ -5,14 +5,13 @@
 		resultType="kr.co.sist.user.login.domain.LoginDomain"
 		parameterType="kr.co.sist.user.login.vo.LoginVO" >
 		
-		
 		<choose>
 			<when test='login_type == "M"'>
-				select m_id, m_name from member
+				select m_id, m_name, m_join_condition from member
 				where m_id = #{ M_ID } and m_pw = #{ M_PW }
 			</when>
 			<otherwise>
-				select cm_id, cm_name from company_member
+				select cm_id, cm_name, cm_co_join_condition from company_member
 				where cm_id = #{ M_ID } and cm_pw = #{ M_PW }
 			</otherwise>
 		</choose>

@@ -1,6 +1,9 @@
 package kr.co.sist.user.search.service;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import kr.co.sist.common.DataEncrypt;
 import kr.co.sist.user.search.dao.SearchDAO;
 import kr.co.sist.user.search.domain.SearchIdDomain;
@@ -9,11 +12,14 @@ import kr.co.sist.user.search.vo.NewPassVO;
 import kr.co.sist.user.search.vo.SearchIdVO;
 import kr.co.sist.user.search.vo.SearchPassVO;
 
+@Component
 public class SearchService {
+	
+	@Autowired(required = false)
+	private SearchDAO sDAO;
 	
 	public SearchIdDomain searchUser(SearchIdVO searchIdVO) {
 		
-		SearchDAO sDAO = SearchDAO.getInstance();
 		SearchIdDomain userIdDomain = sDAO.selectUserId(searchIdVO);
 		
 		return userIdDomain;
@@ -22,9 +28,7 @@ public class SearchService {
 	
 	public String searchIsUser(SearchPassVO searchPassVO) {
 		
-		SearchDAO sDAO = SearchDAO.getInstance();
 		String userId = sDAO.selectUser(searchPassVO);
-		
 		
 		return userId;
 		
@@ -32,7 +36,6 @@ public class SearchService {
 	
 	public boolean resetPass(NewPassVO newPassVO) {
 		
-		SearchDAO sDAO = SearchDAO.getInstance();
 		DataEncrypt dataEncrypt = DataEncrypt.getInstance();
 		boolean resultFlag = false;
 		

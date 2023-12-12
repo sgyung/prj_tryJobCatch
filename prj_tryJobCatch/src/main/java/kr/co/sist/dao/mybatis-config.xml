@@ -42,9 +42,14 @@
   <mapper resource="kr/co/sist/user/recruitment/dao/user_recruitment_mapper.xml"/>
   <mapper resource="kr/co/sist/user/review/dao/user_review_mapper.xml"/>
   
-  <!-- 용석 mapping -->
+   <!-- 용석 mapping -->
   <mapper resource="kr/co/sist/user/login/mapper/LoginMapper.xml"/>
   <mapper resource="kr/co/sist/user/search/mapper/SearchMapper.xml"/>
+  <mapper resource="kr/co/sist/user/join/mapper/JoinMapper.xml"/>
+  <mapper resource="kr/co/sist/user/mypage/mapper/MypageMapper.xml"/>
+  <mapper resource="kr/co/sist/user/mypage/mapper/ModifyMapper.xml"/>
+  <mapper resource="kr/co/sist/user/mypage/mapper/ResumeMapper.xml"/>
+  <mapper resource="kr/co/sist/user/mypage/mapper/ApplyMapper.xml"/>
    
   </mappers>
 </configuration>

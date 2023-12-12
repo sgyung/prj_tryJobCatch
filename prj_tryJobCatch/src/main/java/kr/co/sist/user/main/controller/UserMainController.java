@@ -1,10 +1,14 @@
 package kr.co.sist.user.main.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.sist.user.main.domain.MainDomain;
@@ -15,7 +19,7 @@ import kr.co.sist.user.main.service.MainService;
 @Controller
 public class UserMainController {
 	
-	@GetMapping("/main.do")
+	@RequestMapping(value="/main.do", method={GET, POST})
 	public String goMain(Model model) {
 		
 		MainService ms = MainService.getInstance();

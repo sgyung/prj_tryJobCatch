@@ -141,8 +141,8 @@ $(function(){
 				
 			<div class="secNav">
 				<ol>
-					<li class="mn1"><a href="searchIdFrm.do"><span></span>아이디 찾기</a></li>
-					<li class="mn2"><a href="searchPassFrm.do"><span></span>비밀번호 찾기</a></li>
+					<li class="mn1"><a href="http://localhost/prj_tryJobCatch/member/searchIdFrm.do"><span></span>아이디 찾기</a></li>
+					<li class="mn2"><a href="http://localhost/prj_tryJobCatch/member/searchPassFrm.do"><span></span>비밀번호 찾기</a></li>
 					<!-- <li class="mn3"><a href="/Customer_C/ETC/CC_Inquiry.asp?OEM_No=1"><span></span>고객상담</a></li>
 					<li class="mn4 end"><a href="https://talk.naver.com/ct/wcb8l5" target="_blank" title="새창"><span></span>톡톡상담</a></li> -->
 				</ol>
@@ -159,7 +159,7 @@ $(function(){
 	<div id="container">
 		<div id="content">
 			<h1 class="skip">비밀번호 변경</h1>
-			<form id="newPassFrm" method="post" action="resetPass.do">
+			<form id="newPassFrm" method="post" action="http://localhost/prj_tryJobCatch/member/resetPass.do">
 				<input type="hidden" name="searchType" id="searchType">
 				<input type="hidden" name="M_ID" id="M_ID" >
 			<fieldset>

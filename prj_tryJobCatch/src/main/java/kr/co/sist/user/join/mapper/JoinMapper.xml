@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.join" >
+	<!-- member 회원가입 -->
+	<insert id="insertMember" parameterType="kr.co.sist.user.join.vo.MemberJoinVO">
+		insert into member(
+			M_ID,M_PW, M_NAME, M_EMAIL, M_TEL, M_ZIP, M_ADDR,
+			M_DETAIL_ADDR, M_GENDER, M_BDAY,
+			M_REGISTRATION_DATE, M_JOIN_CONDITION
+			)
+		values(
+			#{M_ID}, 
+			#{M_PW}, 
+			#{M_NAME}, 
+			#{M_EMAIL}, 
+			#{M_TEL}, 
+			#{M_ZIP}, 
+			#{M_ADDR}, 
+			#{M_DETAIL_ADDR}, 
+			#{M_GENDER}, 
+			#{M_BDAY}, 
+			SYSDATE,
+			'Y'
+			)
+	</insert>
+	
+	<!-- company_member 기업 회원가입 -->
+	<insert id="insertCompany" parameterType="kr.co.sist.user.join.vo.CompanyJoinVO">
+	insert into company_member(
+	CM_ID, CM_PW, CM_NAME, CM_TEL, CM_EMAIL, CM_CO_REGISTRATION_NUM,
+	CM_CO_NAME, CM_ZIPCODE, CM_ADDR, CM_DETAIL_ADDR,
+	CM_INDUSTRY, CM_CO_TYPE, CM_EMP_NUM, CM_ESTABLISHMENT_YEAR,
+	CM_HOMEPAGE, CM_CO_REGISTRATION_DATE,
+	CM_MONEY, CM_SALES, CM_CO_JOIN_CONDITION
+	)
+	values(
+		#{ CM_ID },
+		#{ CM_PW },
+		#{ CM_CO_NAME },
+		#{ CM_TEL },
+		#{ CM_EMAIL },
+		#{ CM_CO_REGISTRATION_NUM },
+		#{ CM_NAME },
+		#{ CM_ZIPCODE },
+		#{ CM_ADDR },
+		#{ CM_DETAIL_ADDR },
+		#{ CM_INDUSTRY },
+		#{ CM_CO_TYPE },
+		#{ CM_EMP_NUM, jdbcType=NUMERIC},
+		TO_DATE(#{CM_ESTABLISHMENT_YEAR}, 'YYYY'),
+		#{ CM_HOMEPAGE },
+		SYSDATE,
+		#{ CM_MONEY },
+		#{ CM_SALES },
+		'Y'
+	)
+	</insert>
+	
+	
+	
+	<select id="selectMbrId" resultType="String">
+		select m_id from member
+		where m_id = #{ id }
+	</select>
+	
+	<select id="selectCoId" resultType="String">
+		select cm_id from company_member
+		where cm_id = #{ id }
+	</select>
+	
+</mapper>

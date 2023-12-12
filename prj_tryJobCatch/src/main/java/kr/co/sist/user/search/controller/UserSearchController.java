@@ -1,6 +1,7 @@
 package kr.co.sist.user.search.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,9 @@ import kr.co.sist.user.search.vo.SearchPassVO;
 @Controller
 public class UserSearchController {
 	
+	@Autowired(required = false)
+	private SearchService searchService;
+	
 	@GetMapping("/member/searchIdFrm.do")
 	public String goSearchId() {
 		
@@ -37,7 +41,6 @@ public class UserSearchController {
 	@PostMapping("/member/searchId.do")
 	public String searchId(Model model, SearchIdVO searchIdVO) {
 		
-		SearchService searchService = new SearchService();
 		SearchIdDomain userIdDomain = searchService.searchUser(searchIdVO);
 		
 		
@@ -60,9 +63,6 @@ public class UserSearchController {
 	@PostMapping("/member/searchPass.do")
 	public String searchPass(Model model, SearchPassVO searchPassVO ) {
 		
-		System.out.println("------------------------");
-		System.out.println(searchPassVO.toString());
-		SearchService searchService = new SearchService();
 		String M_ID = searchService.searchIsUser(searchPassVO);
 		
 		if(M_ID == null ) {
@@ -77,7 +77,6 @@ public class UserSearchController {
 	
 	@PostMapping("/member/resetPass.do")
 	public String resetPass(Model model, NewPassVO newPassVO) {
-		SearchService searchService = new SearchService();
 		boolean resultFlag = searchService.resetPass(newPassVO);
 		
 		if(!resultFlag) {

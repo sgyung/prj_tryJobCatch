@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.mypage" >
+	<!-- 이력서count -->
+	<select id="selectResumeCnt"
+		resultType="int"
+		parameterType="String" >
+		
+		select count(MR_ID) CNT from member_resume
+		where M_ID = #{ M_ID } and delete_state='N'
+	</select>
+	
+	<!-- 지원count -->
+	<select id="selectApplyCnt"
+		resultType="int"
+		parameterType="String" >
+		
+		select count(a_id) CNT
+		from application
+		where m_id = #{ M_ID } and a_condition = 'Y'
+	</select>
+	
+	<!-- 리뷰count -->
+	<select id="selectReviewCnt"
+		resultType="int"
+		parameterType="String" >
+		
+		select count(RV_ID) CNT
+		from review
+		where m_id = #{ M_ID }
+	</select>
+	
+	<!-- 문의count -->
+	<select id="selectInquireCnt"
+		resultType="int"
+		parameterType="String" >
+		
+		select count(I_ID) CNT
+		from inquire
+		where M_ID = #{ M_ID }
+	</select>
+	
+	<!-- 회원 프로릴  -->
+	<select id="selectMbrProfile"
+		resultType="kr.co.sist.user.mypage.domain.MemberProfileDomain"
+		parameterType="String" >
+		
+		select M_PIC, MR_TITLE, MR_REGISTRATION_DATE
+		from( SELECT MR_ID, M_PIC, MR_TITLE, MR_REGISTRATION_DATE
+		FROM MEMBER MBR, MEMBER_RESUME MBRR
+		WHERE MBR.M_ID = MBRR.M_ID AND mbr.M_ID= #{ M_ID }
+		order by MR_REGISTRATION_DATE DESC)
+		where ROWNUM = 1
+	</select>
+	
+</mapper>

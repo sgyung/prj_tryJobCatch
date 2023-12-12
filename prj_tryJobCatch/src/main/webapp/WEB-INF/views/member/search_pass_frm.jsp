@@ -176,7 +176,7 @@ $(function(){
 		<!-- Include virtual = "/Include/Menu/Sub/Gnb_Bar.asp" //-->
 		<div id="gnb">
 			
-				<h1><a class="logo" href="https://www.jobkorea.co.kr"><img alt="잡코리아" src="//i.jobkorea.kr/content/images/2023/common/gnb/h_logo.png"></a>
+				<h1><a class="logo" href="http://localhost/prj_tryJobCatch/main.do"><img alt="잡코리아" src="//i.jobkorea.kr/content/images/2023/common/gnb/h_logo.png"></a>
 					<span class="bar">
 						<span class="title">
 							<img src="	https://www.jobkorea.co.kr/img/member/h_cc_schpwd.gif" alt="비밀번호 찾기">
@@ -186,8 +186,8 @@ $(function(){
 				
 			<div class="secNav">
 				<ol>
-					<li class="mn1"><a href="searchIdFrm.do"><span></span>아이디 찾기</a></li>
-					<li class="mn2"><a href="searchPassFrm.do"><span></span>비밀번호 찾기</a></li>
+					<li class="mn1"><a href="http://localhost/prj_tryJobCatch/member/searchIdFrm.do"><span></span>아이디 찾기</a></li>
+					<li class="mn2"><a href="http://localhost/prj_tryJobCatch/member/searchPassFrm.do"><span></span>비밀번호 찾기</a></li>
 					<!-- <li class="mn3"><a href="/Customer_C/ETC/CC_Inquiry.asp?OEM_No=1"><span></span>고객상담</a></li>
 					<li class="mn4 end"><a href="https://talk.naver.com/ct/wcb8l5" target="_blank" title="새창"><span></span>톡톡상담</a></li> -->
 				</ol>
@@ -210,7 +210,7 @@ $(function(){
 				<div class="mbrTplDesc">
 					<p>회원구분별로 가입 시 입력한 본인정보를 입력해 주세요.</p>
 				</div>
-				<form name="pageForm" id="searchPassFrm" method="post" action="searchPass.do" >
+				<form name="pageForm" id="searchPassFrm" method="post" action="http://localhost/prj_tryJobCatch/member/searchPass.do" >
 					<input type="hidden" id="searchType" name="searchType" value=""/>
 					<input type="hidden" id="M_EMAIL" name="M_EMAIL" value="" />
 					<input type="hidden" id="CO_WORKNUM" name="CO_WORKNUM" value="" />

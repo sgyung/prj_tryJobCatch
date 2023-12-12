@@ -20,6 +20,10 @@
 
 <script>
 $(function(){
+	var joinResultMsg = "${joinResultMsg}"
+	if( joinResultMsg != ""){
+		alert( joinResultMsg );
+	}//end if
 	
 	//Capslock alertMsg
 	 $("#M_PWD").keydown(function(e) {
@@ -93,14 +97,14 @@ $(function(){
 
 	<div id="container">
 		<div class="logtop logtop_login">
-			<p class="lnb"><a href="/">tryjobcatch홈</a> <a href="/Customer_C/CC_Main.asp">고객센터</a></p>
+			<p class="lnb"><a href="http://localhost/prj_tryJobCatch/main.do">tryjobcatch홈</a>
 		</div>
 
 		<div class="secLogin">
 			<h1 class="hd"><span class=""></span></h1>
 			<div class="logWrap" id="loginFormWrite" style="padding-right: 0;">
 				<h2 class="blind">로그인</h2>
-				<form name="form" id="loginFrm" method="post" action="login.do" >
+				<form name="form" id="loginFrm" method="post" action="http://localhost/prj_tryJobCatch/member/login.do" >
 				<fieldset class="login_form"><legend class="blind">로그인 입력폼</legend>
 					<!-- 회원선택-->
 					<input type="hidden" id="login_type" name="login_type" value="M" />
@@ -137,9 +141,9 @@ $(function(){
 
 					<div class="join">
 						<p class="sch">
-							<a href="searchIdFrm.do" target="_self">아이디 찾기</a> 
-							<a href="searchPassFrm.do" target="_self">비밀번호 찾기</a>
-							<a id=joinLink href="memberJoinFrm.do" target="_self">회원가입</a>
+							<a href="http://localhost/prj_tryJobCatch/member/searchIdFrm.do" target="_self">아이디 찾기</a> 
+							<a href="http://localhost/prj_tryJobCatch/member/searchPassFrm.do" target="_self">비밀번호 찾기</a>
+							<a id=joinLink href="http://localhost/prj_tryJobCatch/member/memberJoinFrm.do" target="_self">회원가입</a>
 						</p>
 					</div>
 				</fieldset>

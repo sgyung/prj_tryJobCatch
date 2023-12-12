@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.resume" >
+	<!-- 이미지 업데이트 -->
+	<update id="updateImg"
+		parameterType="kr.co.sist.user.mypage.vo.UploadImgVO">
+		
+		update member
+		set M_PIC = #{ M_PIC }
+		where M_ID = #{ M_ID }
+	</update>
+	<!-- 이미지 선택 -->
+	<select id="selectImg"
+		parameterType="String" 
+		resultType="String">
+		select M_PIC from member
+		where M_ID = #{ M_ID }
+	</select>
+	<!-- 이력서유무 조회 -->
+	<select id="selectResume" parameterType="String" resultType="String">
+		select MR_ID from member_resume
+		where M_ID = #{ M_ID }
+	</select>
+	
+	<!-- 이력서 -->
+	<!-- 이력서 시퀀스 -->
+	<select id="selectResumeSeq" resultType="String">
+		select 'mr_' || LPAD(mr_seq.NEXTVAL, 5, '0') MR_SEQ from dual	
+	</select>
+	<!-- 인적사항 update -->
+	<update id="updateMbrInfo" parameterType="kr.co.sist.user.mypage.vo.ResumeVO">
+		update member
+		set M_TEL = #{M_TEL}, M_ZIP = #{M_ZIP}, M_ADDR=#{M_ADDR}, M_DETAIL_ADDR=#{M_DETAIL_ADDR}
+		where M_ID = #{ M_ID }
+	</update>
+	
+	<!-- 이력서 insert -->
+	<insert id="insertResume" parameterType="kr.co.sist.user.mypage.vo.ResumeVO">
+		insert into member_resume(MR_ID, M_ID, MR_TITLE, MR_REGISTRATION_DATE)
+		values( #{ MR_ID }, 
+				 #{ M_ID }, #{ MR_TITLE }, SYSDATE
+			   )
+	</insert>
+	<!-- 이력서 update -->
+	<update id="updateResume" parameterType="kr.co.sist.user.mypage.vo.ResumeVO">
+		update member_resume
+		set MR_TITLE = #{ MR_TITLE }, MR_REGISTRATION_DATE = SYSDATE
+		where MR_ID = #{ MR_ID }
+	</update>
+	
+	<!-- 이력서 항목 delete -->
+	<!-- 스킬 -->
+	<delete id="deleteSkill" parameterType="String">
+		delete SKILL where MR_ID = #{ MR_ID }
+	</delete>
+	<!-- 학력 -->
+	<delete id="deleteAcademicAbility" parameterType="String">
+		delete ACADEMIC_ABILITY where MR_ID = #{ MR_ID }
+	</delete>
+	<!-- 경력 -->
+	<delete id="deleteCareer" parameterType="String">
+		delete CAREER where MR_ID = #{ MR_ID }
+	</delete>
+	<!-- 인턴,대외활동,교육 -->
+	<delete id="deleteIIAE" parameterType="String">
+		delete INTERN_INT_ACTY_EDU where MR_ID = #{ MR_ID }
+	</delete>
+	<!-- 자격증 -->
+	<delete id="deleteCertificate" parameterType="String">
+		delete CERTIFICATE where MR_ID = #{ MR_ID }
+	</delete>
+	<!-- 수상 -->
+	<delete id="deleteAward" parameterType="String">
+		delete AWARD where MR_ID = #{ MR_ID }
+	</delete>
+	<!-- 어학 -->
+	<delete id="deleteLanguage" parameterType="String">
+		delete LANGUAGE where MR_ID = #{ MR_ID }
+	</delete>
+	<!-- 포트폴리오 -->
+	<delete id="deletePortfolio" parameterType="String">
+		delete PORTFOLIO where MR_ID = #{ MR_ID }
+	</delete>
+	<!-- 자기소개서 -->
+	<delete id="deleteCoverLetter" parameterType="String">
+		delete COVER_LETTER where MR_ID = #{ MR_ID }
+	</delete>
+	
+	<!-- 스킬 등록 -->
+<!-- 	<insert id="insertSkill" parameterType="kr.co.sist.user.mypage.vo.ResumeVO">
+		<foreach collection="S_NAME" item="sName" separator=";" open="DECLARE BEGIN" close="; END;">
+		insert into skill(S_ID, MR_ID, M_ID, S_NAME )
+		select
+			's_' || LPAD(s_seq.NEXTVAL, 5, '0'),
+			#{MR_ID},
+			#{M_ID},
+			#{sName}
+		from dual
+		</foreach>
+	</insert> -->
+	<insert id="insertSkill" parameterType="kr.co.sist.user.mypage.vo.ResumeVO">
+		<foreach collection="S_NAME" item="sName" separator=";" open="DECLARE BEGIN" close="; END;">
+		insert into skill(S_ID, MR_ID, M_ID, S_NAME )
+		select
+		's_' || LPAD(s_seq.NEXTVAL, 5, '0'),
+			#{MR_ID},
+			#{M_ID},
+			#{sName}
+		from dual
+		</foreach>
+	</insert>
+	
+	
+	
+	<!-- 이력서 리스트 -->
+	<select id="selectResumeList"
+		parameterType="String"
+		resultType="kr.co.sist.user.mypage.domain.ResumeDomain">
+		
+		select MR_ID, MR_TITLE, MR_REGISTRATION_DATE
+		from member_resume
+		where m_id = #{M_ID} and DELETE_STATE= 'N'
+		order by MR_REGISTRATION_DATE DESC
+	</select>
+	<!-- 이력서 삭제 -->
+	<update id="deleteResume"
+		parameterType="String">
+		
+		update member_resume
+		set delete_state = 'Y'
+		where mr_id = #{ MR_ID }
+	</update>
+	
+</mapper>

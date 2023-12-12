@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.apply" >
+	
+	<!-- 지원 리스트 -->
+	<select id="selectApplyList"
+		parameterType="String"
+		resultType="kr.co.sist.user.mypage.domain.ApplyDomain">
+		
+		select a_date,     
+			a_recruitment_condition, 
+			a_id,                 
+			recruit.r_title r_title,          
+			co.cm_co_name cm_co_name,
+			R_REGISTRATION_STATE,
+			R_END_DATE               
+		from application app, recruitment recruit, company_member co
+		where
+			(app.R_ID = recruit.R_ID) and
+			(co.cm_id = recruit.cm_id) and
+			m_id = #{ M_ID } and a_condition ='Y'
+		order by a_date DESC
+	</select>
+	
+	<update id="updateApplyState"
+		parameterType="String">
+		
+		update application
+		set a_condition = 'N'
+		where a_id = #{APP_ID}
+	
+	</update>
+
+</mapper>

@@ -29,11 +29,39 @@
     box-sizing: border-box;
     text-align: center;
     }
+    
+    #idDupCheck {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 150px;
+    height: 60px;
+    border-left: 1px solid #ddd;
+    background-color: #f2f4f7;
+    box-sizing: border-box;
+    text-align: center;
+    }
 	
 	.mbrRegist i.icon.required {
     margin-left: 5px;
     font-size: 16px;
     color: #ff3333;
+}
+
+.mbrRegist .policy label.chk.checked:after {
+  background-position : 0 -253px !important/* 체크됐을 때의 스타일 설정 */
+}
+
+.mbrRegist .policy label.chk.no:after {
+	background-position: 0 -283px !important;
+}
+
+.mbrRegist .policy .policy_check_all label.allChecked:after{
+	background-position: 0 -439px !important;
+}
+.mbrRegist .policy .policy_check_all label.noAll:after{
+	background-position: 0 -403px !important;
 }
 	
 </style>
@@ -42,28 +70,335 @@
 
     <link rel="SHORTCUT ICON" href="/favicon.ico?202311281400">
 
-    <link href="http://i.jobkorea.kr/content/css/ver_1/mbr/mbr_tpl-sv-202212062201.css" rel="stylesheet" type="text/css">
-    <link href="http://i.jobkorea.kr/content/css/ver_1/join/common-sv-202311081332.css" rel="stylesheet" type="text/css">
-    <link href="http://i.jobkorea.kr/content/css/ver_1/join/join-sv-202310111400.css" rel="stylesheet" type="text/css">
+    <link href="https://i.jobkorea.kr/content/css/ver_1/mbr/mbr_tpl-sv-202212062201.css" rel="stylesheet" type="text/css">
+    <link href="https://i.jobkorea.kr/content/css/ver_1/join/common-sv-202311081332.css" rel="stylesheet" type="text/css">
+    <link href="https://i.jobkorea.kr/content/css/ver_1/join/join-sv-202310111400.css" rel="stylesheet" type="text/css">
 
     
-    <script type="text/javascript" src="https://www.jobkorea.co.kr/Scripts/underscore.js" charset="utf-8"></script>
-    <script type="text/javascript" src="https://www.jobkorea.co.kr/Scripts/Member/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://i.jobkorea.kr/Scripts/underscore.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://i.jobkorea.kr/Scripts/Member/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
     
 
-    <script src="https://www.jobkorea.co.kr/Scripts/Member/join_common.js?ver=202311281400"></script>
+    <script src="https://i.jobkorea.kr/Scripts/Member/join_common.js?ver=202311281400"></script>
 
-    <script src="https://www.jobkorea.co.kr/Scripts/Member/join_account.js?ver=202311281400"></script>
+    <script src="https://i.jobkorea.kr/Scripts/Member/join_account.js?ver=202311281400"></script>
 
-
+<script type="text/javascript" src="https://www.jobkorea.co.kr/include/JS/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="https://www.jobkorea.co.kr/include/js/RegNo_Check.js"></script>
  
-    <script type="text/javascript" src="/Scripts/EchoScriptV2.js"></script>
-<meta http-equiv="origin-trial" content="A+N5HpM5gDAUeupaWw3J2yuMrpgH0IC7KtFHAqtmHkW8Vr+dPpJWuOpMNIRh3ybxyoIUKlvDQs7+VGPfYdQ/qQUAAABxeyJvcmlnaW4iOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IkZlZENtQXV0b1JlYXV0aG4iLCJleHBpcnkiOjE2OTE1MzkxOTksImlzVGhpcmRQYXJ0eSI6dHJ1ZX0="><meta http-equiv="origin-trial" content="AymqwRC7u88Y4JPvfIF2F37QKylC04248hLCdJAsh8xgOfe/dVJPV3XS3wLFca1ZMVOtnBfVjaCMTVudWM//5g4AAAB7eyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1RoaXJkUGFydHkiOnRydWV9"><script type="text/javascript" src="//t1.daumcdn.net/adfit/static/kp.js"></script><meta http-equiv="origin-trial" content="A+N5HpM5gDAUeupaWw3J2yuMrpgH0IC7KtFHAqtmHkW8Vr+dPpJWuOpMNIRh3ybxyoIUKlvDQs7+VGPfYdQ/qQUAAABxeyJvcmlnaW4iOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IkZlZENtQXV0b1JlYXV0aG4iLCJleHBpcnkiOjE2OTE1MzkxOTksImlzVGhpcmRQYXJ0eSI6dHJ1ZX0="><meta http-equiv="origin-trial" content="AymqwRC7u88Y4JPvfIF2F37QKylC04248hLCdJAsh8xgOfe/dVJPV3XS3wLFca1ZMVOtnBfVjaCMTVudWM//5g4AAAB7eyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1RoaXJkUGFydHkiOnRydWV9"><script type="text/javascript" src="//t1.daumcdn.net/adfit/static/kp.js"></script><script type="text/javascript" src="//t1.daumcdn.net/adfit/static/kp.js"></script><script type="text/javascript" src="//t1.daumcdn.net/adfit/static/kp.js"></script></head>
+    <script type="text/javascript" src="https://i.jobkorea.kr/Scripts/EchoScriptV2.js"></script>
+    
+
+<!-- 다음 우편번호 API -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script>
+    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+    function execDaumPostcode() {
+           
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('M_zipcode').value = data.zonecode;
+                document.getElementById("M_addr1").value = roadAddr;
+                document.getElementById("M_addr1").value = data.jibunAddress;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("M_addr2").focus();
+            },
+            
+            onclose: function(state) {
+                //state는 우편번호 찾기 화면이 어떻게 닫혔는지에 대한 상태 변수 이며, 상세 설명은 아래 목록에서 확인하실 수 있습니다.
+                if(state === 'FORCE_CLOSE'){
+                    //사용자가 브라우저 닫기 버튼을 통해 팝업창을 닫았을 경우, 실행될 코드를 작성하는 부분입니다.
+
+                } else if(state === 'COMPLETE_CLOSE'){
+                    //사용자가 검색결과를 선택하여 팝업창이 닫혔을 경우, 실행될 코드를 작성하는 부분입니다.
+                    //oncomplete 콜백 함수가 실행 완료된 후에 실행됩니다.
+                	$(".mbr_zipcode").find(".col_1").addClass("focus");
+                	$(".mbr_zipcode").find(".col_2").addClass("focus");
+                	$(".mbr_addr1").find(".col_1").addClass("focus");
+                	$(".mbr_addr1").find(".col_2").addClass("focus");
+                	$(".mbr_addr2").find(".col_1").addClass("focus");
+                	$(".mbr_addr2").find(".col_2").addClass("focus");
+                }
+            }
+        }).open();
+        
+        
+        		
+    }//execDaumPostcode
+</script>
+<script type="text/javascript">
+$(function(){
+	//test 값 세팅
+	$("#Corp_RegNum").val("123-10-12345");
+	$("#Corp_Name").val("testName");
+	$("#Boss_Name").val("boss");
+	$("#M_zipcode").val("34245");
+	$("#M_addr1").val("testaddr1");
+	$("#M_addr2").val("testaddr2");
+	$("#M_empCnt").val("30");
+	$("#M_startDate").val("2022");
+	$("#M_homepage").val("www.test.test");
+	$("#capital").val("500000");
+	$("#revenue").val("5000000");
+	$("#U_PWD").val("zxc8294!@");
+	$("#Mem_Name").val("jys");
+	$("#Corp_Phone").val("010-0000-0000");
+	$("#email").val("zxc8294@zxc.zxc");
+	
+	
+	$(".chk_all").click(function(){
+		if( $(this).hasClass("noAll") ){
+			$(this).removeClass("noAll")
+			$(this).addClass("allChecked")
+			
+			$(".chk").removeClass("no");
+			$(".chk").addClass("checked");
+		} else if( !$(this).hasClass("noAll") && !$(this).hasClass("allChecked") ){
+			$(this).addClass("allChecked")
+			$(".chk").addClass("checked");
+		} else {
+			$(".chk").removeClass("checked");
+			$(".chk").addClass("no");
+			$(this).removeClass("allChecked")
+			$(this).addClass("noAll");
+		}
+	})//click
+	
+	$(".chk").click(function(event){
+		// 클릭된 요소가 '내용보기'라면 실행취소
+	    if ( $(event.target).hasClass("mbrBtnPolicy") ){
+	    	return;
+	    }
+		if( $(this).hasClass("no")  ){
+			$(this).removeClass("no")
+			$(this).addClass("checked")
+		} else if( !$(this).hasClass("no") && !$(this).hasClass("checked") ){
+			$(this).addClass("checked")
+		} else 	{
+			$(this).removeClass("checked")
+			$(this).addClass("no");
+		}
+		var cnt = 0;
+		$(".chk").each(function(){
+			if( $(this).hasClass("checked") ){
+				cnt++;
+			}
+		})//each
+		//항목이 모두 체크되었을 때 전체동의 체크
+		
+		if(cnt == 3){
+			$(".chk_all").removeClass("noAll")
+			$(".chk_all").addClass("allChecked")
+		} else {
+			$(".chk_all").removeClass("allChecked")
+			$(".chk_all").addClass("noAll")
+		}
+		
+		
+	})
+	
+	//inputBox 효과
+	$(".mbr_info .row").focusin(function(){
+	    var inputData = $(this).find(".col_2 input").val();
+	
+			$(this).find(".col_1").addClass("focus");
+		    $(this).find(".col_2").addClass("focus");
+		
+		    $(this).focusout(function(){
+		    	if( $(this).find(".col_2 input").val() == "" ||
+	    			$(this).find(".col_2 select").val() == "" ){
+			    	$(this).find(".col_1").removeClass("focus");
+				    $(this).find(".col_2").removeClass("focus");
+		    	}//end if
+		    })//focusout
+	})//click
+	
+	$("#idDupCheck").click(function(){
+		var id = $("#U_ID").val();
+		if( id == ""){
+			alert("아이디를 입력해주세요.");
+			return;
+		}//end if
+		var idPattern = /^[a-z]+[a-z0-9]{5,19}$/;
+		if( !idPattern.test(id)){
+			alert("아이디는 영문 소문자, 숫자를 포함한 6~20자 이여야 합니다.");
+			return;
+		}//end if
+		
+		var param = { "id" : id };
+		$.ajax({
+			url : "http://localhost/prj_tryJobCatch/member/coIdDupCheck.do",
+			data : param,
+			dataType : "JSON",
+			type : "POST",
+			error : function(xhr){
+				alert(xhr.status);
+			},
+			success : function( jsonObj ){
+				var state = jsonObj.dupState;
+				if( state == 'Y' ){
+					alert("사용 가능한 아이디 입니다.");
+					$("#idDupState").val(state);
+					return;
+				}
+				if( state == 'N'){
+					alert("중복된 아이디 입니다.");
+					$("#idDupState").val(state);
+					$("#U_ID").val("")
+					$("#U_ID").focus();
+					return;
+				}
+			}//success
+		})//ajax
+		
+		
+	})//click
+	
+	//가입하기 버튼
+	$("#companyJoinBtn").click(function(){
+		
+		//기업형태 체크
+		var coType = $("#Corp_Type option:selected").val();
+		if( coType == ""){
+			alert("기업형태를 선택해주세요.");
+			return;
+		}//end if
+		//산업 체크
+		
+		var industry = $("#co_industry option:selected").val();
+		if( industry == "" ){
+			alert("산업을 선택해주세요.");
+			return;
+		}//end if
+		//사업자등록번호 체크
+		var registNumPtn = /^\d{3}-\d{2}-\d{5}$/;
+		var registNum = $("#Corp_RegNum").val();
+		if( !registNumPtn.test(registNum)){
+			alert("사업자 등록번호 형식을 확인해주세요. ( 000-00-00000 )");
+			return;
+		}//end if
+		//사원수 체크
+		var empCnt = $("#M_empCnt").val();
+		if( isNaN(empCnt) ){
+			alert("사원수는 숫자여야 합니다.");
+			return;
+		}//end if
+		//설립년도 체크
+		var startYear = $("#M_startDate").val();
+		if( isNaN(startYear)){
+			alert("설립년도는 숫자여야 합니다.");
+			return;
+		}//end if
+		//자본금 체크
+		var capital = $("#capital").val();
+		if( isNaN(capital) ){
+			alert("자본금은 숫자여야 합니다.");
+			return;
+		}//end if
+		var revenue = $("#revenue").val();
+		if(  isNaN(revenue) ){
+			alert("매출액은 숫자여야 합니다.");
+			return;
+		}//end if
+		
+		//아이디 중복확인 체크
+		var idDupState = $("#idDupState").val();
+		if( idDupState != 'Y'){
+			alert("아이디 중복확인을 해주세요.");
+			return;
+		}//end if
+		
+		//비밀번호 체크
+		var passwordPattern = /^(?=.*[a-z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,16}/;
+		var password = $("#U_PWD").val();
+		if( !passwordPattern.test(password)){
+			alert("비밀번호는 영문,숫자,특수기호를 조합해서 8~16자이어야 합니다.");
+			return;
+		}//end if
+		//이메일 체크
+		var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		var email = $("#email").val();
+		if( !emailPattern.test(email)){
+			alert("이메일 형식에 맞게 작성해주세요. ( example@example.com )");
+			return;
+		}//end if
+		//휴대폰번호 체크
+		var phonePattern = /^010-\d{4}-\d{4}$/;
+		var phone = $("#Corp_Phone").val();
+		if( !phonePattern.test(phone) ){
+			alert("휴대폰번호를 확인해주세요. ( 010-0000-0000 )");
+			return;
+		}//end if
+		
+		//필수입력 항목 체크ㅇ
+		var flag = false;
+		$(".mbr_info").find("input").each(function(){
+			var inputData = $(this).val();
+			
+			if( inputData == ""){
+				flag = true;
+				return
+			}//end if
+		})//each
+		if( flag ){
+			alert("필수 입력 정보를 모두 입력해주세요.");
+			return;
+		}//end if
+		
+		
+		//필수동의 항목 및 개인정보 수집 및 이용 동의 체크
+		if( !$(".chk_all").hasClass("allChecked")){
+			alert("필수동의 항목을 체크 해주세요.")
+			return;
+		}//end if
+		
+		$("#JoinFrm").submit();
+	})//click
+	
+	
+	
+	
+	
+})//ready
+
+//동의항목 클릭
+function spreadPolicy( target ){
+	var displayState = $(target).css("display");
+	var newDisplay = (displayState == 'none') ? 'block' : 'none';
+	$(target).css("display", newDisplay);
+	
+}
+	
+</script>
+ 
 <body class="jkJoin" cz-shortcut-listen="true">
     <div id="wrap">
         
 <div id="header">
-    <h1><a href="https://www.jobkorea.co.kr"><img src="https://i.jobkorea.kr/content/images/member/gnb/h_logo_jobkorea.png" alt="JOBKOREA x albamon"></a></h1>
+    <h1><a href="main.do"><img src="https://i.jobkorea.kr/content/images/member/gnb/h_logo_jobkorea.png" alt="JOBKOREA x albamon"></a></h1>
     <div class="joinTop">
         <h2>
             <span class="slogun_1">JOBKOREA x albamon</span>
@@ -72,14 +407,14 @@
 
     <h3 class="skip">글로벌 메뉴</h3>
     <ul class="gnb f_clear">
-        <li><a href="https://www.jobkorea.co.kr">홈</a></li>
-        <li><a href="/help/">고객센터</a></li>
+        <li><a href="../main.do">홈</a></li>
+        <li><a href="#">고객센터</a></li>
     </ul>
 
     <h3 class="skip">회원 형태별 가입</h3>
     <ul class="snb f_clear">
-    	<li class="person "><a href="memberJoinFrm.do?joinType=M">개인회원</a></li>
-        <li class="corp on"><a href="companyJoinFrm.do?jointType=CO">기업회원</a></li>
+    	<li class="person"><a href="memberJoinFrm.do">개인회원</a></li>
+        <li class="corp on"><a href="companyJoinFrm.do">기업회원</a></li>
     </ul>
 </div>
         
@@ -90,7 +425,7 @@
     <h3 class="skip">개인회원 가입 정보</h3>
     <fieldset>
         <legend>개인회원 가입</legend>
-<form action="/Join/M_Regist" id="frm" method="post" name="frm">            <!-- 약관 동의 -->
+<form action="http://localhost/prj_tryJobCatch/member/companyJoin.do" id="JoinFrm" method="post" name="frm">            <!-- 약관 동의 -->
 <input data-val="true" data-val-required="<p class=&quot;failure&quot;>필수 정보입니다.</p>" id="M_Id" name="M_Id" type="hidden" value=""><input id="OEM_No" name="OEM_No" type="hidden" value="1"><input id="DI_Code" name="DI_Code" type="hidden" value=""><input id="getCertifynum" name="getCertifynum" type="hidden" value=""><input id="CertifyReCall" name="CertifyReCall" type="hidden" value=""><input id="ReSubmit" name="ReSubmit" type="hidden" value=""><input id="CertifyCode" name="CertifyCode" type="hidden" value=""><input id="Aptitute_Stat" name="Aptitute_Stat" type="hidden" value=""><input id="CheckParamString" name="CheckParamString" type="hidden" value="8d3bc0d8e98202294a311db74c5eb05d"><input id="Re_Url" name="Re_Url" type="hidden" value="">            <!-- 소셜 로그인 -->
             
             <div class="row_group mbr_info">
@@ -102,18 +437,12 @@
                    </div>
                     <div class="col_2">
                         <div class="select_wrap dev-corp-type">
-                            <select id="Corp_Type" name="Corp_Type">
+                            <select id="Corp_Type" name="CM_CO_TYPE">
                                 <option value=""></option>
-                                    <option value="3">대기업</option>
-                                    <option value="4">대기업 계열사·자회사</option>
-                                    <option value="1">중소기업(300명이하)</option>
-                                    <option value="2">중견기업(300명이상)</option>
-                                    <option value="5">벤처기업</option>
-                                    <option value="6">외국계(외국 투자기업)</option>
-                                    <option value="8">외국계(외국 법인기업)</option>
-                                    <option value="7">국내 공공기관·공기업</option>
-                                    <option value="9">비영리단체·협회·교육재단</option>
-                                    <option value="10">외국 기관·비영리기구·단체</option>
+                                    <option value="대기업">대기업</option>
+                                    <option value="중견기업">중견기업</option>
+                                    <option value="중소기업">중소기업</option>
+                                    <option value="공기업">공기업</option>
                             </select>
                         </div>
                         <div class="notice_msg" style="display:none;"></div>
@@ -126,18 +455,19 @@
                    </div>
                     <div class="col_2">
                         <div class="select_wrap dev-co-industry">
-                            <select id="co_industry" name="co_industry">
+                            <select id="co_industry" name="CM_INDUSTRY">
                                 <option value=""></option>
-                                    <option value="3">대기업</option>
-                                    <option value="4">대기업 계열사·자회사</option>
-                                    <option value="1">중소기업(300명이하)</option>
-                                    <option value="2">중견기업(300명이상)</option>
-                                    <option value="5">벤처기업</option>
-                                    <option value="6">외국계(외국 투자기업)</option>
-                                    <option value="8">외국계(외국 법인기업)</option>
-                                    <option value="7">국내 공공기관·공기업</option>
-                                    <option value="9">비영리단체·협회·교육재단</option>
-                                    <option value="10">외국 기관·비영리기구·단체</option>
+                                    <option value="서비스업">서비스업</option>
+                                    <option value="금융/은행업">금융/은행업</option>
+                                    <option value="IT/정보통신업">IT/정보통신업</option>
+                                    <option value="판매/유통업">판매/유통업</option>
+                                    <option value="제조/생산/화학업">제조/생산/화학업</option>
+                                    <option value="교육업">교육업</option>
+                                    <option value="건설업">건설업</option>
+                                    <option value="의료/제약업">의료/제약업</option>
+                                    <option value="미디어/광고업">미디어/광고업</option>
+                                    <option value="문화/예술/디자인업">문화/예술/디자인업</option>
+                                    <option value="기관/협회">기관/협회</option>
                             </select>
                         </div>
                         <div class="notice_msg" style="display:none;"></div>
@@ -149,7 +479,7 @@
                             <label for="Corp_RegNum">사업자등록번호<i class="icon required" aria-hidden="hidde">*</i></label>
                         </div>
                         <div class="col_2">
-                            <input type="text" name="Corp_RegNum" id="Corp_RegNum" class="mbr_name dev-corp-num" maxlength="12" value="">
+                            <input type="text" name="CM_CO_REGISTRATION_NUM" id="Corp_RegNum" class="mbr_name dev-corp-num" maxlength="12" value="">
                             <div class="notice_msg" id="notice_msg_regnum"></div>
                         </div>
                    </div>
@@ -160,7 +490,7 @@
                                 <label class="mbr_name" for="Corp_Name">회사명<i class="icon required" aria-hidden="hidde">*</i></label>
                             </div>
                             <div class="col_2">
-                                <input class="mbr_name dev-corp-name" data-val="true" data-val-maxlength="필드 Corp_Name은(는) 최대 길이가 '50'인 문자열 또는 배열 형식이어야 합니다." data-val-maxlength-max="50" data-val-required="Corp_Name 필드가 필요합니다." id="Corp_Name" maxlength="50" name="Corp_Name" type="text" value="">
+                                <input class="mbr_name dev-corp-name" data-val="true" data-val-maxlength="필드 Corp_Name은(는) 최대 길이가 '50'인 문자열 또는 배열 형식이어야 합니다." data-val-maxlength-max="50" data-val-required="Corp_Name 필드가 필요합니다." id="Corp_Name" maxlength="50" name="CM_NAME" type="text" value="">
                                 <div class="notice_msg" id="notice_msg_corp_name"></div>
                             </div>
                         </div>
@@ -169,7 +499,7 @@
                                 <label class="mbr_name" for="Boss_Name">대표자명<i class="icon required" aria-hidden="hidde">*</i></label>
                             </div>
                             <div class="col_2">
-                                <input class="mbr_name dev-ceo-name" data-val="true" data-val-maxlength="필드 Boss_Name은(는) 최대 길이가 '20'인 문자열 또는 배열 형식이어야 합니다." data-val-maxlength-max="20" data-val-required="Boss_Name 필드가 필요합니다." id="Boss_Name" maxlength="20" name="Boss_Name" type="text" value="">
+                                <input class="mbr_name dev-ceo-name" data-val="true" data-val-maxlength="필드 Boss_Name은(는) 최대 길이가 '20'인 문자열 또는 배열 형식이어야 합니다." data-val-maxlength-max="20" data-val-required="Boss_Name 필드가 필요합니다." id="Boss_Name" maxlength="20" name="CM_CEO_NAME" type="text" value="">
                                 <div class="notice_msg" id="notice_msg_ceo_name"></div>
                             </div>
                         </div>
@@ -183,8 +513,8 @@
                         <label for="M_zipcode">회사주소<i class="icon required" aria-hidden="hidde">*</i></label>
                     </div>
                     <div class="col_2">
-                        <input type="text" id="M_zipcode" name="M_zipcode" size="4" maxlength="13" class="dev-zipcode">
-                        <input type="button" id="zipSearchBtn" value="주소검색" style="border: none; cursor: pointer;">
+                        <input type="text" id="M_zipcode" name="CM_ZIPCODE" size="4" maxlength="13" class="dev-zipcode">
+                        <input type="button" id="zipSearchBtn" onclick="execDaumPostcode()" value="주소검색" style="border: none; cursor: pointer;">
                         <div class="notice_msg" id="notice_msg_zipcode"></div>
                     </div>
                 </div>
@@ -193,7 +523,7 @@
                         <label for="M_addr1">주소<i class="icon required" aria-hidden="hidde">*</i></label>
                     </div>
                     <div class="col_2">
-                        <input type="text" id="M_addr1" name="M_addr1" size="4" maxlength="13" class="dev-addr1">
+                        <input type="text" id="M_addr1" name="CM_ADDR" size="4" maxlength="13" class="dev-addr1">
                         
                         <div class="notice_msg" id="notice_msg_addr1"></div>
                     </div>
@@ -203,7 +533,7 @@
                         <label for="M_addr2">상세주소<i class="icon required" aria-hidden="hidde">*</i></label>
                     </div>
                     <div class="col_2">
-                        <input type="text" id="M_addr2" name="M_addr2" size="4" maxlength="13" class="dev-addr2">
+                        <input type="text" id="M_addr2" name="CM_DETAIL_ADDR" size="4" maxlength="13" class="dev-addr2">
                         
                         <div class="notice_msg" id="notice_msg_addr2"></div>
                     </div>
@@ -214,7 +544,7 @@
                         <label for="M_empCnt">사원수<i class="icon required" aria-hidden="hidde">*</i></label>
                     </div>
                     <div class="col_2">
-                        <input type="text" id="M_empCnt" name="M_empCnt" size="4" maxlength="13" class="dev-empCnt">
+                        <input type="text" id="M_empCnt" name="CM_EMP_NUM" size="4" maxlength="13" class="dev-empCnt">
                         
                         <div class="notice_msg" id="notice_msg_empCnt"></div>
                     </div>
@@ -225,7 +555,7 @@
                         <label for="M_startDate">설립년도<i class="icon required" aria-hidden="hidde">*</i></label>
                     </div>
                     <div class="col_2">
-                        <input type="text" id="M_startDate" name="M_startDate" size="4" maxlength="13" class="dev-startDate">
+                        <input type="text" id="M_startDate" name="CM_ESTABLISHMENT_YEAR" size="4" maxlength="4" class="dev-startDate">
                         
                         <div class="notice_msg" id="notice_msg_startDate"></div>
                     </div>
@@ -236,7 +566,7 @@
                         <label for="M_homepage">홈페이지<i class="icon required" aria-hidden="hidde">*</i></label>
                     </div>
                     <div class="col_2">
-                        <input type="text" id="M_homepage" name="M_homepage" size="4" maxlength="13" class="dev-homepage">
+                        <input type="text" id="M_homepage" name="CM_HOMEPAGE" size="4" maxlength="13" class="dev-homepage">
                         
                         <div class="notice_msg" id="notice_msg_homepage"></div>
                     </div>
@@ -253,7 +583,7 @@
                             <div class="col_2" style="
     /* width: 70%; */
 ">
-                                <input class="mbr_name dev-corp-capital" name="Corp_capital" type="text" value="">
+                                <input class="mbr_name dev-corp-capital" id="capital" name="CM_MONEY" type="text" value="">
                                 <div class="notice_msg" id="notice_msg_corp_capital"></div>
                             </div>
                         </div>
@@ -266,7 +596,7 @@
                             <div class="col_2" style="
     width: 100%;
 ">
-                                <input class="mbr_revenue dev-co-revenue" data-val="true"  id="revenue" name="revenue" type="text" value="">
+                                <input class="mbr_revenue dev-co-revenue" data-val="true"  id="revenue" name="CM_SALES" type="text" value="">
                                 <div class="notice_msg" id="notice_msg_ceo_name"></div>
                             </div>
                         </div>
@@ -282,42 +612,26 @@
         
 			                    <!-- 기본정보 -->
 			<div class="rows">
-			    <div class="row mbr_id" style="width:300px">
+			    <div class="row mbr_id" style="width:400px">
 			        <div class="col_1">
 			            <label for="U_ID">아이디<i class="icon required" aria-hidden="hidde">*</i></label>
 			        </div>
 			        <div class="col_2">
-			            <input data-val="true" id="U_ID" maxlength="16" name="U_ID" class="dev-id" type="text" value="">
+			            <input data-val="true" id="U_ID" maxlength="20" name="CM_ID" class="dev-id" type="text" value="">
+			            <input type="hidden" id="idDupState" value="N" />
+                        <input type="button" id="idDupCheck"  value="중복확인" style="border: none; cursor: pointer;" />
 			            <div class="notice_msg" id="notice_msg_id"></div>
 			        </div>
 			    </div>
-			    <div class="row mbr_passwd">
+			    <div class="row mbr_passwd" style="width:400px">
 			        <div class="col_1">
 			            <label for="U_PWD">비밀번호<i class="icon required" aria-hidden="hidde">*</i></label>
 			        </div>
 			        <div class="col_2">
-			            <input id="U_PWD" class="dev-password" maxlength="16" name="U_PWD" type="password" style="ime-mode:disabled;" value="">
-			            <button type="button" class="btnHelp devPwdHelpBtn" title="안전한 비밀번호 작성법">?</button>
-			            <div class="lyHelp">
-			                <dl>
-			                    <dt>안전한 비밀번호 작성법</dt>
-			                    <dd>
-			                        <ol>
-			                            <li>8~16자의 영문 대소문, 숫자, 특수기호만 사용가능 (공백입력 불가)</li>
-			                            (사용 가능한 특수문자는 ! "# $ % &amp; ( ) * + , - . / : ; ? @ [ ] ^ _ { } ~ 입니다.)
-			                            <li>3자 이상 연속 영문/숫자 조합은 사용불가 (AAA. 111)</li>
-			                            <li>아이디, 반복되는 영문/숫자 조합은 사용불가 (1234, ABCD)</li>
-			                            <li>키보드의 연속 패턴은 사용하지 마세요. (ASDF) </li>
-			                            <li>비밀번호는 주기적으로 변경하여 안전하게 관리하기</li>
-			                        </ol>
-			                    </dd>
-			                </dl>
-			            </div>
+			            <input id="U_PWD" class="dev-password" maxlength="16" name="CM_PW" type="password" style="ime-mode:disabled;" value="">
 			            <div class="notice_msg" id="notice_msg_pwd"><p class="failure"></p></div>
 			        </div>
-			        <div class="col_3">
-			            <button type="button" class="mbrBtnAuth dev-password-dp"><span>표시</span></button>
-			        </div>
+			       
 			    </div>
 			</div>
 			<div class="row mbr_name">
@@ -325,22 +639,18 @@
 			        <label class="mbr_name" for="Mem_Name">가입자명<i class="icon required" aria-hidden="hidde">*</i></label>
 			    </div>
 			    <div class="col_2">
-			        <input class="mbr_name dev-name" id="Mem_Name" maxlength="12" name="Mem_Name" type="text" value="">
+			        <input class="mbr_name dev-name" id="Mem_Name" maxlength="12" name="CM_CO_NAME" type="text" value="">
 			        <div class="notice_msg" id="notice_msg_name"></div>
 			    </div>
 			</div>
 			
 			<div class="row mbr_phone">
 			    <div class="col_1">
-			        <label class="mbr_phone" for="Corp_Phone">전화번호<i class="icon required" aria-hidden="hidde">*</i></label>
+			        <label class="mbr_phone" for="Corp_Phone">전화번호 (010-0000-0000)<i class="icon required" aria-hidden="hidde">*</i></label>
 			    </div>
 			    <div class="col_2">
-			        <input class="mbr_phone dev-phone" data-val="true" id="Corp_Phone" maxlength="13" name="Corp_Phone" title="전화번호" type="text" value="">
+			        <input class="mbr_phone dev-phone" data-val="true" id="Corp_Phone" maxlength="13" name="CM_TEL" title="전화번호" type="text" value="">
 			        <div class="notice_msg" id="notice_msg_phone"><p class="failure">필수 정보입니다.</p></div>
-			        <input type="hidden" id="Corp_Phone1" name="Corp_Phone1" value="">
-			        <input type="hidden" id="Corp_Phone2" name="Corp_Phone2" value="">
-			        <input type="hidden" id="Corp_Phone3" name="Corp_Phone3" value="">
-			        <input type="hidden" id="Corp_Phone_Etc" name="Corp_Phone_Etc" value="">
 			    </div>
 			</div>
 			<div class="row mbr_email">
@@ -348,10 +658,8 @@
 			        <label for="Email_ID" class="mbr_email_id">이메일<i class="icon required" aria-hidden="hidde">*</i></label>
 			    </div>
 			    <div class="col_2">
-			        <input type="text" id="email" name="email" class="mbr_email_id dev-mail" size="8" maxlength="100" value="">
+			        <input type="text" id="email" name="CM_EMAIL" class="mbr_email_id dev-mail" size="8" maxlength="100" value="">
 			        <div class="notice_msg" id="notice_msg_mail"></div>
-			        <input type="hidden" id="Email_ID" name="Email_ID">
-			        <input type="hidden" id="Email_Addr" name="Email_Addr">
 			    </div>
 			</div>
                 </div>
@@ -365,7 +673,7 @@
 
     <div class="row policy_check_service required">
         <input type="checkbox" id="lb_chk_service" name="Service_Agree" class="mbrCheckOn devAgreeCheck" value="1">
-        <label for="lb_chk_service" class="chk_service"><strong>[필수]</strong> 이용약관 동의 <a href="#DevPolicyService" class="mbrBtnPolicy devPolicyService">내용보기</a></label>
+        <label for="lb_chk_service" class="chk_service chk"><strong>[필수]</strong> 이용약관 동의 <a href="#DevPolicyService" onclick="spreadPolicy(DevPolicyService)" class="mbrBtnPolicy devPolicyService">내용보기</a></label>
         <div id="DevPolicyService" class="policyTplBox" style="display: none;">
             <div class="pvsSec pvsCntTp">
     <ol>
@@ -818,7 +1126,7 @@
 
     <div class="row policy_check_privacy required">
         <input type="checkbox" id="lb_chk_privacy" name="Priacy_Agree" class="mbrCheckOn devAgreeCheck" value="1">
-        <label for="lb_chk_privacy" class="chk_privacy"><strong>[필수]</strong> 개인정보 수집 및 이용 동의 <a href="#DevPolicyPrivacy" class="mbrBtnPolicy devPolicyService">내용보기</a></label>
+        <label for="lb_chk_privacy" class="chk_privacy chk"><strong>[필수]</strong> 개인정보 수집 및 이용 동의 <a href="#DevPolicyPrivacy" onclick="spreadPolicy( DevPolicyPrivacy )" class="mbrBtnPolicy devPolicyService">내용보기</a></label>
         <div id="DevPolicyPrivacy" class="policyTplBox" style="display: none;">
             <div class="pvsSec pvsTpList">
     <!-- 7.0 변경 -->
@@ -862,7 +1170,7 @@
 
         <div class="row policy_check_privacy required">
             <input type="checkbox" id="lb_chk_sms" name="SMS_Agreee" class="mbrCheckOn devAgreeCheck" value="1">
-            <label for="lb_chk_sms" class="chk_sms"><strong>[필수]</strong> 문자서비스 이용약관 동의 <a href="#DevPolicySMS" class="mbrBtnPolicy devPolicyService">내용보기</a></label>
+            <label for="lb_chk_sms" class="chk_sms chk"><strong>[필수]</strong> 문자서비스 이용약관 동의 <a href="#DevPolicySMS" onclick="spreadPolicy( DevPolicySMS)" class="mbrBtnPolicy devPolicyService">내용보기</a></label>
             <div id="DevPolicySMS" class="policyTplBox" style="display: none;">
                 <div class="pvsSec pvsTpList">
     <h2 class="pvsHeading2"><strong>제1조(목적)</strong></h2>
@@ -1320,7 +1628,7 @@
             <!-- 회원 가입 버튼 -->
             <div class="row_group line_none regist_complete" style="position:relative;">
                 <div class="row">
-                    <button type="submit" class="mbrBtnRegist"><span>가입하기</span></button>
+                    <button type="button" id="companyJoinBtn" class="mbrBtnRegist"><span>가입하기</span></button>
                 </div>
             </div>
 </form>    </fieldset>

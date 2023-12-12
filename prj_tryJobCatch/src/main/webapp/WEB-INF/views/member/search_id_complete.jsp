@@ -41,105 +41,6 @@
 
 <script>
 $(function(){
-	var errMsg = "";
-	if( errMsg != ""){
-		alert(errMsg);
-	}//end if
-	
-	//search방법 선택
-	$("#mbrSearchBox").click(function(){
-		$("#mbrSearchBox").css("border", "solid 2px #002AFF");
-		$("#coSearchBox").css("border", "");
-		
-		//company폼 clear
-		$("#coSearchBox").find("input").prop("value", "");		
-		//선택되면 disabled해제
-		$("#mbrSearchBox").find("input").prop("disabled", false);
-		$("#mbrSearchBox").find("select").prop("disabled", false);
-		//맴버 폼 disabled
-		$("#coSearchBox").find("input").prop("disabled", true);
-		//searchType 설정
-		$("#searchType").val("M");
-	})//click
-	
-	$("#coSearchBox").click(function(){
-		$("#coSearchBox").css("border", "solid 2px #002AFF");
-		$("#mbrSearchBox").css("border","");
-		//선택되면 disabled해제
-		$("#coSearchBox").find("input").prop("disabled", false);
-		$("#coSearchBox").find("select").prop("disabled", false);
-		//맴버 폼 disabled
-		$("#mbrSearchBox").find("input").prop("disabled", true);
-		$("#mbrSearchBox").find("select").prop("disabled", true);
-		//searchType 설정
-		$("#searchType").val("CO");
-	})//click
-	
-	$("#searchIdBtn").click(function(){
-		if( $("#searchType").val() == "" ){
-			alert("개인회원 또는 사업자회원을 선택해주세요.");
-			return;
-		}//end if
-		
-		//searchFrm 유효성검사(Member)
-		var searchType = $("#searchType").val();
-		var flag = false;
-		
-		if( searchType == "M" ){
-			$("#mbrSearchBox").find("input").each(function(){
-				var inputValue = $(this).val();
-				var emailValue = $("#lb_email_select").val();
-				
-				if(inputValue == "" || emailValue == ""){
-					flag = true;
-				}//end if
-			})//each
-			if( flag ){
-				alert("이름과 이메일 주소를 모두 입력해주세요.");
-				return;
-			}
-			//full email
-			var email = $("#m_email_head").val() + "@" + $("#m_email_detail").val(); 
-			$("#M_EMAIL").val(email);
-		}//end if
-		
-		//searchFrm 유효성검사(Compnay)
-		if( searchType == "CO" ){
-			$("#coSearchBox").find("input").each(function(){
-				var inputValue = $(this).val();
-				
-				if(inputValue == "" ){
-					flag = true;
-				}//end if
-			})//each
-			if( flag ){
-				alert("가입자명과 사업자등록번호를 모두 입력해주세요.");
-				return;
-			}//end if
-			
-			//사업자등록번호가 숫자가 아닐때
-			var workNum1 = $("#work_rr_no1").val();
-			var workNum2 = $("#work_rr_no2").val();
-			var workNum3 = $("#work_rr_no3").val();
-			if( isNaN(workNum1) || isNaN(workNum2) || isNaN(workNum3) ){
-				alert("사업자등록번호는 숫자만 입력 가능합니다.");
-				return;
-			}//end if
-			
-			var worknum = workNum1 + "-" + workNum2 + "-" + workNum3;
-			$("#CO_WORKNUM").val(worknum);
-		}//end if
-		
-		$("#searchIdFrm").submit();
-	})//click
-	
-	//사업자등록번호 숫자만 입력가능
-	$("#work_rr_no1, #work_rr_no2, #work_rr_no3").keyup(function(){
-		if( isNaN($(this).val()) ){
-			alert("사업자등록번호는 숫자만 입력 가능합니다.");
-			$(this).val("");
-		}//end if
-	})//keydown
 	
 })//ready
 </script>
@@ -152,7 +53,7 @@ $(function(){
 		<!-- Include virtual = "/Include/Menu/Sub/Gnb_Bar.asp" //-->
 		<div id="gnb">
 			
-				<h1><a class="logo" href="https://www.jobkorea.co.kr"><img alt="잡코리아" src="//i.jobkorea.kr/content/images/2023/common/gnb/h_logo.png"></a>
+				<h1><a class="logo" href="http://localhost/prj_tryJobCatch/main.do"><img alt="잡코리아" src="//i.jobkorea.kr/content/images/2023/common/gnb/h_logo.png"></a>
 					<span class="bar">
 						<span class="title">
 							<img src="	https://www.jobkorea.co.kr/img/member/h_cc_schid.gif" alt="아이디 찾기">
@@ -162,8 +63,8 @@ $(function(){
 				
 			<div class="secNav">
 				<ol>
-					<li class="mn1"><a href="http://www.jobkorea.co.kr/Login/Search/Search_ID.asp?OEM_No=1"><span></span>아이디 찾기</a></li>
-					<li class="mn2"><a href="http://www.jobkorea.co.kr/Login/Search/search_pwd.asp?OEM_No=1"><span></span>비밀번호 찾기</a></li>
+					<li class="mn1"><a href="http://localhost/prj_tryJobCatch/member/searchIdFrm.do"><span></span>아이디 찾기</a></li>
+					<li class="mn2"><a href="http://localhost/prj_tryJobCatch/member/searchPassFrm.do"><span></span>비밀번호 찾기</a></li>
 					<!-- <li class="mn3"><a href="/Customer_C/ETC/CC_Inquiry.asp?OEM_No=1"><span></span>고객상담</a></li>
 					<li class="mn4 end"><a href="https://talk.naver.com/ct/wcb8l5" target="_blank" title="새창"><span></span>톡톡상담</a></li> -->
 				</ol>
@@ -199,8 +100,8 @@ $(function(){
 				</div>
 				
 				<p class="mbrBtnFunc">
-				<span class="mbrBtn mbrBtnLogin_1"><a href="loginFrm.do">로그인</a></span>
-				<span class="mbrBtn mbrBtnSearch_2"><a href="searchPassFrm.do">비밀번호 찾기</a></span></p>
+				<span class="mbrBtn mbrBtnLogin_1"><a href="http://localhost/prj_tryJobCatch/member/loginFrm.do">로그인</a></span>
+				<span class="mbrBtn mbrBtnSearch_2"><a href="http://localhost/prj_tryJobCatch/member/searchPassFrm.do">비밀번호 찾기</a></span></p>
 			</div>
 	
 			

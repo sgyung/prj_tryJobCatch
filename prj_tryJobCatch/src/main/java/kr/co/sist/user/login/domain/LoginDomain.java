@@ -14,6 +14,6 @@ import lombok.ToString;
 @AllArgsConstructor
 public class LoginDomain {
 	
-	private String M_ID, M_NAME, CM_ID, CM_NAME;
+	private String M_ID, M_NAME, CM_ID, CM_NAME, M_JOIN_CONDITION, CM_CO_JOIN_CONDITION;
 	
 }//class

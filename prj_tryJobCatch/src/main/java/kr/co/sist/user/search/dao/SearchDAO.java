@@ -1,6 +1,7 @@
 package kr.co.sist.user.search.dao;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Component;
 
 import kr.co.sist.dao.MyBatisHandler;
 import kr.co.sist.user.search.domain.SearchIdDomain;
@@ -8,22 +9,8 @@ import kr.co.sist.user.search.vo.NewPassVO;
 import kr.co.sist.user.search.vo.SearchIdVO;
 import kr.co.sist.user.search.vo.SearchPassVO;
 
+@Component
 public class SearchDAO {
-	private static SearchDAO sDAO;
-	
-	private String configPath;
-	
-	private SearchDAO() {
-		
-	}//TestDAO
-	
-	public static SearchDAO getInstance() {
-		if( sDAO == null ) {
-			sDAO = new SearchDAO();
-		}//end if
-		
-		return sDAO;
-	}//getInstance
 	
 	public SearchIdDomain selectUserId(SearchIdVO searchIdVO) {
 		
