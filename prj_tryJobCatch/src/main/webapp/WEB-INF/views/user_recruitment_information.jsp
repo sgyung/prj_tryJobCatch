@@ -84,7 +84,7 @@ $(function(){
 			output += "</td>";
 			output += "<td class='tplPrv'></td>";
 			output += "<td class='odd'>";
-			output += "<button type='button' class='tplBtn tplBtn_1 tplBtnOrg dev-btn-apply' onclick=\"GA_Event('상세검색_PC', '채용공고', '즉시지원')\"><span>즉시지원</span></button>";
+			output += "<button type='button' class='tplBtn tplBtn_1 tplBtnOrg dev-btn-apply' onclick='apply(\"" + jsonList.r_id + "\")'><span>즉시지원</span></button>";
 			output += "<span class='date dotum'><span class='tahoma'>~"+ jsonList.r_end_date +"</span></span>";
 			output += "</td>";
 			output += "</tr>";
@@ -156,7 +156,7 @@ $(function(){
         // 결과 세트에 li 엘리먼트가 1개 이하일 때는 "두 줄 넘쳤을 때만 나오게" 하는 클래스 제거
         if ($('#searchFrm li').length === 0) {
             $('#searchFrm .item_more').removeClass('show');
-            param = {currentPage : num};
+            param = {};
             recruitmentList(1);
             // resultSet 클래스가 있는 엘리먼트의 style display 속성 변경
             $('.resultSet').css('display', 'none');
@@ -311,6 +311,7 @@ $(function(){
 	    var ind = $(".items li.indItem").attr("value");
 	    var et = $(".items li.etItem").attr("value");
 	    
+	    
 	 	// 값이 있는 경우에만 JSON에 추가
 	    if (duty && duty.length > 0) {
 	        param.d_id = duty;
@@ -362,6 +363,7 @@ function recruitmentList(num) {
     // 클래스가 "on"인 <li>를 찾아서 텍스트 값을 변수에 저장
     if (coType === 0) {  // 여기서 0은 '전체'에 해당하는 data-tab-index 값입니다.
         param.currentPage = num;
+        delete param.cm_co_type;
     } else if(coType === 1) {
     	param.currentPage = num;
     	param.cm_co_type = "대기업";
@@ -371,7 +373,7 @@ function recruitmentList(num) {
     }else if(coType === 3) {
     	param.currentPage = num;
     	param.cm_co_type = "중소기업";
-    }else {
+    }else if(coType === 4) {
     	param.currentPage = num;
     	param.cm_co_type = "공기업";
     }
@@ -432,7 +434,7 @@ function recruitmentList(num) {
 				output += "</td>";
 				output += "<td class='tplPrv'></td>";
 				output += "<td class='odd'>";
-				output += "<button type='button' class='tplBtn tplBtn_1 tplBtnOrg dev-btn-apply' onclick=\"GA_Event('상세검색_PC', '채용공고', '즉시지원')\"><span>즉시지원</span></button>";
+				output += "<button type='button' class='tplBtn tplBtn_1 tplBtnOrg dev-btn-apply' onclick='apply(\"" + jsonList.r_id + "\")'><span>즉시지원</span></button>";
 				output += "<span class='date dotum'><span class='tahoma'>~"+ jsonList.r_end_date +"</span></span>";
 				output += "</td>";
 				output += "</tr>";
@@ -476,11 +478,24 @@ function recruitmentList(num) {
 		}//success
 	});//ajax
 	
-	function recruitmentDetail(id) {
-		location.href = "http://localhost/prj_tyrJobCatch/recruitmentDetail.do?r_id=" + id;
-	}
+	
 }
-
+	// 채용 상세로 넘어가는 이벤트
+	function recruitmentDetail(id) {
+		location.href = "http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id=" + id;
+	}
+	
+	// 지원하기 버튼 클릭
+	function apply(id) {
+	    // 새 창을 열고 지정된 URL을 로드
+	    var newWindow = window.open("http://localhost/prj_tryJobCatch/apply.do?r_id=" + id, "NewWindow", "width=600, height=800");
+	    
+	    // 새 창의 크기 및 위치를 설정 (선택적)
+	    if (newWindow) {
+	        newWindow.resizeTo(600, 800);
+	        newWindow.moveTo((window.screen.width - 600) / 2, (window.screen.height - 800) / 2);
+	    }
+	}
 </script>
     
     <link href="//i.jobkorea.kr/deploy/pc/dist/css/personal/layout/footer-sv-202311031048.css" rel="stylesheet" type="text/css">
@@ -513,13 +528,6 @@ function recruitmentList(num) {
     <h1 class="skip">메뉴별 채용공고</h1>
     <!-- Side Menu -->
 
-<div class="rcr_lnb">
-    <ul class="cateList">
-        <li><a href="/recruit/joblist?menucode=local&amp;localorder=1" class="on" onclick="GA_Event('상세검색_PC', '사이드메뉴', '지역별')">지역별</a></li>
-        <li><a href="/recruit/joblist?menucode=duty" class="" onclick="GA_Event('상세검색_PC', '사이드메뉴', '직무별')">직무별</a></li>
-        <li><a href="/recruit/joblist?menucode=industry" class="" onclick="GA_Event('상세검색_PC', '사이드메뉴', '산업별')">산업별</a></li>
-    </ul>
-</div>
     <div class="rcr_cnt" id="bbArea">
         <!-- 검색설정 -->
         

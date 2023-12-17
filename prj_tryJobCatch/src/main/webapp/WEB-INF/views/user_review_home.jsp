@@ -90,6 +90,7 @@
     .async-hide {
         opacity: 0 !important
     }
+    
 </style>
 
 
@@ -103,6 +104,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <!-- jQuery CDN -->
 <script type="text/javascript">
+var param ={};
 $(function(){
 	// 리뷰 홈 로드되면 리스트 출력
 	$.ajax({
@@ -115,7 +117,7 @@ $(function(){
 		},
 		success : function(jsonObj){
 			var output = "";
-
+			
 			$.each(jsonObj.data, function (i, jsonList) {
 			    output += '<li>';
 			    output += '<div>';
@@ -136,7 +138,7 @@ $(function(){
 			    output += '</div>';
 			    output += '</a>';
 			    output += '<div class="result-list_right">';
-			    output += '<input type="checkbox" name="like" id="like' + i + '" onclick="reviewDetail(\'' + jsonList.cm_id + '\')" >';
+			    output += '<input type="button" name="like" id="like' + i + '" onclick="reviewDetail(\'' + jsonList.cm_id + '\')">';
 			    output += '<label for="like' + i + '">리뷰보기</label>';
 			    output += '</div>';
 			    output += '</div>';
@@ -144,9 +146,13 @@ $(function(){
 			});//each
 			
 			var pageOutput = jsonObj.pageNation;
+			var resultCount = jsonObj.dataSize;
+			
 			
 			$("#output").html(output);
 			$("#pageOutput").html(pageOutput);
+			$("#resultCount").text(resultCount);
+			
 		}//success
 	});//ajax
 	
@@ -178,6 +184,15 @@ $(function(){
 
 	    // 클릭한 li 요소의 display 속성을 'none'으로 변경
 	    $parentLi.css('display', 'none');
+	    
+	 	// 체크된 체크박스 개수 확인
+	    const checkedCheckboxes = $('input[type="checkbox"]:checked');
+
+	    // 만약 체크된 체크박스가 하나도 없으면
+	    if (checkedCheckboxes.length === 0) {
+	    	param = {};
+		    reviewList(1);
+	    }
 	});
    
    $('.reset').on('click', function () {
@@ -187,30 +202,30 @@ $(function(){
 	    // 연결된 요소 숨기기
 	    $('.keyword-value li').css('display', 'none');
 	    
-	    resetSearch();
+		param = {};
 	    reviewList(1);
 	});
 
    
 // 검색 버튼에 대한 이벤트 리스너
    $("#kwrdSearch").click(function() {
-	   alert("fdfd")
        searchBtn();
        reviewList(1);
    });
    
 });//ready
 
-//검색 변수를 false로 초기화하는 함수
-function resetSearch() {
-    search = false;
-}
 
 // 검색 조건을 확인하는 함수
 function searchBtn() {
-    search = true;
+	
+    param.salary = getCheckedValues('salary');
+    param.balance = getCheckedValues('balance');
+    param.culture = getCheckedValues('culture');
+    param.welfare = getCheckedValues('welfare');
+    param.stability = getCheckedValues('stability');
+    param.career = getCheckedValues('career');
     
-    return search;
 }
 
 function getCheckedValues(groupName) {
@@ -223,22 +238,8 @@ function getCheckedValues(groupName) {
 
 function reviewList(num){
 	
-	var param = { currentPage: num };
+	param.currentPage=num;
 
-	var search = searchBtn();
-	
-	if(search){
-	    param.salary = getCheckedValues('salary');
-	    param.balance = getCheckedValues('balance');
-	    param.culture = getCheckedValues('culture');
-	    param.welfare = getCheckedValues('welfare');
-	    param.stability = getCheckedValues('stability');
-	    param.career = getCheckedValues('career');
-	}
-	
-	alert(search);
-	alert("-----------------------------"+param.balance);
-	
 	$.ajax({
 		url : "http://localhost/prj_tryJobCatch/reviewList_process.do",
 		data : param,
@@ -249,47 +250,65 @@ function reviewList(num){
 		},
 		success : function(jsonObj){
 			var output = "";
-
-			$.each(jsonObj.data, function (i, jsonList) {
-				$("#output").empty();
-			    output += '<li>';
-			    output += '<div>';
-			    output += '<a href="#void" class="result-list_left co">';
-			    output += '<div class="co-logo">';
-			    output += '<img src="http://localhost/prj_tryJobCatch/common/images/company_logo/' + jsonList.cm_co_logo + '" alt="' + jsonList.cm_co_name + '"style="width: 100%; height: 100%">';
-			    output += '<span>' + jsonList.cm_co_name + '</span>';
-			    output += '</div>';
-			    output += '<div class="co-info">';
-			    output += '<div class="co-hd ">';
-			    output += '<span class="co-name">' + jsonList.cm_co_name + '</span>';
-			    output += '</div>';
-			    output += '<div class="co-detail">';
-			    output += '<span>' + jsonList.industry + '</span>';
-			    output += '</div>';
-			    output += '<div class="co-keyword">';
-			    output += '</div>';
-			    output += '</div>';
-			    output += '</a>';
-			    output += '<div class="result-list_right">';
-			    output += '<input type="button" name="like" id="like' + i + '" onclick="reviewDetail(\'' + jsonList.cm_id + '\')">';
-			    output += '<label for="like' + i + '">리뷰보기</label>';
-			    output += '</div>';
-			    output += '</div>';
-			    output += '</li>';
-			});//each
+			
+			if (jsonObj.data.length > 0) {
+				$.each(jsonObj.data, function (i, jsonList) {
+					$("#output").empty();
+					 output += '<li>';
+					    output += '<div>';
+					    output += '<a href="#void" onclick="reviewDetail(\'' + jsonList.cm_id + '\')" class="result-list_left co">';
+					    output += '<div class="co-logo">';
+					    output += '<img src="http://localhost/prj_tryJobCatch/common/images/company_logo/' + jsonList.cm_co_logo + '" alt="' + jsonList.cm_co_name + '"style="width: 100%; height: 100%">';
+					    output += '<span>' + jsonList.cm_co_name + '</span>';
+					    output += '</div>';
+					    output += '<div class="co-info">';
+					    output += '<div class="co-hd ">';
+					    output += '<span class="co-name">' + jsonList.cm_co_name + '</span>';
+					    output += '</div>';
+					    output += '<div class="co-detail">';
+					    output += '<span>' + jsonList.industry + '</span>';
+					    output += '</div>';
+					    output += '<div class="co-keyword">';
+					    output += '</div>';
+					    output += '</div>';
+					    output += '</a>';
+					    output += '<div class="result-list_right">';
+					    output += '<input type="button" name="like" id="like' + i + '" onclick="reviewDetail(\'' + jsonList.cm_id + '\')">';
+					    output += '<label for="like' + i + '">리뷰보기</label>';
+					    output += '</div>';
+					    output += '</div>';
+					    output += '</li>';
+				});//each
+				
+			}else{
+				// 검색 결과가 없는 경우 메시지를 출력
+				 output = "<li style='text-align: center;'><p style='font-weight: bold; font-size: 20px;'>검색하신 채용정보가 없습니다.</p></li>";
+			}
 			
 			var pageOutput = jsonObj.pageNation;
+			var resultCount = jsonObj.dataSize;
 			
 			$("#output").html(output);
 			$("#pageOutput").html(pageOutput);
+			$("#resultCount").text(resultCount);
 		}//success
 	});//ajax
 }
 
 function reviewDetail(id) {
-	alert(id);
 	location.href="http://localhost/prj_tryJobCatch/reviewDetail.do?cm_id=" + id;
 			
+}
+
+function keywordFrm() {
+   // 검색어 입력란의 값을 가져옵니다.
+    var keyword = document.getElementById("search").value;
+    if (keyword.trim() === "") {
+        alert("검색어를 입력해주세요.");
+    }else{
+    	location.href="http://localhost/prj_tryJobCatch/search_corperation.do?keyword=" + keyword;
+    }
+    
 }
 </script>    
 
@@ -355,24 +374,10 @@ function reviewDetail(id) {
             <!-- 기업리뷰 검색 -->
             <dclaiv class="sec-search">
                 <h2>기업리뷰 <span class="blue">검색</span></h2>
-                <p>경험해 본 사람들의 이야기. 잡코리아 기업리뷰!</p>
+                <p>경험해 본 사람들의 이야기. TryJobCatch 기업리뷰!</p>
                 <div class="input-search" id="inputKeyword">
-                    <input type="hidden" id="OrderType" name="OrderType" value="0">
-                    <input type="search" name="search" id="search" placeholder="궁금한 기업의 리뷰를 검색해보세요!" onfocus="this.placeholder=''" onblur="this.placeholder='궁금한 기업의 리뷰를 검색해보세요!'">
-                    <button class="button button-delete" id="schDelete">삭제</button>
-                    <a href="javascript:;" id="btnSearch" class="button button-search">검색</a>
-                    <div class="input-search-list reviewSearchList" style="display: none;">
-                        <div class="recently list " id="searchRecently">
-                            <div>
-                                <p>최근 검색어</p>
-                                <button class="reset-btn allRecentlyDel">전체삭제</button>
-                            </div>
-                            <ul class="recent-list" id="searchRecentlyList"><li><a href="javascript:SetKeywordSearch('현대', 'eg')" class="keyword"><span>현대</span></a><button type="button" class="delete recentlyDel"></button></li> </ul>
-                        </div>
-                        <div class="keyword list" id="autoKeywordList" style="display:none">
-                            <ul class="nano-content"></ul>
-                        </div>
-                    </div>
+                    <input type="text" name="keyword" id="search" placeholder="궁금한 기업의 리뷰를 검색해보세요!">
+                    <a href="#" id="btnSearch" class="button button-search" onclick="keywordFrm()">검색</a>
                 </div>
             </dclaiv>
             <!-- 오늘의 인기 기업리뷰 -->
@@ -708,7 +713,7 @@ function reviewDetail(id) {
 
 <div class="search-result">
     <div class="search-result_top">
-        <p>멋진기업! 검색 결과 821건</p>
+        <p>멋진기업! 검색 결과 <span id="resultCount"></span>건</p>
         <div class="btn-recruit">
             <input type="checkbox" name="recruit" id="recruit">
             <label for="recruit">채용중</label>
@@ -756,9 +761,9 @@ function reviewDetail(id) {
         <h2 class="lnbTit">기업리뷰</h2>
         <ul>
             <!-- [개발] 메뉴 선택시 a.on 추가 -->
-            <li><a href="/Review/Home" class="on" onclick="GA_Event('기업리뷰_PC', '사이드메뉴', '기업리뷰_기업리뷰홈');">기업리뷰 홈</a></li>
+            <li><a href="http://localhost/prj_tryJobCatch/review_home.do" class="on" onclick="GA_Event('기업리뷰_PC', '사이드메뉴', '기업리뷰_기업리뷰홈');">기업리뷰 홈</a></li>
                    <!-- 레이어 팝업 호출 -->
-            <li><a href="javascript:GA_Event('기업리뷰_PC', '사이드메뉴', '기업리뷰_My기업리뷰'); btnMyReviewLink();">My 기업리뷰<span class="ico">새창</span></a></li>
+            <li><a href="http://localhost/prj_tryJobCatch/myReview.do">My 기업리뷰<span class="ico">새창</span></a></li>
         </ul>
     </div>
     

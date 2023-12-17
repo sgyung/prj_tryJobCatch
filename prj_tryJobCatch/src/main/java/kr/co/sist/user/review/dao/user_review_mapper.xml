@@ -4,166 +4,255 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.sist.user.review">
 <select id="reviewTotalCount" resultType="int" parameterType="java.util.HashMap">
-    SELECT COUNT(*) FROM (
-        SELECT
-            cm.cm_co_name, cm.cm_co_logo, cm.cm_industry, cm.cm_id,
-            rec.r_title, rec.r_id, rec.r_start_date, rec.r_end_date, r.rv_id,
-            ROW_NUMBER() OVER (ORDER BY r.rv_id) AS rnum
-        FROM
-            review r
-        JOIN
-            company_member cm ON r.cm_id = cm.cm_id
-        LEFT JOIN
-            career_growth_evaluation cge ON r.rv_id = cge.rv_id
-        LEFT JOIN
-            career_growth cg ON cge.cg_id = cg.cg_id
-        LEFT JOIN
-            organizational_cltr_evltn oce ON r.rv_id = oce.rv_id
-        LEFT JOIN
-            organizational_culture oc ON oce.oc_id = oc.oc_id
-        LEFT JOIN
-            welfare_eval we ON r.rv_id = we.rv_id
-        LEFT JOIN
-            welfare w ON we.w_id = w.w_id
-        LEFT JOIN
-            work_life_balance_evaluation wlbe ON r.rv_id = wlbe.rv_id
-        LEFT JOIN
-            work_life_balance wlb ON wlbe.wlb_id = wlb.wlb_id
-        LEFT JOIN
-            annual_salary_evaluation ase ON r.rv_id = ase.rv_id
-        LEFT JOIN
-            annual_salary asa ON ase.as_id = asa.as_id
-        LEFT JOIN
-            job_stability_eval jse ON r.rv_id = jse.rv_id
-        LEFT JOIN
-            job_stability js ON jse.js_id = js.js_id
-        INNER JOIN
-            recruitment rec ON cm.cm_id = rec.cm_id
- <if test="annual_salary != null || work_life_balance != null || organizational_culture != null || welfareList != null || job_stability != null || career_growth != null">
-            <where>
-                <trim prefixOverrides="AND">
-                    <if test="annual_salary != null">
-                        <foreach collection="annual_salary" item="salary" separator="AND">
-                            ${salary} = 'Y'
-                        </foreach>
-                    </if>
-                    
-                    <if test="work_life_balance != null">
-                        <foreach collection="work_life_balance" item="balance" separator="AND">
-                            ${balance} = 'Y'
-                        </foreach>
-                    </if>
-                    
-                    <if test="organizational_culture != null">
-                        <foreach collection="organizational_culture" item="culture" separator="AND">
-                            ${culture} = 'Y'
-                        </foreach>
-                    </if>
-                    
-                    <if test="welfareList != null">
-                        <foreach collection="welfareList" item="welfare" separator="AND">
-                            ${welfare} = 'Y'
-                        </foreach>
-                    </if>
-                    
-                    <if test="job_stability != null">
-                        <foreach collection="job_stability" item="stability" separator="AND">
-                            ${stability} = 'Y'
-                        </foreach>
-                    </if>
-                    
-                    <if test="career_growth != null">
-                        <foreach collection="career_growth" item="career" separator="AND">
-                            ${career} = 'Y'
-                        </foreach>
-                    </if>
-                </trim>
-            </where>
+   WITH RankedData AS (
+    SELECT
+        cm.cm_co_name,
+        cm.cm_co_logo,
+        cm.cm_industry,
+        cm.cm_id,
+        LISTAGG(asa.as_sal, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS as_sal,
+        LISTAGG(asa.as_first_sal, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS as_first_sal,
+        LISTAGG(asa.as_retirement_pay, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS as_retirement_pay,
+        LISTAGG(asa.as_bonus, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS as_bonus,
+        LISTAGG(cg.cg_fair_evaluation, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS cg_fair_evaluation,
+        LISTAGG(cg.cg, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS cg,
+        LISTAGG(cg.cg_capable_colleague, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS cg_capable_colleague,
+        LISTAGG(oc.oc_team, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS oc_team,
+        LISTAGG(oc.oc_clothes, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS oc_clothes,
+        LISTAGG(oc.oc_meeting, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS oc_meeting,
+        LISTAGG(oc.oc_work, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS oc_work,
+        LISTAGG(oc.oc_system, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS oc_system,
+        LISTAGG(oc.oc_culture, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS oc_culture,
+        LISTAGG(w.w_study, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS w_study,
+        LISTAGG(w.w_spply, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS w_spply,
+        LISTAGG(w.w_holiday_bonus, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS w_holiday_bonus,
+        LISTAGG(w.w_vacation_bonus, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS w_vacation_bonus,
+        LISTAGG(w.w_stock_option, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS w_stock_option,
+        LISTAGG(wlb.wlb_provide, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS wlb_provide,
+        LISTAGG(wlb.wlb_gohome, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS wlb_gohome,
+        LISTAGG(wlb.wlb_break, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS wlb_break,
+        LISTAGG(js.js_grow_co, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS js_grow_co,
+        LISTAGG(js.js_mgmt_vision, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS js_mgmt_vision,
+        LISTAGG(js.js_best, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS js_best,
+        ROW_NUMBER() OVER (ORDER BY cm.cm_co_name) AS rnum
+    FROM
+        review r
+    JOIN
+        company_member cm ON r.cm_id = cm.cm_id
+    LEFT JOIN
+        career_growth_evaluation cge ON r.rv_id = cge.rv_id
+    LEFT JOIN
+        career_growth cg ON cge.cg_id = cg.cg_id
+    LEFT JOIN
+        organizational_cltr_evltn oce ON r.rv_id = oce.rv_id
+    LEFT JOIN
+        organizational_culture oc ON oce.oc_id = oc.oc_id
+    LEFT JOIN
+        welfare_eval we ON r.rv_id = we.rv_id
+    LEFT JOIN
+        welfare w ON we.w_id = w.w_id
+    LEFT JOIN
+        work_life_balance_evaluation wlbe ON r.rv_id = wlbe.rv_id
+    LEFT JOIN
+        work_life_balance wlb ON wlbe.wlb_id = wlb.wlb_id
+    LEFT JOIN
+        annual_salary_evaluation ase ON r.rv_id = ase.rv_id
+    LEFT JOIN
+        annual_salary asa ON ase.as_id = asa.as_id
+    LEFT JOIN
+        job_stability_eval jse ON r.rv_id = jse.rv_id
+    LEFT JOIN
+        job_stability js ON jse.js_id = js.js_id
+    INNER JOIN
+        recruitment rec ON cm.cm_id = rec.cm_id
+    GROUP BY
+        cm.cm_co_name,
+        cm.cm_co_logo,
+        cm.cm_industry,
+        cm.cm_id
+  <if test=" annual_salary != null || work_life_balance != null || organizational_culture != null || welfareList || job_stability || career_growth != null">
+    <trim prefix="having" suffixOverrides="and"> 
+ 		<if test="annual_salary != null">
+        <trim suffix="and">
+            <foreach collection="annual_salary" item="salary" separator="AND">
+               MAX(CASE WHEN ${salary} = 'Y' THEN 1 ELSE 0 END) = 1
+            </foreach>
+        </trim>
         </if>
-    ) total
+        <if test="work_life_balance != null">
+        <trim suffix="and">
+            <foreach collection="work_life_balance" item="balance" separator="AND">
+                MAX(CASE WHEN ${balance} = 'Y' THEN 1 ELSE 0 END) = 1
+            </foreach>
+        </trim>
+        </if>
+        <if test="organizational_culture != null">
+        <trim suffix="and">
+            <foreach collection="organizational_culture" item="culture" separator="AND">
+                MAX(CASE WHEN ${culture} = 'Y' THEN 1 ELSE 0 END) = 1
+            </foreach>
+        </trim>
+        </if>
+        <if test="welfareList != null">
+        <trim suffix="and">
+            <foreach collection="welfareList" item="welfare" separator="AND">
+                MAX(CASE WHEN ${welfare} = 'Y' THEN 1 ELSE 0 END) = 1
+            </foreach>
+        </trim>
+        </if>
+        <if test="job_stability != null">
+        <trim suffix="and">
+            <foreach collection="job_stability" item="stability" separator="AND">
+                MAX(CASE WHEN ${stability} = 'Y' THEN 1 ELSE 0 END) = 1
+            </foreach>
+        </trim>
+        </if>
+        <if test="career_growth != null">
+        <trim suffix="and">
+            <foreach collection="career_growth" item="career" separator="AND">
+                MAX(CASE WHEN ${career} = 'Y' THEN 1 ELSE 0 END) = 1
+            </foreach>
+        </trim>
+        </if>
+        </trim>   
+  </if>      
+)
+SELECT
+    count(*)
+FROM
+    RankedData
+	<if test="keyword != null">
+	where cm_co_name LIKE '%' || #{keyword} || '%'
+	</if>
 </select>
 
 <select id="selectSearchReview" resultType="cod" parameterType="java.util.HashMap">
+     WITH RankedData AS (
     SELECT
-        numbered_data.r_id, numbered_data.cm_id, numbered_data.r_title,
-        numbered_data.r_start_date, numbered_data.r_end_date,
-        numbered_data.cm_co_name, numbered_data.cm_industry, numbered_data.cm_co_logo
-    FROM (
-        SELECT
-            cm.cm_co_name, cm.cm_co_logo, cm.cm_industry, cm.cm_id,
-            rec.r_title, rec.r_id, rec.r_start_date, rec.r_end_date,r.rv_id,
-            ROW_NUMBER() OVER (ORDER BY r.rv_id) AS rnum
-        FROM
-            review r
-        JOIN
-            company_member cm ON r.cm_id = cm.cm_id
-        LEFT JOIN
-            career_growth_evaluation cge ON r.rv_id = cge.rv_id
-        LEFT JOIN
-            career_growth cg ON cge.cg_id = cg.cg_id
-        LEFT JOIN
-            organizational_cltr_evltn oce ON r.rv_id = oce.rv_id
-        LEFT JOIN
-            organizational_culture oc ON oce.oc_id = oc.oc_id
-        LEFT JOIN
-            welfare_eval we ON r.rv_id = we.rv_id
-        LEFT JOIN
-            welfare w ON we.w_id = w.w_id
-        LEFT JOIN
-            work_life_balance_evaluation wlbe ON r.rv_id = wlbe.rv_id
-        LEFT JOIN
-            work_life_balance wlb ON wlbe.wlb_id = wlb.wlb_id
-        LEFT JOIN
-            annual_salary_evaluation ase ON r.rv_id = ase.rv_id
-        LEFT JOIN
-            annual_salary asa ON ase.as_id = asa.as_id
-        LEFT JOIN
-            job_stability_eval jse ON r.rv_id = jse.rv_id
-        LEFT JOIN
-            job_stability js ON jse.js_id = js.js_id
-        INNER JOIN
-            recruitment rec ON cm.cm_id = rec.cm_id
-        <if test="annual_salary != null || work_life_balance != null || organizational_culture != null || welfareList != null || job_stability != null || career_growth != null">
-            <where>
-                <if test="annual_salary != null">
-                        <foreach collection="annual_salary" item="salary" separator="AND">
-                            ${salary} = 'Y'
-                        </foreach>
-                </if>
-                    
-                    <if test="work_life_balance != null">
-                        <foreach collection="work_life_balance" item="balance" separator="AND">
-                            ${balance} = 'Y'
-                        </foreach>
-                    </if>
-                    
-                    <if test="organizational_culture != null">
-                        <foreach collection="organizational_culture" item="culture" separator="AND">
-                            ${culture} = 'Y'
-                        </foreach>
-                    </if>
-                    
-                    <if test="welfareList != null">
-                        <foreach collection="welfareList" item="welfare" separator="AND">
-                            ${welfare} = 'Y'
-                        </foreach>
-                    </if>
-                    
-                    <if test="job_stability != null">
-                        <foreach collection="job_stability" item="stability" separator="AND">
-                            ${stability} = 'Y'
-                        </foreach>
-                    </if>
-                    
-                    <if test="career_growth != null">
-                        <foreach collection="career_growth" item="career" separator="AND">
-                            ${career} = 'Y'
-                        </foreach>
-                    </if>
-            </where>
+        cm.cm_co_name,
+        cm.cm_co_logo,
+        cm.cm_industry,
+        cm.cm_id,
+        LISTAGG(asa.as_sal, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS as_sal,
+        LISTAGG(asa.as_first_sal, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS as_first_sal,
+        LISTAGG(asa.as_retirement_pay, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS as_retirement_pay,
+        LISTAGG(asa.as_bonus, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS as_bonus,
+        LISTAGG(cg.cg_fair_evaluation, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS cg_fair_evaluation,
+        LISTAGG(cg.cg, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS cg,
+        LISTAGG(cg.cg_capable_colleague, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS cg_capable_colleague,
+        LISTAGG(oc.oc_team, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS oc_team,
+        LISTAGG(oc.oc_clothes, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS oc_clothes,
+        LISTAGG(oc.oc_meeting, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS oc_meeting,
+        LISTAGG(oc.oc_work, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS oc_work,
+        LISTAGG(oc.oc_system, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS oc_system,
+        LISTAGG(oc.oc_culture, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS oc_culture,
+        LISTAGG(w.w_study, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS w_study,
+        LISTAGG(w.w_spply, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS w_spply,
+        LISTAGG(w.w_holiday_bonus, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS w_holiday_bonus,
+        LISTAGG(w.w_vacation_bonus, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS w_vacation_bonus,
+        LISTAGG(w.w_stock_option, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS w_stock_option,
+        LISTAGG(wlb.wlb_provide, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS wlb_provide,
+        LISTAGG(wlb.wlb_gohome, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS wlb_gohome,
+        LISTAGG(wlb.wlb_break, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS wlb_break,
+        LISTAGG(js.js_grow_co, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS js_grow_co,
+        LISTAGG(js.js_mgmt_vision, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS js_mgmt_vision,
+        LISTAGG(js.js_best, ', ') WITHIN GROUP (ORDER BY r.rv_id) AS js_best
+    FROM
+        review r
+    JOIN
+        company_member cm ON r.cm_id = cm.cm_id
+    LEFT JOIN
+        career_growth_evaluation cge ON r.rv_id = cge.rv_id
+    LEFT JOIN
+        career_growth cg ON cge.cg_id = cg.cg_id
+    LEFT JOIN
+        organizational_cltr_evltn oce ON r.rv_id = oce.rv_id
+    LEFT JOIN
+        organizational_culture oc ON oce.oc_id = oc.oc_id
+    LEFT JOIN
+        welfare_eval we ON r.rv_id = we.rv_id
+    LEFT JOIN
+        welfare w ON we.w_id = w.w_id
+    LEFT JOIN
+        work_life_balance_evaluation wlbe ON r.rv_id = wlbe.rv_id
+    LEFT JOIN
+        work_life_balance wlb ON wlbe.wlb_id = wlb.wlb_id
+    LEFT JOIN
+        annual_salary_evaluation ase ON r.rv_id = ase.rv_id
+    LEFT JOIN
+        annual_salary asa ON ase.as_id = asa.as_id
+    LEFT JOIN
+        job_stability_eval jse ON r.rv_id = jse.rv_id
+    LEFT JOIN
+        job_stability js ON jse.js_id = js.js_id
+    INNER JOIN
+        recruitment rec ON cm.cm_id = rec.cm_id
+    GROUP BY
+        cm.cm_co_name,
+        cm.cm_co_logo,
+        cm.cm_industry,
+        cm.cm_id
+    <if test=" annual_salary != null || work_life_balance != null || organizational_culture != null || welfareList || job_stability || career_growth != null">
+    <trim prefix="having" suffixOverrides="and"> 
+ 		<if test="annual_salary != null">
+        <trim suffix="and">
+            <foreach collection="annual_salary" item="salary" separator="AND">
+               MAX(CASE WHEN ${salary} = 'Y' THEN 1 ELSE 0 END) = 1
+            </foreach>
+        </trim>
         </if>
-    ) numbered_data
-    WHERE numbered_data.rnum BETWEEN #{startNum} AND #{endNum}
+        <if test="work_life_balance != null">
+        <trim suffix="and">
+            <foreach collection="work_life_balance" item="balance" separator="AND">
+                MAX(CASE WHEN ${balance} = 'Y' THEN 1 ELSE 0 END) = 1
+            </foreach>
+        </trim>
+        </if>
+        <if test="organizational_culture != null">
+        <trim suffix="and">
+            <foreach collection="organizational_culture" item="culture" separator="AND">
+                MAX(CASE WHEN ${culture} = 'Y' THEN 1 ELSE 0 END) = 1
+            </foreach>
+        </trim>
+        </if>
+        <if test="welfareList != null">
+        <trim suffix="and">
+            <foreach collection="welfareList" item="welfare" separator="AND">
+                MAX(CASE WHEN ${welfare} = 'Y' THEN 1 ELSE 0 END) = 1
+            </foreach>
+        </trim>
+        </if>
+        <if test="job_stability != null">
+        <trim suffix="and">
+            <foreach collection="job_stability" item="stability" separator="AND">
+                MAX(CASE WHEN ${stability} = 'Y' THEN 1 ELSE 0 END) = 1
+            </foreach>
+        </trim>
+        </if>
+        <if test="career_growth != null">
+        <trim suffix="and">
+            <foreach collection="career_growth" item="career" separator="AND">
+                MAX(CASE WHEN ${career} = 'Y' THEN 1 ELSE 0 END) = 1
+            </foreach>
+        </trim>
+        </if>
+        </trim>   
+  </if>           
+)
+SELECT
+  cm_co_name, cm_co_logo, cm_industry, cm_id, rnum
+FROM (
+  SELECT
+    cm_co_name, cm_co_logo, cm_industry, cm_id,
+    ROW_NUMBER() OVER (ORDER BY cm_co_name) AS rnum
+  FROM
+    RankedData
+    <if test="keyword != null">
+        where cm_co_name LIKE '%' || #{keyword} || '%'
+    </if>
+  	) Subquery
+WHERE
+  rnum BETWEEN #{ startNum } AND #{ endNum }
 </select>
 <select id="selectSalaryNum" resultType="kr.co.sist.user.review.domain.SalaryDomain" parameterType="String">
 SELECT
@@ -396,4 +485,335 @@ WHERE
 GROUP BY
 	r.r_id, r.r_title,r.r_end_date
 </select>
+
+<select id="selectFormerCompany" resultType="kr.co.sist.user.review.domain.CorperationDomain" parameterType="String">
+SELECT DISTINCT
+        cm.cm_id,
+        cm.cm_co_name
+    FROM
+        application a
+    JOIN
+        recruitment r ON a.r_id = r.r_id
+    JOIN
+        company_member cm ON r.cm_id = cm.cm_id
+    WHERE
+        a.m_id = #{ m_id }
+        AND r.r_registration_state = 'Y'
+        AND NOT EXISTS (
+            SELECT 1
+            FROM
+                review rv
+            WHERE
+                rv.m_id = #{ m_id }
+                AND rv.cm_id = cm.cm_id
+        )
+</select>
+
+<select id="selectMyReviewList" resultType="kr.co.sist.user.review.domain.CorperationDomain" parameterType="String">
+SELECT
+    r.rv_id,
+    r.m_id,
+    r.cm_id,
+    r.rv_reply_date,
+    cm.cm_co_name,
+    ase.as_id,
+    wlb.wlb_id,
+    w.w_id,
+    cg.cg_id,
+    oc.oc_id,
+    js.js_id
+FROM
+    review r
+JOIN
+    company_member cm ON r.cm_id = cm.cm_id
+LEFT JOIN annual_salary_evaluation ase ON r.rv_id = ase.rv_id
+LEFT JOIN work_life_balance_evaluation wlb ON r.rv_id = wlb.rv_id
+LEFT JOIN welfare_eval w ON r.rv_id = w.rv_id
+LEFT JOIN career_growth_evaluation cg ON r.rv_id = cg.rv_id
+LEFT JOIN organizational_cltr_evltn oc ON r.rv_id = oc.rv_id
+LEFT JOIN job_stability_eval js ON r.rv_id = js.rv_id
+WHERE
+    r.m_id = #{m_id}
+</select>
+
+
+
+<insert id="insertReview" parameterType="kr.co.sist.user.review.vo.ReviewPageVO" useGeneratedKeys="true" keyColumn="rv_id" keyProperty="rv_id">
+	insert into review (rv_id, m_id, cm_id, rv_reply_date)
+	values ('rv_' || lpad(rv_seq.nextval, 5, '0'), #{m_id},
+			#{cm_id}, sysdate) 
+</insert>
+
+<insert id="insertSalary" parameterType="kr.co.sist.user.review.vo.ReviewPageVO" useGeneratedKeys="true" keyColumn="as_id" keyProperty="as_id">
+    insert into annual_salary (as_id, as_sal,as_first_sal, as_retirement_pay, as_bonus) values
+    (
+        'as_' || LPAD(as_seq.NEXTVAL, 5, '0'),
+        <foreach collection="salary" item="item" separator=",">
+            <choose>
+                <when test='item == "Y"'>#{item}</when>
+                <otherwise>'N'</otherwise>
+            </choose>
+        </foreach>
+    )
+</insert>
+
+<insert id="insertBalance" parameterType="kr.co.sist.user.review.vo.ReviewPageVO" useGeneratedKeys="true" keyColumn="wlb_id" keyProperty="wlb_id">
+    insert into work_life_balance (wlb_id, wlb_provide,wlb_gohome, wlb_break) values
+    (
+        'wlb_' || LPAD(wlb_seq.NEXTVAL, 5, '0'),
+        <foreach collection="balance" item="item" separator=",">
+            <choose>
+                <when test='item == "Y"'>#{item}</when>
+                <otherwise>'N'</otherwise>
+            </choose>
+        </foreach>
+    )
+</insert>
+
+<insert id="insertCulture" parameterType="kr.co.sist.user.review.vo.ReviewPageVO" useGeneratedKeys="true" keyColumn="oc_id" keyProperty="oc_id">
+    insert into organizational_culture (oc_id, oc_team, oc_clothes, oc_meeting, oc_work, oc_system, oc_culture) values
+    (
+        'oc_' || LPAD(oc_seq.NEXTVAL, 5, '0'),
+       <foreach collection="culture" item="item" separator=",">
+            <choose>
+                <when test='item == "Y"'>#{item}</when>
+                <otherwise>'N'</otherwise>
+            </choose>
+        </foreach>
+    )
+</insert>
+
+<insert id="insertWelfare" parameterType="kr.co.sist.user.review.vo.ReviewPageVO" useGeneratedKeys="true" keyColumn="w_id" keyProperty="w_id">
+    insert into welfare (w_id, w_study, w_spply, w_holiday_bonus, w_vacation_bonus, w_stock_option) values
+    (
+        'w_' || LPAD(w_seq.NEXTVAL, 5, '0'),
+       <foreach collection="welfare" item="item" separator=",">
+            <choose>
+                <when test='item == "Y"'>#{item}</when>
+                <otherwise>'N'</otherwise>
+            </choose>
+        </foreach>
+    )
+</insert>
+
+<insert id="insertStability" parameterType="kr.co.sist.user.review.vo.ReviewPageVO" useGeneratedKeys="true" keyColumn="js_id" keyProperty="js_id">
+    insert into job_stability (js_id, js_grow_co, js_mgmt_vision, js_best) values
+    (
+        'js_' || LPAD(js_seq.NEXTVAL, 5, '0'),
+       <foreach collection="stability" item="item" separator=",">
+            <choose>
+                <when test='item == "Y"'>#{item}</when>
+                <otherwise>'N'</otherwise>
+            </choose>
+        </foreach>
+    )
+</insert>
+
+<insert id="insertCareer" parameterType="kr.co.sist.user.review.vo.ReviewPageVO" useGeneratedKeys="true" keyColumn="cg_id" keyProperty="cg_id">
+    insert into career_growth (cg_id,cg_fair_evaluation, cg, cg_capable_colleague) values
+    (
+        'cg_' || LPAD(cg_seq.NEXTVAL, 5, '0'),
+        <foreach collection="career" item="item" separator=",">
+            <choose>
+                <when test='item == "Y"'>#{item}</when>
+                <otherwise>'N'</otherwise>
+            </choose>
+        </foreach>
+    )
+</insert>
+
+<insert id="insertSalaryEval" parameterType="kr.co.sist.user.review.vo.ReviewPageVO">
+	insert into annual_salary_evaluation (as_id, rv_id)
+	values (#{as_id}, #{rv_id})
+</insert>
+
+<insert id="insertBalanceEval" parameterType="kr.co.sist.user.review.vo.ReviewPageVO">
+	insert into work_life_balance_evaluation (wlb_id, rv_id)
+	values (#{wlb_id}, #{rv_id})
+</insert>
+
+<insert id="insertCultureEval" parameterType="kr.co.sist.user.review.vo.ReviewPageVO">
+	insert into organizational_cltr_evltn (oc_id, rv_id)
+	values (#{oc_id}, #{rv_id})
+</insert>
+
+<insert id="insertWelfareEval" parameterType="kr.co.sist.user.review.vo.ReviewPageVO">
+	insert into welfare_eval (w_id, rv_id)
+	values (#{w_id}, #{rv_id})
+</insert>
+
+<insert id="insertStabilityEval" parameterType="kr.co.sist.user.review.vo.ReviewPageVO">
+	insert into job_stability_eval (js_id, rv_id)
+	values (#{js_id}, #{rv_id})
+</insert>
+
+<insert id="insertCareerEval" parameterType="kr.co.sist.user.review.vo.ReviewPageVO">
+	insert into career_growth_evaluation (cg_id, rv_id)
+	values (#{cg_id}, #{rv_id})
+</insert>
+
+<update id="updateSalary" parameterType="kr.co.sist.user.review.vo.SalaryVO">
+    UPDATE annual_salary
+    SET
+        as_sal = #{ as_sal },
+        as_first_sal = #{ as_first_sal },
+        as_retirement_pay = #{ as_retirement_pay },
+        as_bonus = #{ as_retirement_pay }
+    WHERE as_id = #{as_id}
+</update>
+
+<update id="updateBalance" parameterType="kr.co.sist.user.review.vo.BalanceVO">
+    UPDATE work_life_balance 
+    SET
+        wlb_provide  = #{ wlb_provide },
+        wlb_gohome  = #{ wlb_gohome }, 
+        wlb_break  = #{ wlb_break }
+
+    WHERE wlb_id  = #{wlb_id}
+</update>
+
+<update id="updateCulture" parameterType="kr.co.sist.user.review.vo.CultureVO">
+    UPDATE organizational_culture 
+    SET
+        oc_team = #{ oc_team },
+        oc_clothes = #{ oc_clothes },
+        oc_meeting = #{ oc_meeting },
+        oc_work = #{ oc_work },
+        oc_system = #{ oc_system },
+        oc_culture = #{ oc_culture } 
+
+    WHERE oc_id  = #{oc_id}
+</update>
+
+<update id="updateWelfare" parameterType="kr.co.sist.user.review.vo.WelfareVO">
+    UPDATE welfare
+    SET
+        w_study = #{ w_study },
+        w_spply = #{ w_spply },
+        w_holiday_bonus = #{ w_holiday_bonus },
+        w_vacation_bonus = #{ w_vacation_bonus },
+        w_stock_option = #{ w_stock_option } 
+    WHERE w_id = #{w_id}
+</update>
+
+<update id="updateStability" parameterType="kr.co.sist.user.review.vo.StabilityVO">
+    UPDATE job_stability
+    SET
+        js_grow_co = #{js_grow_co},
+        js_mgmt_vision = #{js_mgmt_vision},
+        js_best = #{js_best}
+    WHERE js_id = #{js_id}
+</update>
+
+<update id="updateReviewCareer" parameterType="kr.co.sist.user.review.vo.ReviewCareerVO">
+    UPDATE career_growth
+    SET
+        cg_fair_evaluation = #{ cg_fair_evaluation },
+        cg = #{ cg },
+        cg_capable_colleague = #{ cg_capable_colleague }
+    WHERE cg_id = #{cg_id}
+</update>
+
+<select id="selectCheckSalary" resultType="kr.co.sist.user.review.domain.SalaryDomain" parameterType="String">
+	SELECT
+	asa.as_id, 
+    asa.as_sal,
+    asa.as_first_sal,
+    asa.as_retirement_pay,
+    asa.as_bonus
+FROM 
+    review r
+JOIN 
+    annual_salary_evaluation ase ON r.rv_id = ase.rv_id
+JOIN 
+    annual_salary asa ON ase.as_id = asa.as_id
+WHERE 
+    r.rv_id = #{ rv_id }
+</select>
+
+<select id="selectCheckBalance" resultType="kr.co.sist.user.review.domain.BalanceDomain" parameterType="String">
+	SELECT
+	wlb.wlb_id, 
+    wlb.wlb_provide,
+    wlb.wlb_gohome,
+    wlb.wlb_break 
+FROM 
+    review r
+JOIN 
+    work_life_balance_evaluation wlbe ON r.rv_id = wlbe.rv_id
+JOIN 
+    work_life_balance wlb ON wlbe.wlb_id = wlb.wlb_id
+WHERE 
+    r.rv_id = #{ rv_id }
+</select>
+
+<select id="selectCheckCulture" resultType="kr.co.sist.user.review.domain.CultureDomain" parameterType="String">
+	SELECT
+	oc.oc_id, 
+    oc.oc_team,
+    oc.oc_clothes,
+    oc.oc_meeting,
+    oc.oc_work, 
+    oc.oc_system,
+    oc.oc_culture
+FROM 
+    review r
+JOIN 
+    organizational_cltr_evltn oce ON r.rv_id = oce.rv_id
+JOIN 
+    organizational_culture oc ON oce.oc_id = oc.oc_id
+WHERE 
+    r.rv_id = #{ rv_id }
+</select>
+
+<select id="selectCheckWelfare" resultType="kr.co.sist.user.review.domain.WelfareDomain" parameterType="String">
+	SELECT
+	w.w_id, 
+    w.w_study ,
+    w.w_spply ,
+    w.w_holiday_bonus ,
+    w.w_vacation_bonus ,
+    w.w_stock_option 
+FROM 
+    review r
+JOIN 
+    welfare_eval we ON r.rv_id = we.rv_id
+JOIN 
+    welfare w ON we.w_id = w.w_id 
+WHERE 
+    r.rv_id = #{ rv_id }
+</select>
+
+<select id="selectCheckStability" resultType="kr.co.sist.user.review.domain.StabilityDomain" parameterType="String">
+	SELECT
+	js.js_id, 
+    js.js_grow_co,
+    js.js_mgmt_vision,
+    js.js_best
+FROM 
+    review r
+JOIN 
+    job_stability_eval jse ON r.rv_id = jse.rv_id
+JOIN 
+    job_stability js ON jse.js_id = js.js_id
+WHERE 
+    r.rv_id = #{ rv_id }
+</select>
+
+<select id="selectCheckCareer" resultType="kr.co.sist.user.review.domain.ReviewCareerDomain" parameterType="String">
+	SELECT
+	cg.cg_id, 
+    cg.cg_fair_evaluation ,
+    cg.cg ,
+    cg.cg_capable_colleague 
+FROM 
+    review r
+JOIN 
+    career_growth_evaluation cge ON r.rv_id = cge.rv_id
+JOIN 
+    career_growth cg ON cge.cg_id = cg.cg_id
+WHERE 
+    r.rv_id = #{ rv_id }
+</select>
+
 </mapper>
