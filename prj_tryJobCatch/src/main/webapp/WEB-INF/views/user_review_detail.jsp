@@ -225,49 +225,192 @@
                             </div>
 
                                 <div class="chart-wrap swiper likeSwiper swiper-initialized swiper-horizontal swiper-backface-hidden">
-                                    <div class="swiper-wrapper" id="swiper-wrapper-31656a91eef4b8c10" aria-live="polite">
-                                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 1" style="width: 420px; margin-right: 14px;">
+                                    <div class="swiper-wrapper" id="swiper-wrapper-fcf89deaea9e4e08" aria-live="polite" style="transition-duration: 0ms; 
+                                    transform: translate3d(0px, 0px, 0px); transition-delay: 0ms;">
+                                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 5" style="width: 420px; margin-right: 14px;">
                                                 <div class="like-box">
                                                     <div class="like-text">
-                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon12.png" alt="icon">
-                                                        <span>같이 일하는 사람들이 좋아요</span>
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon01.png" alt="icon">
+                                                        <span>연봉 인상률이 합리적이에요</span>
                                                     </div>
-                                                    <div class="like-bg" style="width:20%"></div>
+                                                    <div class="like-bg" style="width:${ requestScope.sal }%"></div>
                                                 </div>
                                                 <div class="like-box">
                                                     <div class="like-text">
-                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon24.png" alt="icon">
-                                                        <span>배울 수 있는 상사, 동료가 있어요</span>
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon02.png" alt="icon">
+                                                        <span>신입사원 초봉이 높아요</span>
                                                     </div>
-                                                    <div class="like-bg" style="width:20%"></div>
+                                                    <div class="like-bg" style="width:${ requestScope.firstSal }%"></div>
                                                 </div>
                                                 <div class="like-box">
                                                     <div class="like-text">
-                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon23.png" alt="icon">
-                                                        <span>업무를 통해 성장함을 느껴요</span>
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon03.png" alt="icon">
+                                                        <span>퇴직금은 연봉과 별도예요</span>
                                                     </div>
-                                                    <div class="like-bg" style="width:20%"></div>
+                                                    <div class="like-bg" style="width:${ requestScope.retirementPay }%"></div>
                                                 </div>
                                                 <div class="like-box">
                                                     <div class="like-text">
-                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon08.png" alt="icon">
-                                                        <span>학습을 장려하고 지원 해줘요</span>
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon04.png" alt="icon">
+                                                        <span>성과급을 챙겨줘요</span>
                                                     </div>
-                                                    <div class="like-bg" style="width:20%"></div>
+                                                    <div class="like-bg" style="width:${ requestScope.bonus }%"></div>
                                                 </div>
                                                 <div class="like-box">
                                                     <div class="like-text">
                                                         <img src="https://i.jobkorea.kr/content/images/user/review/like-icon05.png" alt="icon">
                                                         <span>회사가 계속 성장하고 있어요</span>
                                                     </div>
-                                                    <div class="like-bg" style="width:0%"></div>
+                                                    <div class="like-bg" style="width:${ requestScope.growCo }%"></div>
                                                 </div>
                                         </div>
+                                        
+                                        <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 5" style="width: 420px; margin-right: 14px;">                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon06.png" alt="icon">
+                                                        <span>이 곳의 경영진은 비전이 있어요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.vision }%"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon07.png" alt="icon">
+                                                        <span>우리 회사가 업계 최고예요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.best }"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon08.png" alt="icon">
+                                                        <span>학습을 장려하고 지원 해줘요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.study }%"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon09.png" alt="icon">
+                                                        <span>복지비용·포인트를 줘요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.spply }%"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon10.png" alt="icon">
+                                                        <span>명절 상여금을 챙겨줘요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.holiday }%"></div>
+                                                </div>
+											</div>
+											
+											<div class="swiper-slide" role="group" aria-label="3 / 5" style="width: 420px; margin-right: 14px;">                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon11.png" alt="icon">
+                                                        <span>휴가비를 챙겨줘요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.vacation }%"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon12.png" alt="icon">
+                                                        <span>같이 일하는 사람들이 좋아요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.team }%"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon13.png" alt="icon">
+                                                        <span>스톡옵션을 줘요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.stock }%"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon14.png" alt="icon">
+                                                        <span>업무 복장이 자유로워요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.clothes }%"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon15.png" alt="icon">
+                                                        <span>회의는 필요할 때만 해요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.meeting }%"></div>
+                                                </div>
+											</div>
+											
+											<div class="swiper-slide" role="group" aria-label="4 / 5" style="width: 420px; margin-right: 14px;">                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon16.png" alt="icon">
+                                                        <span>유연근무제를 실행해요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.work }%"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon17.png" alt="icon">
+                                                        <span>업무 체계가 잘 잡혀 있어요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.system }%"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon18.png" alt="icon">
+                                                        <span>개인의 성향을 서로 존중해줘요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.culture }%"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon19.png" alt="icon">
+                                                        <span>워라벨이 보장돼요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.provide }%"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon20.png" alt="icon">
+                                                        <span>정시 퇴근이 가능해요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.gohome }%"></div>
+                                                </div>
+											</div>
+											
+											<div class="swiper-slide" role="group" aria-label="5 / 5" style="width: 420px; margin-right: 14px;">                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon21.png" alt="icon">
+                                                        <span>연차·휴가 사용이 자유로워요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.useFree }%"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon22.png" alt="icon">
+                                                        <span>실력이 공정하게 평가돼요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.evaluation }%"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon23.png" alt="icon">
+                                                        <span>업무를 통해 성장함을 느껴요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.careerGrowth }%"></div>
+                                                </div>
+                                                <div class="like-box">
+                                                    <div class="like-text">
+                                                        <img src="https://i.jobkorea.kr/content/images/user/review/like-icon24.png" alt="icon">
+                                                        <span>배울 수 있는 상사, 동료가 있어요</span>
+                                                    </div>
+                                                    <div class="like-bg" style="width:${ requestScope.colleague }%"></div>
+                                                </div>
+                                        </div>
+											
                                     </div>
                                     <div class="btns">
-                                        <button type="button" class="mainBtnA swiper-button-prev swiper-button-disabled swiper-button-lock" disabled="" tabindex="-1" aria-label="Previous slide" aria-controls="swiper-wrapper-31656a91eef4b8c10" aria-disabled="true"><span class="blind">이전 랭킹 보기</span></button>
-                                        <div class="swiper-pagination swiper-pagination-fraction swiper-pagination-horizontal swiper-pagination-lock"><span class="swiper-pagination-current">1</span> / <span class="swiper-pagination-total">1</span></div>
-                                        <button type="button" class="mainBtnB swiper-button-next swiper-button-disabled swiper-button-lock" disabled="" tabindex="-1" aria-label="Next slide" aria-controls="swiper-wrapper-31656a91eef4b8c10" aria-disabled="true"><span class="blind">다음 랭킹 보기</span></button>
+                                       <button type="button" class="mainBtnA swiper-button-prev swiper-button-disabled" tabindex="-1" aria-label="Previous slide" aria-controls="swiper-wrapper-ddc83f41741aeb7f" aria-disabled="true"><span class="blind">이전 랭킹 보기</span></button>
+                                        <div class="swiper-pagination swiper-pagination-fraction swiper-pagination-horizontal"><span class="swiper-pagination-current">1</span> / <span class="swiper-pagination-total">5</span></div>
+                                        <button type="button" class="mainBtnB swiper-button-next" tabindex="0" aria-label="Next slide" aria-controls="swiper-wrapper-27214cbaa3ffd6e9" aria-disabled="false"><span class="blind">다음 랭킹 보기</span></button>
                                     </div>
                                 <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
                         </div>
@@ -282,8 +425,8 @@
             </div>
             <section class="section section05">
                 <div class="chart-content">
-                      <div class="recruit-list">
                 		<c:forEach var="recruitment" items="${ requestScope.recruitmentList }">
+                      <div class="recruit-list">
                             <div class="recruit-left">
                                 <div>
                                     <a href="http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id=${ recruitment.r_id }" target="_blank"><c:out value="${ recruitment.r_title }"/></a>
@@ -298,8 +441,8 @@
                                 <a href="http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id=${ recruitment.r_id }" target="_blank">상세보기</a>
                                 <p>~<c:out value="${ recruitment.r_end_date}"/></p>
                             </div>
-                		</c:forEach>
                         </div>
+                		</c:forEach>
 
                 </div>
             </section>
@@ -325,9 +468,9 @@
         <h2 class="lnbTit">기업리뷰</h2>
         <ul>
             <!-- [개발] 메뉴 선택시 a.on 추가 -->
-            <li><a href="/Review/Home" class="on" onclick="GA_Event('기업리뷰_PC', '사이드메뉴', '기업리뷰_기업리뷰홈');">기업리뷰 홈</a></li>
+            <li><a href="http://localhost/prj_tryJobCatch/review_home.do" class="on" onclick="GA_Event('기업리뷰_PC', '사이드메뉴', '기업리뷰_기업리뷰홈');">기업리뷰 홈</a></li>
                    <!-- 레이어 팝업 호출 -->
-            <li><a href="javascript:GA_Event('기업리뷰_PC', '사이드메뉴', '기업리뷰_My기업리뷰'); btnMyReviewLink();">My 기업리뷰<span class="ico">새창</span></a></li>
+            <li><a href="http://localhost/prj_tryJobCatch/myReview.do">My 기업리뷰<span class="ico">새창</span></a></li>
         </ul>
     </div>
     

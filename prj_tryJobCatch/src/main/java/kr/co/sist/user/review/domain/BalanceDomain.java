@@ -11,5 +11,6 @@ public class BalanceDomain {
 	private String rv_id;
 	private int total_review, total_evaluation, total_sum;
 	private double provide_count, gohome_count, break_count;
+	private String wlb_id, wlb_provide,wlb_gohome,wlb_break;   
 	
 }

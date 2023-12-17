@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
 import kr.co.sist.dao.MyBatisHandler;
+import kr.co.sist.user.mypage.domain.MemberDomain;
+import kr.co.sist.user.recruitment.domain.ApplyDomain;
 import kr.co.sist.user.recruitment.domain.AreaDomain;
 import kr.co.sist.user.recruitment.domain.RecruitmentCareerDomain;
 import kr.co.sist.user.recruitment.domain.DutyDomain;
@@ -14,6 +16,8 @@ import kr.co.sist.user.recruitment.domain.EducationDomain;
 import kr.co.sist.user.recruitment.domain.EmployeeTypeDomain;
 import kr.co.sist.user.recruitment.domain.IndustryDomain;
 import kr.co.sist.user.recruitment.domain.RecruitmentDomain;
+import kr.co.sist.user.recruitment.domain.ResumeDomain;
+import kr.co.sist.user.recruitment.vo.ApplyVO;
 import kr.co.sist.user.recruitment.vo.PageVO;
 
 @Component
@@ -134,6 +138,65 @@ public class UserRecruitmentDAO {
 		mbh.closeHandler(ss);
 		
 		return list;
+	}
+	
+	// 이력서 조회
+
+	public List<ResumeDomain> selectResume(String id) throws PersistenceException{
+		List<ResumeDomain> list = null;
+		
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		
+		SqlSession ss = mbh.getMyBatisHandler(false);
+		
+		list = ss.selectList("kr.co.sist.user.recruitment.selectResume", id);
+		mbh.closeHandler(ss);
+		
+		return list;
+	}
+	
+	// 지원 목록 리스트 조회
+	public ApplyDomain selectApply(ApplyVO aVO) throws PersistenceException{
+		ApplyDomain ad = null;
+		
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		
+		SqlSession ss = mbh.getMyBatisHandler(false);
+		
+		ad = ss.selectOne("kr.co.sist.user.recruitment.selectApply", aVO);
+		
+		return ad;
+	}
+	
+	// 지원하기 insert
+	public boolean insertApply(ApplyVO aVO) throws PersistenceException{
+		boolean flag = false;
+		int cnt = 0;
+		
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		
+		SqlSession ss = mbh.getMyBatisHandler(false);
+		
+		cnt = ss.insert("kr.co.sist.user.recruitment.insertApply", aVO);
+		
+		if(cnt == 1) {
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
+	// 회원 이메일, 전화번호 조회
+	public MemberDomain selectMember(String id) throws PersistenceException{
+		MemberDomain md = null;
+		
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		
+		SqlSession ss = mbh.getMyBatisHandler(false);
+		
+		md = ss.selectOne("kr.co.sist.user.recruitment.selectMember", id);
+		
+		return md;
 	}
 	
 	public static void main(String[] args) {

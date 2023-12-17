@@ -6,7 +6,9 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import kr.co.sist.user.mypage.domain.MemberDomain;
 import kr.co.sist.user.recruitment.dao.UserRecruitmentDAO;
+import kr.co.sist.user.recruitment.domain.ApplyDomain;
 import kr.co.sist.user.recruitment.domain.AreaDomain;
 import kr.co.sist.user.recruitment.domain.RecruitmentCareerDomain;
 import kr.co.sist.user.recruitment.domain.DutyDomain;
@@ -14,6 +16,8 @@ import kr.co.sist.user.recruitment.domain.EducationDomain;
 import kr.co.sist.user.recruitment.domain.EmployeeTypeDomain;
 import kr.co.sist.user.recruitment.domain.IndustryDomain;
 import kr.co.sist.user.recruitment.domain.RecruitmentDomain;
+import kr.co.sist.user.recruitment.domain.ResumeDomain;
+import kr.co.sist.user.recruitment.vo.ApplyVO;
 import kr.co.sist.user.recruitment.vo.PageVO;
 
 @Component
@@ -131,6 +135,72 @@ public class RecruitmentService {
 		}
 		
 		return list;
+	}
+	
+	// 회원이 특정 채용에 지원한 지원상태 조회
+	public String applyCondition(ApplyVO aVO) {
+		String condition = "";
+		
+		ApplyDomain ad = null;
+		
+		try {
+			
+			ad = urDAO.selectApply(aVO);
+			
+			if(ad == null) {
+				condition = "N";
+			}else {
+				condition = "Y";
+			}
+			
+		}catch(PersistenceException pe){
+			pe.printStackTrace();
+		}
+		
+		return condition;
+	}
+	
+	// 지원하기 insert
+	public boolean applyComplete(ApplyVO aVO) {
+		boolean flag = false;
+		
+		try {
+			
+			flag = urDAO.insertApply(aVO);
+			
+		}catch(PersistenceException pe){
+			pe.printStackTrace();
+		}
+		
+		return flag;
+	}
+	
+	// 이력서 조회
+	public List<ResumeDomain> resumeList(String id){
+		List<ResumeDomain> list = null;
+		
+		try {
+			list = urDAO.selectResume(id);
+		}catch (PersistenceException pe) {
+			pe.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	// 회원 이메일,번호 조회
+	public MemberDomain searchMember(String id) {
+		MemberDomain md = null;
+		
+		try {
+			
+			md = urDAO.selectMember(id);
+			
+		}catch(PersistenceException pe) {
+			pe.printStackTrace();
+		}
+		
+		return md;
 	}
 	
 	public int totalCount( PageVO pVO ) {

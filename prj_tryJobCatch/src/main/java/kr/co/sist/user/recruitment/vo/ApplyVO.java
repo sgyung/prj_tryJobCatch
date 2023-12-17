@@ -8,8 +8,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ApplyVO {
-	private String CM_ID;
-	private String M_ID;
-	private String R_ID;
-	private String MR_ID;
+	private String cm_id;
+	private String m_id;
+	private String r_id;
+	private String mr_id;
 }

@@ -2,11 +2,14 @@ package kr.co.sist.user.review.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -54,7 +57,7 @@ public class ReviewController {
 		model.addAttribute("retirementPay", salary.getRetirementpay_num());
 		model.addAttribute("totalBalance", balance.getTotal_sum());
 		model.addAttribute("provide", balance.getProvide_count());
-		model.addAttribute("break", balance.getBreak_count());
+		model.addAttribute("useFree", balance.getBreak_count());
 		model.addAttribute("goHome", balance.getGohome_count());
 		model.addAttribute("totalCulture", culture.getTotal_sum());
 		model.addAttribute("clothes", culture.getClothes_count());
@@ -83,7 +86,7 @@ public class ReviewController {
 		model.addAttribute("recruitmentList", list);
 		model.addAttribute("recruitmentCnt",list.size());
 		
-		return "user_corperation_review_detail";
+		return "user_review_detail";
 	}
 	
 	@ResponseBody
@@ -116,11 +119,81 @@ public class ReviewController {
 		rpVO.setEndPage(endPage);
 		rpVO.setStartPage(startPage);
 		
+		
 		JSONObject json = rlp.reviewList(rpVO);
 		
 		return json.toJSONString();
 	}
 	
+	@GetMapping("/myReview.do")
+	public String myReview(HttpSession session, Model model) {
+		String userId = (String)session.getAttribute("M_ID");
+		
+		List<CorperationDomain> formerCompany = rs.searchFormerCompany(userId);
+		List<CorperationDomain> myReview = rs.myReviewList(userId);
+		
+		
+		model.addAttribute("formerCompany", formerCompany);
+		model.addAttribute("myReview", myReview);
+		
+		return "user_my_review";
+	}
+	
+	@GetMapping("/review_registration.do")
+	public String reviewComplete(HttpSession session, ReviewPageVO rpVO, Model model) {
+		String userId = (String)session.getAttribute("M_ID");
+		String msg = "";
+		rpVO.setM_id(userId);
+		
+		boolean flag = rs.reviewComplete(rpVO);
+		if(flag) {
+			msg = "리뷰가 작성되었습니다.";
+		}else {
+			msg = "오류가 발생하였습니다. 리뷰를 다시 작성해주세요.";
+		}
+		
+		model.addAttribute("msg", msg);
+		
+		return "forward:/myReview.do";
+	}
+	
+	@GetMapping("/review_modify.do")
+	public String reviewModify(HttpSession session, ReviewPageVO rpVO, Model model) {
+		String userId = (String)session.getAttribute("M_ID");
+		String msg = "";
+		
+		rpVO.setM_id(userId);
+		
+		boolean flag = rs.reviewUpdate(rpVO);
+		if(flag) {
+			msg = "리뷰가 수정되었습니다.";
+		}else {
+			msg = "오류가 발생하였습니다. 리뷰를 다시 수정해주세요.";
+		}
+		
+		model.addAttribute("msg", msg);
+		
+		return "forward:/myReview.do";
+	}
+	
+	@ResponseBody
+	@GetMapping("/modify_process.do")
+	public String reviewModify(HttpSession session, ReviewPageVO rpVO) {
+		String userId = (String)session.getAttribute("M_ID");
+		rpVO.setM_id(userId);
+		JSONObject json = rlp.reviewModify(rpVO);
+		
+		return json.toJSONString();
+	}
+	
+	@GetMapping("/search_corperation.do")
+	public String searchCorperation(ReviewPageVO rpVO, Model model) {
+		
+		System.out.println("rpVO.getKeyword()===============================" + rpVO.getKeyword());
+		model.addAttribute("keyword",rpVO.getKeyword());
+		
+		return "user_search_corperation";
+	}
 	
 	
 }

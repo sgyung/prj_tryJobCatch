@@ -9,8 +9,9 @@ import lombok.ToString;
 @ToString
 public class ReviewPageVO {
 	
-	private String reviewId;
-	private String corperationId;
+	private String rv_id;
+	private String cm_id;
+	private String m_id;
 	private int startNum;
 	private int endNum, pageNumber, endPage, startPage, totalPage;
 	private String currentPage;
@@ -20,6 +21,7 @@ public class ReviewPageVO {
 	private String[] welfare;
 	private String[] stability;
 	private String[] career; 
+	private String as_id, wlb_id, oc_id, w_id, js_id, cg_id;
 	private String field;
 	private String keyword;
 	

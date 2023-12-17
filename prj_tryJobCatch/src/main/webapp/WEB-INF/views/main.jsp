@@ -115,6 +115,10 @@ $(function(){
 	
 })//ready
 
+function recruitmentDetail(id) {
+	
+	location.href = "http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id="+id;
+}
 
 
 </script>
@@ -189,7 +193,7 @@ for(int i = 0; i < list.size(); i++){
                                     </div>
                                 </div>
                                 <p class="chips primary">이번주 공채</p>
-                                <a class="entire link clickcnt" href="#void" onclick="recruitmentDetail('<%= list.get(i).getR_id() %>')" target="_blank" data-rcmdsvcagi-galabel="이번주 공채" data-cntnt-no="12898" data-click-value="2" onclick="mainView.onContsHrefClick(this)">링크이동</a>
+                                <a class="entire link clickcnt" href="#void" onclick="recruitmentDetail('<%= list.get(i).getR_id() %>')" data-rcmdsvcagi-galabel="이번주 공채" data-cntnt-no="12898" data-click-value="2" onclick="mainView.onContsHrefClick(this)">링크이동</a>
                             </article>
                         </li>                        
 <%

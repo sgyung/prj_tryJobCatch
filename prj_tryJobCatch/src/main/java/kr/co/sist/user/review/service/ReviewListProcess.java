@@ -11,7 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.sist.user.review.dao.ReviewDAO;
+import kr.co.sist.user.review.domain.BalanceDomain;
 import kr.co.sist.user.review.domain.CorperationDomain;
+import kr.co.sist.user.review.domain.CultureDomain;
+import kr.co.sist.user.review.domain.ReviewCareerDomain;
+import kr.co.sist.user.review.domain.SalaryDomain;
+import kr.co.sist.user.review.domain.StabilityDomain;
+import kr.co.sist.user.review.domain.WelfareDomain;
 import kr.co.sist.user.review.vo.ReviewPageVO;
 
 @Component
@@ -26,7 +32,6 @@ public class ReviewListProcess {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			
 			if(rpVO.getSalary() != null && rpVO.getSalary().length > 0) {
 				map.put("annual_salary",rpVO.getSalary());
@@ -46,9 +51,12 @@ public class ReviewListProcess {
 			if(rpVO.getCareer() != null && rpVO.getCareer().length > 0) {
 				map.put("career_growth",rpVO.getCareer());
 			}
-			
+			if(rpVO.getKeyword() != null) {
+				map.put("keyword", rpVO.getKeyword());
+			}
 			map.put("startNum", rpVO.getStartNum());
 			map.put("endNum", rpVO.getEndNum());
+			
 			
 			List<CorperationDomain> list = rDAO.selectSearchReview(map);
 			int cnt = rDAO.selectReviewTotalCount(map);
@@ -64,7 +72,6 @@ public class ReviewListProcess {
 				jsonTemp.put("cm_id", corperation.getCm_id());
 				jsonTemp.put("industry", corperation.getCm_industry());
 				jsonTemp.put("cm_co_logo", corperation.getCm_co_logo());
-				jsonTemp.put("r_end_date", sdf.format(corperation.getR_end_date()));
 				jsonTemp.put("r_id", corperation.getR_id());
 				jsonTemp.put("r_title", corperation.getR_title());
 				jsonArr.add(jsonTemp);
@@ -75,6 +82,58 @@ public class ReviewListProcess {
 			jsonObj.put("pageNation", pageNation);
 			
 		}catch (PersistenceException pe) {
+			pe.printStackTrace();
+		}
+		
+		return jsonObj;
+	}
+	
+	public JSONObject reviewModify(ReviewPageVO rpVO) {
+		JSONObject jsonObj = new JSONObject();
+		ReviewService rs = new ReviewService();
+		try {
+			
+			System.out.println("+++++++++++++++++++++++reviewModify+++++++++++" + rpVO.getRv_id());
+			
+			SalaryDomain salary = rs.checkedSalary(rpVO.getRv_id());
+			BalanceDomain balance = rs.checkedBalance(rpVO.getRv_id());
+			CultureDomain culture = rs.checkedCulture(rpVO.getRv_id());
+			WelfareDomain welfare = rs.checkedWelfare(rpVO.getRv_id());
+			StabilityDomain stability = rs.checkedStability(rpVO.getRv_id());
+			ReviewCareerDomain career = rs.checkedCareer(rpVO.getRv_id());
+			
+			jsonObj.put("sal", salary.getAs_sal());
+			jsonObj.put("first_sal", salary.getAs_first_sal());
+			jsonObj.put("retirement_pay", salary.getAs_retirement_pay());
+			jsonObj.put("bonus", salary.getAs_bonus());
+			jsonObj.put("fair_evaluation", career.getCg_fair_evaluation());
+			jsonObj.put("cg", career.getCg());
+			jsonObj.put("capable_colleague", career.getCg_capable_colleague());
+			jsonObj.put("team", culture.getOc_team());
+			jsonObj.put("clothes", culture.getOc_clothes());
+			jsonObj.put("meeting", culture.getOc_meeting());
+			jsonObj.put("work", culture.getOc_work());
+			jsonObj.put("system", culture.getOc_system());
+			jsonObj.put("culture", culture.getOc_culture());
+			jsonObj.put("provide", balance.getWlb_provide());
+			jsonObj.put("gohome", balance.getWlb_gohome());
+			jsonObj.put("break", balance.getWlb_break());
+			jsonObj.put("grow_co", stability.getJs_grow_co());
+			jsonObj.put("mgmt_vision", stability.getJs_mgmt_vision());
+			jsonObj.put("best", stability.getJs_best());
+			jsonObj.put("study", welfare.getW_study());
+			jsonObj.put("spply", welfare.getW_spply());
+			jsonObj.put("holiday_bonus", welfare.getW_holiday_bonus());
+			jsonObj.put("vacation_bonus", welfare.getW_vacation_bonus());
+			jsonObj.put("stock_option", welfare.getW_stock_option());
+			jsonObj.put("as_id", salary.getAs_id());
+			jsonObj.put("wlb_id", balance.getWlb_id());
+			jsonObj.put("oc_id", culture.getOc_id());
+			jsonObj.put("w_id", welfare.getW_id());
+			jsonObj.put("js_id", stability.getJs_id());
+			jsonObj.put("cg_id", career.getCg_id());
+			
+		}catch(PersistenceException pe) {
 			pe.printStackTrace();
 		}
 		

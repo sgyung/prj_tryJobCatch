@@ -1,7 +1,5 @@
 package kr.co.sist.user.recruitment.domain;
 
-import java.sql.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,9 +7,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ResumeDomain {
+public class ApplyDomain {
+
+	private String a_id,r_id,mr_id,m_id,a_condition;
 	
-	private String mr_id;
-	private String mr_title;
-	private Date mr_registration_date;
 }

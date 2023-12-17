@@ -1,8 +1,10 @@
 package kr.co.sist.user.recruitment.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.sist.user.mypage.domain.MemberDomain;
+import kr.co.sist.user.recruitment.domain.ApplyDomain;
 import kr.co.sist.user.recruitment.domain.RecruitmentDomain;
+import kr.co.sist.user.recruitment.domain.ResumeDomain;
 import kr.co.sist.user.recruitment.service.RecruitmentListProcess;
 import kr.co.sist.user.recruitment.service.RecruitmentService;
+import kr.co.sist.user.recruitment.vo.ApplyVO;
 import kr.co.sist.user.recruitment.vo.PageVO;
 
 @Controller
@@ -80,8 +86,6 @@ public class RecruitmentController {
 	@GetMapping("/recruitmentDetail.do")
 	public String oneRecruitment(@RequestParam("r_id") String r_id, Model model){
 		
-		System.out.println("================" + r_id);
-		
 		RecruitmentDomain rd = rs.OneRecruitment(r_id);
 		System.out.println(rd);
 		
@@ -113,5 +117,49 @@ public class RecruitmentController {
 		model.addAttribute("r_registration_date", rd.getR_registration_date());
 		
 		return "user_recruitment_detail";
+	}
+	
+	@GetMapping("/apply.do")
+	public String goApply(@RequestParam("r_id") String id, Model model, HttpSession session) {
+		String userId = (String)session.getAttribute("M_ID");
+		ApplyVO aVO = new ApplyVO();
+		
+		aVO.setM_id(userId);
+		aVO.setR_id(id);
+		
+		List<ResumeDomain> list = rs.resumeList(userId);
+		RecruitmentDomain rd = rs.OneRecruitment(id);
+		String condition = rs.applyCondition(aVO);
+		MemberDomain md = rs.searchMember(userId);
+		
+		System.out.println(list.toString());
+		
+		model.addAttribute("cm_id",rd.getCm_id());
+		System.out.println("cm_id========================" + rd.getCm_id());
+		model.addAttribute("cm_co_name",rd.getCm_co_name());
+		model.addAttribute("r_title",rd.getR_title());
+		model.addAttribute("r_id",rd.getR_id());
+		model.addAttribute("m_id",userId);
+		model.addAttribute("tel",md.getM_TEL());
+		model.addAttribute("email",md.getM_EMAIL());
+		model.addAttribute("resumeList",list);
+		model.addAttribute("condition",condition);
+		model.addAttribute("mr_id",list.get(0).getMr_id());
+		model.addAttribute("mr_title",list.get(0).getMr_title());
+		return "user_recruitment_apply";
+	}
+	
+	@GetMapping("/apply_complete.do")
+	public String applyComplete(ApplyVO aVO, HttpSession session) {
+		String userId = (String)session.getAttribute("M_ID");
+		
+		aVO.setM_id(userId);
+		
+		System.out.println("===========" + aVO.getMr_id());
+		System.out.println("===========" + aVO.getM_id());
+		System.out.println("===========" + aVO.getR_id());
+		System.out.println("===========" + aVO.getCm_id());
+		
+		return "forword:/recruitment.do";
 	}
 }

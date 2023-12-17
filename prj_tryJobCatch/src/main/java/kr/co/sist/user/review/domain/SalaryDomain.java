@@ -13,5 +13,5 @@ public class SalaryDomain {
 	private String rv_id;
 	private int total_review, total_evaluation, total_sum;
 	private double sal_num, firstsal_num, retirementpay_num, bonus_num;
-	
+	private String as_id, as_sal, as_first_sal, as_retirement_pay, as_bonus;
 }

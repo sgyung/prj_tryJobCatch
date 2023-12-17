@@ -224,6 +224,46 @@ left join recruitment r on et.et_id = r.et_id
 group by et.et_id, et.et_name 
 </select>
 
+<!-- 개인 회원 이력서 조회 -->
+<select id="selectResume" resultType="rd" parameterType="String">
+SELECT
+    mr.mr_id,
+    mr.mr_title,
+	mr.mr_registration_date    
+FROM
+    member m
+LEFT JOIN
+    member_resume mr ON m.m_id = mr.m_id
+WHERE
+    m.m_id = #{ m_id }
+</select>
 
+<!-- 회원이 지원한 채용 목록 조회 -->
+<select id="selectApply" resultType="kr.co.sist.user.recruitment.domain.ApplyDomain" parameterType="kr.co.sist.user.recruitment.vo.ApplyVO">
+select a_id, r_id, mr_id, m_id, a_condition
+from application
+where m_id = #{ m_id } and r_id = #{ r_id }
+</select>
+
+<!-- 지원하기 insert -->
+<insert id="insertApply" parameterType="kr.co.sist.user.recruitment.vo.ApplyVO">
+insert into application( a_id, r_id, cm_id, mr_id, m_id, a_recruitment_condition, a_date, a_condition )
+values(
+		'app_' || LPAD(app_seq.NEXTVAL, 5, '0'),
+	    #{ r_id },
+	    #{ cm_id },
+		#{ mr_id },
+		#{ m_id },
+		'N',
+		sysdate,
+		 'Y'
+		)
+</insert>
+
+<select id="selectMember" resultType="kr.co.sist.user.mypage.domain.MemberDomain" parameterType="String">
+select m_tel, m_email
+from member
+where m_id = #{ m_id }
+</select>
 
 </mapper>

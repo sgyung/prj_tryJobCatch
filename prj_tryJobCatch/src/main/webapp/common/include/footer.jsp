@@ -119,7 +119,7 @@
             <div class="footer__company-item footer__company-item--job">직업정보제공사업 신고번호 : 서울청 제0000-00호</div>
             <div class="footer__company-item footer__company-item--job">유료직업소개업 등록번호 : 제0000-0000000-00-0-00000호</div>
             <br>
-            <div class="copyright">
+            <div class="copyright" style="text-align: center;">
                 © <strong><a href="http://company.jobkorea.co.kr/" target="_blank">TryJobCatch</a></strong> LLC. All rights
                 reserved.
             </div>

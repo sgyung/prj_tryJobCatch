@@ -21,7 +21,7 @@ import kr.co.sist.user.review.vo.ReviewPageVO;
 @Component
 public class ReviewService {
 
-	@Autowired
+	@Autowired(required = false)
 	private ReviewDAO rDAO;
 	
 	public List<CorperationDomain> searchReview(ReviewPageVO rpVO){
@@ -48,6 +48,10 @@ public class ReviewService {
 			map.put("career_growth",rpVO.getCareer());
 		}
 		
+		if(rpVO.getKeyword() != null) {
+			map.put("keyword", rpVO.getKeyword());
+		}
+		
 		map.put("startNum", rpVO.getStartNum());
 		map.put("endNum", rpVO.getEndNum());
 		
@@ -60,6 +64,32 @@ public class ReviewService {
 		return list;
 	}
 	
+	
+	public List<CorperationDomain> searchFormerCompany(String id){
+		List<CorperationDomain> list = null;
+		
+		try {
+			list = rDAO.selectFormerCompany(id);
+			
+		}catch(PersistenceException pe) {
+			pe.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public List<CorperationDomain> myReviewList(String id){
+		List<CorperationDomain> list = null;
+		
+		try {
+			list = rDAO.selectMyReviewList(id);
+			
+		}catch(PersistenceException pe) {
+			pe.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 	
 	public int reviewTotalCount(ReviewPageVO rpVO) {
@@ -85,13 +115,16 @@ public class ReviewService {
 		if(rpVO.getCareer() != null && rpVO.getCareer().length > 0) {
 			map.put("career_growth",rpVO.getCareer());
 		}
-	
+		
+		if(rpVO.getKeyword() != null) {
+			map.put("keyword", rpVO.getKeyword());
+		}
+		
 		try {
 			cnt = rDAO.selectReviewTotalCount(map);
 		}catch(PersistenceException pe) {
 			pe.printStackTrace();
 		}
-		
 		return cnt; 
 	}
 	
@@ -325,6 +358,311 @@ public class ReviewService {
 			}
 			
 			return list;		
+		}
+		
+		public boolean reviewComplete(ReviewPageVO rpVO) {
+			boolean flag = false;
+			String[] salary = new String[4]; 
+			String[] balance = new String[3]; 
+			String[] culture = new String[6]; 
+			String[] welfare = new String[5]; 
+			String[] stability = new String[3]; 
+			String[] career = new String[3]; 
+			
+			
+			for(int i = 0; i < rpVO.getSalary().length; i++) {
+				if ("[\"1\"".equals(rpVO.getSalary()[i])) {
+			        salary[i] = "Y";
+			    }else if("\"2\"".equals(rpVO.getSalary()[i])) {
+			    	salary[i] = "Y";
+			    }else if("\"3\"".equals(rpVO.getSalary()[i])) {
+			    	salary[i] = "Y";
+			    }else if("\"4\"]".equals(rpVO.getSalary()[i])) {
+			    	salary[i] = "Y";
+			    }else {
+			    	salary[i] = "N";
+			    }
+			}
+			
+			for(int i = 0; i < rpVO.getBalance().length; i++) {
+				if ("[\"5\"".equals(rpVO.getBalance()[i])) {
+					balance[i] = "Y";
+			    }else if("\"6\"".equals(rpVO.getBalance()[i])) {
+			    	balance[i] = "Y";
+			    }else if("\"7\"]".equals(rpVO.getBalance()[i])) {
+			    	balance[i] = "Y";
+			    }else {
+			    	balance[i] = "N";
+			    }
+			}
+			
+			for(int i = 0; i < rpVO.getCulture().length; i++) {
+				if ("[\"8\"".equals(rpVO.getCulture()[i])) {
+					culture[i] = "Y";
+			    }else if("\"9\"".equals(rpVO.getCulture()[i])) {
+			    	culture[i] = "Y";
+			    }else if("\"10\"".equals(rpVO.getCulture()[i])) {
+			    	culture[i] = "Y";
+			    }else if("\"11\"".equals(rpVO.getCulture()[i])) {
+			    	culture[i] = "Y";
+			    }else if("\"12\"".equals(rpVO.getCulture()[i])) {
+			    	culture[i] = "Y";
+			    }else if("\"13\"]".equals(rpVO.getCulture()[i])) {
+			    	culture[i] = "Y";
+			    }else {
+			    	culture[i] = "N";
+			    }
+			}
+			
+			for(int i = 0; i < rpVO.getWelfare().length; i++) {
+				if ("[\"14\"".equals(rpVO.getWelfare()[i])) {
+					welfare[i] = "Y";
+			    }else if("\"15\"".equals(rpVO.getWelfare()[i])) {
+			    	welfare[i] = "Y";
+			    }else if("\"16\"".equals(rpVO.getWelfare()[i])) {
+			    	welfare[i] = "Y";
+			    }else if("\"17\"".equals(rpVO.getWelfare()[i])) {
+			    	welfare[i] = "Y";
+			    }else if("\"18\"]".equals(rpVO.getWelfare()[i])) {
+			    	welfare[i] = "Y";
+			    }else {
+			    	welfare[i] = "N";
+			    }
+			}
+			
+			for(int i = 0; i < rpVO.getStability().length; i++) {
+				if ("[\"19\"".equals(rpVO.getStability()[i])) {
+					stability[i] = "Y";
+			    }else if("\"20\"".equals(rpVO.getStability()[i])) {
+			    	stability[i] = "Y";
+			    }else if("\'21\"]".equals(rpVO.getStability()[i])) {
+			    	stability[i] = "Y";
+			    }else {
+			    	stability[i] = "N";
+			    }
+			}
+			
+			for(int i = 0; i < rpVO.getCareer().length; i++) {
+				if ("[\"22\"".equals(rpVO.getCareer()[i])) {
+					career[i] = "Y";
+			    }else if("\"23\"".equals(rpVO.getCareer()[i])) {
+			    	career[i] = "Y";
+			    }else if("\"24\"]".equals(rpVO.getCareer()[i])) {
+			    	career[i] = "Y";
+			    }else {
+			    	career[i] = "N";
+			    }
+			}
+			
+			rpVO.setSalary(salary);
+			rpVO.setBalance(balance);
+			rpVO.setCulture(culture);
+			rpVO.setWelfare(welfare);
+			rpVO.setStability(stability);
+			rpVO.setCareer(career);
+			
+			
+			flag = rDAO.insertTransaction(rpVO);
+			
+			return flag;
+		}
+		
+		public boolean reviewUpdate(ReviewPageVO rpVO) {
+			boolean flag = false;
+			String[] salary = new String[4]; 
+			String[] balance = new String[3]; 
+			String[] culture = new String[6]; 
+			String[] welfare = new String[5]; 
+			String[] stability = new String[3]; 
+			String[] career = new String[3]; 
+			
+			
+			for(int i = 0; i < rpVO.getSalary().length; i++) {
+				if ("[\"1\"".equals(rpVO.getSalary()[i])) {
+			        salary[i] = "Y";
+			    }else if("\"2\"".equals(rpVO.getSalary()[i])) {
+			    	salary[i] = "Y";
+			    }else if("\"3\"".equals(rpVO.getSalary()[i])) {
+			    	salary[i] = "Y";
+			    }else if("\"4\"]".equals(rpVO.getSalary()[i])) {
+			    	salary[i] = "Y";
+			    }else {
+			    	salary[i] = "N";
+			    }
+			}
+			
+			for(int i = 0; i < rpVO.getBalance().length; i++) {
+				if ("[\"5\"".equals(rpVO.getBalance()[i])) {
+					balance[i] = "Y";
+			    }else if("\"6\"".equals(rpVO.getBalance()[i])) {
+			    	balance[i] = "Y";
+			    }else if("\"7\"]".equals(rpVO.getBalance()[i])) {
+			    	balance[i] = "Y";
+			    }else {
+			    	balance[i] = "N";
+			    }
+			}
+			
+			for(int i = 0; i < rpVO.getCulture().length; i++) {
+				if ("[\"8\"".equals(rpVO.getCulture()[i])) {
+					culture[i] = "Y";
+			    }else if("\"9\"".equals(rpVO.getCulture()[i])) {
+			    	culture[i] = "Y";
+			    }else if("\"10\"".equals(rpVO.getCulture()[i])) {
+			    	culture[i] = "Y";
+			    }else if("\"11\"".equals(rpVO.getCulture()[i])) {
+			    	culture[i] = "Y";
+			    }else if("\"12\"".equals(rpVO.getCulture()[i])) {
+			    	culture[i] = "Y";
+			    }else if("\"13\"]".equals(rpVO.getCulture()[i])) {
+			    	culture[i] = "Y";
+			    }else {
+			    	culture[i] = "N";
+			    }
+			}
+			
+			for(int i = 0; i < rpVO.getWelfare().length; i++) {
+				if ("[\"14\"".equals(rpVO.getWelfare()[i])) {
+					welfare[i] = "Y";
+			    }else if("\"15\"".equals(rpVO.getWelfare()[i])) {
+			    	welfare[i] = "Y";
+			    }else if("\"16\"".equals(rpVO.getWelfare()[i])) {
+			    	welfare[i] = "Y";
+			    }else if("\"17\"".equals(rpVO.getWelfare()[i])) {
+			    	welfare[i] = "Y";
+			    }else if("\"18\"]".equals(rpVO.getWelfare()[i])) {
+			    	welfare[i] = "Y";
+			    }else {
+			    	welfare[i] = "N";
+			    }
+			}
+			
+			for(int i = 0; i < rpVO.getStability().length; i++) {
+				if ("[\"19\"".equals(rpVO.getStability()[i])) {
+					stability[i] = "Y";
+			    }else if("\"20\"".equals(rpVO.getStability()[i])) {
+			    	stability[i] = "Y";
+			    }else if("\'21\"]".equals(rpVO.getStability()[i])) {
+			    	stability[i] = "Y";
+			    }else {
+			    	stability[i] = "N";
+			    }
+			}
+			
+			for(int i = 0; i < rpVO.getCareer().length; i++) {
+				if ("[\"22\"".equals(rpVO.getCareer()[i])) {
+					career[i] = "Y";
+			    }else if("\"23\"".equals(rpVO.getCareer()[i])) {
+			    	career[i] = "Y";
+			    }else if("\"24\"]".equals(rpVO.getCareer()[i])) {
+			    	career[i] = "Y";
+			    }else {
+			    	career[i] = "N";
+			    }
+			}
+			
+			rpVO.setSalary(salary);
+			rpVO.setBalance(balance);
+			rpVO.setCulture(culture);
+			rpVO.setWelfare(welfare);
+			rpVO.setStability(stability);
+			rpVO.setCareer(career);
+			
+			
+			flag = rDAO.updateTransaction(rpVO);
+			
+			return flag;
+		}
+		
+		// 체크된 연봉키워드 조회
+		public SalaryDomain checkedSalary(String id) {
+			SalaryDomain salary = null;
+			try {
+				
+				ReviewDAO rDAO=new ReviewDAO();
+				
+				salary = rDAO.selectCheckSalary(id);
+				
+			}catch(PersistenceException pe) {
+				pe.printStackTrace();
+			}
+			
+			return salary;
+		}
+		
+		// 체크된 워라벨 키워드 조회
+		public BalanceDomain checkedBalance(String id) {
+			BalanceDomain balance = null;
+			
+			try {
+				ReviewDAO rDAO=new ReviewDAO();
+				balance = rDAO.selectCheckBalance(id);
+			
+			}catch(PersistenceException pe) {
+				pe.printStackTrace();
+			}
+			
+			return balance;
+		}
+		
+		// 체크된 조직문화 키워드 조회
+		public CultureDomain checkedCulture(String id) {
+			CultureDomain culture = null;
+			
+			try {
+				ReviewDAO rDAO=new ReviewDAO();
+				culture = rDAO.selectCheckCulture(id);
+			
+			}catch(PersistenceException pe) {
+				pe.printStackTrace();
+			}
+			
+			return culture;
+		}
+		
+		// 체크된 연봉키워드 조회
+		public WelfareDomain checkedWelfare(String id) {
+			WelfareDomain welfare = null;
+			
+			try {
+				ReviewDAO rDAO=new ReviewDAO();
+				welfare = rDAO.selectCheckWelfare(id);
+			
+			}catch(PersistenceException pe) {
+				pe.printStackTrace();
+			}
+			
+			return welfare;
+		}
+		
+		// 체크된 고용안정성 키워드 조회
+		public StabilityDomain checkedStability(String id) {
+			StabilityDomain stability = null;
+			
+			try {
+				ReviewDAO rDAO=new ReviewDAO();
+				stability = rDAO.selectCheckStability(id);
+			
+			}catch(PersistenceException pe) {
+				pe.printStackTrace();
+			}
+			
+			return stability;
+		}
+		
+		// 체크된 커리어 키워드 조회
+		public ReviewCareerDomain checkedCareer(String id) {
+			ReviewCareerDomain career = null;
+			
+			try {
+				ReviewDAO rDAO=new ReviewDAO();
+				career = rDAO.selectCheckCareer(id);
+			
+			}catch(PersistenceException pe) {
+				pe.printStackTrace();
+			}
+			
+			return career;
 		}
 	
 }
