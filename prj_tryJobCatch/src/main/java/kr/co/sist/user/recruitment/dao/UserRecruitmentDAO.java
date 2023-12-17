@@ -164,7 +164,8 @@ public class UserRecruitmentDAO {
 		SqlSession ss = mbh.getMyBatisHandler(false);
 		
 		ad = ss.selectOne("kr.co.sist.user.recruitment.selectApply", aVO);
-		
+		mbh.closeHandler(ss);
+
 		return ad;
 	}
 	
@@ -181,8 +182,11 @@ public class UserRecruitmentDAO {
 		
 		if(cnt == 1) {
 			flag = true;
+			ss.commit();
 		}
 		
+		mbh.closeHandler(ss);
+
 		return flag;
 	}
 	

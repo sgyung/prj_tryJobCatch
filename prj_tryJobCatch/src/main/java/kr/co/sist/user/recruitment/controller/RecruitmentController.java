@@ -150,16 +150,20 @@ public class RecruitmentController {
 	}
 	
 	@GetMapping("/apply_complete.do")
-	public String applyComplete(ApplyVO aVO, HttpSession session) {
+	public String applyComplete(ApplyVO aVO, HttpSession session, Model model) {
 		String userId = (String)session.getAttribute("M_ID");
+		String msg = ""; 
 		
 		aVO.setM_id(userId);
 		
-		System.out.println("===========" + aVO.getMr_id());
-		System.out.println("===========" + aVO.getM_id());
-		System.out.println("===========" + aVO.getR_id());
-		System.out.println("===========" + aVO.getCm_id());
+		if(rs.applyComplete(aVO)) {
+			msg = "지원이 완료되었습니다.";
+		}else {
+			msg = "오류가 발생하였습니다. 다시 지원해주세요.";
+		}
 		
-		return "forword:/recruitment.do";
+		model.addAttribute("msg", msg);
+		
+		return "forward:/recruitment.do";
 	}
 }

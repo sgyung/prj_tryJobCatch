@@ -142,7 +142,7 @@
 <!-- 채용상세 쿼리 -->
 <select id="selectOneRecruitment" resultMap="redResult" parameterType="String">
 SELECT
-    r.r_id,c.cm_co_name,r.r_title,r.r_sal,r.r_start_date,r.r_end_date,r.r_time,c.cm_homepage,c.cm_co_logo,
+    r.r_id,c.cm_id,c.cm_co_name,r.r_title,r.r_sal,r.r_start_date,r.r_end_date,r.r_time,c.cm_homepage,c.cm_co_logo,
     c.cm_co_type,c.cm_emp_num,c.cm_establishment_year,r.r_info,rf.rf_fields,rs.rs_names,r.r_registration_date,r.r_registration_state,
     r.r_recruitment_volume,d.d_name,ind.ind_name,e.education,et.et_name,wa.wa_name,rec.rec_name
 FROM

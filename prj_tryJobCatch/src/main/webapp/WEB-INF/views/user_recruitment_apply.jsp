@@ -111,6 +111,10 @@ $(function(){
 
 function applyComplete() {
 	$("#applyFrm").submit();
+	
+	if("${ msg }" != ""){
+		alert("${ msg }");
+	}
 }
 
 </script>
