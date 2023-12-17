@@ -18,7 +18,6 @@ public class DataEncrypt {
 		return dataEncrypt;
 	}//getInstance
 	
-	
 	public String sha256(String str) {
 		
 		MessageDigest md = null;

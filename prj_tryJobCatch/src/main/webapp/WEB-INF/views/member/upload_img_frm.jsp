@@ -201,7 +201,6 @@ $(document).ready(function () {
                 // 이미지 설정
                 cropper.replace(resizedCanvas.toDataURL());
             };
-            $("#defaultImg").hide();
             img.src = imageUrl;
         };
 
@@ -214,7 +213,7 @@ $(document).ready(function () {
     	var imageData = cropper.getCroppedCanvas().toDataURL("image/png");
     	var blob = dataURItoBlob(imageData);
     	var m_id = "${ M_ID }";
-    	var fileName = m_id + "_" + "resume.png"; 
+    	var fileName = m_id;
     	
     	// FormData를 사용하여 이미지 데이터를 서버에 전송
         var formData = new FormData();
@@ -234,10 +233,11 @@ $(document).ready(function () {
             success: function (json) {
             	alert(json.msg)
             	window.close();
-            }//end success
+            },
         });
     	
-    });//click  	
+    });//click  
+    
 });//ready
 
 //Data URI를 Blob으로 변환하는 함수

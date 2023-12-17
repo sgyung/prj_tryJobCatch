@@ -37,7 +37,16 @@
 
 <link href="https://i.jobkorea.kr/content/css/ver_2/event/banner.promotion-sv-202211241151.css" rel="stylesheet" type="text/css">
 
-<link href="https://i.jobkorea.kr/content/css/ver_2/common-sv-202311091305.css" rel="stylesheet" type="text/css"><link href="//i.jobkorea.kr/deploy/pc/dist/css/personal/common/gnb-sv-202311201607.css" rel="stylesheet" type="text/css"><link href="//i.jobkorea.kr/deploy/pc/dist/css/mtu/mtu_common-sv-202311151322.css" rel="stylesheet" type="text/css"><link href="//i.jobkorea.kr/content/css/ver_2/mtu/mtu_tpl-sv-202006091259.css" rel="stylesheet" type="text/css"><link href="//i.jobkorea.kr/content/css/ver_2/mtu/mtu_style-sv-202311281234.css" rel="stylesheet" type="text/css"><link href="//i.jobkorea.kr/deploy/pc/dist/css/mtu/mtu_popup-sv-202308211127.css" rel="stylesheet" type="text/css"><link href="//i.jobkorea.kr/content/css/components/notification/1.0.0/notification-sv-202005061649.css" rel="stylesheet" type="text/css"><link href="//i.jobkorea.kr/deploy/pc/dist/css/personal/layout/footer-sv-202311031048.css" rel="stylesheet" type="text/css"><link href="//i.jobkorea.kr/deploy/pc/dist/css/components/tooltip.css?v=202311281400" rel="stylesheet" type="text/css"><link href="//i.jobkorea.kr//content/css/ver_2/modules/swiper/4.3.3/swiper.min.css?v=202311281400" rel="stylesheet" type="text/css">
+<link href="//i.jobkorea.kr/content/css/ver_2/common-sv-202311301113.css" rel="stylesheet" type="text/css">
+<link href="//i.jobkorea.kr/deploy/pc/dist/css/personal/common/gnb.css" rel="stylesheet" type="text/css">
+<link href="//i.jobkorea.kr/deploy/pc/dist/css/mtu/mtu_common-sv-202311151322.css" rel="stylesheet" type="text/css">
+<link href="//i.jobkorea.kr/content/css/ver_2/mtu/mtu_tpl-sv-202006091259.css" rel="stylesheet" type="text/css">
+<link href="//i.jobkorea.kr/content/css/ver_2/mtu/mtu_style-sv-202311281234.css" rel="stylesheet" type="text/css">
+<link href="//i.jobkorea.kr/deploy/pc/dist/css/mtu/mtu_popup-sv-202308211127.css" rel="stylesheet" type="text/css">
+<link href="//i.jobkorea.kr/content/css/components/notification/1.0.0/notification-sv-202005061649.css" rel="stylesheet" type="text/css">
+<link href="//i.jobkorea.kr/deploy/pc/dist/css/personal/layout/footer-sv-202311031048.css" rel="stylesheet" type="text/css">
+<link href="//i.jobkorea.kr/deploy/pc/dist/css/components/tooltip.css?v=202311281400" rel="stylesheet" type="text/css">
+<link href="//i.jobkorea.kr//content/css/ver_2/modules/swiper/4.3.3/swiper.min.css?v=202311281400" rel="stylesheet" type="text/css">
     
     <link href="https://i.jobkorea.kr/content/css/ver_2/mtu/mtu_popup-sv-202311201246.css" rel="stylesheet" type="text/css">
     
@@ -65,11 +74,52 @@ $(function(){
 		alert( msg );
 	}
 	
-})
+	//사진 추가/수정
+	$(".btnModify").click(function(){
+		var leftPosition = (window.screen.width / 2) - (700 / 2);
+		var topPosition = (window.screen.height / 2) - (500 / 2);
+			
+		var uploadImgWindow = window.open('http://localhost/prj_tryJobCatch/member/uploadImgFrm.do', '이미지 등록', 'width=700,height=500,left=' + leftPosition + ',top=' + topPosition);
+		
+		//사진 추가,수정 완료
+		$(uploadImgWindow).on("beforeunload", function(){
+			var imgPath 
+			$.ajax({
+				url : "http://localhost/prj_tryJobCatch/member/refreshImage.do",
+				type : "POST",
+				error : function(xhr){
+					alert(xhr.status)
+				},
+				success : function( img ){
+					imgPath = "http://localhost/prj_tryJobCatch/common/images/mbrImages/" + img
+					checkImg(imgPath);
+				},
+			})//ajax
+		})
+	})//click
+	//이미지 파일 업로드 완료 체크
+	function checkImg(imgPath){
+		$('<img>', {
+	        src: imgPath,
+	        error: function (jqXHR) {
+	        	if(jqXHR.status == undefined){
+	        		 setTimeout(function () {
+	                     checkImg(imgPath);
+	                 }, 1000);
+	        	}
+	        },
+	        load: function () {
+				$("#mbrImg").attr("src", imgPath)
+	        }
+	    });
+	}
+	
+})//readly
 </script>
     
 </head>
 <jsp:include page="../../../common/include/header.jsp"/>
+<%-- <c:import url="/common/include/header.jsp" /> --%>
 <body id="secMtu" class="mtuHome" style="" cz-shortcut-listen="true">
 	<div id="skipNavigation">
 		<p></p>
@@ -120,7 +170,6 @@ $(function(){
                 <div class="my-profile devPhotoBtns btns">
                     <div class="pie-chart" style="background: conic-gradient(rgb(0, 42, 255) 100%, rgb(0, 42, 255) 60%, rgb(244, 244, 244) 100%, rgb(244, 244, 244) 100%);">
                         <div class="profile-img"><p class="img">
-                        
                         	<c:if test="${ not empty mbrProfile.m_PIC }">
 		                        <img id="mbrImg" src="http://localhost/prj_tryJobCatch/common/images/mbrImages/${mbrProfile.m_PIC}" alt="회원사진" style="width:100%">
                         	</c:if>
@@ -157,7 +206,7 @@ $(function(){
                 <div class="my-status-box">
                                 <p class="status">
                                 	<c:choose>
-                                		<c:when test="${ not empty registDate }">
+                                		<c:when test="${ not empty mbrProfile.MR_REGISTRATION_DATE }">
 		                                    <a href="http://localhost/prj_tryJobCatch/member/resumeList.do" target="_blank">
 		                                        최근 이력서 작성일 : ${mbrProfile.MR_REGISTRATION_DATE}
 		                                    </a>
@@ -278,13 +327,9 @@ $(function(){
 
 
 
+<c:import url="/common/include/footer_mypage.jsp"/>
 
-
-
-
-
-
-
+<%-- <jsp:include page="../../../common/include/footer_mypage.jsp"/> --%>
 
 
 </body></html>

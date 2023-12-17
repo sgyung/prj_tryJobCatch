@@ -143,7 +143,7 @@ $(function(){
                          	 </div>
                          	 <div class="col col02">
                               <!-- checkbox -->
-                              <div class="btnCell"><a class="btn background" href="/User/Resume/Write" target="_blank">수정하기</a></div>
+                              <div class="btnCell"><a class="btn background" href="http://localhost/prj_tryJobCatch/member/modifyResumeFrm.do?mr_id=${ resume.MR_ID }" target="_blank">수정하기</a></div>
                               <div class="btnCell">
                               	<button id="resumeDeleteBtn" class="btn resumeDeleteBtn" type="button" >
                               		<span>삭제</span>

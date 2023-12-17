@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.qna" >
+	
+	<insert id="insertInquire"
+			parameterType="kr.co.sist.user.qna.vo.QnAVO">
+		insert into inquire(
+			I_ID, M_ID, I_TITLE, I_CONTENT,
+			I_DATE, I_REPLY_CONDITION
+			)
+		values (
+			 ('i_' || LPAD(i_seq.NEXTVAL, 5, '0')),
+			 #{M_ID}, #{I_TITLE}, #{I_CONTENT},
+			 SYSDATE, 'N' )
+	</insert>
+	
+	<select id="selectQnA"
+		parameterType="kr.co.sist.user.qna.vo.QnAPageVO"
+		resultType="kr.co.sist.user.qna.domain.QnADomain">
+		select *
+		from(
+		select row_number() over (order by I_DATE DESC) IDX, I_ID, I_TITLE, I_CONTENT, I_REPLY, I_DATE, I_REPLY_CONDITION, I_REPLY_DATE
+		from inquire
+		where m_id = #{M_ID}
+		)
+		where IDX between #{startNum} and #{endNum}
+	</select>
+	
+	<select id="selectQnATotalCnt"
+			parameterType="String"
+			resultType="int">
+		select count(I_ID)
+		from inquire
+		where m_id = #{M_ID}
+	</select>
+	
+	<select id="selectOneQnA"
+			parameterType="String"
+			resultType="kr.co.sist.user.qna.domain.QnADomain">
+		select I_TITLE, I_CONTENT, I_REPLY, I_DATE, I_REPLY_CONDITION, I_REPLY_DATE
+		from inquire
+		where i_id = #{ I_ID }
+	</select>
+	
+	
+
+</mapper>

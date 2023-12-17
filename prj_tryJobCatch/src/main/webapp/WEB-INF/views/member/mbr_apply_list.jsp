@@ -197,16 +197,16 @@ $(function(){
                          	 </div>
                          	 
                          	 <div class="col col02">
-                              <div class="tit"><a href="http://localhost/prj_tryJobCatch/member/recruitDetail.do?app_id=${ apply.APP_ID}" target="_blank" style="color:black; font-weight:bold">
+                              <div class="tit"><a href="http://localhost/prj_tryJobCatch/member/recruitDetail.do?app_id=${ apply.a_ID}" target="_blank" style="color:black; font-weight:bold">
                               	<c:out value="${ apply.r_TITLE }" />
                               	</a>
                               	</div>
-                              <div class="date"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${ apply.APP_DATE }" /></div>
+                              <div class="date"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${ apply.a_DATE }" /></div>
                          	 </div>
                          	 
                          	 <div class="col col03">
                          	 	<c:choose>
-                         	 		<c:when test="${ apply.APP_RECRUITMENT_CONDITION eq 'N' }">
+                         	 		<c:when test="${ apply.a_RECRUITMENT_CONDITION eq 'N' }">
 	                              <div class="tit">
         	                 	 		대기중
 		                              </div>
@@ -221,7 +221,7 @@ $(function(){
                          	 
                          	 <div class="col col04">
                               <div class="tit">
-                              <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ apply.r_AREA }" />
+                              <fmt:formatDate pattern="yyyy-MM-dd" value="${ apply.a_DATE }" />
                               </div>
                          	 </div>
                          	 
@@ -230,7 +230,7 @@ $(function(){
                               	<button id="resumeDeleteBtn" class="btn applyCancel" type="button" >
                               		<span>지원 취소</span>
                               	</button>
-                          		<input type="hidden" class="applyId" value="${ apply.APP_ID }" />
+                          		<input type="hidden" class="applyId" value="${ apply.a_ID }" />
                              	</div> 
                          	 </div>
                      		 </li>

@@ -13,6 +13,8 @@ import lombok.ToString;
 @ToString
 public class ResumeVO {
 	private String
+		//삭제항목
+		prevItemCnt,
 		//인적사항
 		M_ID, M_TEL, M_ZIP, M_ADDR, M_DETAIL_ADDR,
 		//이력서 제목, 아이디
@@ -27,7 +29,7 @@ public class ResumeVO {
 		AA_CREDIT, AA_DEGREE,
 		//경력
 		C_CORPORATE_NAME, C_DEPARTMENT_NAME, C_JOINING_DATE,
-		C_RETIREMENT_DATE, C_POSITION, C_DUTY,
+		C_RETIREMENT_DATE, C_POSITION, C_DUTY, C_EMPLOYMENT_STATUS,
 		//인턴,대외활동,교육
 		IIAE_SECTION, IIAE_INSTITUTION_NAME,
 		IIAE_START_DATE, IIAE_END_DATE, IIAE_CONTENT,

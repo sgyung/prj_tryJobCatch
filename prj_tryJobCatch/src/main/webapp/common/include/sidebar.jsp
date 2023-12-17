@@ -16,7 +16,7 @@ $(function(){
 <section class="secLnb">
     <h1 class="skip">개인회원 서비스 메뉴</h1>
     <div class="lnbGroup">
-        <h2 class="lnbTit"><a href="/User/MyPage" onclick="GA_Event('마이페이지_PC', '사이드메뉴', '개인회원 홈')">개인회원 홈</a></h2>
+        <h2 class="lnbTit"><a href="http://localhost/prj_tryJobCatch/member/mypageHome.do" >개인회원 홈</a></h2>
     </div>
     <div class="lnbGroup">
         <h2 class="lnbTit">이력서 관리</h2>
@@ -33,7 +33,7 @@ $(function(){
     <div class="lnbGroup">
         <h2 class="lnbTit">입사지원 관리</h2>
         <ul>
-            <li><a href="/User/ApplyMng" onclick="GA_Event('마이페이지_PC', '사이드메뉴', '입사지원 현황')">입사지원 현황</a></li>
+            <li><a href="http://localhost/prj_tryJobCatch/member/applyList.do" >입사지원 현황</a></li>
             
             
             
@@ -44,8 +44,8 @@ $(function(){
     <div class="lnbGroup">
         <h2 class="lnbTit">콘텐츠 관리</h2>
         <ul>
-            <li><a href="/Review/MyReview" onclick="GA_Event('마이페이지_PC', '사이드메뉴', 'MY기업리뷰'); BrazeCallPageInto('기업리뷰진입');">MY 기업리뷰</a></li>
-            <li><a href="/Starter/AptitudeTest/JatTest" onclick="GA_Event('마이페이지_PC', '사이드메뉴', '인적성 검사')">MY 문의</a></li>
+            <li><a href="/Review/MyReview" >MY 기업리뷰</a></li>
+            <li><a href="http://localhost/prj_tryJobCatch/member/qnaList.do" >MY 문의</a></li>
         </ul>
     </div>
     <div class="lnbGroup">

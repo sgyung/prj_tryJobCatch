@@ -50,6 +50,7 @@
   <mapper resource="kr/co/sist/user/mypage/mapper/ModifyMapper.xml"/>
   <mapper resource="kr/co/sist/user/mypage/mapper/ResumeMapper.xml"/>
   <mapper resource="kr/co/sist/user/mypage/mapper/ApplyMapper.xml"/>
+  <mapper resource="kr/co/sist/user/qna/mapper/QnAMapper.xml"/>
    
   </mappers>
 </configuration>

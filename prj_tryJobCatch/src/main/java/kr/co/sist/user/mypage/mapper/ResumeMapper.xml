@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.sist.resume" >
+	<!-- 인적사항 선택 -->
+	<select id="selectMbrInfo"
+		parameterType="String"
+		resultType="kr.co.sist.user.mypage.domain.ResumeMbrInfoDomain">
+		select  m_name, m_bday, m_gender, m_email, m_tel,
+				m_zip, m_addr, m_detail_addr, m_pic
+		from member
+		where m_id = #{ M_ID }
+	</select>
+		
 	<!-- 이미지 업데이트 -->
 	<update id="updateImg"
 		parameterType="kr.co.sist.user.mypage.vo.UploadImgVO">
@@ -22,6 +32,12 @@
 		where M_ID = #{ M_ID }
 	</select>
 	
+	<!-- 이력서 제목 조회 -->
+	<select id="selectResumeTitle" parameterType="String" resultType="String">
+		select MR_TITLE from member_resume
+		where mr_id = #{MR_ID}
+	</select>
+	
 	<!-- 이력서 -->
 	<!-- 이력서 시퀀스 -->
 	<select id="selectResumeSeq" resultType="String">
@@ -35,16 +51,23 @@
 	</update>
 	
 	<!-- 이력서 insert -->
-	<insert id="insertResume" parameterType="kr.co.sist.user.mypage.vo.ResumeVO">
-		insert into member_resume(MR_ID, M_ID, MR_TITLE, MR_REGISTRATION_DATE)
-		values( #{ MR_ID }, 
-				 #{ M_ID }, #{ MR_TITLE }, SYSDATE
+	<insert id="insertResume"
+		parameterType="kr.co.sist.user.mypage.vo.ResumeVO"
+		useGeneratedKeys="true"
+		keyColumn="MR_ID"
+		keyProperty="MR_ID"
+		>
+	
+		insert into member_resume(MR_ID, M_ID, MR_TITLE, MR_REGISTRATION_DATE, DELETE_STATE)
+		values(
+			'mr_' || LPAD(mr_seq.NEXTVAL, 5, '0'), 
+				 #{ M_ID }, #{ MR_TITLE }, SYSDATE, 'N'
 			   )
 	</insert>
 	<!-- 이력서 update -->
 	<update id="updateResume" parameterType="kr.co.sist.user.mypage.vo.ResumeVO">
 		update member_resume
-		set MR_TITLE = #{ MR_TITLE }, MR_REGISTRATION_DATE = SYSDATE
+		set MR_TITLE = #{ MR_TITLE }
 		where MR_ID = #{ MR_ID }
 	</update>
 	
@@ -87,29 +110,172 @@
 	</delete>
 	
 	<!-- 스킬 등록 -->
-<!-- 	<insert id="insertSkill" parameterType="kr.co.sist.user.mypage.vo.ResumeVO">
-		<foreach collection="S_NAME" item="sName" separator=";" open="DECLARE BEGIN" close="; END;">
+	<insert id="insertSkill" parameterType="java.util.HashMap">
 		insert into skill(S_ID, MR_ID, M_ID, S_NAME )
+		select 's_' || LPAD(s_seq.NEXTVAL, 5, '0'), total.*
+		from (
+		<foreach collection="skillList" item="map" index="i" separator="union all">
 		select
-			's_' || LPAD(s_seq.NEXTVAL, 5, '0'),
-			#{MR_ID},
-			#{M_ID},
-			#{sName}
+			#{ idMap.mr_id },
+			#{ idMap.m_id },
+			#{ map.S_NAME }
 		from dual
 		</foreach>
-	</insert> -->
-	<insert id="insertSkill" parameterType="kr.co.sist.user.mypage.vo.ResumeVO">
-		<foreach collection="S_NAME" item="sName" separator=";" open="DECLARE BEGIN" close="; END;">
-		insert into skill(S_ID, MR_ID, M_ID, S_NAME )
-		select
-		's_' || LPAD(s_seq.NEXTVAL, 5, '0'),
-			#{MR_ID},
-			#{M_ID},
-			#{sName}
-		from dual
-		</foreach>
+		) total
 	</insert>
 	
+	<!-- 학력 -->
+	<insert id="insertAcademicAbility" parameterType="java.util.HashMap">
+		insert into ACADEMIC_ABILITY(AA_ID, MR_ID, M_ID, 
+			AA_SCHOOL_DIVISION,
+			AA_SCHOOL_NAME, AA_ENTRANCE_DATE, AA_GRADUATION_DATE,
+			AA_GRADUATION_CONDITION, AA_MAJOR, AA_CREDIT, AA_DEGREE
+			)
+		select 'aa_' || LPAD(aa_seq.NEXTVAL, 5, '0'), total.*
+		from(
+		<foreach collection="academicAbilityList" item="map" index="index" separator="union all">
+		select
+			#{idMap.mr_id}, #{idMap.m_id}, 
+			#{map.AA_SCHOOL_DIVISION} ,#{map.AA_SCHOOL_NAME}, TO_DATE(#{map.AA_ENTRANCE_DATE}, 'yyyy.MM'),
+			TO_DATE(#{map.AA_GRADUATION_DATE},'yyyy.MM'), #{map.AA_GRADUATION_CONDITION},
+			#{map.AA_MAJOR_NAME}, #{map.AA_CREDIT}, #{map.AA_DEGREE}
+		from dual
+		</foreach>
+		) total
+		
+	</insert>
+	
+	
+	<insert id="insertCareerEmp" parameterType="java.util.HashMap">
+		insert into career(C_ID, MR_ID, M_ID,
+				C_CO_NAME, C_DEPT_NAME, C_JOIN_DATE,
+				C_RETIREMENT_DATE, C_EMP_CONDITION, C_POSITION, C_DUTY )
+		values (
+				'c_' || LPAD(rec_seq.NEXTVAL, 5, '0'),
+				#{MR_ID}, #{M_ID}, 
+				#{C_CORPORATE_NAME} ,#{C_DEPARTMENT_NAME}, TO_DATE(#{C_JOINING_DATE}, 'yyyy.MM'),
+				TO_DATE(#{C_RETIREMENT_DATE},'yyyy.MM'), #{C_EMPLOYMENT_STATUS}, #{C_POSITION}, #{C_DUTY}
+		)
+	</insert>
+	<insert id="insertCareerEmped" parameterType="java.util.HashMap">
+		insert into career(C_ID, MR_ID, M_ID,
+				C_CO_NAME, C_DEPT_NAME, C_JOIN_DATE,
+				C_EMP_CONDITION, C_POSITION, C_DUTY )
+		values (
+				'c_' || LPAD(rec_seq.NEXTVAL, 5, '0'),
+				#{MR_ID}, #{M_ID}, 
+				#{C_CORPORATE_NAME} ,#{C_DEPARTMENT_NAME}, TO_DATE(#{C_JOINING_DATE}, 'yyyy.MM'),
+				#{C_EMPLOYMENT_STATUS}, #{C_POSITION}, #{C_DUTY}
+		)
+	</insert>
+	
+	
+	<!-- 인턴/대외활동/교육 -->
+	<insert id="insertIIAE" parameterType="java.util.HashMap">
+		insert into INTERN_INT_ACTY_EDU(
+				IIAE_ID, MR_ID, M_ID,
+				IIAE_SECTION, IIAE_INST_NAME, IIAE_START_DATE,
+				IIAE_END_DATE, IIAE_CONTENT)
+		select 'iiae_' || LPAD(iiae_seq.NEXTVAL, 5, '0'), total.*
+		from(
+		<foreach collection="IIAEList" item="map" index="index" separator="union all">
+		select
+			#{idMap.mr_id}, #{idMap.m_id}, 
+			#{map.IIAE_SECTION} ,#{map.IIAE_INSTITUTION_NAME}, TO_DATE(#{map.IIAE_START_DATE}, 'yyyy.MM'),
+			TO_DATE(#{map.IIAE_END_DATE},'yyyy.MM'), #{map.IIAE_CONTENT}
+		from dual
+		</foreach>
+		) total
+	</insert>
+	
+	<!-- 자격증 -->
+	<insert id="insertCerti" parameterType="java.util.HashMap">
+		insert into CERTIFICATE(
+				CER_ID, MR_ID, M_ID,
+				CER_NAME, CER_ORG, CER_ACQUISITION_DATE)
+		select 'cer_' || LPAD(cer_seq.NEXTVAL, 5, '0'), total.*
+		from(
+		<foreach collection="certiList" item="map" index="index" separator="union all">
+		select
+			#{idMap.mr_id}, #{idMap.m_id}, 
+			#{map.CER_NAME} ,#{map.CER_ISSUING_ORGANIZATION}, TO_DATE(#{map.CER_ACQUISITION_DATE}, 'yyyy.MM')
+		from dual
+		</foreach>
+		) total
+	</insert>
+	
+	<!-- 수상 -->
+	<insert id="insertAward" parameterType="java.util.HashMap">
+		insert into AWARD(
+			A_ID, MR_ID, M_ID, A_NAME, A_INST, A_DATE, A_CONTENT
+			)
+		select 	'a_' || LPAD(a_seq.NEXTVAL, 5, '0'), total.*
+		from(
+		<foreach collection="awardList" item="map" index="index" separator="union all">
+		select
+			#{idMap.mr_id}, #{idMap.m_id}, 
+			#{map.A_NAME} ,#{map.A_INSTITUTION}, TO_DATE(#{map.A_DATE}, 'yyyy'), #{map.A_CONTENT}
+		from dual
+		</foreach>
+		) total
+	</insert>
+	
+	<insert id="insertLangAbility" parameterType="java.util.HashMap">
+		insert into LANGUAGE(
+			L_ID, MR_ID, M_ID,
+		  	L_TYPE, L_NAME,
+		  	L_ABILITY )
+		 values( 
+		 	'l_' || LPAD(l_seq.NEXTVAL, 5, '0'),
+		 	#{MR_ID}, #{M_ID}, #{L_TYPE}, #{L_NAME}, #{L_ABILITY}
+		 )
+	</insert>
+	<insert id="insertLangTest" parameterType="java.util.HashMap">
+		insert into LANGUAGE(
+			L_ID, MR_ID, M_ID,
+		  	L_TYPE, L_NAME,
+		  	L_TEST, L_SCORE, L_ACQUISITION_DATE 
+		  	 )
+		 values( 
+		 	'l_' || LPAD(l_seq.NEXTVAL, 5, '0'),
+		 	#{MR_ID}, #{M_ID}, #{L_TYPE}, #{L_NAME},
+		 	#{L_TEST_NAME}, #{L_SCORE},
+			TO_DATE(#{L_ACQUISITION_DATE}, 'yyyy.MM')
+		 )
+	</insert>
+	
+	
+	<!-- 포트폴리오 -->
+	<insert id="insertPortfolio" parameterType="java.util.HashMap">
+		insert into PORTFOLIO(
+			P_ID, MR_ID, M_ID, P_URL
+			)
+		select 	'p_' || LPAD(p_seq.NEXTVAL, 5, '0'), total.*
+		from(
+		<foreach collection="portfolioList" item="map" index="index" separator="union all">
+		select
+			#{idMap.mr_id}, #{idMap.m_id}, 
+			#{map.P_URL}
+		from dual
+		</foreach>
+		) total
+	</insert>
+	
+	<!-- 자기소개서 -->
+	<insert id="insertCoverLetter" parameterType="java.util.HashMap">
+		insert into COVER_LETTER(
+			CL_ID, MR_ID, M_ID, CL_TITLE, CL_CONTENT
+			)
+		select 	'cl_' || LPAD(cl_seq.NEXTVAL, 5, '0'), total.*
+		from(
+		<foreach collection="coverLetterList" item="map" index="index" separator="union all">
+		select
+			#{idMap.mr_id}, #{idMap.m_id}, 
+			#{map.CL_TITLE} ,#{map.CL_CONTENT}
+		from dual
+		</foreach>
+		) total
+	</insert>
 	
 	
 	<!-- 이력서 리스트 -->
@@ -130,5 +296,90 @@
 		set delete_state = 'Y'
 		where mr_id = #{ MR_ID }
 	</update>
+	
+	<!-- 이력서 항목 선택  -->
+	<!-- SKILL -->
+	<select id="selectSkill"
+		resultType="String"
+		parameterType="String">
+		select S_NAME from skill
+		where mr_id = #{mr_id}
+	</select>
+	<!-- ACADEMIC_ABILITY -->
+	<select id="selectAcademicAbility"
+		parameterType="String"
+		resultType="kr.co.sist.user.mypage.domain.AcademicAbilityDomain">
+		select
+			AA_SCHOOL_DIVISION, AA_SCHOOL_NAME, AA_ENTRANCE_DATE,
+			AA_GRADUATION_DATE, AA_GRADUATION_CONDITION, AA_MAJOR,
+			AA_CREDIT, AA_DEGREE
+		from ACADEMIC_ABILITY
+		where mr_id = #{mr_id}
+	</select>
+	<!-- CAREER -->
+	<select id="selectCareer"
+			parameterType="String"
+			resultType="kr.co.sist.user.mypage.domain.CareerDomain">
+		select C_CO_NAME, C_DEPT_NAME, C_JOIN_DATE,
+			C_RETIREMENT_DATE, C_EMP_CONDITION,
+			C_POSITION, C_DUTY
+		from career
+		where mr_id = #{mr_id}
+	</select>
+	<!-- INTERN_INT_ACTY_EDU -->
+	<select id="selectIntActyEdu"
+			parameterType="String"
+			resultType="kr.co.sist.user.mypage.domain.IntActyEduDomain" >
+		select
+			IIAE_SECTION, IIAE_INST_NAME,
+			IIAE_START_DATE, IIAE_END_DATE, IIAE_CONTENT
+		from INTERN_INT_ACTY_EDU
+		where mr_id = #{mr_id}
+	</select>
+	<!-- CERTIFICATE -->
+	<select id="selectCertificate"
+			parameterType="String"
+			resultType="kr.co.sist.user.mypage.domain.CertificateDomain" >
+		select
+			CER_NAME, CER_ORG, CER_ACQUISITION_DATE
+		from CERTIFICATE
+		where mr_id = #{mr_id}
+	</select>
+	<!-- AWARD -->
+	<select id="selectAward"
+			parameterType="String"
+			resultType="kr.co.sist.user.mypage.domain.AwardDomain" >
+		select
+			A_NAME, A_INST, A_DATE, A_CONTENT
+		from AWARD
+		where mr_id = #{mr_id}
+	</select>
+	<!-- LANGUAGE -->
+	<select id="selectLanguage"
+			parameterType="String"
+			resultType="kr.co.sist.user.mypage.domain.LanguageDomain" >
+		select
+			L_TYPE, L_NAME, L_ABILITY,
+			L_TEST, L_SCORE, L_ACQUISITION_DATE
+		from LANGUAGE
+		where mr_id = #{mr_id}
+	</select>
+	<!-- PORTFOLIO -->
+	<select id="selectPortfolio"
+		resultType="String"
+		parameterType="String">
+		select P_URL
+		from PORTFOLIO
+  		where mr_id = #{mr_id}
+	</select>
+	<!-- COVER_LETTER -->
+	<select id="selectCoverLetter"
+			parameterType="String"
+			resultType="kr.co.sist.user.mypage.domain.CoverLetterDomain" >
+		select
+			CL_TITLE, CL_CONTENT
+		from COVER_LETTER
+		where mr_id = #{mr_id}
+	</select>
 	
 </mapper>
