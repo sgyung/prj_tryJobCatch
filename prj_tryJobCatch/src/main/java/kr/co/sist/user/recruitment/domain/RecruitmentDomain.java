@@ -31,6 +31,7 @@ public class RecruitmentDomain {
 	private String cm_co_logo;
 	private String cm_homepage;
 	private int cm_emp_num;
+	private int cm_sales;
 	private Date cm_establishment_year;
 	private String rf_field;
 	private String rs_name;

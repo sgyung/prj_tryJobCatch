@@ -16,7 +16,7 @@ import kr.co.sist.dao.MyBatisHandler;
 import kr.co.sist.user.recruitment.domain.RecruitmentDomain;
 
 @Component
-public class NoticeDAO {
+public class AdminNoticeDAO {
 	
 	public List<NoticeDomain> selectAllNotice() throws PersistenceException {
 		List<NoticeDomain> list = null;

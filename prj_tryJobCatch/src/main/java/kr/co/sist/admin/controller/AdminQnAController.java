@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class QnAController {
+public class AdminQnAController {
 
 	@GetMapping("/qnalist.do")
 	public String qnaList() {

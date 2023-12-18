@@ -142,7 +142,7 @@ public class RecruitmentService {
 	// 회원이 특정 채용에 지원한 지원상태 조회
 	public String applyCondition(ApplyVO aVO) {
 		String condition = "";
-		
+		UserRecruitmentDAO urDAO = new UserRecruitmentDAO();
 		ApplyDomain ad = null;
 		
 		try {

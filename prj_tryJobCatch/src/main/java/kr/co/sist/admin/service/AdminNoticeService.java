@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.sist.admin.dao.CompanyDAO;
-import kr.co.sist.admin.dao.NoticeDAO;
+import kr.co.sist.admin.dao.AdminNoticeDAO;
 import kr.co.sist.admin.dao.UserDAO;
 import kr.co.sist.admin.domain.CompanyDomain;
 import kr.co.sist.admin.domain.NoticeDomain;
@@ -17,10 +17,10 @@ import kr.co.sist.admin.vo.PageVO;
 import kr.co.sist.admin.vo.UserModifyVO;
 
 @Component
-public class NoticeService {
+public class AdminNoticeService {
 
 	@Autowired
-	private NoticeDAO nDAO;
+	private AdminNoticeDAO nDAO;
 
 	public List<NoticeDomain> printAllNotice(){
 		List<NoticeDomain> noticeList = null;

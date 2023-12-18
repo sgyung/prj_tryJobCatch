@@ -15,8 +15,8 @@
     LEFT JOIN working_area wa ON r.wa_id = wa.wa_id
     LEFT JOIN re_career rec ON r.rec_id = rec.rec_id
     LEFT JOIN recruitment_field rf ON r.r_id = rf.r_id
+     WHERE r.r_end_date >= SYSDATE
     <if test="d_id != null || ind_id != null || e_id != null || et_id != null || wa_id != null || rec_id != null || keyword != null || cm_co_type != null">
-        WHERE 1=1
         <if test="d_id != null">
             AND r.d_id = #{d_id}
         </if>
@@ -71,8 +71,8 @@
         LEFT JOIN employment_type et ON r.et_id = et.et_id
         LEFT JOIN working_area wa ON r.wa_id = wa.wa_id
         LEFT JOIN re_career rec ON r.rec_id = rec.rec_id
+        WHERE r.r_end_date >= SYSDATE
         <if test="d_id != null || ind_id != null || e_id != null || et_id != null || wa_id != null || rec_id != null || keyword != null || cm_co_type !=  null">
-        WHERE 1=1
             <if test="d_id != null">
                 AND r.d_id = #{d_id}
             </if>
@@ -114,6 +114,7 @@
 
 <resultMap type="red" id="redResult">
 <result column="r_id" property="r_id"/>
+<result column="cm_id" property="cm_id"/>
 <result column="cm_co_name" property="cm_co_name"/>
 <result column="r_title" property="r_title"/>
 <result column="r_sal" property="r_sal"/>
@@ -137,6 +138,7 @@
 <result column="et_name" property="et_name"/>
 <result column="wa_name" property="wa_name"/>
 <result column="rec_name" property="rec_name"/>
+<result column="cm_sales" property="cm_sales"/>
 </resultMap>
 
 <!-- 채용상세 쿼리 -->
@@ -144,7 +146,7 @@
 SELECT
     r.r_id,c.cm_id,c.cm_co_name,r.r_title,r.r_sal,r.r_start_date,r.r_end_date,r.r_time,c.cm_homepage,c.cm_co_logo,
     c.cm_co_type,c.cm_emp_num,c.cm_establishment_year,r.r_info,rf.rf_fields,rs.rs_names,r.r_registration_date,r.r_registration_state,
-    r.r_recruitment_volume,d.d_name,ind.ind_name,e.education,et.et_name,wa.wa_name,rec.rec_name
+    r.r_recruitment_volume,d.d_name,ind.ind_name,e.education,et.et_name,wa.wa_name,rec.rec_name,c.cm_sales
 FROM
     recruitment r
 JOIN
@@ -242,7 +244,7 @@ WHERE
 <select id="selectApply" resultType="kr.co.sist.user.recruitment.domain.ApplyDomain" parameterType="kr.co.sist.user.recruitment.vo.ApplyVO">
 select a_id, r_id, mr_id, m_id, a_condition
 from application
-where m_id = #{ m_id } and r_id = #{ r_id }
+where m_id = #{ m_id } and r_id = #{ r_id } and a_condition = 'Y'
 </select>
 
 <!-- 지원하기 insert -->

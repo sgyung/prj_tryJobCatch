@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.sist.admin.domain.CompanyDomain;
 import kr.co.sist.admin.domain.NoticeDomain;
-import kr.co.sist.admin.service.NoticeService;
+import kr.co.sist.admin.service.AdminNoticeService;
 import kr.co.sist.admin.vo.NoticeInsertVO;
 
 @Controller
-public class NoticeController {
+public class AdminNoticeController {
 
 	@Autowired
-	private NoticeService ns;
+	private AdminNoticeService ns;
 	
 	@RequestMapping(value="/noticelist.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String noticeList(Model model) {

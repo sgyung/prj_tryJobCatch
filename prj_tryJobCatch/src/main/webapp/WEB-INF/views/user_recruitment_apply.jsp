@@ -83,6 +83,12 @@
 <script type="text/javascript">
 
 $(function(){
+	if ("${msg}" != "") {
+		alert("${msg}");
+        
+            window.close();
+    }
+	
 	 // 버튼 클릭 시 클래스 토글
     $('.btnSelCate').on('click', function () {
         $('.selCateWRap').toggleClass('sel');
@@ -110,12 +116,10 @@ $(function(){
 });
 
 function applyComplete() {
-	$("#applyFrm").submit();
-	
-	if("${ msg }" != ""){
-		alert("${ msg }");
-	}
+		$("#applyFrm").submit();
+			
 }
+		
 
 </script>
     

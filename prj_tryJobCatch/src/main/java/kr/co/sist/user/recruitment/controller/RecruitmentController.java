@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,8 +37,6 @@ public class RecruitmentController {
 	@GetMapping("/recruitment.do")
 	public String recruitmentList(PageVO pVO, Model model) {
 		
-//		 model.addAttribute("recruitmentList", rs.SearchRecruitment(pVO));
-		
 		 model.addAttribute("dutyList", rs.allDuty());
 		 model.addAttribute("areaList", rs.allArea());
 		 model.addAttribute("careerList", rs.allCareer());
@@ -48,7 +48,23 @@ public class RecruitmentController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/recruitmentList_process.do")
+	@GetMapping("/applyState.do")
+	public String applyState(@RequestParam("r_id")String id,HttpSession session, Model model ) {
+		String userId = (String)session.getAttribute("M_ID");
+		ApplyVO aVO = new ApplyVO();
+		
+		
+		aVO.setM_id(userId);
+		aVO.setR_id(id);
+		
+		JSONObject json = rlp.applyState(aVO);
+		
+		
+		return json.toJSONString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/recruitmentList_process.do", method=RequestMethod.GET,produces = "application/json;charset=UTF-8")
 	public String recruitmentListProcess(PageVO pVO, HttpSession session) {
 		int totalCount = 0;
 		int pageScale = 0;
@@ -84,11 +100,16 @@ public class RecruitmentController {
 	}
 	
 	@GetMapping("/recruitmentDetail.do")
-	public String oneRecruitment(@RequestParam("r_id") String r_id, Model model){
-		
+	public String oneRecruitment(@RequestParam("r_id") String r_id, Model model, HttpSession session){
+		String userId = (String)session.getAttribute("M_ID");
 		RecruitmentDomain rd = rs.OneRecruitment(r_id);
+		ApplyVO aVO = new ApplyVO();
 		
+		aVO.setM_id(userId);
+		aVO.setR_id(r_id);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+		String condition = rs.applyCondition(aVO);
+		
 		
 		model.addAttribute("r_id", rd.getR_id());
 		model.addAttribute("cm_id", rd.getCm_id());
@@ -110,31 +131,27 @@ public class RecruitmentController {
 		model.addAttribute("cm_co_logo", rd.getCm_co_logo());
 		model.addAttribute("cm_homepage", rd.getCm_homepage());
 		model.addAttribute("cm_emp_num", rd.getCm_emp_num());
+		model.addAttribute("cm_sales", rd.getCm_sales());
 		model.addAttribute("cm_establishment_year", sdf.format(rd.getCm_establishment_year()));
 		model.addAttribute("rf_field", rd.getRf_field());
 		model.addAttribute("rs_name", rd.getRs_name());
 		model.addAttribute("r_registration_date", rd.getR_registration_date());
-		
+		model.addAttribute("condition",condition);
 		return "user_recruitment_detail";
 	}
 	
 	@GetMapping("/apply.do")
 	public String goApply(@RequestParam("r_id") String id, Model model, HttpSession session) {
 		String userId = (String)session.getAttribute("M_ID");
-		ApplyVO aVO = new ApplyVO();
 		
-		aVO.setM_id(userId);
-		aVO.setR_id(id);
 		
 		List<ResumeDomain> list = rs.resumeList(userId);
 		RecruitmentDomain rd = rs.OneRecruitment(id);
-		String condition = rs.applyCondition(aVO);
+		
 		MemberDomain md = rs.searchMember(userId);
 		
-		System.out.println(list.toString());
 		
 		model.addAttribute("cm_id",rd.getCm_id());
-		System.out.println("cm_id========================" + rd.getCm_id());
 		model.addAttribute("cm_co_name",rd.getCm_co_name());
 		model.addAttribute("r_title",rd.getR_title());
 		model.addAttribute("r_id",rd.getR_id());
@@ -142,7 +159,6 @@ public class RecruitmentController {
 		model.addAttribute("tel",md.getM_TEL());
 		model.addAttribute("email",md.getM_EMAIL());
 		model.addAttribute("resumeList",list);
-		model.addAttribute("condition",condition);
 		model.addAttribute("mr_id",list.get(0).getMr_id());
 		model.addAttribute("mr_title",list.get(0).getMr_title());
 		return "user_recruitment_apply";
@@ -163,7 +179,7 @@ public class RecruitmentController {
 		
 		model.addAttribute("msg", msg);
 		
-		return "forward:/recruitment.do";
+		return "forward:/apply.do";
 	}
 	
 
