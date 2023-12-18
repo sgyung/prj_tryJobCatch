@@ -45,6 +45,8 @@ var param ={};
 
 $(function(){
 	
+
+	
 	// 채용정보 버튼 클릭 시 리스트 출력 
 	$.ajax({
 		url : "http://localhost/prj_tryJobCatch/recruitmentList_process.do",
@@ -485,20 +487,38 @@ function recruitmentList(num) {
 	
 	// 지원하기 버튼 클릭
 	function apply(id) {
-		var id = "${M_ID}";
 		
-		if(id != ""){
-	    	// 새 창을 열고 지정된 URL을 로드
-		    var newWindow = window.open("http://localhost/prj_tryJobCatch/apply.do?r_id=" + id, "NewWindow", "width=600, height=800");
-		    
-		    // 새 창의 크기 및 위치를 설정 (선택적)
-		    if (newWindow) {
-		        newWindow.resizeTo(600, 800);
-		        newWindow.moveTo((window.screen.width - 600) / 2, (window.screen.height - 800) / 2);
-		    }
-		}else{
-			alert("로그인 후 이용해주세요.");
-		}
+		$.ajax({
+			url : "http://localhost/prj_tryJobCatch/applyState.do",
+			data : {r_id : id},
+			type : "GET",
+			dataType : "JSON",
+			error : function(xhr){
+				alert(xhr.status);
+			},
+			success : function( jsonObj ){
+				var userId = "${M_ID}";
+				var condition = jsonObj.condition;
+				
+				if(userId != "" && condition != 'Y'){
+			    	// 새 창을 열고 지정된 URL을 로드
+				    var newWindow = window.open("http://localhost/prj_tryJobCatch/apply.do?r_id=" + id, "NewWindow", "width=600, height=800");
+				    
+				    // 새 창의 크기 및 위치를 설정 (선택적)
+				    if (newWindow) {
+				        newWindow.resizeTo(600, 800);
+				        newWindow.moveTo((window.screen.width - 600) / 2, (window.screen.height - 800) / 2);
+				    }
+				}else if(userId != "" && condition == 'Y'){
+					alert("이미 지원한 공고입니다. 마이페이지에서 지원서 수정 가능합니다.")	
+				}else{
+					alert("로그인 후 이용해주세요.");
+				}
+					
+			}//success
+		});//ajax
+		
+		
 	}
 </script>
     

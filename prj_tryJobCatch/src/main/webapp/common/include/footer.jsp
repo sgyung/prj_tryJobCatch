@@ -43,6 +43,17 @@
     <script src="/resources/js/public/dist/jk.public.main.contents.min.js?v=202312041400"></script>
     <script src="/resources/js/user/dist/jk.user.mypage.min.js?v=202312041400"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<!-- jQuery CDN -->
+
+<script type="text/javascript">
+
+function noticeDetail(id) {
+	location.href="http://localhost/prj_tryJobCatch/noticeDetail.do?n_id="+id;
+}
+
+</script>
+
     
 <div id="footer" class="footer footer--main">
     <div class="footer__wrap">

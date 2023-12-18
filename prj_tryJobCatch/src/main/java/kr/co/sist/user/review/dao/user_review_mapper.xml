@@ -499,7 +499,7 @@ SELECT DISTINCT
         company_member cm ON r.cm_id = cm.cm_id
     WHERE
         a.m_id = #{ m_id }
-        AND r.r_registration_state = 'Y'
+        AND a.a_recruitment_condition = 'Y'
         AND NOT EXISTS (
             SELECT 1
             FROM

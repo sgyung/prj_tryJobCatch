@@ -167,7 +167,6 @@ $(function(){
 
        // 체크박스 5개로 제한
        $('.devBtnKeyword').on('change', function () {
-    	   alert("dsdsdas");
            var checkedCheckboxes = $('.devBtnKeyword:checked');
            if (checkedCheckboxes.length > 5) {
                // 현재 체크박스가 5개 이상인 경우 체크 해제

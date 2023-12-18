@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import kr.co.sist.user.recruitment.dao.UserRecruitmentDAO;
 import kr.co.sist.user.recruitment.domain.RecruitmentDomain;
+import kr.co.sist.user.recruitment.vo.ApplyVO;
 import kr.co.sist.user.recruitment.vo.PageVO;
 import kr.co.sist.user.review.domain.LikeDomain;
 
@@ -57,6 +58,23 @@ public class RecruitmentListProcess {
 			jsonObj.put("data", jsonArr);
 			jsonObj.put("dataSize", cnt);
 			jsonObj.put("pageNation", pageNaion);
+			
+			
+		}catch(PersistenceException pe) {
+			pe.printStackTrace();
+		}
+		return jsonObj;
+	}
+	
+	public JSONObject applyState(ApplyVO aVO) {
+		JSONObject jsonObj = new JSONObject();
+		RecruitmentService rs = new RecruitmentService();
+		
+		try {
+			
+			String Condition = rs.applyCondition(aVO);
+			
+			jsonObj.put("condition", Condition);
 			
 			
 		}catch(PersistenceException pe) {

@@ -93,7 +93,7 @@ function deleteLike(id) {
 
 // 등록 처리 함수
 function addLike() {
-	var id = "${M_id}";
+	var id = "${M_ID}";
 	if(id != ""){		
 	    var confirmationMessage = "관심기업을 등록하시겠습니까?";
 	
