@@ -107,9 +107,9 @@
 		resultType="kr.co.sist.user.company.domain.RecruitListDomain">
 		select count(app.r_id) applycnt, re.R_ID, re.R_TITLE, re.R_START_DATE, re.R_END_DATE, re.R_REGISTRATION_STATE, re.R_REGISTRATION_DATE
 		from RECRUITMENT re, application app
-		where re.cm_id = 'cm_00001'
+		where re.cm_id = #{CM_ID}
 		 and R_REGISTRATION_STATE = 'Y'
-		 and re.r_id = app.r_id
+		 and re.r_id = app.r_id(+)
 		group by re.R_ID, re.R_TITLE, re.R_START_DATE, re.R_END_DATE, re.R_REGISTRATION_STATE, re.R_REGISTRATION_DATE
 	</select>
 	
@@ -184,9 +184,33 @@
 		where r_id = #{R_ID}
 	</update>
 	
-	<insert id="insert">
+	<update id="updateRegistState"
+		parameterType="String">
+		update recruitment
+		set r_registration_state = 'N'
+		where r_id = #{r_id}
+	</update>	
 	
+	<select id="selectApllyMbrList"
+			parameterType="String"
+			resultType="kr.co.sist.user.company.domain.ApplyMbrDomain">
+		select re.r_id, resume.mr_id, mbr.m_id, app.a_id, mbr.m_name, resume.mr_title, a_recruitment_condition, a_date
+		from recruitment re, application app, member_resume resume, member mbr
+		where re.r_id = app.r_id and
+			app.mr_id = resume.mr_id and
+			resume.m_id = mbr.m_id and
+			re.r_id = #{R_ID}
+		group by re.r_id, resume.mr_id, mbr.m_id, app.a_id, mbr.m_name , resume.mr_title, a_recruitment_condition, a_date
+	</select>	
 	
-	</insert>
-
+	<!-- 채용하기  -->
+	<update id="updateRecruitState"
+			parameterType="String"
+			>
+		update application
+		set a_recruitment_condition = 'Y'
+		where a_id = #{a_id}
+	</update>
+		
+		
 </mapper>

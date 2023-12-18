@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
 import kr.co.sist.dao.MyBatisHandler;
+import kr.co.sist.user.company.domain.ApplyMbrDomain;
 import kr.co.sist.user.company.domain.CareerDomain;
 import kr.co.sist.user.company.domain.CoLatestRecruitDomain;
 import kr.co.sist.user.company.domain.CoProfileDomain;
@@ -206,6 +207,47 @@ public class CoRecruitDAO {
 		}
 		
 		return resultFlag;
+	}
+	
+	public int updateRegistState(String r_id) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getMyBatisHandler(false);
+		
+		int result = ss.update("kr.co.sist.coRecruit.updateRegistState", r_id);
+		
+		if( result == 1 ) {
+			ss.commit();
+		} else {
+			ss.rollback();
+		}//end else
+		
+		mbh.closeHandler(ss);
+		
+		return result;
+	}//updateRegistState
+	
+	public List<ApplyMbrDomain> selectApplyMbrList(String r_id){
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getMyBatisHandler(false);
+		
+		List<ApplyMbrDomain> list = ss.selectList("kr.co.sist.coRecruit.selectApllyMbrList", r_id);
+		
+		mbh.closeHandler(ss);
+		
+		return list;
+	}
+	
+	public int updateRecruitState (String a_id) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getMyBatisHandler(false);
+		
+		int result = ss.update("kr.co.sist.coRecruit.updateRecruitState", a_id);
+		
+		ss.commit();
+		
+		mbh.closeHandler(ss);
+		
+		return result;
 	}
 
 }//class

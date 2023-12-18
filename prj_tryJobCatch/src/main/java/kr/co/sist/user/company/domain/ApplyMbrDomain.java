@@ -1,6 +1,5 @@
-package kr.co.sist.user.mypage.domain;
+package kr.co.sist.user.company.domain;
 
-import java.sql.Date;
 
 
 import lombok.AllArgsConstructor;
@@ -14,9 +13,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ApplyDomain {
+public class ApplyMbrDomain {
 	private String
-		A_RECRUITMENT_CONDITION, A_ID,
-		R_TITLE, CM_CO_NAME, R_REGISTRATION_STATE;
-	private Date A_DATE, R_END_DATE;
+		r_id, mr_id, m_id, a_id, m_name, mr_title,
+		a_recruitment_condition, a_date; 
 }

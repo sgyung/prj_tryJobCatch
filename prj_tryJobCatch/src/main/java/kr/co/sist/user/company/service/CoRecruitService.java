@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.sist.user.company.dao.CoRecruitDAO;
+import kr.co.sist.user.company.domain.ApplyMbrDomain;
 import kr.co.sist.user.company.domain.CareerDomain;
 import kr.co.sist.user.company.domain.DutyDomain;
 import kr.co.sist.user.company.domain.EducationDomain;
@@ -15,6 +16,7 @@ import kr.co.sist.user.company.domain.RecruitDetailDomain;
 import kr.co.sist.user.company.domain.RecruitListDomain;
 import kr.co.sist.user.company.domain.WorkAreaDomain;
 import kr.co.sist.user.company.vo.RecruitmentVO;
+import kr.co.sist.user.mypage.dao.ResumeDAO;
 
 @Component
 public class CoRecruitService {
@@ -91,4 +93,34 @@ public class CoRecruitService {
 		
 		return flag;
 	}
+	
+	public boolean removeRecruitment(String r_id) {
+		int result = coRecruitDAO.updateRegistState(r_id);
+		boolean resultFlag = false;
+		
+		if( result == 1 ) {
+			resultFlag = true;
+		}
+		
+		return resultFlag;
+	}
+	
+	public List<ApplyMbrDomain> getApplyMbrList(String r_id){
+		List<ApplyMbrDomain> list = coRecruitDAO.selectApplyMbrList(r_id);
+		
+		return list;
+	}
+	
+	public boolean changeRecruitState(String a_id) {
+		int result = coRecruitDAO.updateRecruitState(a_id);
+		boolean resultFlag = false;
+		
+		if( result == 1) {
+			resultFlag = true;
+		}//end if
+		
+		return resultFlag;
+				
+	}
+	
 }

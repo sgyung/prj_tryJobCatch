@@ -38,21 +38,18 @@
 <script type="text/javascript" src="/Scripts/EchoScriptV2.js"></script>
 
 
-    <script type="text/javascript" src="/resources/lib/datastory/dslog.js?ver=1.1" id="dslog_tag"></script> 
-
-
-
-
+   <script type="text/javascript" src="/resources/lib/datastory/dslog.js?ver=1.1" id="dslog_tag"></script> 
 
 <style>
     .async-hide {
         opacity: 0 !important
     }
 </style>
+<script async="" src="https://www.googleoptimize.com/optimize.js?id=OPT-TD4G95J"></script>
+<!-- End Google Tag Manager -->
+<!-- Google Ad Manager -->
+<script data-ad-client="ca-pub-2252464458280030" async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
-
-
-    
 
 <link href="//i.jobkorea.kr/content/css/ver_2/event/banner.promotion-sv-202211241151.css" rel="stylesheet" type="text/css">
 
@@ -60,74 +57,29 @@
     
     <link href="//i.jobkorea.kr/content/css/ver_2/mtu/mtu_popup-sv-202311201246.css" rel="stylesheet" type="text/css">
 
-    
-
     <script src="/NET/bundles/backbone?v=v0-3Qm9SB2AUlk_aeK9GniBVmVTE9yxsGpDYtXZWlYU1"></script>
 
     <script type="text/javascript" src="/Scripts/json2.js"></script>
     <script type="text/javascript" src="/Scripts/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="https://i.jobkorea.kr/content/js/jk_uit.js?202311281400"></script>
     <script src="//i.jobkorea.kr/content/js/swiper-4.3.3.min-sv-202304070200.js" type="text/javascript"></script>
+    <script src="//i.jobkorea.kr/content/js/uit_mypage-sv-202311091305.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://i.jobkorea.kr/content/js/starter/jquery.nanoscroller.js?202311281400"></script>
     <script type="text/javascript" src="https://i.jobkorea.kr/content/js/sidebar.min.js?202311281400"></script>
     
     <link rel="stylesheet" href="https://i.jobkorea.kr/content/css/join/flow/flow.css">
-        <!-- jQuery CDN -->
+
+    <!-- jQuery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <!-- jQuery CDN -->
 <script type="text/javascript">
 $(function(){
-	var msg ="${ msg }"
-	if( msg != "" ){
-		alert(msg);
+	var msg = "${ msg }";
+	if( msg != ""){
+		alert(msg)
 	}
-	
-	
-	$(".cancel").click(function(){
-		var r_id = $(this).val();
-		
-		var param = {"r_id" : r_id }
-		if( confirm("삭제하시겠습니까?") ){
-			$.ajax({
-				url : "http://localhost/prj_tryJobCatch/company/coRecruitmentRemove.do",
-				type : "POST",
-				data : param,
-				dataType : "JSON",
-				error : function(xhr){
-					alert(xhr.status)				
-				},
-				success : function( json ){
-					alert(json.msg);
-					location.reload();
-				}//success
-				
-			})//ajax 
-		}
-		
-		/* if( confirm("삭제하시겠습니까?") ){
-			alert("dddd")
-		}
-		
-			
-			var r_id = $(this).val();
-			
-			$.ajax({
-				url : "http://localhost/prj_tryJobCatch/company/coRecruitmentRemove.do",
-				type : "POST",
-				data : { "r_id" = r_id },
-				dataType : "json",
-				error : function(xhr){
-					alert(xhr.status)				
-				},
-				success : function( msg ){
-					alert(msg);
-				}//success
-				
-			})//ajax */
-		
-	})//click
-	
-})//ready
+}    
 </script>
-    
 </head>
 <body id="secMtu" class="mtuHome" style="" cz-shortcut-listen="true">
 <c:import url="/common/include/header.jsp" />
@@ -136,20 +88,46 @@ $(function(){
 	</div>
 	<hr>
 	
+	
+
+
+
+
+
+
+
+<input type="hidden" name="MemId" id="MemId" value="average8294">
+<input type="hidden" name="MemTypeCode" id="MemTypeCode" value="M">
+
+<!--// GNB 개편 시작 -->
+
 
 <div class="jkNavDimm"></div>
 <!-- GNB 개편 끝 //-->
 
-<script src="/NET/bundles/backbone?v=v0-3Qm9SB2AUlk_aeK9GniBVmVTE9yxsGpDYtXZWlYU1"></script><div id="criteo-tags-div" style="display: none;"></div><div id="criteo-tags-div" style="display: none;"></div><div id="criteo-tags-div" style="display: none;"></div><div id="criteo-tags-div" style="display: none;"></div><div id="criteo-tags-div" style="display: none;"></div><div id="criteo-tags-div" style="display: none;"></div><div id="criteo-tags-div" style="display: none;"></div>
+<script src="/NET/bundles/backbone?v=v0-3Qm9SB2AUlk_aeK9GniBVmVTE9yxsGpDYtXZWlYU1"></script><div id="criteo-tags-div" style="display: none;"></div><div id="criteo-tags-div" style="display: none;"></div><div id="criteo-tags-div" style="display: none;"></div><div id="criteo-tags-div" style="display: none;"></div><div id="criteo-tags-div" style="display: none;"></div><div id="criteo-tags-div" style="display: none;"></div><div id="criteo-tags-div" style="display: none;"></div><div id="criteo-tags-div" style="display: none;"></div>
 
 <script src="/NET/bundles/Gnb?v=JnEyldyQ4JQKsSv2JSofWwnA-lS2Ce07qqJMI25VA6k1"></script>
 
 
 
+<script src="//i.jobkorea.kr/content/js/uit.carousel-sv-202005061649.js" type="text/javascript"></script>
 <script type="text/javascript" src="/Scripts/User/Mict.js?202311281400"></script>
 
 
 
+
+
+
+	
+
+
+	<!-- 우측 사이드바 영역 -->
+	
+    
+
+
+<!-- [주석 삭제] 레이어가 #wrap 밖으로 위치해야 함. -->
 
 
 <div id="adTopWrap" class="info applyCont">
@@ -441,7 +419,7 @@ $(function(){
     </div>
 
     
-    <div class="btnBx"><a href="http://localhost/prj_tryJobCatch/company/coRegistRecruitmentFrm.do" class="btn btnBl mtuSpImgBefore" target="_blank"><span>채용 등록</span></a></div>
+    
 
     <div>
         
@@ -454,43 +432,43 @@ $(function(){
 ">
                 <div class="col col01" style="
     padding: 0px;
-    width: 30%;
-">채용 제목</div>
+    width: 10%;
+">번호</div>
                 <div class="col col02" style="
     width: 20%;
     padding-right: 0px;
     text-align: center;
-">채용기간</div><div class="col col03" style="
-    width: 20%;
+">지원자</div><div class="col col03" style="
+    width: 40%;
     padding-right: 0px;
     text-align: center;
-">채용상태</div><div class="col col04" style="
-    width: 10%;
+">이력서</div><div class="col col04" style="
+    width: 15%;
     padding-right: 0px;
     text-align: center;
-">지원현황</div>
+"></div>
 <div class="col col05" style="
-    width: 20%;
-">채용 관리</div>
+    width: 15%;
+">채용상태</div>
 
             </div>
             <div class="mtuList">
-            	<c:choose>
-            	<c:when test="${ not empty recruitList }">
-            	<c:forEach var="item" items="${ recruitList }">
-            	
-            	
-            		<ul>
+            
+            	<c:forEach var="item" items="${ applyMbrList }" varStatus="i">
+                <ul>
 
                                     <!-- [개발] 이력서 작성중 yet 클래스 추가 -->
                                     <li class="ing">
                                         
                                         
                                         <div class="col col01" style="
-    width: 30%;
+    width: 10%;
 ">
-                                            <div class="tit"><a href="http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id=${ item.r_ID }" target="_blank"><c:out value="${ item.r_TITLE}" /></a></div>
-                                            <div class="date">${item.r_REGISTRATION_DATE}</div>
+                                            <div class="tit" style="
+    text-align: center;
+    display: block;
+"><a href="http://localhost/prj_tryJobCatch/company/applyResumeDetail.do?mr_id=${item.mr_id}&a_id=${item.a_id}&m_id=${item.m_id}&r_id=${item.r_id}" target="_self">${i.count }</a></div>
+                                            
                                         </div><div class="col col02" style="
     width: 20%;
     margin: 0px;
@@ -501,58 +479,65 @@ $(function(){
     text-align: center;
     display: block;
     margin: 0px;
-"><a href="http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id=${ item.r_ID }" target="_blank">${item.r_START_DATE} ~ ${item.r_END_DATE }</a></div>
+"><a href="http://localhost/prj_tryJobCatch/company/applyResumeDetail.do?mr_id=${item.mr_id}&a_id=${item.a_id}&m_id=${item.m_id}&r_id=${item.r_id}" target="_self">${ item.m_name }</a></div>
                                             
                                         </div><div class="col col03" style="
+    width: 40%;
+">
+                                            <div class="tit" style="
+    display: block;
+    text-align: center;
+"><a href="http://localhost/prj_tryJobCatch/company/applyResumeDetail.do?mr_id=${item.mr_id}&a_id=${item.a_id}&m_id=${item.m_id}&r_id=${item.r_id}" target="_self" style="
+    text-align: center;
+">${ item.mr_title }</a></div>
+                                            <div class="date" style="
+    text-align: center;
+">${ item.a_date }</div>
+                                        </div>
+                                        <div class="col col04" style="
     padding: 0px;
-    width: 20%;
+    width: 15%;
     margin: 0px;
 ">
                                             <div class="tit" style="
     display: block;
     margin: 0px;
     text-align: center;
-"><a href="http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id=${ item.r_ID }" target="_blank">채용중</a></div>
-                                            
-                                        </div><div class="col col04" style="
-    padding: 0px;
-    width: 10%;
-    margin: 0px;
-">
-                                            <div class="tit" style="
-    display: block;
-    margin: 0px;
-    text-align: center;
-    
-">
-
-<a href="http://localhost/prj_tryJobCatch/company/coApplyList.do?r_id=${ item.r_ID }" target="_blank">${ not empty item.applycnt? item.applycnt : 0 }</a></div>
+"></div>
                                             
                                         </div>
-                                        <div class="col col05" style="width: 20%;">
-                                            <!-- checkbox -->
-                                            <div class="btnCell"><a class="btn background" href="http://localhost/prj_tryJobCatch/company/coRegistRecruitmentFrm.do?r_id=${ item.r_ID }" target="_blank">수정하기</a></div>
-                                            <div class="btnCell"><button  class="btn cancel" type="button" value="${item.r_ID}"><span>삭제</span></button></div> 
+                                        <div class="col col05" style="width: 15%;">
+                                      <div class="tit" style="
+    display: block;
+    margin: 0px;
+    text-align: center;
+"><a href="#" target="_self">${ item.a_recruitment_condition eq 'Y' ? '채용확정' : '대기중' }</a></div>      
+                                            
+                                             
                                         </div>
                                         
                                     </li>
                 </ul>
-            		</c:forEach>
-            	</c:when>
-            	<c:otherwise>
-            	 <ul>
-					<li style="padding:20px; font-size:large" >등록한 채용공고가 없습니다.</li>
-                </ul>
-            	
-            	</c:otherwise>	
-            	</c:choose>
-               
+                </c:forEach>
+                
+                
+                
             </div>
             
         </div>
 
         
         
+        <!-- TIP -->
+        <div class="mtuTip">
+            <strong class="skip">이용 TIP</strong>
+            <ul class="tipList">
+                
+            </ul>
+        </div>
+        <div id="devResumeEmail" name="devResumeEmail" style="position:absolute; top:100px; left:70px; z-index:9999; display:none;">
+            
+        </div>
     </div>
 
 
@@ -594,10 +579,11 @@ $(function(){
 <input type="hidden" id="mictShareURL" value="https://mict.jobkorea.co.kr">
 
 
+
 			</section>
+			
 			<hr>
 			
-
 <c:import url="/common/include/co_sidebar.jsp"></c:import>
 
 <hr>
@@ -625,18 +611,6 @@ $(function(){
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-	
-	
     <script type="text/javascript" src="/Scripts/jquery.cookie.min.js?ver=202311281400"></script>
     <script type="text/javascript" src="/Scripts/Main/Common.js?ver=202311281400"></script>
     <script type="text/javascript" src="/Scripts/GI/OnPass_Quick.js?ver=202311281400"></script>
@@ -648,6 +622,7 @@ $(function(){
     <script type="text/javascript" src="/Scripts/User/MICT.js?ver=202311281400"></script>
 
 
+    <script src="https://i.jobkorea.kr/content/js/jk_uit.js"></script>
     <script src="//i.jobkorea.kr/content/javascript/pc/dist/user/ui.user.min-sv-202308080257.js" type="text/javascript"></script>
     <script type="text/javascript" src="/include/JS/resume-target.js?v=202311281400"></script>
 
@@ -662,10 +637,7 @@ $(function(){
 
     <script src="/Scripts/User/Resume/itemtemplate.js?v=20171019001"></script>
 
-
-
-
-
+<iframe height="0" width="0" title="Criteo DIS iframe" style="display: none;"></iframe><iframe height="0" width="0" title="Criteo DIS iframe" style="display: none;"></iframe><iframe height="0" width="0" title="Criteo DIS iframe" style="display: none;"></iframe><iframe height="0" width="0" title="Criteo DIS iframe" style="display: none;"></iframe>
 
 </body>
 <c:import url="/common/include/footer_mypage.jsp"/>

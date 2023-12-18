@@ -247,7 +247,7 @@ $(function(){
                 </li>
 
                 <li class="list">
-                    <a class="box" href="/User/PositionOffer?tabStat=1#dev-tab-position" onclick="GA_Event('마이페이지_PC', '나의지원현황', '포지션제안')">
+                    <a class="box" href="http://localhost/prj_tryJobCatch/myReview.do">
                         <p class="title">
                             MY 기업리뷰
                             <strong class="count"><c:out value="${ requestScope.reviewCnt }" /></strong>
@@ -257,7 +257,7 @@ $(function(){
                 </li>
 
                 <li class="list">
-                    <a class="box" href="/User/Scrap/Index" >
+                    <a class="box" href="http://localhost/prj_tryJobCatch/member/qnaList.do" >
                         <p class="title">
                             MY 문의
                             <strong class="count"><c:out value="${ requestScope.inquireCnt }" /></strong>
@@ -287,7 +287,7 @@ $(function(){
     <!-- 건강보험공단 배너 -->
     <div class="topContent healthBanner">
         <div class="IconWrap">
-            <a href="/User/Resume/Write?healthBanner=1" target="_blank" class="health-link" onclick="GA_Event('마이페이지_PC', '상단배너', '건강보험공단 경력 불러오기')">
+            <a href="#" target="_self" class="health-link" onclick="GA_Event('마이페이지_PC', '상단배너', '건강보험공단 경력 불러오기')">
                 <img src="//i.jobkorea.kr/content/images/Text_User/resume/banner_health.png" alt="">
             </a>
         </div>
