@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin.company">
+
+<select id="companyList" resultType="kr.co.sist.admin.domain.CompanyDomain">
+SELECT cm_id, cm_co_name, cm_co_registration_date, cm_co_join_condition
+FROM company_member
+</select>
+
+<select id="companyInfo" resultType="kr.co.sist.admin.domain.CompanyDomain" parameterType="String">
+SELECT cm_id, cm_pw, cm_name, cm_tel, cm_email, cm_co_registration_num, cm_co_name
+	,cm_ceo_name, cm_zipcode, cm_addr, cm_detail_addr, cm_industry, cm_co_type, cm_homepage, cm_co_logo,cm_co_pic, cm_co_join_condition
+	,cm_emp_num, cm_money, cm_sales
+	,cm_establishment_year, cm_co_registration_date 
+FROM company_member
+WHERE cm_id = #{ cm_id }
+</select>
+
+<update id="companyDelete" parameterType="String">
+update company_member
+set	cm_co_join_condition = 'N'
+where cm_id = #{ cm_id }
+</update>
+
+
+<update id="companyModify" parameterType="kr.co.sist.admin.domain.CompanyDomain">
+update member
+<set>
+<if test="m_email neq null and m_email neq ''">
+m_email=#{m_email} , 
+</if>
+<if test="m_zip neq null and m_zip neq ''">
+m_zip=#{m_zip} , 
+</if>
+<if test="m_addr neq null and m_addr neq ''">
+m_addr=#{m_addr} , 
+</if>
+<if test="m_detail_addr neq null and m_detail_addr neq ''">
+m_detail_addr=#{m_detail_addr}
+</if>
+</set>
+where cm_id = #{ cm_id }
+</update>
+
+
+</mapper>

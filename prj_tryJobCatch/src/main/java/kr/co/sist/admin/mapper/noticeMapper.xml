@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin.notice">
+
+<select id="noticeList" resultType="kr.co.sist.admin.domain.NoticeDomain">
+SELECT n_id, n_title, n_date
+FROM notice
+</select>
+
+<select id="noticeInfo" resultType="kr.co.sist.admin.domain.NoticeDomain" parameterType="String">
+SELECT n_id, ad_id, n_title, n_content, n_date
+FROM notice
+WHERE n_id = #{ n_id }
+</select>
+
+<insert id="noticeInsert" parameterType="kr.co.sist.admin.vo.NoticeInsertVO">
+INSERT INTO notice (n_id, ad_id, n_title, n_content, n_date)
+VALUES (
+'n_' || LPAD(n_seq.NEXTVAL, 5, '0'),
+#{ad_id},
+#{n_title},
+#{n_content},
+sysdate
+)
+</insert>
+
+<delete id="noticeDelete" parameterType="String">
+delete
+from notice
+where n_id = #{ n_id }
+</delete>
+
+<update id="noticeModify" parameterType="kr.co.sist.admin.domain.NoticeDomain">
+update notice
+<set>
+<if test="n_title neq null and n_title neq ''">
+n_title=#{n_title} , 
+</if>
+<if test="n_content neq null and n_content neq ''">
+n_content=#{n_content}  
+</if>
+</set>
+where n_id = #{ n_id }
+</update>
+
+</mapper>

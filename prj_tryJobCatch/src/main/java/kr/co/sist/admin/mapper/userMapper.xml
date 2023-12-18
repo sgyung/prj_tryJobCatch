@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin.user">
+
+<!-- 채용 총 레코드 수 구하기 & 검색 후 레코드 수 구하기 -->
+<select id="userTotalCount" resultType="int" parameterType="kr.co.sist.admin.vo.PageVO">
+    SELECT COUNT(DISTINCT m_id) AS cnt
+    FROM member
+    <if test="m_id != null || keyword != null">
+    WHERE 1=1
+        <if test="keyword != null">
+            AND 
+            <choose>
+                <when test="field eq 'm_id'">
+                    m_id LIKE '%' || #{keyword} || '%'
+                </when>
+                <when test="field eq 'm_name'">
+                    m_name LIKE '%' || #{keyword} || '%'
+                </when>
+            </choose>
+        </if>
+    </if>
+</select>
+
+
+<select id="selectSearchUser" resultType="kr.co.sist.admin.domain.UserDomain" parameterType="kr.co.sist.admin.vo.PageVO">
+    SELECT SELECT M_ID, M_NAME, M_REGISTRATION_DATE, M_JOIN_CONDITION
+    FROM (
+        SELECT M_ID, M_NAME, M_REGISTRATION_DATE, M_JOIN_CONDITION,
+        DENSE_RANK() OVER (ORDER BY m_id DESC) AS rnum
+    	FROM member
+    <if test="m_id != null || keyword != null">
+    WHERE 1=1
+        <if test="keyword != null">
+            AND 
+            <choose>
+                <when test="field eq 'm_id'">
+                    m_id LIKE '%' || #{keyword} || '%'
+                </when>
+                <when test="field eq 'm_name'">
+                    m_name LIKE '%' || #{keyword} || '%'
+                </when>
+            </choose>
+        </if>
+    </if>
+    ) numbered_user
+    WHERE
+    rnum BETWEEN #{startNum} AND #{endNum}
+    
+</select>
+
+<resultMap type="kr.co.sist.admin.domain.UserDomain" id="memResult">
+<result column="m_id" property="m_id"/>
+<result column="m_name" property="m_name"/>
+<result column="m_registration_date" property="m_registration_date"/>
+<result column="m_join_condition" property="m_join_condition"/>
+</resultMap>
+
+
+
+
+<select id="userList" resultType="kr.co.sist.admin.domain.UserDomain">
+SELECT M_ID, M_NAME, M_REGISTRATION_DATE, M_JOIN_CONDITION 
+FROM MEMBER
+</select>
+
+<select id="userInfo" resultType="kr.co.sist.admin.domain.UserDomain" parameterType="String">
+SELECT m_id, m_name, m_email, m_tel, m_zip, m_addr, m_detail_addr, m_gender, m_bday, m_pic, m_registration_date, m_join_condition 
+FROM member
+WHERE m_id = #{ m_id }
+</select>
+
+<update id="userDelete" parameterType="String">
+update member
+set	m_join_condition = 'N'
+where m_id = #{ m_id }
+</update>
+
+
+<update id="userModify" parameterType="kr.co.sist.admin.vo.UserModifyVO">
+update member
+<set>
+<if test="m_email neq null and m_email neq ''">
+m_email=#{m_email} , 
+</if>
+<if test="m_zip neq null and m_zip neq ''">
+m_zip=#{m_zip} , 
+</if>
+<if test="m_addr neq null and m_addr neq ''">
+m_addr=#{m_addr} , 
+</if>
+<if test="m_detail_addr neq null and m_detail_addr neq ''">
+m_detail_addr=#{m_detail_addr}
+</if>
+</set>
+where m_id = #{ m_id }
+</update>
+
+
+</mapper>
