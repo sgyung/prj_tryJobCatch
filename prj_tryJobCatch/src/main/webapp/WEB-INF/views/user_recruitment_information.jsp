@@ -63,7 +63,6 @@ $(function(){
 			output += "</th>";
 			output += "<td class='tplCo'>";
 			output += "<a href='/Recruit/Co_Read/C/37486638' class='link normalLog' data-clickctgrcode='B01' target='_blank' onclick=\"GA_Event('상세검색_PC', '채용공고', '기업리뷰_타파코파')\">"+ jsonList.cm_co_name +"</a>";
-			output += "<button type='button' class='tplBtnTy tplBtnFavOff dev-favor dev-tplBtnFav-37486638' data-mem-sys='37486638' onclick=\"GA_Event('상세검색_PC', '채용공고', '관심_' + ($(this).hasClass('tplBtnFavOff')?'등록':'해제') + '_타파코파')\"><span class='blind'>관심기업</span></button>";
 			output += "<div class='typ'></div>";
 			output += "</td>";
 			output += "<td class='tplTit'>";
@@ -134,7 +133,7 @@ $(function(){
         $('dl').not(dlElement).removeClass('on');
     });
 
-    $('#searchFrm').on('click', '.item', function () {
+    $('#keywordFrm').on('click', '.item', function () {
         var liElement = $(this).closest('li');
         var valueToRemove = liElement.attr('value');
         
@@ -154,8 +153,8 @@ $(function(){
         liElement.remove();
 
         // 결과 세트에 li 엘리먼트가 1개 이하일 때는 "두 줄 넘쳤을 때만 나오게" 하는 클래스 제거
-        if ($('#searchFrm li').length === 0) {
-            $('#searchFrm .item_more').removeClass('show');
+        if ($('#keywordFrm li').length === 0) {
+            $('#keywordFrm .item_more').removeClass('show');
             param = {};
             recruitmentList(1);
             // resultSet 클래스가 있는 엘리먼트의 style display 속성 변경
@@ -204,7 +203,7 @@ $(function(){
         currentUl.find('input[type="checkbox"]').not(checkbox).prop('checked', false);
 
         // Remove all existing li elements with the same name
-        $('#searchFrm li.' + itemNameClass).remove();
+        $('#keywordFrm li.' + itemNameClass).remove();
 
         // Create new li element based on the currently checked checkbox
         if (checkbox.prop('checked')) {
@@ -212,16 +211,16 @@ $(function(){
             addLiElement(currentValue, currentName, itemNameClass, itemName);
 
             // 추가된 li 엘리먼트가 2개 이상이면 "두 줄 넘쳤을 때만 나오게" 하는 클래스 추가
-            if ($('#searchFrm li').length > 1) {
-                $('#searchFrm .item_more').addClass('show');
+            if ($('#keywordFrm li').length > 1) {
+                $('#keywordFrm .item_more').addClass('show');
             }
 
             // resultSet 클래스가 있는 엘리먼트의 style display 속성 변경
             $('.resultSet').css('display', 'block');
         } else {
             // 결과 세트에 li 엘리먼트가 1개 이하일 때는 "두 줄 넘쳤을 때만 나오게" 하는 클래스 제거
-            if ($('#searchFrm li').length === 0) {
-                $('#searchFrm .item_more').removeClass('show');
+            if ($('#keywordFrm li').length === 0) {
+                $('#keywordFrm .item_more').removeClass('show');
 
                 // resultSet 클래스가 있는 엘리먼트의 style display 속성 변경
                 $('.resultSet').css('display', 'none');
@@ -234,7 +233,7 @@ $(function(){
 
     // 새로운 li 엘리먼트 추가
     function addLiElement(value, name, itemNameClass, itemName) {
-        $('#searchFrm').append('<li class="item ' + itemNameClass + '" value="' + value + '" name="' + itemName + '"><button type="button">' + name + '<span class="ico">삭제</span></button></li>');
+        $('#keywordFrm').append('<li class="item ' + itemNameClass + '" value="' + value + '" name="' + itemName + '"><button type="button">' + name + '<span class="ico">삭제</span></button></li>');
     }   
     
     // .btn_tit 클릭 시 클래스 부여/제거
@@ -246,7 +245,7 @@ $(function(){
     // 선택된 조건 제거
     function handleRemoval(valueToRemove) {
         // 해당 value를 가지고 있는 li 엘리먼트 선택
-        var liElement = $('#searchFrm li[value="' + valueToRemove + '"]');
+        var liElement = $('#keywordFrm li[value="' + valueToRemove + '"]');
 
         // 해당 li 엘리먼트에 부여된 클래스 확인
         var itemClass = liElement.attr('class');
@@ -264,8 +263,8 @@ $(function(){
         liElement.remove();
 
         // 결과 세트에 li 엘리먼트가 1개 이하일 때는 "두 줄 넘쳤을 때만 나오게" 하는 클래스 제거
-        if ($('#searchFrm li').length === 0) {
-            $('#searchFrm .item_more').removeClass('show');
+        if ($('#keywordFrm li').length === 0) {
+            $('#keywordFrm .item_more').removeClass('show');
 			
             // resultSet 클래스가 있는 엘리먼트의 style display 속성 변경
             $('.resultSet').css('display', 'none');
@@ -276,13 +275,13 @@ $(function(){
  // 초기화 버튼 클릭 시 실행되는 이벤트 핸들러
     $('.item_reset button').on('click', function () {
         // 모든 li 요소 제거
-        $('#searchFrm li').remove();
+        $('#keywordFrm li').remove();
 
         // 모든 체크박스 해제
         $('input[type="checkbox"]').prop('checked', false);
 
         // .item_more 클래스 제거
-        $('#searchFrm .item_more').removeClass('show');
+        $('#keywordFrm .item_more').removeClass('show');
 
         // resultSet 클래스가 있는 엘리먼트의 style display 속성 변경
         $('.resultSet').css('display', 'none');
@@ -382,7 +381,7 @@ function recruitmentList(num) {
     var sortOption = $("#sortTab").val();
  	
     // 검색어 입력값
-    var searchKeyword = $("#keyword").val();
+    var searchKeyword = $("#keywordFrm").val();
     
 	 // 값이 있는 경우에만 JSON에 추가
     if (sortOption && sortOption.length > 0) {
@@ -413,7 +412,6 @@ function recruitmentList(num) {
 				output += "</th>";
 				output += "<td class='tplCo'>";
 				output += "<a href='/Recruit/Co_Read/C/37486638' class='link normalLog' data-clickctgrcode='B01' target='_blank'>"+ jsonList.cm_co_name +"</a>";
-				output += "<button type='button' class='tplBtnTy tplBtnFavOff dev-favor dev-tplBtnFav-37486638' data-mem-sys='37486638' onclick=\"GA_Event('상세검색_PC', '채용공고', '관심_' + ($(this).hasClass('tplBtnFavOff')?'등록':'해제') + '_타파코파')\"><span class='blind'>관심기업</span></button>";
 				output += "<div class='typ'></div>";
 				output += "</td>";
 				output += "<td class='tplTit'>";
@@ -487,14 +485,20 @@ function recruitmentList(num) {
 	
 	// 지원하기 버튼 클릭
 	function apply(id) {
-	    // 새 창을 열고 지정된 URL을 로드
-	    var newWindow = window.open("http://localhost/prj_tryJobCatch/apply.do?r_id=" + id, "NewWindow", "width=600, height=800");
-	    
-	    // 새 창의 크기 및 위치를 설정 (선택적)
-	    if (newWindow) {
-	        newWindow.resizeTo(600, 800);
-	        newWindow.moveTo((window.screen.width - 600) / 2, (window.screen.height - 800) / 2);
-	    }
+		var id = "${M_ID}";
+		
+		if(id != ""){
+	    	// 새 창을 열고 지정된 URL을 로드
+		    var newWindow = window.open("http://localhost/prj_tryJobCatch/apply.do?r_id=" + id, "NewWindow", "width=600, height=800");
+		    
+		    // 새 창의 크기 및 위치를 설정 (선택적)
+		    if (newWindow) {
+		        newWindow.resizeTo(600, 800);
+		        newWindow.moveTo((window.screen.width - 600) / 2, (window.screen.height - 800) / 2);
+		    }
+		}else{
+			alert("로그인 후 이용해주세요.");
+		}
 	}
 </script>
     
@@ -709,7 +713,7 @@ function recruitmentList(num) {
                         <dt class="blind">선택한 조건 값</dt>
                         <dd class="resultList">
                             <ul id="toolitems" class="items clear">
-                            <form id="searchFrm">
+                            <form id="keywordFrm">
                             
             
                             </form>

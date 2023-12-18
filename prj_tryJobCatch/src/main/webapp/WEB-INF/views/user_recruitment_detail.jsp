@@ -8,7 +8,7 @@
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-<title>동국산업 채용 - 온라인 쇼핑몰 MD, 해외구매/무역 및 수입 담당자 경력직 채용 | 잡코리아</title>
+<title>${ requestScope.cm_co_name } 채용 - ${ requestScope.r_title } | TryJobCatch</title>
 <link rel="SHORTCUT ICON" href="/favicon.ico?202312071400">
 
 <link rel="canonical" href="https://www.jobkorea.co.kr/Recruit/GI_Read/43508000">
@@ -96,10 +96,48 @@ $(function(){
     document.getElementById('experience').innerHTML = experienceYears;
     document.getElementById('experience2').innerHTML = experienceYears;
     
-    
+ // 시작일과 마감일을 가져오기
+    var startDateStr = "<c:out value='${requestScope.r_start_date}'/>";
+    var endDateStr = "<c:out value='${requestScope.r_end_date}'/>";
+
+    // 날짜 형식을 변환하여 Date 객체로 변환
+    var startDate = new Date(startDateStr);
+    var endDate = new Date(endDateStr);
+
+    // 두 날짜의 차이 계산 (밀리초 기준)
+    var timeDifference = endDate.getTime() - startDate.getTime();
+
+    // 밀리초를 일, 시간, 분, 초로 변환
+    var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+
+    // 결과를 HTML 요소에 적용
+    var timeElement = document.querySelector(".devRemainCount");
+    timeElement.innerHTML = "<span class='tahoma'>" + days + "일 </span>";
     
 });
 
+//지원하기 버튼 클릭
+function apply(id) {
+	
+	var id = "${M_ID}";
+	
+	if(id != ""){
+	    // 새 창을 열고 지정된 URL을 로드
+	    var newWindow = window.open("http://localhost/prj_tryJobCatch/apply.do?r_id=" + id, "NewWindow", "width=600, height=800");
+	    
+	    // 새 창의 크기 및 위치를 설정 (선택적)
+	    if (newWindow) {
+	        newWindow.resizeTo(600, 800);
+	        newWindow.moveTo((window.screen.width - 600) / 2, (window.screen.height - 800) / 2);
+	    }
+	}else{
+		alert("로그인 후 이용해주세요.");
+	}    
+}
 
 </script>
 
@@ -153,9 +191,6 @@ $(function(){
                                 <div class="ico-certify">
                                     <span class="blind">기업인증 완료</span>
                                 </div>
-                                                        <div class="item favorite">
-                                <button type="button" class="girBtn girBtn_2 girBtnFav  devFavor5_24449963" onclick="GA_Event('공고_PC', '채용정보', '관심_' + ($(this).hasClass('girBtnFavOn')?'해제':'등록') + '_동국산업');go_favor('24449963');"><span>관심기업</span></button>
-                            </div>
                         </div>
                         <c:out value="${ requestScope.r_title }"/>
                     </h3>

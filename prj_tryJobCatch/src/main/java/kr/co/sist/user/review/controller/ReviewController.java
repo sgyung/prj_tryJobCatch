@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.sist.user.review.domain.BalanceDomain;
 import kr.co.sist.user.review.domain.CorperationDomain;
 import kr.co.sist.user.review.domain.CultureDomain;
+import kr.co.sist.user.review.domain.LikeDomain;
 import kr.co.sist.user.review.domain.ReviewCareerDomain;
 import kr.co.sist.user.review.domain.SalaryDomain;
 import kr.co.sist.user.review.domain.StabilityDomain;
 import kr.co.sist.user.review.domain.WelfareDomain;
 import kr.co.sist.user.review.service.ReviewListProcess;
 import kr.co.sist.user.review.service.ReviewService;
+import kr.co.sist.user.review.vo.LikeVO;
 import kr.co.sist.user.review.vo.ReviewPageVO;
 
 @Controller
@@ -34,13 +36,17 @@ public class ReviewController {
 	private ReviewListProcess rlp;
 	
 	@GetMapping("/review_home.do")
-	public String reviewHome() {
+	public String reviewHome(Model model) {
+		
+		List<LikeDomain> list = rs.likeRankList();
+		System.out.println(list.toString());
+		model.addAttribute("rank", list);
 		
 		return "user_review_home";
 	}
 	
 	@GetMapping("/reviewDetail.do")
-	public String reviewDetail(@RequestParam("cm_id") String id, Model model) {
+	public String reviewDetail(@RequestParam("cm_id") String id, Model model, HttpSession session) {
 		SalaryDomain salary = rs.selectSalaryNum(id);
 		BalanceDomain balance = rs.selectBalanceNum(id);
 		WelfareDomain welfare = rs.selectWelfareNum(id);
@@ -49,6 +55,19 @@ public class ReviewController {
 		StabilityDomain stability = rs.selectStabilityNum(id);
 		CorperationDomain cd = rs.corperationInfo(id);
 		List<CorperationDomain> list = rs.recruitmentInfo(id);
+		String userId = (String)session.getAttribute("M_ID");
+		LikeVO lVO = new LikeVO();
+		
+		lVO.setM_id(userId);
+		lVO.setCm_id(id);
+		
+		if(userId != null) {
+			LikeDomain ld = rs.likeState(lVO);
+			if(ld != null) {
+				model.addAttribute("likeState", ld.getIc_check_condition());
+				model.addAttribute("ic_id", ld.getIc_id());
+			}
+		}
 		
 		model.addAttribute("totalSalary", salary.getTotal_sum());
 		model.addAttribute("sal", salary.getSal_num());
@@ -193,6 +212,46 @@ public class ReviewController {
 		model.addAttribute("keyword",rpVO.getKeyword());
 		
 		return "user_search_corperation";
+	}
+	
+	@GetMapping("/addLike.do")
+	public String addLike(HttpSession session, LikeVO lVO, Model model) {
+		String userId = (String)session.getAttribute("M_ID");
+		boolean flag = false;
+		String msg = "";
+		
+		lVO.setM_id(userId);
+		
+		flag = rs.addLike(lVO);
+		System.out.println("=======================================" + flag);
+		
+		if(flag) {
+			msg = "관심기업이 등록되었습니다.";
+		}else{
+			msg = "오류가 발생하였습니다. 다시 시도해주세요.";
+		}
+		
+		model.addAttribute("msg",msg);
+		
+		return "forward:/reviewDetail.do";
+	}
+	
+	@GetMapping("/deleteLike.do")
+	public String deleteLike(LikeVO lVO, Model model) {
+		boolean flag = false;
+		String msg = "";
+		
+		flag = rs.cancelLike(lVO);
+		
+		if(flag) {
+			msg = "관심기업이 삭제되었습니다.";
+		}else{
+			msg = "오류가 발생하였습니다. 다시 시도해주세요.";
+		}
+		
+		model.addAttribute("msg",msg);
+		
+		return "forward:/reviewDetail.do";
 	}
 	
 	

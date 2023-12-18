@@ -54,7 +54,7 @@
 
 <!-- 채용정보 검색 쿼리 -->
 <select id="selectSearchRecruitment" resultType="red" parameterType="pVO">
-    SELECT cm_co_name, cm_id, r_title, r_id, r_sal, r_end_date, LISTAGG(rf_field, ', ') WITHIN GROUP (ORDER BY rf_field) AS rf_field,
+ SELECT cm_co_name, cm_id, r_title, r_id, r_sal, r_end_date, LISTAGG(rf_field, ', ') WITHIN GROUP (ORDER BY rf_field) AS rf_field,
            d_name, ind_name, education, et_name, wa_name, rec_name, cm_co_type
     FROM (
         SELECT c.cm_co_name, c.cm_id, r.r_title, r.r_id, r.r_sal, r.r_end_date, rf.rf_field, c.cm_co_type,
@@ -265,5 +265,7 @@ select m_tel, m_email
 from member
 where m_id = #{ m_id }
 </select>
+
+
 
 </mapper>

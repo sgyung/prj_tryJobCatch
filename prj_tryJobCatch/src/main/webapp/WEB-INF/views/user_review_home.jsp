@@ -389,7 +389,7 @@ function keywordFrm() {
                     <div class="page-wrap">
                         <div class="swiper-pagination swiper-pagination-fraction swiper-pagination-horizontal"><span class="swiper-pagination-current">1</span> / <span class="swiper-pagination-total">2</span></div>
                         <span class="btns">
-                            <button type="button" class="mainBtnA swiper-button-prev swiper-button-disabled" aria-label="Previous slide" disabled="" tabindex="-1" aria-controls="swiper-wrapper-89eda0f109d709111" aria-disabled="true">
+                            <button type="button" class="mainBtnA swiper-button-prev swiper-button-disabled" aria-label="Previous slide" tabindex="-1" aria-controls="swiper-wrapper-89eda0f109d709111" aria-disabled="true">
                                 <span class="blind">이전 랭킹 보기</span>
                             </button>
                             <button type="button" class="mainBtnB swiper-button-next" aria-label="Next slide" tabindex="0" aria-controls="swiper-wrapper-89eda0f109d709111" aria-disabled="false">
@@ -399,168 +399,35 @@ function keywordFrm() {
                     </div>
                 </div>
                 <div class="swiper-wrapper day-wrapper" id="swiper-wrapper-89eda0f109d709111" aria-live="polite">
-                    <ul class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 2" style="width: 299px; margin-right: 25px;">
+                           <c:forEach var="rank" items="${ requestScope.rank }" varStatus="i">
+                            <c:if test="${ i.count == 1 }">
+                    		<ul class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 2" style="width: 299px; margin-right: 25px;">
+                            </c:if>
+                            <c:if test="${ i.count == 6 }">
+							<ul class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 2" style="width: 299px; margin-right: 25px;">
+                            </c:if>    
                                 <li>
-                                    <a href="/Review/ServiceView?ucoNo=45099849" onclick="GA_Event('기업리뷰_PC', '오늘의인기기업리뷰', '기업리뷰보기_1위');" target="_blank" class="box">
+                                    <a href="http://localhost/prj_tryJobCatch/reviewDetail.do?cm_id=${ rank.cm_id }" target="_blank" class="box">
                                         <div class="box-left">
-                                            <strong class="lank">1</strong>
-                                            <span class="none">-</span>
+                                            <strong class="lank"><c:out value="${ i.count }"/></strong>
                                         </div>
                                         <div class="box-right">
-                                            <span>무신사</span>
+                                            <span><c:out value="${ rank.cm_co_name }"/></span>
                                             <p class="view-total">
                                                 
-                                                <span>463</span>
+                                                <span><c:out value="${ rank.check_count }"/></span>
                                             </p>
                                             
                                         </div>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="/Review/ServiceView?ucoNo=43704918" onclick="GA_Event('기업리뷰_PC', '오늘의인기기업리뷰', '기업리뷰보기_2위');" target="_blank" class="box">
-                                        <div class="box-left">
-                                            <strong class="lank">2</strong>
-                                            <span class="none">-</span>
-                                        </div>
-                                        <div class="box-right">
-                                            <span>㈜하이브</span>
-                                            <p class="view-total">
-                                                
-                                                <span>369</span>
-                                            </p>
-                                            
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/Review/ServiceView?ucoNo=1976007" onclick="GA_Event('기업리뷰_PC', '오늘의인기기업리뷰', '기업리뷰보기_3위');" target="_blank" class="box">
-                                        <div class="box-left">
-                                            <strong class="lank">3</strong>
-                                            <span class="up red">1</span>
-                                        </div>
-                                        <div class="box-right">
-                                            <span>(주)카카오</span>
-                                            <p class="view-total">
-                                                
-                                                <span>251</span>
-                                            </p>
-                                            
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/Review/ServiceView?ucoNo=48170719" onclick="GA_Event('기업리뷰_PC', '오늘의인기기업리뷰', '기업리뷰보기_4위');" target="_blank" class="box">
-                                        <div class="box-left">
-                                            <strong class="lank">4</strong>
-                                            <span class="down blue">-1</span>
-                                        </div>
-                                        <div class="box-right">
-                                            <span>현대자동차㈜ 울산하</span>
-                                            <p class="view-total">
-                                                
-                                                <span>227</span>
-                                            </p>
-                                            
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/Review/ServiceView?ucoNo=1487996" onclick="GA_Event('기업리뷰_PC', '오늘의인기기업리뷰', '기업리뷰보기_5위');" target="_blank" class="box">
-                                        <div class="box-left">
-                                            <strong class="lank">5</strong>
-                                            <span class="none">-</span>
-                                        </div>
-                                        <div class="box-right">
-                                            <span>대한항공</span>
-                                            <p class="view-total">
-                                                
-                                                <span>150</span>
-                                            </p>
-                                            
-                                        </div>
-                                    </a>
-                                </li>
-</ul><ul class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 2" style="width: 299px; margin-right: 25px;">                                <li>
-                                    <a href="/Review/ServiceView?ucoNo=1934148" onclick="GA_Event('기업리뷰_PC', '오늘의인기기업리뷰', '기업리뷰보기_6위');" target="_blank" class="box">
-                                        <div class="box-left">
-                                            <strong class="lank">6</strong>
-                                            <span class="up red">99+</span>
-                                        </div>
-                                        <div class="box-right">
-                                            <span>메인트란스(주)</span>
-                                            <p class="view-total">
-                                                
-                                                <span>89</span>
-                                            </p>
-                                            
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/Review/ServiceView?ucoNo=1696583" onclick="GA_Event('기업리뷰_PC', '오늘의인기기업리뷰', '기업리뷰보기_7위');" target="_blank" class="box">
-                                        <div class="box-left">
-                                            <strong class="lank">7</strong>
-                                            <span class="up red">2</span>
-                                        </div>
-                                        <div class="box-right">
-                                            <span>삼성전자㈜</span>
-                                            <p class="view-total">
-                                                
-                                                <span>65</span>
-                                            </p>
-                                            
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/Review/ServiceView?ucoNo=1384601" onclick="GA_Event('기업리뷰_PC', '오늘의인기기업리뷰', '기업리뷰보기_8위');" target="_blank" class="box">
-                                        <div class="box-left">
-                                            <strong class="lank">8</strong>
-                                            <span class="none">-</span>
-                                        </div>
-                                        <div class="box-right">
-                                            <span>(주)오뚜기</span>
-                                            <p class="view-total">
-                                                
-                                                <span>57</span>
-                                            </p>
-                                            
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/Review/ServiceView?ucoNo=1384599" onclick="GA_Event('기업리뷰_PC', '오늘의인기기업리뷰', '기업리뷰보기_9위');" target="_blank" class="box">
-                                        <div class="box-left">
-                                            <strong class="lank">9</strong>
-                                            <span class="up red">63</span>
-                                        </div>
-                                        <div class="box-right">
-                                            <span>㈜세스코</span>
-                                            <p class="view-total">
-                                                
-                                                <span>54</span>
-                                            </p>
-                                            
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/Review/ServiceView?ucoNo=1868390" onclick="GA_Event('기업리뷰_PC', '오늘의인기기업리뷰', '기업리뷰보기_10위');" target="_blank" class="box">
-                                        <div class="box-left">
-                                            <strong class="lank">10</strong>
-                                            <span class="up red">99+</span>
-                                        </div>
-                                        <div class="box-right">
-                                            <span>롯데글로벌로지스</span>
-                                            <p class="view-total">
-                                                
-                                                <span>52</span>
-                                            </p>
-                                            
-                                        </div>
-                                    </a>
-                                </li>
-                    </ul>
+                                <c:if test="${ i.count == 5 }">
+								</ul>
+                            </c:if>
+                            <c:if test="${ i.count == 10 }">
+                    			</ul>
+                            </c:if>
+                                </c:forEach>
                 </div>
             <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
         </section>

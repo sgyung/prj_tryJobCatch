@@ -19,6 +19,8 @@ import kr.co.sist.user.recruitment.domain.RecruitmentDomain;
 import kr.co.sist.user.recruitment.domain.ResumeDomain;
 import kr.co.sist.user.recruitment.vo.ApplyVO;
 import kr.co.sist.user.recruitment.vo.PageVO;
+import kr.co.sist.user.review.domain.LikeDomain;
+import kr.co.sist.user.review.vo.LikeVO;
 
 @Component
 public class RecruitmentService {

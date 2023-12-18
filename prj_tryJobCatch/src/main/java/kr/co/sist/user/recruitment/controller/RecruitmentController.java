@@ -49,7 +49,7 @@ public class RecruitmentController {
 	
 	@ResponseBody
 	@GetMapping("/recruitmentList_process.do")
-	public String recruitmentListProcess(PageVO pVO) {
+	public String recruitmentListProcess(PageVO pVO, HttpSession session) {
 		int totalCount = 0;
 		int pageScale = 0;
 		int currentPage = 0;
@@ -87,7 +87,6 @@ public class RecruitmentController {
 	public String oneRecruitment(@RequestParam("r_id") String r_id, Model model){
 		
 		RecruitmentDomain rd = rs.OneRecruitment(r_id);
-		System.out.println(rd);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
 		
@@ -166,4 +165,7 @@ public class RecruitmentController {
 		
 		return "forward:/recruitment.do";
 	}
+	
+
+	
 }

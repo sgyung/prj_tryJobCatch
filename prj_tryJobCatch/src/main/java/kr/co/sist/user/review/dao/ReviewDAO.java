@@ -10,15 +10,18 @@ import org.springframework.stereotype.Component;
 
 import kr.co.sist.dao.MyBatisHandler;
 import kr.co.sist.user.recruitment.domain.RecruitmentCareerDomain;
+import kr.co.sist.user.recruitment.vo.PageVO;
 import kr.co.sist.user.review.domain.BalanceDomain;
 import kr.co.sist.user.review.domain.CorperationDomain;
 import kr.co.sist.user.review.domain.CultureDomain;
+import kr.co.sist.user.review.domain.LikeDomain;
 import kr.co.sist.user.review.domain.ReviewCareerDomain;
 import kr.co.sist.user.review.domain.SalaryDomain;
 import kr.co.sist.user.review.domain.StabilityDomain;
 import kr.co.sist.user.review.domain.WelfareDomain;
 import kr.co.sist.user.review.vo.BalanceVO;
 import kr.co.sist.user.review.vo.CultureVO;
+import kr.co.sist.user.review.vo.LikeVO;
 import kr.co.sist.user.review.vo.ReviewCareerVO;
 import kr.co.sist.user.review.vo.ReviewPageVO;
 import kr.co.sist.user.review.vo.SalaryVO;
@@ -257,20 +260,15 @@ public class ReviewDAO {
 				for(int i = 0; i < rpVO.getSalary().length; i++) {
 					if(i == 0) {
 						sVO.setAs_sal(rpVO.getSalary()[i]);
-						System.out.println("====DAO====" + sVO.getAs_sal());
 					}else if(i == 1) {
 						sVO.setAs_first_sal(rpVO.getSalary()[i]);
-						System.out.println("====DAO====" + sVO.getAs_first_sal());
 					}else if(i == 2) {
 						sVO.setAs_retirement_pay(rpVO.getSalary()[i]);
-						System.out.println("====DAO====" + sVO.getAs_retirement_pay());
 					}else if(i == 3) {
 						sVO.setAs_bonus(rpVO.getSalary()[i]);
-						System.out.println("====DAO====" + sVO.getAs_bonus());
 					}
 				}
 				sVO.setAs_id(rpVO.getAs_id());
-				System.out.println(rpVO.getAs_id());
 			}
 			
 			if(rpVO.getBalance().length > 0) {
@@ -323,13 +321,13 @@ public class ReviewDAO {
 			}
 			
 			if(rpVO.getStability().length > 0) {
-				for(int i = 0; i < rpVO.getSalary().length; i++) {
+				for(int i = 0; i < rpVO.getStability().length; i++) {
 					if(i == 0) {
-						sbVO.setJs_grow_co(rpVO.getSalary()[i]);
+						sbVO.setJs_grow_co(rpVO.getStability()[i]);
 					}else if(i == 1) {
-						sbVO.setJs_mgmt_vision(rpVO.getSalary()[i]);
+						sbVO.setJs_mgmt_vision(rpVO.getStability()[i]);
 					}else if(i == 2) {
-						sbVO.setJs_best(rpVO.getSalary()[i]);
+						sbVO.setJs_best(rpVO.getStability()[i]);
 					}
 				}
 				sbVO.setJs_id(rpVO.getJs_id());
@@ -456,6 +454,71 @@ public class ReviewDAO {
 		return rcd; 
 	} 
 	
+	// 관심기업 조회
+		public LikeDomain selectLikeCompany(LikeVO lVO) throws PersistenceException{
+			LikeDomain ld = null;
+			
+			MyBatisHandler mbh = MyBatisHandler.getInstance();
+			
+			SqlSession ss = mbh.getMyBatisHandler(false);
+			
+			ld = ss.selectOne("kr.co.sist.user.review.selectLikeCompany", lVO);
+			
+			mbh.closeHandler(ss);
+			
+			return ld;
+			
+		}
+		
+		// 관심기업 insert
+		public int insertLike(LikeVO lVO) throws PersistenceException{
+			int cnt = 0;
+			
+			MyBatisHandler mbh = MyBatisHandler.getInstance();
+			
+			SqlSession ss = mbh.getMyBatisHandler(false);
+			
+			cnt = ss.insert("kr.co.sist.user.review.insertLikeCompany", lVO);
+			
+			ss.commit();
+			
+			mbh.closeHandler(ss);
+			
+			return cnt;
+		}
+		
+		// 관심기업 delete
+		public int deleteLike(LikeVO lVO) throws PersistenceException{
+			int cnt = 0;
+			
+			MyBatisHandler mbh = MyBatisHandler.getInstance();
+			
+			SqlSession ss = mbh.getMyBatisHandler(false);
+			
+			cnt = ss.delete("kr.co.sist.user.review.deleteLikeCompany", lVO);
+			
+			ss.commit();
+			
+			mbh.closeHandler(ss);
+			
+			return cnt; 
+		}
+		
+		// 관심기업 순위 조회
+		public List<LikeDomain> selectLikeRank() throws PersistenceException{
+			List<LikeDomain> list = null;
+			
+			MyBatisHandler mbh = MyBatisHandler.getInstance();
+			
+			SqlSession ss = mbh.getMyBatisHandler(false);
+			
+			list = ss.selectList("kr.co.sist.user.review.selectLikeRank");
+			
+			mbh.closeHandler(ss);
+			
+			return list;
+		}
+	
 	
 	public static void main(String[] args) {
 		
@@ -463,6 +526,6 @@ public class ReviewDAO {
 		ReviewPageVO rpVO = new ReviewPageVO();
 		rpVO.setRv_id("rv_00047");
 		
-		System.out.println(rDAO.selectCheckSalary("rv_00047"));
+		System.out.println(rDAO.selectLikeRank());
 	}
 }

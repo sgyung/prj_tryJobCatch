@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import kr.co.sist.user.recruitment.dao.UserRecruitmentDAO;
 import kr.co.sist.user.recruitment.domain.RecruitmentDomain;
 import kr.co.sist.user.recruitment.vo.PageVO;
+import kr.co.sist.user.review.domain.LikeDomain;
 
 @Component
 public class RecruitmentListProcess {
@@ -30,6 +31,7 @@ public class RecruitmentListProcess {
 			
 			List<RecruitmentDomain> list = urDAO.selectSearchRecruitment(pVO);
 			int cnt = urDAO.recruitmentTotalCount(pVO);
+			
 			
 			String pageNaion = rs.pageNation(pVO);
 			

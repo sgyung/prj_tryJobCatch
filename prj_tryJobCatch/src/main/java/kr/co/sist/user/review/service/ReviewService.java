@@ -12,10 +12,12 @@ import kr.co.sist.user.review.dao.ReviewDAO;
 import kr.co.sist.user.review.domain.BalanceDomain;
 import kr.co.sist.user.review.domain.CorperationDomain;
 import kr.co.sist.user.review.domain.CultureDomain;
+import kr.co.sist.user.review.domain.LikeDomain;
 import kr.co.sist.user.review.domain.ReviewCareerDomain;
 import kr.co.sist.user.review.domain.SalaryDomain;
 import kr.co.sist.user.review.domain.StabilityDomain;
 import kr.co.sist.user.review.domain.WelfareDomain;
+import kr.co.sist.user.review.vo.LikeVO;
 import kr.co.sist.user.review.vo.ReviewPageVO;
 
 @Component
@@ -663,6 +665,74 @@ public class ReviewService {
 			}
 			
 			return career;
+		}
+		
+		// 관심기업 조회
+		public LikeDomain likeState(LikeVO lVO) {
+			LikeDomain ld = null;
+			
+			try {
+				
+				ld = rDAO.selectLikeCompany(lVO);
+				
+			}catch(PersistenceException pe) {
+				pe.printStackTrace();
+			}
+			
+			return ld; 
+		}
+		
+		// 관심기업 insert
+		public boolean addLike(LikeVO lVO) {
+			boolean flag = false;
+			int cnt = 0;
+			
+			try {
+				cnt = rDAO.insertLike(lVO);
+				
+				if(cnt == 1) {
+					flag = true;
+				}
+				
+			}catch(PersistenceException pe) {
+				pe.printStackTrace();
+			}
+			
+			return flag;
+		}
+		
+		// 관심 기업 delete
+		public boolean cancelLike(LikeVO lVO) {
+			boolean flag = false;
+			int cnt = 0;
+			
+			try {
+				cnt = rDAO.deleteLike(lVO);
+				
+				if(cnt == 1) {
+					flag = true;
+				}
+				
+			}catch(PersistenceException pe) {
+				pe.printStackTrace();
+			}
+			
+			return flag;
+		}
+		
+		// 관심기업 랭킹
+		public List<LikeDomain> likeRankList(){
+			List<LikeDomain> list = null;
+			
+			try {
+				
+				list = rDAO.selectLikeRank();
+				
+			}catch(PersistenceException pe) {
+				pe.printStackTrace();
+			}
+			
+			return list;
 		}
 	
 }

@@ -19,6 +19,8 @@ import kr.co.sist.user.recruitment.domain.RecruitmentDomain;
 import kr.co.sist.user.recruitment.domain.ResumeDomain;
 import kr.co.sist.user.recruitment.vo.ApplyVO;
 import kr.co.sist.user.recruitment.vo.PageVO;
+import kr.co.sist.user.review.domain.LikeDomain;
+import kr.co.sist.user.review.vo.LikeVO;
 
 @Component
 public class UserRecruitmentDAO {
@@ -200,24 +202,15 @@ public class UserRecruitmentDAO {
 		
 		md = ss.selectOne("kr.co.sist.user.recruitment.selectMember", id);
 		
+		mbh.closeHandler(ss);
+		
 		return md;
 	}
+	
 	
 	public static void main(String[] args) {
 		PageVO pVO = new PageVO();
 		UserRecruitmentDAO urDAO = new UserRecruitmentDAO();
-		pVO.setStartNum(1);
-		pVO.setEndNum(10);
-//		pVO.setStartNum(1);
-//		pVO.setEndNum(5);
-//		pVO.setCm_co_type("´ë±â¾÷");
-//		pVO.setField("cm_co_name");
-//		pVO.setKeyword("»ï");
-		
-//		System.out.println(UserRecruitmentDAO.getInstance().selectOneRecruitment("r_00001").toString());
-		System.out.println(urDAO.selectSearchRecruitment(pVO));
-//		System.out.println(UserRecruitmentDAO.getInstance().recruitmentTotalCount(pVO));
-//		System.out.println(urDAO.selectAllArea().toString());
-		
+
 	}
 }

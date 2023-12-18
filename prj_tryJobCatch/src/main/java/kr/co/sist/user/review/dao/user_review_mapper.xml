@@ -254,6 +254,7 @@ FROM (
 WHERE
   rnum BETWEEN #{ startNum } AND #{ endNum }
 </select>
+
 <select id="selectSalaryNum" resultType="kr.co.sist.user.review.domain.SalaryDomain" parameterType="String">
 SELECT
         cm.cm_co_name,
@@ -658,7 +659,7 @@ WHERE
         as_sal = #{ as_sal },
         as_first_sal = #{ as_first_sal },
         as_retirement_pay = #{ as_retirement_pay },
-        as_bonus = #{ as_retirement_pay }
+        as_bonus = #{ as_bonus }
     WHERE as_id = #{as_id}
 </update>
 
@@ -814,6 +815,48 @@ JOIN
     career_growth cg ON cge.cg_id = cg.cg_id
 WHERE 
     r.rv_id = #{ rv_id }
+</select>
+
+<select id="selectLikeCompany" resultType="kr.co.sist.user.review.domain.LikeDomain" parameterType="kr.co.sist.user.review.vo.LikeVO">
+select ic_id, m_id, cm_id, ic_check_condition
+from interesting_company
+where m_id= #{ m_id } and cm_id= #{ cm_id }
+</select>
+
+<insert id="insertLikeCompany" parameterType="kr.co.sist.user.review.vo.LikeVO">
+INSERT INTO interesting_company (ic_id, m_id, cm_id, ic_check_condition)
+VALUES (
+		'ic_' || LPAD(ic_seq.NEXTVAL, 5, '0'),
+ 		#{ m_id },
+ 		#{ cm_id },
+ 		'Y')
+</insert>
+
+<delete id="deleteLikeCompany" parameterType="kr.co.sist.user.review.vo.LikeVO">
+delete from interesting_company 
+where ic_id = #{ ic_id }
+</delete>
+
+<select id="selectLikeRank" resultType="kr.co.sist.user.review.domain.LikeDomain">
+SELECT
+    cm_id,
+    cm_co_name,
+    check_count,
+    ROW_NUMBER() OVER (ORDER BY check_count DESC) AS ranking
+FROM (
+    SELECT
+        cm.cm_id,
+        cm.cm_co_name,
+        COUNT(ic.ic_id) AS check_count
+    FROM
+        company_member cm
+    LEFT JOIN
+        interesting_company ic ON cm.cm_id = ic.cm_id AND ic.ic_check_condition = 'Y'
+    GROUP BY
+        cm.cm_id, cm.cm_co_name
+)
+WHERE
+    ROWNUM between 1 and 10
 </select>
 
 </mapper>
