@@ -54,6 +54,12 @@
   <mapper resource="kr/co/sist/user/qna/mapper/QnAMapper.xml"/>
   <mapper resource="kr/co/sist/user/company/mapper/CoMypageMapper.xml"/> 
   <mapper resource="kr/co/sist/user/company/mapper/CoRecruitMapper.xml"/> 
+  
+  <!-- 호수 mapping -->
+  <mapper resource="kr/co/sist/admin/mapper/loginMapper.xml"/>
+  <mapper resource="kr/co/sist/admin/mapper/userMapper.xml"/>
+  <mapper resource="kr/co/sist/admin/mapper/companyMapper.xml"/>
+  <mapper resource="kr/co/sist/admin/mapper/noticeMapper.xml"/>
    
   </mappers>
 </configuration>
