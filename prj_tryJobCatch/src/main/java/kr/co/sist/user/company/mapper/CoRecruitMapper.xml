@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.coRecruit" >
+	<!-- 직무 -->
+	<select id="selectDuty"
+		resultType="kr.co.sist.user.company.domain.DutyDomain">
+		select D_ID, D_NAME
+		from duty
+	</select>
+	
+	<!-- 산업 -->
+	<select id="selectIndustry"
+		resultType="kr.co.sist.user.company.domain.IndustryDomain">
+		select IND_NAME, IND_ID
+		from industry
+	</select>
+		
+	<!-- 경력 -->
+	<select id="selectCareer"
+		resultType="kr.co.sist.user.company.domain.CareerDomain">
+		select REC_NAME, REC_ID 
+		from RE_CAREER
+	</select>
+	
+	<!-- 학력 -->
+	<select id="selectEducation"
+		resultType="kr.co.sist.user.company.domain.EducationDomain">
+		select E_ID, EDUCATION
+		from education
+	</select>
+	
+	<!-- 고용형태 -->
+	<select id="selectEmpType"
+		resultType="kr.co.sist.user.company.domain.EmpTypeDomain">
+		select ET_ID, ET_NAME
+		from EMPLOYMENT_TYPE
+	</select>
+	
+	<!-- 근무지역 -->
+	<select id="selectWorkArea"
+		resultType="kr.co.sist.user.company.domain.WorkAreaDomain">
+		select WA_ID, WA_NAME
+		from WORKING_AREA
+	</select>
+	
+	<!-- 채용 등록 -->
+	<insert id="insertRecruit"
+		parameterType="kr.co.sist.user.company.vo.RecruitmentVO"
+		useGeneratedKeys="true"
+		keyColumn="R_ID"
+		keyProperty="R_ID" >
+		insert into RECRUITMENT(
+		R_ID ,CM_ID,
+		R_TITLE, R_SAL, R_TIME,
+		R_START_DATE, R_END_DATE,
+		R_RECRUITMENT_VOLUME, R_INFO,
+		R_REGISTRATION_DATE, R_REGISTRATION_STATE,
+		D_ID, IND_ID, E_ID, ET_ID, REC_ID, WA_ID
+		)
+		values(
+		'r_' || LPAD(r_seq.NEXTVAL, 5, '0'), #{CM_ID},
+		#{R_TITLE}, #{R_SAL}, #{R_TIME},
+		#{R_START_DATE}, #{R_END_DATE},
+		#{R_RECRUITMENT_VOLUME}, #{R_INFO},
+		SYSDATE, 'Y',
+		#{D_ID}, #{IND_ID}, #{E_ID}, #{ET_ID}, #{REC_ID}, #{WA_ID}
+		)
+	</insert>
+	
+	<!-- 채용 스킬등록 -->
+	<insert id="insertRecruitSkill"
+		parameterType="kr.co.sist.user.company.vo.RecruitmentVO">
+		insert into RECRUITMENT_SKILL(
+	    RS_ID,
+	    R_ID, RS_NAME, CM_ID
+	    )
+	    select 'rs_' || LPAD(rs_seq.NEXTVAL, 5, '0'), total.*
+	    from(
+	    <foreach collection="RS_NAME" item="skillName" index="index" separator="union all">
+	    select
+			#{R_ID}, #{skillName}, #{CM_ID}
+		from dual
+		</foreach>
+		) total
+	</insert>
+	
+	<!-- 모집분야 -->
+	<insert id="insertRecruitField"
+		parameterType="kr.co.sist.user.company.vo.RecruitmentVO">
+		insert into RECRUITMENT_FIELD(
+			RF_ID,
+			R_ID, RF_FIELD, CM_ID
+		)
+		select 'rf_' || LPAD(rf_seq.NEXTVAL, 5, '0'), total.*
+		from(
+		 <foreach collection="RF_FIELD" item="fieldName" index="index" separator="union all">
+		 select
+   			 #{R_ID}, #{fieldName}, #{CM_ID}
+		 from dual
+		</foreach>
+		) total
+	</insert>
+	
+	<!-- 채용 리스트 -->
+	<select id="selectRecruitList"
+		parameterType="String"
+		resultType="kr.co.sist.user.company.domain.RecruitListDomain">
+		select count(app.r_id) applycnt, re.R_ID, re.R_TITLE, re.R_START_DATE, re.R_END_DATE, re.R_REGISTRATION_STATE, re.R_REGISTRATION_DATE
+		from RECRUITMENT re, application app
+		where re.cm_id = 'cm_00001'
+		 and R_REGISTRATION_STATE = 'Y'
+		 and re.r_id = app.r_id
+		group by re.R_ID, re.R_TITLE, re.R_START_DATE, re.R_END_DATE, re.R_REGISTRATION_STATE, re.R_REGISTRATION_DATE
+	</select>
+	
+	<!-- 채용 detail -->
+	<select id="selectRecruitDetail"
+		parameterType="String"
+		resultType="kr.co.sist.user.company.domain.RecruitDetailDomain">
+	select R_TITLE, R_SAL, R_TIME, R_START_DATE, R_END_DATE, R_RECRUITMENT_VOLUME, R_INFO, R_REGISTRATION_DATE, R_REGISTRATION_STATE,
+	du.d_name, ind.ind_name, edu.education, emp.et_name, rec.rec_name, wa.wa_name,
+	du.D_ID, ind.IND_ID, edu.E_ID, emp.ET_ID, rec.REC_ID, wa.WA_ID
+	from RECRUITMENT re, duty du, industry ind, education edu, EMPLOYMENT_TYPE emp, WORKING_AREA wa, re_career rec
+	where r_id = #{ R_ID } and
+		re.d_id = du.d_id  and
+		re.ind_id = ind.ind_id and
+		re.e_id = edu.e_id and
+		re.et_id = emp.et_id and
+		re.rec_id = rec.rec_id and
+		re.wa_id = wa.wa_id
+	</select>
+	
+	<!-- 스킬 list -->
+	<select id="selectRecruitSkill"
+		parameterType="String"
+		resultType="String">
+		select  RS_NAME
+		from RECRUITMENT_SKILL
+		where r_id = #{R_ID}
+	</select>
+	<!-- 모집분야 list -->
+	<select id="selectRecruitField"
+			parameterType="String"
+			resultType="String">
+		select  RF_FIELD
+		from RECRUITMENT_FIELD
+		where r_id = #{R_ID}
+	</select>
+	
+	<!-- 스킬list 삭제 -->
+	<delete id="deleteRecruitSkill"
+		parameterType="String">
+		delete RECRUITMENT_SKILL
+		where r_id = #{R_ID}
+	</delete>
+	
+	<!-- 모집분야list 삭제 -->
+	<delete id="deleteRecruitField"
+		parameterType="String">
+		delete RECRUITMENT_FIELD
+		where r_id = #{R_ID}
+	</delete>
+	
+	<!-- 채용 업데이트 -->
+	<update id="updateRecruit"
+		parameterType="kr.co.sist.user.company.vo.RecruitmentVO">
+		update RECRUITMENT
+		set
+		R_TITLE = #{R_TITLE},
+		R_SAL = #{R_SAL},
+		R_TIME = #{R_TIME},
+		R_START_DATE = #{R_START_DATE},
+		R_END_DATE = #{R_END_DATE},
+		R_RECRUITMENT_VOLUME = #{R_RECRUITMENT_VOLUME}, 
+		R_INFO = #{R_INFO},
+		R_REGISTRATION_DATE = SYSDATE,
+		R_REGISTRATION_STATE = 'Y',
+		D_ID = #{D_ID},
+		IND_ID = #{IND_ID},
+		E_ID = #{E_ID},
+		ET_ID = #{ET_ID},
+		REC_ID = #{REC_ID},
+		WA_ID = #{WA_ID}
+		where r_id = #{R_ID}
+	</update>
+	
+	<insert id="insert">
+	
+	
+	</insert>
+
+</mapper>

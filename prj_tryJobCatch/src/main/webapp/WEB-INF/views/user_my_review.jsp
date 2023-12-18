@@ -194,7 +194,7 @@ $(function(){
     	
     	// button-add 링크 클릭 시
        $('.button-add').on('click', function (event) {
-    	   if("${formerCompany}".length > 0){
+    	   if("${formerCompany.size()}" > 0){
 	    	   event.preventDefault();
 	           // step-0에 active 클래스 추가
 	           $('.step-0').addClass('active');

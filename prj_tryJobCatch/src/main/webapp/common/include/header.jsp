@@ -142,14 +142,14 @@ function submitFrm() {
                 <c:when test="${ sessionScope.login_type eq 'M' }">
                     <ul style="padding: 0px">
                         <li><a href="http://localhost/prj_tryJobCatch/member/mypageHome.do" ><span class="tx">개인회원 홈</span></a></li>
-                        <li><a href="#" ><span class="tx">이력서 관리</span></a></li>
-                        <li><a href="#" ><span class="tx">입사지원 현황</span></a></li>
-                        <li><a href="#" ><span class="tx">개인정보 수정</span></a></li>
+                        <li><a href="http://localhost/prj_tryJobCatch/member/resumeList.do" ><span class="tx">이력서 관리</span></a></li>
+                        <li><a href="http://localhost/prj_tryJobCatch/member/applyList.do" ><span class="tx">입사지원 현황</span></a></li>
+                        <li><a href="http://localhost/prj_tryJobCatch/member/mbrModifyFrm.do" ><span class="tx">개인정보 수정</span></a></li>
                     </ul>
                 </c:when>
                 <c:otherwise>
                     <ul style="padding: 0px">
-                        <li><a href="/member/mypageHome.do" ><span class="tx">기업회원 홈</span></a></li>
+                        <li><a href="http://localhost/prj_tryJobCatch/company/coMyPageHome.do" ><span class="tx">기업회원 홈</span></a></li>
                         <li><a href="#" ><span class="tx">채용 관리</span></a></li>
                         <li><a href="#" ><span class="tx">입사지원 현황</span></a></li>
                         <li><a href="#" ><span class="tx">개인정보 수정</span></a></li>

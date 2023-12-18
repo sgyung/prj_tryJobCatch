@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.coMypage" >
+	<select id="selectRecruitmentCnt"
+		parameterType="String"
+		resultType="int">
+		select count(r_id) from RECRUITMENT
+		where cm_id = #{CM_ID} and r_registration_state = 'Y'
+	</select>
+	
+	<select id="selectAllApplyCnt"
+		parameterType="String"
+		resultType="int">
+		select count(app.r_id) CNT
+		from (select * from RECRUITMENT
+		where R_REGISTRATION_STATE ='Y' and cm_id = #{CM_ID}
+		) recruit, application app
+		where recruit.r_id = app.r_id
+	</select>
+	
+	<!-- 최신 채용공고 선택 -->
+	<select id="selectLatestRecruitment"
+		parameterType="String"
+		resultType="kr.co.sist.user.company.domain.CoLatestRecruitDomain">
+		select r_title,  R_REGISTRATION_DATE
+		from RECRUITMENT
+		where cm_id = #{CM_ID} and rownum =1
+		order by R_REGISTRATION_DATE desc
+	</select>
+	
+	<!-- 최신 채용공고 선택 -->
+	<select id="selectCoProfile"
+		parameterType="String"
+		resultType="kr.co.sist.user.company.domain.CoProfileDomain">
+		select cm_co_name, cm_co_pic, cm_co_logo from company_member
+		where cm_id=#{CM_ID}
+	</select>
+		
+		
+</mapper>

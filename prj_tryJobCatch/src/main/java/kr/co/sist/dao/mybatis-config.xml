@@ -41,6 +41,7 @@
   <mapper resource="kr/co/sist/user/main/dao/user_main_mapper.xml"/>
   <mapper resource="kr/co/sist/user/recruitment/dao/user_recruitment_mapper.xml"/>
   <mapper resource="kr/co/sist/user/review/dao/user_review_mapper.xml"/>
+  <mapper resource="kr/co/sist/user/notice/dao/user_notice_mapper.xml"/>
   
    <!-- 용석 mapping -->
   <mapper resource="kr/co/sist/user/login/mapper/LoginMapper.xml"/>
@@ -51,6 +52,8 @@
   <mapper resource="kr/co/sist/user/mypage/mapper/ResumeMapper.xml"/>
   <mapper resource="kr/co/sist/user/mypage/mapper/ApplyMapper.xml"/>
   <mapper resource="kr/co/sist/user/qna/mapper/QnAMapper.xml"/>
+  <mapper resource="kr/co/sist/user/company/mapper/CoMypageMapper.xml"/> 
+  <mapper resource="kr/co/sist/user/company/mapper/CoRecruitMapper.xml"/> 
    
   </mappers>
 </configuration>
