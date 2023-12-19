@@ -45,7 +45,7 @@ $(function() {
 	 
 	
 	 $("#logout").click(function() {
-			location.href = "logout.do";
+			location.href = "http://localhost/prj_tryJobCatch/logout.do";
 		});//click    
 	 
 })//ready
@@ -71,7 +71,7 @@ function modifyProccess( id ) {
 	    <!-- Left navbar links -->
 	    <ul class="navbar-nav">
 	      <li class="nav-item d-none d-sm-inline-block">
-	        <a href="dashboard.do" class="nav-link">Home</a>
+	        <a href="http://localhost/prj_tryJobCatch/dashboard.do">Home</a>
 	      </li>
 	    </ul>
 
@@ -92,7 +92,7 @@ function modifyProccess( id ) {
 	  <!-- Main Sidebar Container -->
 	  <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	    <!-- Brand Logo -->
-	    <a href="dashboard.do" class="brand-link">
+	    <a href="http://localhost/prj_tryJobCatch/dashboard.do">
 	            <span class="brand-text font-weight-light">tryJOBcatch</span>
 	    </a>
 
@@ -103,7 +103,7 @@ function modifyProccess( id ) {
 	          <!-- Add icons to the links using the .nav-icon class
 	               with font-awesome or any other icon font library -->
 	          <li class="nav-item">
-	            <a href="dashboard.do" class="nav-link">
+	            <a href="http://localhost/prj_tryJobCatch/dashboard.do">
 	               <i class="bi bi-speedometer"></i>
 	              <p>
 	                 Dashboard
@@ -112,7 +112,7 @@ function modifyProccess( id ) {
 	          </li>
 	          
 	          <li class="nav-item">
-	          <a href="userlist.do" class="nav-link">
+	          <a href="http://localhost/prj_tryJobCatch/userlist.do" class="nav-link">
 	               <i class="bi-people-fill"></i>
 	              <p> 회원관리</p>
 	            </a>
@@ -127,19 +127,19 @@ function modifyProccess( id ) {
 	            </a>
 	            <ul class="nav nav-treeview">
 	              <li class="nav-item ">
-	                <a href="companylist.do" class="nav-link">
+	                <a href="http://localhost/prj_tryJobCatch/companylist.do" class="nav-link">
 	                  <i class="far fa-circle nav-icon"></i>
 	                  <p>기업 목록</p>
 	                </a>
 	              </li>
 	              <li class="nav-item">
-	                <a href="recruitmentlist.do" class="nav-link">
+	                <a href="http://localhost/prj_tryJobCatch/recruitmentlist.do" class="nav-link">
 	                  <i class="far fa-circle nav-icon"></i>
 	                  <p>채용 공고</p>
 	                </a>
 	              </li>
 	              <li class="nav-item">
-	                <a href="reviewlist.do" class="nav-link">
+	                <a href="http://localhost/prj_tryJobCatch/reviewlist.do" class="nav-link">
 	                  <i class="far fa-circle nav-icon"></i>
 	                  <p>리뷰 현황</p>
 	                </a>
@@ -153,11 +153,11 @@ function modifyProccess( id ) {
 								<p>게시판 관리</p>
 						</a>
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="noticelist.do" class="nav-link active">
+								<li class="nav-item"><a href="http://localhost/prj_tryJobCatch/noticelist.do" class="nav-link active">
 										<i class="far fa-circle nav-icon"></i>
 										<p>공지사항 관리</p>
 								</a></li>
-								<li class="nav-item"><a href="qnalist.do" class="nav-link">
+								<li class="nav-item"><a href="http://localhost/prj_tryJobCatch/qnalist.do" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>문의사항 관리</p>
 								</a></li>
@@ -181,7 +181,7 @@ function modifyProccess( id ) {
 						</div>
 									<div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="dashboard.do">Home</a></li>
+              <li class="breadcrumb-item"><a href="http://localhost/prj_tryJobCatch/dashboard.do">>Home</a></li>
               <li class="breadcrumb-item active">공지사항 관리</li>
             </ol>
           </div>

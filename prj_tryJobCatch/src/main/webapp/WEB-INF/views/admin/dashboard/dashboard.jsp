@@ -1,21 +1,10 @@
-<%-- <%@page import="admin.vo.ReservationCountVO"%>
-<%@page import="admin.vo.RestaurantReviewVO"%>
-<%@page import="admin.vo.TourReviewVO"%>
-<%@page import="com.google.gson.Gson"%>
-<%@page import="admin.vo.RankVO"%>
-<%@page import="admin.vo.QandAVO"%> --%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.util.ArrayList"%>
-<%-- <%@page import="admin.vo.NoticeVO"%> --%>
 <%@page import="java.util.List"%>
-<%-- <%@page import="admin.dao.DashboardDAO"%> --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page info = "" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%-- <c:if test="${ empty admin }">
-<c:redirect url="../admin/admin_login.jsp"/>
-</c:if> --%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -29,24 +18,6 @@ td{ text-align : center }
 </style>
 <!-- jQuery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
-<%-- <%
-
-DashboardDAO dDAO = DashboardDAO.getInstance();
-try{
-	List<RankVO> restaurantRankList = dDAO.selectRestaurantRank();
-	List<RankVO> touristAreaRankList = dDAO.selectTouristAreaRank();
-	 Gson gson = new Gson();
-	String restaurantRankJson = gson.toJson(restaurantRankList);
-	String touristAreaRankJson = gson.toJson(touristAreaRankList);
-	
-	
-	pageContext.setAttribute("restaurantRankList", restaurantRankJson);
-	pageContext.setAttribute("touristAreaRankList", touristAreaRankJson);
-}catch(SQLException se){
-	se.printStackTrace();
-}
-%> --%>
 
 <script type="text/javascript">
 $(function(){
@@ -166,21 +137,25 @@ $(function(){
 	    
 })//ready
 
-function noticeDetail(id) {
-	$("#noticeId").val(id);
+function noticeInfo(noticeId) {
+	$("#noticeId").val(noticeId);
 	$("#noticeFrm").submit();
 }
 
-function questionDetail(id) {
-	$("#questionId").val(id);
-	$("#questionFrm").submit();
+function userInfo(userId) {
+	$("#userId").val(userId);
+	$("#userFrm").submit();
 }
 
-function moveReservation(id){
-	$("#tourbusId").val(id);
-	$("#tourbusFrm").submit();
+function qnaInfo(qnaId) {
+	$("#qnaId").val(qnaId);
+	$("#qnaFrm").submit();
 }
 
+function companyInfo(companyId) {
+	$("#companyId").val(companyId);
+	$("#companyFrm").submit();
+}
 
 </script>
 <jsp:include page = "/common/jsp/set_style.jsp"></jsp:include>
@@ -193,7 +168,7 @@ function moveReservation(id){
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="dashboard.do" class="nav-link">Home</a>
+        <a href="http://localhost/prj_tryJobCatch/dashboard.do">Home</a>
       </li>
     </ul>
 
@@ -214,7 +189,7 @@ function moveReservation(id){
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="dashboard.do" class="brand-link">
+    <a href="http://localhost/prj_tryJobCatch/dashboard.do" class="brand-link">
             <span class="brand-text font-weight-light">tryJOBcatch</span>
     </a>
 
@@ -225,7 +200,7 @@ function moveReservation(id){
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="dashboard.do" class="nav-link active">
+            <a href="http://localhost/prj_tryJobCatch/dashboard.do" class="nav-link">
                <i class="bi bi-speedometer"></i>
               <p>
                  Dashboard
@@ -249,19 +224,19 @@ function moveReservation(id){
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="companylist.do" class="nav-link">
+                <a href="http://localhost/prj_tryJobCatch/companylist.do" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>기업 목록</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="recruitmentlist.do" class="nav-link">
+                <a href="http://localhost/prj_tryJobCatch/recruitmentlist.do" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>채용 공고</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="reviewlist.do" class="nav-link">
+                <a href="http://localhost/prj_tryJobCatch/reviewlist.do" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>리뷰 현황</p>
                 </a>
@@ -275,11 +250,11 @@ function moveReservation(id){
 							<p>게시판 관리</p>
 					</a>
 						<ul class="nav nav-treeview">
-							<li class="nav-item"><a href="noticelist.do" class="nav-link">
+							<li class="nav-item"><a href="http://localhost/prj_tryJobCatch/noticelist.do" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>공지사항 관리</p>
 							</a></li>
-							<li class="nav-item"><a href="qnalist.do" class="nav-link">
+							<li class="nav-item"><a href="http://localhost/prj_tryJobCatch/qnalist.do" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>문의사항 관리</p>
 							</a></li>
@@ -314,16 +289,16 @@ function moveReservation(id){
     <!-- /.content-header -->
 		<div class="row">
           <div class="col-md-6">
-            <div class="card" style="margin-left: 20px; margin-right: 20px; min-height: 380px">
+            <div class="card card-outline card-dark" style="margin-left: 20px; margin-right: 20px; min-height: 380px">
               <div class="card-header">
                 <h3 class="card-title">최근 공지사항</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                  <form action="../admin_post/admin_post_detail.jsp" method="get" id="noticeFrm">
-                  	<input type="hidden" id= "noticeId" name= "noticeId"/>
+                  <form action="http://localhost/prj_tryJobCatch/noticeinfo.do" method="get" id="noticeFrm">
+                  	<input type="hidden" id= "noticeId" name= "n_id"/>
                   </form>
-                <table class="table">
+                <table class="table table-hover">
                   <thead>
                     <tr>
                       <th style="width: 60px">번호</th>
@@ -332,35 +307,14 @@ function moveReservation(id){
                     </tr>
                   </thead>
                   <tbody>
-<%-- <%
-try{
-List<NoticeVO> list = dDAO.selectRecentNotice();
-for(int i = 0; i < list.size(); i++ ){
-	if( i != 5){
-%> --%>
- 		  <tr>
-            <%-- <td><%= i+1%></td>
-            <td  onclick="noticeDetail('<%= list.get(i).getId() %>')"><%= list.get(i).getTitle() %></td>
-            <td><%= list.get(i).getRegistrationDate() %></td> --%>
-            <td>1</td>
-            <td>title1</td>
-            <td>2023-11-11</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>title2</td>
-            <td>2023-11-11</td>
-          </tr>
-<%-- <%
-	}else{
-		break;
-	}
-}
 
-}catch(SQLException se){
-	se.printStackTrace();
-}
-%> --%>             
+		 <c:forEach var="noticeList" items="${noticeList}" varStatus="i" >
+ 		  <tr onclick="noticeInfo('${ noticeList.n_id }')">
+            <td><c:out value="${i.index+1}"/></td>
+            <td><c:out value="${noticeList.n_title}"/></td>
+            <td><c:out value="${noticeList.n_date }"/></td>
+          </tr>
+          </c:forEach>
 
                   </tbody>
                 </table>
@@ -368,16 +322,16 @@ for(int i = 0; i < list.size(); i++ ){
               <!-- /.card-body --> 
             </div>
             <!-- /.card -->
-            <div class="card" style="margin-left: 20px; margin-right: 20px; min-height: 380px">
+            <div class="card card-outline card-dark" style="margin-left: 20px; margin-right: 20px; min-height: 380px">
               <div class="card-header">
                 <h3 class="card-title">신규 개인회원</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                  <form action="../admin_post/admin_post_detail.jsp" method="get" id="noticeFrm">
-                  	<input type="hidden" id= "noticeId" name= "noticeId"/>
+                  <form action="http://localhost/prj_tryJobCatch/userinfo.do" method="get" id="userFrm">
+                  	<input type="hidden" id= "userId" name= "m_id"/>
                   </form>
-                <table class="table">
+                <table class="table table-hover">
                   <thead>
                     <tr>
                       <th style="width: 60px">번호</th>
@@ -386,35 +340,14 @@ for(int i = 0; i < list.size(); i++ ){
                     </tr>
                   </thead>
                   <tbody>
-<%-- <%
-try{
-List<NoticeVO> list = dDAO.selectRecentNotice();
-for(int i = 0; i < list.size(); i++ ){
-	if( i != 5){
-%> --%>
- 		  <tr>
-            <%-- <td><%= i+1%></td>
-            <td  onclick="noticeDetail('<%= list.get(i).getId() %>')"><%= list.get(i).getTitle() %></td>
-            <td><%= list.get(i).getRegistrationDate() %></td> --%>
-            <td>1</td>
-            <td>회원1</td>
-            <td>2023-11-14</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>회원2</td>
-            <td>2023-11-14</td>
-          </tr>
-<%-- <%
-	}else{
-		break;
-	}
-}
-
-}catch(SQLException se){
-	se.printStackTrace();
-}
-%> --%>             
+ 		  
+				<c:forEach var="userList" items="${userList}" varStatus="i" >
+		 		  <tr onclick="userInfo('${ userList.m_id }')">
+		            <td><c:out value="${i.index+1}"/></td>
+		            <td><c:out value="${userList.m_name}"/></td>
+		            <td><c:out value="${userList.m_registration_date }"/></td>
+		          </tr>
+	         	 </c:forEach>
 
                   </tbody>
                 </table>
@@ -425,7 +358,8 @@ for(int i = 0; i < list.size(); i++ ){
             
 
              <!-- BAR CHART -->
-            <div class="card card-success" style="margin-left: 20px; margin-right: 20px">
+            <div class="card card-outline card-dark" style="margin-left: 20px; margin-right: 20px">
+            
               <div class="card-header">
                 <h3 class="card-title">인기많은 채용공고</h3>
 
@@ -444,61 +378,41 @@ for(int i = 0; i < list.size(); i++ ){
                 </div>
               </div>
               <!-- /.card-body -->
+              <div class="overlay dark">
+				  <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+				</div>
             </div>
             <!-- /.card -->
           </div>
           <!-- /.col -->
           <div class="col-md-6">
-            <div class="card" style="margin-left: 20px; margin-right: 20px; min-height: 380px">
+            <div class="card card-outline card-dark" style="margin-left: 20px; margin-right: 20px; min-height: 380px">
               <div class="card-header">
                 <h3 class="card-title">답변 대기 문의사항</h3> 
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <form action="../admin_post/admin_question_detail_proccess.jsp" method="post" id="questionFrm">
-        	 <input type="hidden" id="questionId" name="questionId"/>
-         	</form>
-                <table class="table">
+              <form action="http://localhost/prj_tryJobCatch/qnainfo.do" method="get" id="qnaFrm">
+                  	<input type="hidden" id= "qnaId" name= "i_id"/>
+                  </form>
+                <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th style="width: 80px">번호</th>
+                      <th style="width: 60px">번호</th>
                       <th>제목</th>
-                      <th style="width: 100px">작성자</th>
-                      <th style="width: 150px">작성일</th>
+                      <!-- <th style="width: 100px">작성자</th> -->
+                      <th style="width: 100px">작성일</th>
                     </tr>
                   </thead>
                   <tbody>
-<%-- <%
-
-try{
-	List<QandAVO> waitingAnswerList = dDAO.selectWaitingAnswer();
-	
-	for(int i = 0; i < waitingAnswerList.size(); i++){
-		if(i < 5 ){
-%> --%>
-                   <tr>
-                      <%-- <td><%= i+1 %></td>
-                      <td><%= waitingAnswerList.get(i).getCategory() %></td>
-                      <td onclick="questionDetail('<%= waitingAnswerList.get(i).getQAndAId() %>')"><%= waitingAnswerList.get(i).getTitle() %></td>
-                      <td><%= waitingAnswerList.get(i).getRegistrationDate() %></td> --%>
-                      	<td>1</td>
-            			<td>이력서 관련 문의</td>
-            			<td>AAA</td>
-            			<td>2023-11-11</td>
-                    </tr>
-                   <tr>
-                      	<td>2</td>
-            			<td>지원 날짜 관련 문의</td>
-            			<td>BBB</td>
-            			<td>2023-11-11</td>
-                    </tr>
-<%-- <%
-		}
-	}
-}catch(SQLException se){
-	se.printStackTrace();
-}
-%> --%>     			
+                  
+                 <c:forEach var="qnaList" items="${qnaList}" varStatus="i" >
+		 		  <tr onclick="qnaInfo('${ qnaList.i_id }')">
+		            <td><c:out value="${i.index+1}"/></td>
+		            <td><c:out value="${qnaList.i_title}"/></td>
+		            <td><c:out value="${qnaList.i_date }"/></td>
+		          </tr>
+	         	 </c:forEach>
 
                   </tbody>
                 </table>
@@ -506,16 +420,16 @@ try{
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-            <div class="card" style="margin-left: 20px; margin-right: 20px; min-height: 380px">
+            <div class="card card-outline card-dark" style="margin-left: 20px; margin-right: 20px; min-height: 380px">
               <div class="card-header">
                 <h3 class="card-title">신규 기업회원</h3> 
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <form action="../admin_post/admin_question_detail_proccess.jsp" method="post" id="questionFrm">
-        	 <input type="hidden" id="questionId" name="questionId"/>
-         	</form>
-                <table class="table">
+              <form action="http://localhost/prj_tryJobCatch/companyinfo.do" method="get" id="companyFrm">
+                  	<input type="hidden" id= "companyId" name= "cm_id"/>
+                  </form>
+                <table class="table table-hover">
                   <thead>
                     <tr>
                       <th style="width: 80px">번호</th>
@@ -524,35 +438,14 @@ try{
                     </tr>
                   </thead>
                   <tbody>
-<%-- <%
-
-try{
-	List<QandAVO> waitingAnswerList = dDAO.selectWaitingAnswer();
-	
-	for(int i = 0; i < waitingAnswerList.size(); i++){
-		if(i < 5 ){
-%> --%>
-                   <tr>
-                      <%-- <td><%= i+1 %></td>
-                      <td><%= waitingAnswerList.get(i).getCategory() %></td>
-                      <td onclick="questionDetail('<%= waitingAnswerList.get(i).getQAndAId() %>')"><%= waitingAnswerList.get(i).getTitle() %></td>
-                      <td><%= waitingAnswerList.get(i).getRegistrationDate() %></td> --%>
-                      	<td>1</td>
-            			<td>기업1</td>
-            			<td>2023-11-11</td>
-                    </tr>
-                   <tr>
-                      	<td>2</td>
-            			<td>기업2</td>
-            			<td>2023-11-11</td>
-                    </tr>
-<%-- <%
-		}
-	}
-}catch(SQLException se){
-	se.printStackTrace();
-}
-%> --%>     			
+                  
+                 <c:forEach var="companyList" items="${companyList}" varStatus="i" >
+		 		  <tr onclick="companyInfo('${ companyList.cm_id }')">
+		            <td><c:out value="${i.index+1}"/></td>
+		            <td><c:out value="${companyList.cm_co_name}"/></td>
+		            <td><c:out value="${companyList.cm_co_registration_date }"/></td>
+		          </tr>
+	         	 </c:forEach>
 
                   </tbody>
                 </table>
@@ -562,9 +455,9 @@ try{
             <!-- /.card -->
 
             <!-- BAR CHART -->
-            <div class="card card-danger" style="margin-left: 20px; margin-right: 20px">
+            <div class="card card-outline card-dark" style="margin-left: 20px; margin-right: 20px">
               <div class="card-header">
-                <h3 class="card-title">컨텐츠 생각해서 추가</h3>
+                <h3 class="card-title">최근 등록된 리뷰</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -581,6 +474,9 @@ try{
                 </div>
               </div>
               <!-- /.card-body -->
+              	<div class="overlay dark">
+		  			<i class="fas fa-2x fa-sync-alt fa-spin"></i>
+				</div>	
             </div>
             <!-- /.card -->
           </div>
@@ -588,206 +484,6 @@ try{
         </div>
         <!-- /.row -->
         
-        <!-- row -->
-        <div class="row">
-          <div class="col-12">
-            <div class="card" style="margin-left: 20px; margin-right: 20px">
-              <div class="card-header">
-                <h3 class="card-title">최근 관광지 리뷰</h3>
-
-                <div class="card-tools">
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                    <tr>
-                      <th style="width:60px">번호</th>
-                      <th>리뷰 내용</th>
-                      <th style="width:150px">아이디</th>
-                      <th style="width:150px">작성일</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-<%--                   <%
-try{
-	List<TourReviewVO> tourReviewList = dDAO.selectRecentTourReview();
-	
-	for(int i = 0; i < tourReviewList.size(); i++){
-		if(i != 5 ){
-%> --%>
-                   <tr>
-                      <%-- <td><%= i+1 %></td>
-                      <td><%= tourReviewList.get(i).getContent() %></td>
-                      <td><span class="tag tag-success"><%= tourReviewList.get(i).getUserId() %></span></td>
-                      <td><%= tourReviewList.get(i).getReviewDate() %></td> --%>
-                      	<td>1</td>
-			            <td>2</td>
-			            <td>3</td>
-			            <td>4</td>
-                    </tr>
-<%-- <%
-		}else{
-			break;
-		}
-	}
-}catch(SQLException se){
-	se.printStackTrace();
-}
-%> --%>     	
-                  
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-        </div>
-        <!-- /.row -->
-        
-        <!-- row -->
-        <div class="row">
-          <div class="col-12">
-            <div class="card" style="margin-left: 20px; margin-right: 20px">
-              <div class="card-header">
-                <h3 class="card-title">최근 맛집 리뷰</h3>
-
-                <div class="card-tools">
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                    <tr>
-                      <th style="width:60px">번호</th>
-                      <th>리뷰 내용</th>
-                      <th style="width:150px">아이디</th>
-                      <th style="width:150px">작성일</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-<%-- <%                 
-try{
-	List<RestaurantReviewVO> restaurantReviewList = dDAO.selectRecentRestaurantReview();
-	
-	for(int i = 0; i < restaurantReviewList.size(); i++){
-		if(i != 5 ){
-%> --%>
-                   <tr>
-                      <%-- <td><%= i+1 %></td>
-                      <td><%= restaurantReviewList.get(i).getContent() %></td>
-                      <td><span class="tag tag-success"><%= restaurantReviewList.get(i).getUserId() %></span></td>
-                      <td><%= restaurantReviewList.get(i).getReviewDate() %></td> --%>
-                      	<td>1</td>
-			            <td>2</td>
-			            <td>3</td>
-			            <td>4</td>
-                    </tr>
-<%-- <%
-		}else{
-			break;
-		}
-	}
-}catch(SQLException se){
-	se.printStackTrace();
-}
-%> --%>  
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-        </div>
-        <!-- /.row -->
-       <div style="margin-left: 20px; margin-right: 20px">
-       	<h4><i class="bi bi-bus-front">&nbsp;투어버스 예약 미승인 현황</i></h4>
-       </div> 
-      <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-<%-- <%
-	try{
-		List<ReservationCountVO> list = dDAO.selectUnappovedReservation();
-		System.out.println(list.toString());
-		for(int i = 0; i < list.size(); i++){
-			if(i == 0){
-%> --%>
-          <div class="col-lg-4 col-8">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <%-- <h3><%= list.get(i).getUnapprovedCount() %>건</h3>
-                <h4><%= list.get(i).getTourName() %></h4> --%>
-                <h3>1</h3>
-                <h4>2</h4>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer" onclick="moveReservation('<%-- <%=list.get(i).getTourbusId() %> --%>')">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-<%-- <%
-			}else if(i == 1){
-%> --%>          
-          
-          <!-- ./col -->
-          <div class="col-lg-4 col-8">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <%-- <h3><%= list.get(i).getUnapprovedCount() %>건</h3>
-                <h4><%= list.get(i).getTourName() %></h4> --%>
-                <h3>1</h3>
-	            <h4>2</h4>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer" onclick="moveReservation('<%-- <%=list.get(i).getTourbusId() %> --%>')">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-<%-- <%
-			}else if(i == 2){
-%> --%>          
-          <!-- ./col -->
-          <div class="col-lg-4 col-8">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-               <%-- <h3><%= list.get(i).getUnapprovedCount() %>건</h3>
-                <h4><%= list.get(i).getTourName() %></h4> --%>
-                <h3>1</h3>
-                <h4>2</h4>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer" onclick="moveReservation('<%-- <%=list.get(i).getTourbusId() %> --%>')">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-<%-- <%
-			}
-		}
-	}catch(SQLException se){
-		se.printStackTrace();
-	}
-%> --%>                
-          <!-- ./col -->
-      </div>
-       <form action="../admin_tourbus/admin_tourbus_reservation.jsp" method="post" id="tourbusFrm">
-          <input type="hidden" id="tourbusId" name="tourbusId"/>
-          </form>
-      <!-- ./row -->
-     </div>
-     <!-- ./container-fluid -->
-     </section> 
   </div>
 
  <footer class="main-footer">

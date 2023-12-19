@@ -6,7 +6,12 @@
 
 <select id="noticeList" resultType="kr.co.sist.admin.domain.NoticeDomain">
 SELECT n_id, n_title, n_date
+FROM
+(SELECT n_id, n_title, n_date,
+DENSE_RANK() OVER (ORDER BY n_id DESC) AS rnum
 FROM notice
+)
+WHERE rnum between 1 and 10
 </select>
 
 <select id="noticeInfo" resultType="kr.co.sist.admin.domain.NoticeDomain" parameterType="String">

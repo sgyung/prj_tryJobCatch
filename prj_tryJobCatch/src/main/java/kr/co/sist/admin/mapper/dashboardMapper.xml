@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin.dashboard">
+
+<select id="selectNotice" resultType="kr.co.sist.admin.domain.NoticeDomain">
+select n_id, n_title, n_date
+from ( 	SELECT 	n_id, n_title, n_date,
+		DENSE_RANK() OVER (ORDER BY n_id DESC) AS rnum
+		FROM notice
+		)
+where rnum between 1 and 5
+</select>
+
+<select id="selectQnA" resultType="kr.co.sist.admin.domain.QnADomain">
+select i_id, i_title, i_date
+from ( 	SELECT 	i_id, i_title, i_date,i_reply_condition,
+		DENSE_RANK() OVER (ORDER BY i_id DESC) AS rnum
+		FROM inquire
+		)
+where i_reply_condition='Y' and rnum between 1 and 5
+</select>
+
+<select id="selectUser" resultType="kr.co.sist.admin.domain.UserDomain">
+select m_id, m_name, m_registration_date
+from ( 	SELECT 	m_id, m_name, m_registration_date, m_join_condition,
+		ROW_NUMBER() OVER (ORDER BY m_registration_date DESC) AS rnum
+		FROM member
+		where m_join_condition='Y'
+		)
+where rnum between 1 and 5
+</select>
+
+<select id="selectCompany" resultType="kr.co.sist.admin.domain.CompanyDomain">
+select cm_id, cm_co_name, cm_co_registration_date
+from ( 	SELECT 	cm_id, cm_co_name, cm_co_registration_date, cm_co_join_condition,
+		ROW_NUMBER() OVER (ORDER BY cm_co_registration_date DESC) AS rnum
+		FROM company_member
+		where cm_co_join_condition='Y'
+		)
+where rnum between 1 and 5
+</select>
+
+</mapper>

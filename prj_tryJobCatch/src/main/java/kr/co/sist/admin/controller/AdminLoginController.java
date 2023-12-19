@@ -35,7 +35,7 @@ public class AdminLoginController {
 		
 		if( adminId != null ) { //로그인 성공
 			model.addAttribute("adminId",adminId);
-			return "admin/dashboard/dashboard";
+			return "redirect:/dashboard.do";
 		} else {
 			model.addAttribute("msg","로그인실패");
 			return "admin/login/login";

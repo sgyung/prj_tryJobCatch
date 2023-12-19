@@ -6,7 +6,11 @@
 
 <select id="companyList" resultType="kr.co.sist.admin.domain.CompanyDomain">
 SELECT cm_id, cm_co_name, cm_co_registration_date, cm_co_join_condition
-FROM company_member
+FROM	(	SELECT cm_id, cm_co_name, cm_co_registration_date, cm_co_join_condition,
+				ROW_NUMBER() OVER (ORDER BY cm_co_registration_date DESC) AS rnum
+				FROM company_member
+			)
+WHERE rnum between 1 and 10
 </select>
 
 <select id="companyInfo" resultType="kr.co.sist.admin.domain.CompanyDomain" parameterType="String">

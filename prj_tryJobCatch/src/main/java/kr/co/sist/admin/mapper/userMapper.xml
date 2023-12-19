@@ -62,8 +62,12 @@
 
 
 <select id="userList" resultType="kr.co.sist.admin.domain.UserDomain">
-SELECT M_ID, M_NAME, M_REGISTRATION_DATE, M_JOIN_CONDITION 
-FROM MEMBER
+SELECT M_ID, M_NAME, M_REGISTRATION_DATE, M_JOIN_CONDITION
+FROM(	SELECT M_ID, M_NAME, M_REGISTRATION_DATE, M_JOIN_CONDITION,
+			ROW_NUMBER() OVER (ORDER BY M_REGISTRATION_DATE DESC) AS rnum
+			FROM MEMBER
+		)
+WHERE rnum between 1 and 10
 </select>
 
 <select id="userInfo" resultType="kr.co.sist.admin.domain.UserDomain" parameterType="String">
