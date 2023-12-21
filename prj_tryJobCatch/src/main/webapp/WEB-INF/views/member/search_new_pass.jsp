@@ -8,7 +8,7 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>비밀번호 찾기 ㅣ 잡코리아 - NEW JOB, NEW ME JOBKOREA.CO.KR</title>
+<title>비밀번호 찾기 ㅣ tryJobCatch</title>
 <link rel="SHORTCUT ICON" href="//www.jobkorea.co.kr/favicon.ico?20230519">
 
 <script type="text/javascript" src="https://www.jobkorea.co.kr/include/JS/jquery-1.8.3.min.js"></script>
@@ -141,8 +141,8 @@ $(function(){
 				
 			<div class="secNav">
 				<ol>
-					<li class="mn1"><a href="http://localhost/prj_tryJobCatch/member/searchIdFrm.do"><span></span>아이디 찾기</a></li>
-					<li class="mn2"><a href="http://localhost/prj_tryJobCatch/member/searchPassFrm.do"><span></span>비밀번호 찾기</a></li>
+					<li class="mn1"><a href="http://211.63.89.133/prj_tryJobCatch/member/searchIdFrm.do"><span></span>아이디 찾기</a></li>
+					<li class="mn2"><a href="http://211.63.89.133/prj_tryJobCatch/member/searchPassFrm.do"><span></span>비밀번호 찾기</a></li>
 					<!-- <li class="mn3"><a href="/Customer_C/ETC/CC_Inquiry.asp?OEM_No=1"><span></span>고객상담</a></li>
 					<li class="mn4 end"><a href="https://talk.naver.com/ct/wcb8l5" target="_blank" title="새창"><span></span>톡톡상담</a></li> -->
 				</ol>
@@ -159,7 +159,7 @@ $(function(){
 	<div id="container">
 		<div id="content">
 			<h1 class="skip">비밀번호 변경</h1>
-			<form id="newPassFrm" method="post" action="http://localhost/prj_tryJobCatch/member/resetPass.do">
+			<form id="newPassFrm" method="post" action="http://211.63.89.133/prj_tryJobCatch/member/resetPass.do">
 				<input type="hidden" name="searchType" id="searchType">
 				<input type="hidden" name="M_ID" id="M_ID" >
 			<fieldset>

@@ -13,8 +13,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class RecruitmentVO {
+	
 	private String
-		CM_ID, R_ID, 
+		CM_ID, R_ID,
 		R_TITLE, R_SAL, R_TIME,
 		R_START_DATE, R_END_DATE,
 		R_RECRUITMENT_VOLUME, R_INFO,

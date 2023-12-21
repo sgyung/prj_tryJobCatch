@@ -128,7 +128,7 @@ function applyComplete() {
     <div id="onPassWrap">
         
         
-<form method="get" action="http://localhost/prj_tryJobCatch/apply_complete.do" id="applyFrm" name="applyFrm">
+<form method="get" action="http://211.63.89.133/prj_tryJobCatch/apply_complete.do" id="applyFrm" name="applyFrm">
     <fieldset>
         <legend>입사지원</legend>
         <div class="onPassCate">
@@ -146,7 +146,7 @@ function applyComplete() {
                 <strong><c:out value="${ requestScope.cm_co_name }"/></strong>
                 <input type="hidden" id="cm_id" name="cm_id" value="${ requestScope.cm_id }"/>
                 <input type="hidden" id="r_id" name="r_id" value="${ requestScope.r_id }"/>
-                <a href="http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id=${ requestScope.r_id }" target="_blank"><c:out value="${ requestScope.r_title }"/></a>
+                <a href="http://211.63.89.133/prj_tryJobCatch/recruitmentDetail.do?r_id=${ requestScope.r_id }" target="_blank"><c:out value="${ requestScope.r_title }"/></a>
             </p>
 
                 <div class="selCateWRap">

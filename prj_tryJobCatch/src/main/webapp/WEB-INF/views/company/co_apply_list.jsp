@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko"><head>
-            <title>MY페이지│잡코리아</title>
+            <title>MY페이지</title>
 
 
 <meta charset="utf-8">
@@ -467,7 +467,7 @@ $(function(){
                                             <div class="tit" style="
     text-align: center;
     display: block;
-"><a href="http://localhost/prj_tryJobCatch/company/applyResumeDetail.do?mr_id=${item.mr_id}&a_id=${item.a_id}&m_id=${item.m_id}&r_id=${item.r_id}" target="_self">${i.count }</a></div>
+"><a href="#" target="_self">${i.count }</a></div>
                                             
                                         </div><div class="col col02" style="
     width: 20%;
@@ -479,7 +479,7 @@ $(function(){
     text-align: center;
     display: block;
     margin: 0px;
-"><a href="http://localhost/prj_tryJobCatch/company/applyResumeDetail.do?mr_id=${item.mr_id}&a_id=${item.a_id}&m_id=${item.m_id}&r_id=${item.r_id}" target="_self">${ item.m_name }</a></div>
+"><a href="#" target="_self">${ item.m_name }</a></div>
                                             
                                         </div><div class="col col03" style="
     width: 40%;
@@ -487,9 +487,21 @@ $(function(){
                                             <div class="tit" style="
     display: block;
     text-align: center;
-"><a href="http://localhost/prj_tryJobCatch/company/applyResumeDetail.do?mr_id=${item.mr_id}&a_id=${item.a_id}&m_id=${item.m_id}&r_id=${item.r_id}" target="_self" style="
-    text-align: center;
-">${ item.mr_title }</a></div>
+">
+<c:choose>
+	<c:when test="${ item.a_recruitment_condition eq 'Y' }">
+		<a href="#" target="_self" style="  text-align: center;">
+		${ item.mr_title }
+		</a>
+	</c:when>
+	<c:otherwise>
+		<a href="http://211.63.89.133/prj_tryJobCatch/company/applyResumeDetail.do?mr_id=${item.mr_id}&a_id=${item.a_id}&m_id=${item.m_id}&r_id=${item.r_id}" target="_self" style="  text-align: center;">
+		${ item.mr_title }
+		</a>
+	</c:otherwise>
+</c:choose>
+
+</div>
                                             <div class="date" style="
     text-align: center;
 ">${ item.a_date }</div>

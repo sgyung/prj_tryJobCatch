@@ -168,7 +168,7 @@ function companyInfo(companyId) {
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="http://localhost/prj_tryJobCatch/dashboard.do">Home</a>
+        <a href="http://211.63.89.133/prj_tryJobCatch/dashboard.do">Home</a>
       </li>
     </ul>
 
@@ -189,7 +189,7 @@ function companyInfo(companyId) {
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="http://localhost/prj_tryJobCatch/dashboard.do" class="brand-link">
+    <a href="http://211.63.89.133/prj_tryJobCatch/dashboard.do" class="brand-link">
             <span class="brand-text font-weight-light">tryJOBcatch</span>
     </a>
 
@@ -200,7 +200,7 @@ function companyInfo(companyId) {
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="http://localhost/prj_tryJobCatch/dashboard.do" class="nav-link">
+            <a href="http://211.63.89.133/prj_tryJobCatch/dashboard.do" class="nav-link">
                <i class="bi bi-speedometer"></i>
               <p>
                  Dashboard
@@ -224,19 +224,19 @@ function companyInfo(companyId) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="http://localhost/prj_tryJobCatch/companylist.do" class="nav-link">
+                <a href="http://211.63.89.133/prj_tryJobCatch/companylist.do" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>기업 목록</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="http://localhost/prj_tryJobCatch/recruitmentlist.do" class="nav-link">
+                <a href="http://211.63.89.133/prj_tryJobCatch/recruitmentlist.do" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>채용 공고</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="http://localhost/prj_tryJobCatch/reviewlist.do" class="nav-link">
+                <a href="http://211.63.89.133/prj_tryJobCatch/reviewlist.do" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>리뷰 현황</p>
                 </a>
@@ -250,11 +250,11 @@ function companyInfo(companyId) {
 							<p>게시판 관리</p>
 					</a>
 						<ul class="nav nav-treeview">
-							<li class="nav-item"><a href="http://localhost/prj_tryJobCatch/noticelist.do" class="nav-link">
+							<li class="nav-item"><a href="http://211.63.89.133/prj_tryJobCatch/noticelist.do" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>공지사항 관리</p>
 							</a></li>
-							<li class="nav-item"><a href="http://localhost/prj_tryJobCatch/qnalist.do" class="nav-link">
+							<li class="nav-item"><a href="http://211.63.89.133/prj_tryJobCatch/qnalist.do" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>문의사항 관리</p>
 							</a></li>
@@ -295,7 +295,7 @@ function companyInfo(companyId) {
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                  <form action="http://localhost/prj_tryJobCatch/noticeinfo.do" method="get" id="noticeFrm">
+                  <form action="http://211.63.89.133/prj_tryJobCatch/noticeinfo.do" method="get" id="noticeFrm">
                   	<input type="hidden" id= "noticeId" name= "n_id"/>
                   </form>
                 <table class="table table-hover">
@@ -328,7 +328,7 @@ function companyInfo(companyId) {
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                  <form action="http://localhost/prj_tryJobCatch/userinfo.do" method="get" id="userFrm">
+                  <form action="http://211.63.89.133/prj_tryJobCatch/userinfo.do" method="get" id="userFrm">
                   	<input type="hidden" id= "userId" name= "m_id"/>
                   </form>
                 <table class="table table-hover">
@@ -392,7 +392,7 @@ function companyInfo(companyId) {
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <form action="http://localhost/prj_tryJobCatch/qnainfo.do" method="get" id="qnaFrm">
+              <form action="http://211.63.89.133/prj_tryJobCatch/qnainfo.do" method="get" id="qnaFrm">
                   	<input type="hidden" id= "qnaId" name= "i_id"/>
                   </form>
                 <table class="table table-hover">
@@ -426,7 +426,7 @@ function companyInfo(companyId) {
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <form action="http://localhost/prj_tryJobCatch/companyinfo.do" method="get" id="companyFrm">
+              <form action="http://211.63.89.133/prj_tryJobCatch/companyinfo.do" method="get" id="companyFrm">
                   	<input type="hidden" id= "companyId" name= "cm_id"/>
                   </form>
                 <table class="table table-hover">

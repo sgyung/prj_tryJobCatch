@@ -132,17 +132,17 @@ $(function(){
 
 <section class="secLnb" style="height: 500px;
     border-bottom: 1px solid #dce1eb;">
-    <h1><span class="skip">고객센터 메뉴 - </span><a class="lnbTit" href="http://localhost/prj_tryJobCatch/noticeList.do">고객센터</a></h1>
+    <h1><span class="skip">고객센터 메뉴 - </span><a class="lnbTit" href="http://211.63.89.133/prj_tryJobCatch/noticeList.do">고객센터</a></h1>
     
     <div class="lnbGroup">
         <ul>
-            <li><a href="http://localhost/prj_tryJobCatch/noticeList.do" class="">공지사항</a></li>
+            <li><a href="http://211.63.89.133/prj_tryJobCatch/noticeList.do" class="">공지사항</a></li>
             
         </ul>
     </div>
     <div class="lnbGroup">
         <ul>
-            <li><a href="http://localhost/prj_tryJobCatch/member/questionFrm.do" class="on">문의∙신고</a></li>
+            <li><a href="http://211.63.89.133/prj_tryJobCatch/member/questionFrm.do" class="on">문의∙신고</a></li>
             
         </ul>
     </div>
@@ -163,8 +163,8 @@ $(function(){
 <!--// tap menu -->
 <div class="mtcTplTab">
 	<ul class="tabItems">
-		<li class=""><a href="http://localhost/prj_tryJobCatch/member/questionFrm.do">문의·신고</a></li>
-		<li class="on"><a href="http://localhost/prj_tryJobCatch/member/qnaList.do">문의·신고 내역</a></li>
+		<li class=""><a href="http://211.63.89.133/prj_tryJobCatch/member/questionFrm.do">문의·신고</a></li>
+		<li class="on"><a href="http://211.63.89.133/prj_tryJobCatch/member/qnaList.do">문의·신고 내역</a></li>
 	</ul>
 </div>
 <!-- tap menu //-->
@@ -197,7 +197,7 @@ $(function(){
 													<c:forEach var="qna" items="${ qnaList }" varStatus="i">
 													<tr>
 														<td><c:out value="${ qna.IDX }" /></td>
-														<td class="alLeft"><span class="tit"><a href="http://localhost/prj_tryJobCatch/member/qnaDetail.do?i_id=${ qna.i_ID }">${ qna.i_TITLE }</a></span></td>
+														<td class="alLeft"><span class="tit"><a href="http://211.63.89.133/prj_tryJobCatch/member/qnaDetail.do?i_id=${ qna.i_ID }">${ qna.i_TITLE }</a></span></td>
 														<td><c:out value="${ qna.i_DATE }" /></td>
 														<td class="">${ qna.i_REPLY_CONDITION eq 'N'? '답변대기중' : '답변완료' }</td>
 													</tr>
@@ -218,7 +218,7 @@ $(function(){
     <div class="tplPagination">
         <ul>
         	<c:forEach var="pageNum" begin="1" end="${pageCount}">
-                    <li><a href='http://localhost/prj_tryJobCatch/member/qnaList.do?currentPage=${pageNum}'><span class="now">${pageNum}</span></a></li>
+                    <li><a href='http://211.63.89.133/prj_tryJobCatch/member/qnaList.do?currentPage=${pageNum}'><span class="now">${pageNum}</span></a></li>
         	</c:forEach>
         </ul>
     </div>

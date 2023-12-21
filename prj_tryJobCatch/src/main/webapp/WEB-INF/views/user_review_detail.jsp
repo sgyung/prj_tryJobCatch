@@ -82,7 +82,7 @@ function deleteLike(id) {
 
     if (confirm(confirmationMessage)) {
         // 여기에 삭제 처리를 위한 코드를 추가하세요.
-        var url = 'http://localhost/prj_tryJobCatch/deleteLike.do?ic_id=' + id +'&cm_id=${param.cm_id}';
+        var url = 'http://211.63.89.133/prj_tryJobCatch/deleteLike.do?ic_id=' + id +'&cm_id=${param.cm_id}';
         location.href = url;
     }
     // 체크박스의 상태를 이전 상태로 되돌립니다.
@@ -99,7 +99,7 @@ function addLike() {
 	
 	    if (confirm(confirmationMessage)) {
 	        // 여기에 등록 처리를 위한 코드를 추가하세요.
-	        var url = 'http://localhost/prj_tryJobCatch/addLike.do?cm_id=${param.cm_id}';
+	        var url = 'http://211.63.89.133/prj_tryJobCatch/addLike.do?cm_id=${param.cm_id}';
 	        location.href = url;
 	        
 	    }
@@ -179,7 +179,7 @@ if("${ msg }" != ""){
         <section class="section section01">
             <div class="result-list_left co">
                 <div class="co-logo">
-                    <img src="http://localhost/prj_tryJobCatch/common/images/company_logo/${ requestScope.logo }">
+                    <img src="http://211.63.89.133/prj_tryJobCatch/common/images/company_logo/${ requestScope.logo }">
                     <span><c:out value="${ requestScope.co_name }"/></span>
                 </div>
                 <div class="co-info">
@@ -194,7 +194,7 @@ if("${ msg }" != ""){
                 </div>
             </div>
             <div class="result-list_right">
-                <a href="http://localhost/prj_tryJobCatch/writeReview.do">리뷰쓰기</a>
+                <a href="http://211.63.89.133/prj_tryJobCatch/writeReview.do">리뷰쓰기</a>
                     <div class="input-like">
                     <c:if test="${requestScope.likeState eq 'Y'}">
 					    <input type="checkbox" name="like" id="like" onclick="deleteLike('${ requestScope.ic_id}')" data-memsysno="103716" checked>
@@ -489,7 +489,7 @@ if("${ msg }" != ""){
                       <div class="recruit-list">
                             <div class="recruit-left">
                                 <div>
-                                    <a href="http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id=${ recruitment.r_id }" target="_blank"><c:out value="${ recruitment.r_title }"/></a>
+                                    <a href="http://211.63.89.133/prj_tryJobCatch/recruitmentDetail.do?r_id=${ recruitment.r_id }" target="_blank"><c:out value="${ recruitment.r_title }"/></a>
                                     <input type="checkbox" name="attention" id="attention1" onclick="_scrap(this)" data-gino="45821129" data-gno="43376676" data-m_id="tjsrud229" data-membertype="C">
                                     <label for="attention1"></label>
                                 </div>
@@ -498,7 +498,7 @@ if("${ msg }" != ""){
                                 </div>
                             </div>
                             <div class="recurit-right">
-                                <a href="http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id=${ recruitment.r_id }" target="_blank">상세보기</a>
+                                <a href="http://211.63.89.133/prj_tryJobCatch/recruitmentDetail.do?r_id=${ recruitment.r_id }" target="_blank">상세보기</a>
                                 <p>~<c:out value="${ recruitment.r_end_date}"/></p>
                             </div>
                         </div>
@@ -528,9 +528,9 @@ if("${ msg }" != ""){
         <h2 class="lnbTit">기업리뷰</h2>
         <ul>
             <!-- [개발] 메뉴 선택시 a.on 추가 -->
-            <li><a href="http://localhost/prj_tryJobCatch/review_home.do" class="on" onclick="GA_Event('기업리뷰_PC', '사이드메뉴', '기업리뷰_기업리뷰홈');">기업리뷰 홈</a></li>
+            <li><a href="http://211.63.89.133/prj_tryJobCatch/review_home.do" class="on" onclick="GA_Event('기업리뷰_PC', '사이드메뉴', '기업리뷰_기업리뷰홈');">기업리뷰 홈</a></li>
                    <!-- 레이어 팝업 호출 -->
-            <li><a href="http://localhost/prj_tryJobCatch/myReview.do">My 기업리뷰<span class="ico">새창</span></a></li>
+            <li><a href="http://211.63.89.133/prj_tryJobCatch/myReview.do">My 기업리뷰<span class="ico">새창</span></a></li>
         </ul>
     </div>
     

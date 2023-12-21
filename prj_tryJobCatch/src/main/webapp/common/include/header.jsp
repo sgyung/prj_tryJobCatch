@@ -59,8 +59,8 @@ function submitFrm() {
         <!-- // headInner -->
         <div class="headInner">
             <h1 class="jkLogo" style="height:120px">
-                <a href="http://localhost/prj_tryJobCatch/main.do">
-                 <img height="100%" src="http://localhost/prj_tryJobCatch/common/images/logo/logo.gif" width= "100%" alt="tryJobCatch">
+                <a href="http://211.63.89.133/prj_tryJobCatch/main.do">
+                 <img height="100%" src="http://211.63.89.133/prj_tryJobCatch/common/images/logo/logo.gif" width= "100%" alt="tryJobCatch">
                 </a>
             </h1>
 
@@ -68,7 +68,7 @@ function submitFrm() {
 <!-- // search -->
 <div class="search">
     <h2 class="skip">검색</h2>
-    <form name="global_seek" id="searchFrm" autocomplete="off" action="http://localhost/prj_tryJobCatch/search_corperation.do" target="_self">
+    <form name="global_seek" id="searchFrm" autocomplete="off" action="http://211.63.89.133/prj_tryJobCatch/search_corperation.do" target="_self">
         <fieldset>
             <legend>Smart Match 통합검색</legend>
             <div class="smKey">
@@ -92,16 +92,16 @@ function submitFrm() {
                     <ul id="serviceNav" class="serviceNav dev-serviceNav">
                         <!-- 메뉴 활성화 클래스 navFixed 마우스 오버시 active 클래스 추가 -->
                         <li id="gnbGi" class="navItem ">
-                            <a href="http://localhost/prj_tryJobCatch/recruitment.do" class="linkItem" onclick=""><span class="spNav"><span class="txIr">채용정보</span></span></a>
+                            <a href="http://211.63.89.133/prj_tryJobCatch/recruitment.do" class="linkItem" onclick=""><span class="spNav"><span class="txIr">채용정보</span></span></a>
                         </li>
                         <li id="gnbStart" class="navItem ">
-                            <a href="http://localhost/prj_tryJobCatch/review_home.do" class="linkItem" ><span class="spNav"><span class="txIr">기업리뷰</span></span></a>
+                            <a href="http://211.63.89.133/prj_tryJobCatch/review_home.do" class="linkItem" ><span class="spNav"><span class="txIr">기업리뷰</span></span></a>
                         </li>
                         <li id="gnbHh" class="navItem hh ">
-                            <a href="https://www.jobkorea.co.kr/headhunting/home" class="linkItem" onclick="GA_Event('공통_PC', 'gnb', '헤드헌팅');"><span class="spNav"><span class="txIr">채용등록</span></span></a>
+                            <a href="#void" class="linkItem"><span class="spNav"><span class="txIr">채용등록</span></span></a>
                         </li>
                         <li id="gnbSalary" class="navItem salary ">
-                            <a href="http://localhost/prj_tryJobCatch/noticeList.do" class="linkItem" onclick="GA_Event('공통_PC', 'gnb', '기업·연봉');">
+                            <a href="http://211.63.89.133/prj_tryJobCatch/noticeList.do" class="linkItem" onclick="GA_Event('공통_PC', 'gnb', '기업·연봉');">
                                 <span class="spNav"><span class="txIr">고객센터</span></span></a>
                         </li>
                     </ul>
@@ -114,10 +114,10 @@ function submitFrm() {
 
 	<ul class="userNav">
         <li class="userNav-item login">
-            <a href="http://localhost/prj_tryJobCatch/member/loginFrm.do" class="txt-button login-button" >로그인</a>
+            <a href="http://211.63.89.133/prj_tryJobCatch/member/loginFrm.do" class="txt-button login-button" >로그인</a>
         </li>
         <li class="userNav-item join">
-            <a href="http://localhost/prj_tryJobCatch/member/memberJoinFrm.do" class="txt-button join-button">회원가입</a>
+            <a href="http://211.63.89.133/prj_tryJobCatch/member/memberJoinFrm.do" class="txt-button join-button">회원가입</a>
         </li>
     </ul>
 
@@ -131,7 +131,7 @@ function submitFrm() {
     <div class="popup-notification" id="js-notiLayer"></div>
 </li>
     <li id="myMenu" class="userNav-item my member">
-        <a href="http://localhost/prj_tryJobCatch/member/mypageHome.do" class="btnMyOpen txt-button ico-cp">
+        <a href="http://211.63.89.133/prj_tryJobCatch/member/mypageHome.do" class="btnMyOpen txt-button ico-cp">
         <span class="spGnb"></span>
         <span class="user-name">${ sessionScope.M_NAME } 님</span>
         <span class="skip">열기</span></a>
@@ -141,15 +141,15 @@ function submitFrm() {
                 <c:choose>
                 <c:when test="${ sessionScope.login_type eq 'M' }">
                     <ul style="padding: 0px">
-                        <li><a href="http://localhost/prj_tryJobCatch/member/mypageHome.do" ><span class="tx">개인회원 홈</span></a></li>
-                        <li><a href="http://localhost/prj_tryJobCatch/member/resumeList.do" ><span class="tx">이력서 관리</span></a></li>
-                        <li><a href="http://localhost/prj_tryJobCatch/member/applyList.do" ><span class="tx">입사지원 현황</span></a></li>
-                        <li><a href="http://localhost/prj_tryJobCatch/member/mbrModifyFrm.do" ><span class="tx">개인정보 수정</span></a></li>
+                        <li><a href="http://211.63.89.133/prj_tryJobCatch/member/mypageHome.do" ><span class="tx">개인회원 홈</span></a></li>
+                        <li><a href="http://211.63.89.133/prj_tryJobCatch/member/resumeList.do" ><span class="tx">이력서 관리</span></a></li>
+                        <li><a href="http://211.63.89.133/prj_tryJobCatch/member/applyList.do" ><span class="tx">입사지원 현황</span></a></li>
+                        <li><a href="http://211.63.89.133/prj_tryJobCatch/member/mbrModifyFrm.do" ><span class="tx">개인정보 수정</span></a></li>
                     </ul>
                 </c:when>
                 <c:otherwise>
                     <ul style="padding: 0px">
-                        <li><a href="http://localhost/prj_tryJobCatch/company/coMyPageHome.do" ><span class="tx">기업회원 홈</span></a></li>
+                        <li><a href="http://211.63.89.133/prj_tryJobCatch/company/coMyPageHome.do" ><span class="tx">기업회원 홈</span></a></li>
                         <li><a href="#" ><span class="tx">채용 관리</span></a></li>
                         <li><a href="#" ><span class="tx">입사지원 현황</span></a></li>
                         <li><a href="#" ><span class="tx">개인정보 수정</span></a></li>
@@ -159,7 +159,7 @@ function submitFrm() {
                 </div>
                 <div class="lyRow">
                     <div class="btnRowWrap">
-                        <a href="http://localhost/prj_tryJobCatch/member/logout.do" class="btnLogOut" >로그아웃</a>
+                        <a href="http://211.63.89.133/prj_tryJobCatch/member/logout.do" class="btnLogOut" >로그아웃</a>
                     </div>
                 </div>
             </div>
@@ -193,12 +193,12 @@ function submitFrm() {
             <div class="lyCol col5h">
                 <div class="colItem">
                     <strong class="titArea">
-                        <a href="http://localhost/prj_tryJobCatch/review_home.do" class="tit onepick" onclick="GA_Event('공통_PC', 'lnb', '전체서비스_이직은원픽');">기업리뷰<i class="line_line_arrow_right"></i></a>
+                        <a href="http://211.63.89.133/prj_tryJobCatch/review_home.do" class="tit onepick" onclick="GA_Event('공통_PC', 'lnb', '전체서비스_이직은원픽');">기업리뷰<i class="line_line_arrow_right"></i></a>
                     </strong>
                     <div class="listBx">
                         <ul class="list-col">
-                            <li><a href="http://localhost/prj_tryJobCatch/review_home.do"onclick="GA_Event('공통_PC', 'lnb', '이직은 원픽_합격축하금 공고');">기업리뷰 홈</a></li>
-                            <li><a href="http://localhost/prj_tryJobCatch/review_home.do" onclick="GA_Event('공통_PC', 'lnb', '이직은 원픽_원픽서비스안내');">My 기업리뷰</a></li>
+                            <li><a href="http://211.63.89.133/prj_tryJobCatch/review_home.do"onclick="GA_Event('공통_PC', 'lnb', '이직은 원픽_합격축하금 공고');">기업리뷰 홈</a></li>
+                            <li><a href="http://211.63.89.133/prj_tryJobCatch/review_home.do" onclick="GA_Event('공통_PC', 'lnb', '이직은 원픽_원픽서비스안내');">My 기업리뷰</a></li>
                         </ul>
                     </div>
                 </div>
@@ -207,11 +207,11 @@ function submitFrm() {
             <div class="lyCol col5h">
                 <div class="colItem">
                     <strong class="titArea">
-                        <a href="http://localhost/prj_tryJobCatch/noticeList.do" class="tit onepick" onclick="GA_Event('공통_PC', 'lnb', '전체서비스_이직은원픽');">고객센터<i class="line_line_arrow_right"></i></a>
+                        <a href="http://211.63.89.133/prj_tryJobCatch/noticeList.do" class="tit onepick" onclick="GA_Event('공통_PC', 'lnb', '전체서비스_이직은원픽');">고객센터<i class="line_line_arrow_right"></i></a>
                     </strong>
                     <div class="listBx">
                         <ul class="list-col">
-                            <li><a href="http://localhost/prj_tryJobCatch/noticeList.do" onclick="GA_Event('공통_PC', 'lnb', '공지사항');"><i class="emoji32_loudspeaker"></i>공지사항</a></li>
+                            <li><a href="http://211.63.89.133/prj_tryJobCatch/noticeList.do" onclick="GA_Event('공통_PC', 'lnb', '공지사항');"><i class="emoji32_loudspeaker"></i>공지사항</a></li>
                             <li><a href="https://www.jobkorea.co.kr/help/faq/user" onclick="GA_Event('공통_PC', 'lnb', '고객센터');"><i class="emoji32_headset"></i>문의사항</a></li>
                         </ul>
                     </div>

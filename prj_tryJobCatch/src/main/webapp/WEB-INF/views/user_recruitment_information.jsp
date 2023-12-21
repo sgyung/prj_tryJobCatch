@@ -49,7 +49,7 @@ $(function(){
 	
 	// 채용정보 버튼 클릭 시 리스트 출력 
 	$.ajax({
-		url : "http://localhost/prj_tryJobCatch/recruitmentList_process.do",
+		url : "http://211.63.89.133/prj_tryJobCatch/recruitmentList_process.do",
 		data : { currentPage : 1 },
 		type : "GET",
 		dataType : "JSON",
@@ -70,7 +70,7 @@ $(function(){
 			output += "<td class='tplTit'>";
 			output += "<div class='titBx'>";
 			output += "<strong>";
-			output += "<a href='http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id="+ jsonList.r_id +"' class='link normalLog' data-clickctgrcode='B02' target='_blank' >"+ jsonList.r_title +"</a>";
+			output += "<a href='http://211.63.89.133/prj_tryJobCatch/recruitmentDetail.do?r_id="+ jsonList.r_id +"' class='link normalLog' data-clickctgrcode='B02' target='_blank' >"+ jsonList.r_title +"</a>";
 			output += "</strong>";
 			output += "<p class='etc'>";
 			output += "<span class='cell'>"+ jsonList.rec_name +"</span>";
@@ -396,7 +396,7 @@ function recruitmentList(num) {
     }
     
 	$.ajax({
-		url : "http://localhost/prj_tryJobCatch/recruitmentList_process.do",
+		url : "http://211.63.89.133/prj_tryJobCatch/recruitmentList_process.do",
 		data : param,
 		type : "GET",
 		dataType : "JSON",
@@ -482,14 +482,14 @@ function recruitmentList(num) {
 }
 	// 채용 상세로 넘어가는 이벤트
 	function recruitmentDetail(id) {
-		location.href = "http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id=" + id;
+		location.href = "http://211.63.89.133/prj_tryJobCatch/recruitmentDetail.do?r_id=" + id;
 	}
 	
 	// 지원하기 버튼 클릭
 	function apply(id) {
 		
 		$.ajax({
-			url : "http://localhost/prj_tryJobCatch/applyState.do",
+			url : "http://211.63.89.133/prj_tryJobCatch/applyState.do",
 			data : {r_id : id},
 			type : "GET",
 			dataType : "JSON",
@@ -502,7 +502,7 @@ function recruitmentList(num) {
 				
 				if(userId != "" && condition != 'Y'){
 			    	// 새 창을 열고 지정된 URL을 로드
-				    var newWindow = window.open("http://localhost/prj_tryJobCatch/apply.do?r_id=" + id, "NewWindow", "width=600, height=800");
+				    var newWindow = window.open("http://211.63.89.133/prj_tryJobCatch/apply.do?r_id=" + id, "NewWindow", "width=600, height=800");
 				    
 				    // 새 창의 크기 및 위치를 설정 (선택적)
 				    if (newWindow) {

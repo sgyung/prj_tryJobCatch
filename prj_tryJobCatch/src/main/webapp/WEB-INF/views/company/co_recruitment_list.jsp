@@ -87,7 +87,7 @@ $(function(){
 		var param = {"r_id" : r_id }
 		if( confirm("삭제하시겠습니까?") ){
 			$.ajax({
-				url : "http://localhost/prj_tryJobCatch/company/coRecruitmentRemove.do",
+				url : "http://211.63.89.133/prj_tryJobCatch/company/coRecruitmentRemove.do",
 				type : "POST",
 				data : param,
 				dataType : "JSON",
@@ -110,7 +110,7 @@ $(function(){
 			var r_id = $(this).val();
 			
 			$.ajax({
-				url : "http://localhost/prj_tryJobCatch/company/coRecruitmentRemove.do",
+				url : "http://211.63.89.133/prj_tryJobCatch/company/coRecruitmentRemove.do",
 				type : "POST",
 				data : { "r_id" = r_id },
 				dataType : "json",
@@ -441,7 +441,7 @@ $(function(){
     </div>
 
     
-    <div class="btnBx"><a href="http://localhost/prj_tryJobCatch/company/coRegistRecruitmentFrm.do" class="btn btnBl mtuSpImgBefore" target="_blank"><span>채용 등록</span></a></div>
+    <div class="btnBx"><a href="http://211.63.89.133/prj_tryJobCatch/company/coRegistRecruitmentFrm.do" class="btn btnBl mtuSpImgBefore" target="_blank"><span>채용 등록</span></a></div>
 
     <div>
         
@@ -489,7 +489,7 @@ $(function(){
                                         <div class="col col01" style="
     width: 30%;
 ">
-                                            <div class="tit"><a href="http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id=${ item.r_ID }" target="_blank"><c:out value="${ item.r_TITLE}" /></a></div>
+                                            <div class="tit"><a href="http://211.63.89.133/prj_tryJobCatch/recruitmentDetail.do?r_id=${ item.r_ID }" target="_blank"><c:out value="${ item.r_TITLE}" /></a></div>
                                             <div class="date">${item.r_REGISTRATION_DATE}</div>
                                         </div><div class="col col02" style="
     width: 20%;
@@ -501,7 +501,7 @@ $(function(){
     text-align: center;
     display: block;
     margin: 0px;
-"><a href="http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id=${ item.r_ID }" target="_blank">${item.r_START_DATE} ~ ${item.r_END_DATE }</a></div>
+"><a href="http://211.63.89.133/prj_tryJobCatch/recruitmentDetail.do?r_id=${ item.r_ID }" target="_blank">${item.r_START_DATE} ~ ${item.r_END_DATE }</a></div>
                                             
                                         </div><div class="col col03" style="
     padding: 0px;
@@ -512,7 +512,7 @@ $(function(){
     display: block;
     margin: 0px;
     text-align: center;
-"><a href="http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id=${ item.r_ID }" target="_blank">채용중</a></div>
+"><a href="http://211.63.89.133/prj_tryJobCatch/recruitmentDetail.do?r_id=${ item.r_ID }" target="_blank">채용중</a></div>
                                             
                                         </div><div class="col col04" style="
     padding: 0px;
@@ -526,12 +526,12 @@ $(function(){
     
 ">
 
-<a href="http://localhost/prj_tryJobCatch/company/coApplyList.do?r_id=${ item.r_ID }" target="_blank">${ not empty item.applycnt? item.applycnt : 0 }</a></div>
+<a href="http://211.63.89.133/prj_tryJobCatch/company/coApplyList.do?r_id=${ item.r_ID }" target="_blank">${ not empty item.applycnt? item.applycnt : 0 }</a></div>
                                             
                                         </div>
                                         <div class="col col05" style="width: 20%;">
                                             <!-- checkbox -->
-                                            <div class="btnCell"><a class="btn background" href="http://localhost/prj_tryJobCatch/company/coRegistRecruitmentFrm.do?r_id=${ item.r_ID }" target="_blank">수정하기</a></div>
+                                            <div class="btnCell"><a class="btn background" href="http://211.63.89.133/prj_tryJobCatch/company/coRegistRecruitmentFrm.do?r_id=${ item.r_ID }" target="_blank">수정하기</a></div>
                                             <div class="btnCell"><button  class="btn cancel" type="button" value="${item.r_ID}"><span>삭제</span></button></div> 
                                         </div>
                                         

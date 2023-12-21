@@ -129,7 +129,7 @@ function apply(id) {
 	
 	if(userId != "" && condition != 'Y'){
     	// 새 창을 열고 지정된 URL을 로드
-	    var newWindow = window.open("http://localhost/prj_tryJobCatch/apply.do?r_id=" + id, "NewWindow", "width=600, height=800");
+	    var newWindow = window.open("http://211.63.89.133/prj_tryJobCatch/apply.do?r_id=" + id, "NewWindow", "width=600, height=800");
 	    
 	    // 새 창의 크기 및 위치를 설정 (선택적)
 	    if (newWindow) {
@@ -252,7 +252,7 @@ function apply(id) {
                         <div class="tbLogo">
                             <div class="logo">
                                 <p>
-                                    <a href="" target="_blank" title="새창" onclick=""><img src="http://localhost/prj_tryJobCatch/common/images/company_logo/${ requestScope.cm_co_logo }" id="cologo" name="cologo" alt="동국산업" onload="go_logo_size(this, 100, 40);" width="100" height="40"></a>
+                                    <a href="" target="_blank" title="새창" onclick=""><img src="http://211.63.89.133/prj_tryJobCatch/common/images/company_logo/${ requestScope.cm_co_logo }" id="cologo" name="cologo" alt="동국산업" onload="go_logo_size(this, 100, 40);" width="100" height="40"></a>
                                 </p>
                             </div>
                         </div>
@@ -417,7 +417,7 @@ function apply(id) {
                         
                         <p class="logo">
                                 <a href="" target="_blank" title="새창" onclick="GA_Event('공고_PC', '기업정보하단', '기업로고_동국산업');">
-                                <img src="http://localhost/prj_tryJobCatch/common/images/company_logo/${ requestScope.cm_co_logo }"id="cologo" name="cologo" alt="동국산업" onload="go_logo_size(this, 180, 72);" width="180" height="72">
+                                <img src="http://211.63.89.133/prj_tryJobCatch/common/images/company_logo/${ requestScope.cm_co_logo }"id="cologo" name="cologo" alt="동국산업" onload="go_logo_size(this, 180, 72);" width="180" height="72">
                                 </a>
                         </p>
                     </div>

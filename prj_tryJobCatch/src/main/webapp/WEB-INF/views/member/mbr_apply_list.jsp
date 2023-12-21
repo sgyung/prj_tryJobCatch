@@ -82,7 +82,7 @@ $(function(){
 	$(".applyCancel").click(function(){
 		if(confirm("지원 취소 하시겠습니까?")){
 			var applyId = $(this).siblings(".applyId").val();
-			location.href="http://localhost/prj_tryJobCatch/member/cancelApply.do?app_id=" + applyId;
+			location.href="http://211.63.89.133/prj_tryJobCatch/member/cancelApply.do?app_id=" + applyId;
 		}//end if
 	})//click
 	
@@ -197,7 +197,7 @@ $(function(){
                          	 </div>
                          	 
                          	 <div class="col col02">
-                              <div class="tit"><a href="http://localhost/prj_tryJobCatch/member/recruitDetail.do?app_id=${ apply.a_ID}" target="_blank" style="color:black; font-weight:bold">
+                              <div class="tit"><a href="http://211.63.89.133/prj_tryJobCatch/member/recruitDetail.do?app_id=${ apply.a_ID}" target="_blank" style="color:black; font-weight:bold">
                               	<c:out value="${ apply.r_TITLE }" />
                               	</a>
                               	</div>
@@ -273,7 +273,7 @@ $(function(){
 
     
 			</div></div></section>
-<c:import url="http://localhost/prj_tryJobCatch/common/include/sidebar.jsp" />
+<c:import url="http://211.63.89.133/prj_tryJobCatch/common/include/sidebar.jsp" />
 <hr>
 <!-- Lnb Area //-->
 		</section>

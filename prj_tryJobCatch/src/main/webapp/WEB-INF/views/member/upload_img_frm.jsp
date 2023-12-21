@@ -112,13 +112,13 @@ $(document).ready(function () {
     
     //이미지 받아오기
     $.ajax({
-    	url : "http://localhost/prj_tryJobCatch/member/refreshImage.do",
+    	url : "http://211.63.89.133/prj_tryJobCatch/member/refreshImage.do",
     	type : "POST",
     	error : function(xhr){
     		alert(xhr.status)
     	},
     	success : function( img ){
-			var imgPath = "http://localhost/prj_tryJobCatch/common/images/mbrImages/" + img;
+			var imgPath = "http://211.63.89.133/prj_tryJobCatch/common/images/mbrImages/" + img;
 
 	        var img = new Image();
 	        img.onload = function () {
@@ -221,7 +221,7 @@ $(document).ready(function () {
         
         // 서버로 전송
         $.ajax({
-            url: 'http://localhost/prj_tryJobCatch/member/fileupload.do',
+            url: 'http://211.63.89.133/prj_tryJobCatch/member/fileupload.do',
             method: 'POST',
             data: formData,
             contentType: false,

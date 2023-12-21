@@ -16,14 +16,14 @@ $(function(){
 <section class="secLnb" style="margin-bottom:450px">
     <h1 class="skip">기업회원 서비스 메뉴</h1>
     <div class="lnbGroup">
-        <h2 class="lnbTit"><a href="http://localhost/prj_tryJobCatch/company/coMyPageHome.do" >기업정보 홈</a></h2>
+        <h2 class="lnbTit"><a href="http://211.63.89.133/prj_tryJobCatch/company/coMyPageHome.do" >기업정보 홈</a></h2>
     </div>
     <div class="lnbGroup">
         <h2 class="lnbTit">채용 관리</h2>
         <ul>
-            <li><a href="http://localhost/prj_tryJobCatch/company/coRegistRecruitmentFrm.do" target="_blank" >채용 등록</a></li>
+            <li><a href="http://211.63.89.133/prj_tryJobCatch/company/coRegistRecruitmentFrm.do" target="_blank" >채용 등록</a></li>
             <li>
-                <a href="http://localhost/prj_tryJobCatch/company/coRecruitmentList.do" >채용 현황</a>
+                <a href="http://211.63.89.133/prj_tryJobCatch/company/coRecruitmentList.do" >채용 현황</a>
             </li>
             
             

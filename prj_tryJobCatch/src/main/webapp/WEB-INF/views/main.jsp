@@ -117,7 +117,7 @@ $(function(){
 
 function recruitmentDetail(id) {
 	
-	location.href = "http://localhost/prj_tryJobCatch/recruitmentDetail.do?r_id="+id;
+	location.href = "http://211.63.89.133/prj_tryJobCatch/recruitmentDetail.do?r_id="+id;
 }
 
 
@@ -182,7 +182,7 @@ for(int i = 0; i < list.size(); i++){
                             <li>                            
                             <article class="box">
                                 <div class="image">
-                                    <img src="http://localhost/prj_tryJobCatch/common/images/company_logo/<%=list.get(i).getCm_co_logo() %>" style="height: 100% ;width: 100%"alt="<%=list.get(i).getCm_co_name() %>" onerror="this.style.display='none'">
+                                    <img src="http://211.63.89.133/prj_tryJobCatch/common/images/company_logo/<%=list.get(i).getCm_co_logo() %>" style="height: 100% ;width: 100%"alt="<%=list.get(i).getCm_co_name() %>" onerror="this.style.display='none'">
                                 </div>
                                 <div class="texts">
                                     <h3><%=list.get(i).getCm_co_name() %></h3>
@@ -234,8 +234,8 @@ for(int i = 0; i < recruitmentList.size(); i++){
                                 <div class="company">
                                     <span class="name">
                                         <div class="image">
-                                            <img src="http://localhost/prj_tryJobCatch/common/images/company/<%=recruitmentList.get(i).getCm_co_pic() %>" alt="" >
-                                            <span class="logo"><img src="http://localhost/prj_tryJobCatch/common/images/company_logo/<%=recruitmentList.get(i).getCm_co_logo() %>" width="180" height="72" alt="" ></span>
+                                            <img src="http://211.63.89.133/prj_tryJobCatch/common/images/company/<%=recruitmentList.get(i).getCm_co_pic() %>" alt="" >
+                                            <span class="logo"><img src="http://211.63.89.133/prj_tryJobCatch/common/images/company_logo/<%=recruitmentList.get(i).getCm_co_logo() %>" width="180" height="72" alt="" ></span>
                                         </div>
                                     </span> 
                                 </div>
@@ -261,8 +261,8 @@ for(int i = 0; i < recruitmentList.size(); i++){
                                 <div class="company">
                                     <span class="name">
                                         <div class="image">
-                                            <img src="http://localhost/prj_tryJobCatch/common/images/company/<%=recruitmentList.get(i).getCm_co_pic() %>" alt="" >
-                                            <span class="logo"><img src="http://localhost/prj_tryJobCatch/common/images/company_logo/<%=recruitmentList.get(i).getCm_co_logo() %>" width="180" height="72" alt="" ></span>
+                                            <img src="http://211.63.89.133/prj_tryJobCatch/common/images/company/<%=recruitmentList.get(i).getCm_co_pic() %>" alt="" >
+                                            <span class="logo"><img src="http://211.63.89.133/prj_tryJobCatch/common/images/company_logo/<%=recruitmentList.get(i).getCm_co_logo() %>" width="180" height="72" alt="" ></span>
                                         </div>
                                     </span> 
                                 </div>
@@ -289,7 +289,7 @@ DREAM-MAKERS를 기다립니다!
                                 <span class="name">
                                     <a href="#void" onclick="recruitmentDetail('<%= recruitmentList.get(i).getR_id() %>')" target="_blank">
                                     <span class="logo">
-                                    <img src="http://localhost/prj_tryJobCatch/common/images/company_logo/<%=recruitmentList.get(i).getCm_co_logo() %>" width="180" height="72" alt="" >
+                                    <img src="http://211.63.89.133/prj_tryJobCatch/common/images/company_logo/<%=recruitmentList.get(i).getCm_co_logo() %>" width="180" height="72" alt="" >
                                     </span><%= recruitmentList.get(i).getCm_co_name() %></a>
                                 </span>
                             </div>

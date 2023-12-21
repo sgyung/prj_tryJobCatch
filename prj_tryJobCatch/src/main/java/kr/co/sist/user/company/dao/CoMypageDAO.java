@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import kr.co.sist.dao.MyBatisHandler;
 import kr.co.sist.user.company.domain.CoLatestRecruitDomain;
 import kr.co.sist.user.company.domain.CoProfileDomain;
+import kr.co.sist.user.mypage.vo.UploadImgVO;
 
 @Component
 public class CoMypageDAO {
@@ -53,5 +54,29 @@ public class CoMypageDAO {
 		
 		return result;
 	}
+	
+	public int updateCoImg(UploadImgVO uploadImgVO) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getMyBatisHandler(false);
+		
+		int cnt = ss.update("kr.co.sist.coMypage.updateCoImg", uploadImgVO);
+		
+		ss.commit();
+		
+		mbh.closeHandler(ss);
+		
+		return cnt;
+	}//updateImg
+	
+	public String selectImg(String id) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getMyBatisHandler(false);
+		
+		String img = ss.selectOne("kr.co.sist.coMypage.selectImg", id);
+		
+		mbh.closeHandler(ss);
+		
+		return img;
+	}//updateImg
 
 }//class

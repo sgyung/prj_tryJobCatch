@@ -81,7 +81,7 @@ $(function(){
 	$(".resumeDeleteBtn").click(function(){
 		if(confirm("삭제 하시겠습니까?")){
 			var resumeId = $(this).siblings(".resumeId").val();
-			location.href="http://localhost/prj_tryJobCatch/member/removeResume.do?mr_id="+resumeId;
+			location.href="http://211.63.89.133/prj_tryJobCatch/member/removeResume.do?mr_id="+resumeId;
 		}//end if
 	})//click
 })
@@ -123,7 +123,7 @@ $(function(){
     <div class="hdWrap">
         <h2 class="hd_1">이력서 관리</h2>
     </div>
-    <div class="btnBx"><a href="http://localhost/prj_tryJobCatch/member/resumeRegistFrm.do" class="btn btnBl mtuSpImgBefore" target="_blank"><span>이력서 등록</span></a></div>
+    <div class="btnBx"><a href="http://211.63.89.133/prj_tryJobCatch/member/resumeRegistFrm.do" class="btn btnBl mtuSpImgBefore" target="_blank"><span>이력서 등록</span></a></div>
     <div>
     <div class="tableList">
         <div clas="">
@@ -138,12 +138,12 @@ $(function(){
                 		<ul>
                      		<li class="ing">
                           	<div class="col col01">
-                              <div class="tit"><a href="http://localhost/prj_tryJobCatch/member/resumeDetail.do?mr_id=${resume.MR_ID}" target="_blank" style="color:black; font-weight:bold"><c:out value="${ resume.MR_TITLE }" /></a></div>
+                              <div class="tit"><a href="http://211.63.89.133/prj_tryJobCatch/member/resumeDetail.do?mr_id=${resume.MR_ID}" target="_blank" style="color:black; font-weight:bold"><c:out value="${ resume.MR_TITLE }" /></a></div>
                               <div class="date"><c:out value="${ resume.MR_REGISTRATION_DATE }" /></div>
                          	 </div>
                          	 <div class="col col02">
                               <!-- checkbox -->
-                              <div class="btnCell"><a class="btn background" href="http://localhost/prj_tryJobCatch/member/modifyResumeFrm.do?mr_id=${ resume.MR_ID }" target="_blank">수정하기</a></div>
+                              <div class="btnCell"><a class="btn background" href="http://211.63.89.133/prj_tryJobCatch/member/modifyResumeFrm.do?mr_id=${ resume.MR_ID }" target="_blank">수정하기</a></div>
                               <div class="btnCell">
                               	<button id="resumeDeleteBtn" class="btn resumeDeleteBtn" type="button" >
                               		<span>삭제</span>
@@ -160,7 +160,7 @@ $(function(){
                     	<div class="mtuList">
                 			<ul>
                     			<li class="ing" style="padding:30px">
-                    			<div style="text-align:center">등록된 이력서가 없습니다.<br/><a href="http://localhost/prj_tryJobCatch/member/resumeRegistFrm.do" class="btn btnBl mtuSpImgBefore" target="_self" style="margin-top:5px"><span>이력서 등록</span></a></div>
+                    			<div style="text-align:center">등록된 이력서가 없습니다.<br/><a href="http://211.63.89.133/prj_tryJobCatch/member/resumeRegistFrm.do" class="btn btnBl mtuSpImgBefore" target="_self" style="margin-top:5px"><span>이력서 등록</span></a></div>
                     			</li>
                    		   </ul>
 		           		</div>
@@ -191,7 +191,7 @@ $(function(){
 
     
 			</div></div></section>
-<c:import url="http://localhost/prj_tryJobCatch/common/include/sidebar.jsp" />
+<c:import url="http://211.63.89.133/prj_tryJobCatch/common/include/sidebar.jsp" />
 <hr>
 <!-- Lnb Area //-->
 		</section>

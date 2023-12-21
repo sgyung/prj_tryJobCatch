@@ -6,7 +6,7 @@
 <html><head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="icon" href="http://192.168.10.133/mvc_prj/common/main/favicon.png">
+<link rel="icon" href="http://211.63.89.133/mvc_prj/common/main/favicon.png">
 
 <style type="text/css">
 .dropdown {
@@ -28,7 +28,7 @@
     
     <link href="https://i.jobkorea.kr/content/css/ver_2/text_user/resume/write-sv-202311281234.css" rel="stylesheet" type="text/css">
     <link href="https://i.jobkorea.kr/content/css/ver_2/mtu/mtu_popup-sv-202311201246.css" rel="stylesheet" type="text/css">
-    <script src="https://teralog.techhub.co.kr/trk?la_tp=pv&amp;la_gc=TR10148105490&amp;la_uid=&amp;la_fid=261fc0dc98663dc7e246c5a4a307aa1f&amp;la_sid=&amp;la_infl=&amp;la_pa1=&amp;la_pa2=&amp;la_dccs=UTF-8&amp;la_r=1284571527&amp;la_crsd_gc=&amp;la_sv=59647be&amp;la_dcrf=&amp;la_dcurl=http%3A%2F%2Flocalhost%2Fmvc_prj%2Fprj_trycatchjop%2Fregist_recruitment.jsp&amp;la_dcttl=Insert%20title%20here&amp;la_ib=&amp;la_is=&amp;la_callback=_LA.CB"></script><script src="https://teralog.techhub.co.kr/ckie"></script><script src="https://teralog.techhub.co.kr/trk?la_tp=pv&amp;la_gc=TR10148105490&amp;la_uid=&amp;la_fid=261fc0dc98663dc7e246c5a4a307aa1f&amp;la_sid=&amp;la_infl=&amp;la_pa1=&amp;la_pa2=&amp;la_dccs=UTF-8&amp;la_r=1083633011&amp;la_crsd_gc=&amp;la_sv=59647be&amp;la_dcrf=&amp;la_dcurl=http%3A%2F%2Flocalhost%2Fmvc_prj%2Fprj_trycatchjop%2Fregist_recruitment.jsp&amp;la_dcttl=Insert%20title%20here&amp;la_ib=&amp;la_is=&amp;la_callback=_LA.CB"></script><script src="https://teralog.techhub.co.kr/ckie"></script><script src="https://teralog.techhub.co.kr/trk?la_tp=pv&amp;la_gc=TR10148105490&amp;la_uid=&amp;la_fid=261fc0dc98663dc7e246c5a4a307aa1f&amp;la_sid=&amp;la_infl=&amp;la_pa1=&amp;la_pa2=&amp;la_dccs=UTF-8&amp;la_r=1442209917&amp;la_crsd_gc=&amp;la_sv=59647be&amp;la_dcrf=&amp;la_dcurl=http%3A%2F%2Flocalhost%2Fmvc_prj%2Fprj_trycatchjop%2Fregist_recruitment.jsp&amp;la_dcttl=Insert%20title%20here&amp;la_ib=&amp;la_is=&amp;la_callback=_LA.CB"></script><script src="https://teralog.techhub.co.kr/ckie"></script><script src="https://teralog.techhub.co.kr/trk?la_tp=pv&amp;la_gc=TR10148105490&amp;la_uid=&amp;la_fid=261fc0dc98663dc7e246c5a4a307aa1f&amp;la_sid=&amp;la_infl=&amp;la_pa1=&amp;la_pa2=&amp;la_dccs=UTF-8&amp;la_r=1516524880&amp;la_crsd_gc=&amp;la_sv=59647be&amp;la_dcrf=&amp;la_dcurl=http%3A%2F%2Flocalhost%2Fmvc_prj%2Fprj_trycatchjop%2Fregist_recruitment.jsp&amp;la_dcttl=Insert%20title%20here&amp;la_ib=&amp;la_is=&amp;la_callback=_LA.CB"></script><script src="https://teralog.techhub.co.kr/ckie"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-H72LM07GXG&amp;cx=c&amp;_slc=1"></script>
+    <script src="https://teralog.techhub.co.kr/trk?la_tp=pv&amp;la_gc=TR10148105490&amp;la_uid=&amp;la_fid=261fc0dc98663dc7e246c5a4a307aa1f&amp;la_sid=&amp;la_infl=&amp;la_pa1=&amp;la_pa2=&amp;la_dccs=UTF-8&amp;la_r=1284571527&amp;la_crsd_gc=&amp;la_sv=59647be&amp;la_dcrf=&amp;la_dcurl=http%3A%2F%2F211.63.89.133/prj_tryJobCatch%2Fmvc_prj%2Fprj_trycatchjop%2Fregist_recruitment.jsp&amp;la_dcttl=Insert%20title%20here&amp;la_ib=&amp;la_is=&amp;la_callback=_LA.CB"></script><script src="https://teralog.techhub.co.kr/ckie"></script><script src="https://teralog.techhub.co.kr/trk?la_tp=pv&amp;la_gc=TR10148105490&amp;la_uid=&amp;la_fid=261fc0dc98663dc7e246c5a4a307aa1f&amp;la_sid=&amp;la_infl=&amp;la_pa1=&amp;la_pa2=&amp;la_dccs=UTF-8&amp;la_r=1083633011&amp;la_crsd_gc=&amp;la_sv=59647be&amp;la_dcrf=&amp;la_dcurl=http%3A%2F%2F211.63.89.133/prj_tryJobCatch%2Fmvc_prj%2Fprj_trycatchjop%2Fregist_recruitment.jsp&amp;la_dcttl=Insert%20title%20here&amp;la_ib=&amp;la_is=&amp;la_callback=_LA.CB"></script><script src="https://teralog.techhub.co.kr/ckie"></script><script src="https://teralog.techhub.co.kr/trk?la_tp=pv&amp;la_gc=TR10148105490&amp;la_uid=&amp;la_fid=261fc0dc98663dc7e246c5a4a307aa1f&amp;la_sid=&amp;la_infl=&amp;la_pa1=&amp;la_pa2=&amp;la_dccs=UTF-8&amp;la_r=1442209917&amp;la_crsd_gc=&amp;la_sv=59647be&amp;la_dcrf=&amp;la_dcurl=http%3A%2F%2F211.63.89.133/prj_tryJobCatch%2Fmvc_prj%2Fprj_trycatchjop%2Fregist_recruitment.jsp&amp;la_dcttl=Insert%20title%20here&amp;la_ib=&amp;la_is=&amp;la_callback=_LA.CB"></script><script src="https://teralog.techhub.co.kr/ckie"></script><script src="https://teralog.techhub.co.kr/trk?la_tp=pv&amp;la_gc=TR10148105490&amp;la_uid=&amp;la_fid=261fc0dc98663dc7e246c5a4a307aa1f&amp;la_sid=&amp;la_infl=&amp;la_pa1=&amp;la_pa2=&amp;la_dccs=UTF-8&amp;la_r=1516524880&amp;la_crsd_gc=&amp;la_sv=59647be&amp;la_dcrf=&amp;la_dcurl=http%3A%2F%2F211.63.89.133/prj_tryJobCatch%2Fmvc_prj%2Fprj_trycatchjop%2Fregist_recruitment.jsp&amp;la_dcttl=Insert%20title%20here&amp;la_ib=&amp;la_is=&amp;la_callback=_LA.CB"></script><script src="https://teralog.techhub.co.kr/ckie"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-H72LM07GXG&amp;cx=c&amp;_slc=1"></script>
     <script src="https://teralog.techhub.co.kr/trk?la_tp=pv&amp;la_gc=TR10148105490&amp;la_uid=&amp;la_fid=261fc0dc98663dc7e246c5a4a307aa1f&amp;la_sid=&amp;la_infl=&amp;la_pa1=&amp;la_pa2=&amp;la_dccs=UTF-8&amp;la_r=798555715&amp;la_crsd_gc=&amp;la_sv=59647be&amp;la_dcrf=INTNL_REF&amp;la_dcurl=https%3A%2F%2Fwww.jobkorea.co.kr%2FUser%2FResume%2FWrite&amp;la_dcttl=%EC%9D%B4%EB%A0%A5%EC%84%9C%20%EC%9E%91%EC%84%B1&amp;la_ib=&amp;la_is=&amp;la_callback=_LA.CB"></script>
     <script src="https://teralog.techhub.co.kr/ckie"></script>
     <script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script>
@@ -73,9 +73,9 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <!-- 서머노트를 위해 추가해야할 부분 -->
-  <script src="/common/summernote/summernote-lite.js"></script>
-  <script src="/common/summernote/summernote/summernote-ko-KR.js"></script>
-  <link rel="stylesheet" href="/common/summernote/summernote/summernote-lite.css">
+  <script src="http://tryjobcatch/common/summernote/summernote-lite.js"></script>
+  <script src="http://tryjobcatch/common/summernote/summernote/summernote-ko-KR.js"></script>
+  <link rel="stylesheet" href="http://tryjobcatch/common/summernote/summernote/summernote-lite.css">
   <!--  -->
 <script type="text/javascript">
 $(function(){
@@ -335,12 +335,12 @@ function removeField( button ){
         <div class="container">
             <a href="https://www.jobkorea.co.kr/" class="logo linkLogo"><img src="https://i.jobkorea.kr/content/images/text_user/resume/logo-jobkorea.png?20230704" alt="JOBKOREA"></a>
             <div class="links">
-                <a href="http://localhost/prj_tryJobCatch/company/coMyPageHome.do" class="link linkHome">기업회원 홈</a>
-                <a href="http://localhost/prj_tryJobCatch/company/coMyPageHome.do" class="link linkManage">채용 관리</a>
+                <a href="http://211.63.89.133/prj_tryJobCatch/company/coMyPageHome.do" class="link linkHome">기업회원 홈</a>
+                <a href="http://211.63.89.133/prj_tryJobCatch/company/coMyPageHome.do" class="link linkManage">채용 관리</a>
             </div>
         </div>
     </div>
-    <form action="http://localhost/prj_tryJobCatch/company/registRecruitment.do" method="post" id="registRecruitFrm">
+    <form action="http://211.63.89.133/prj_tryJobCatch/company/registRecruitment.do" method="post" id="registRecruitFrm">
     	<div class="resumeWrapper">
             <div class="resumeContainer">
             <input type="hidden" name="R_ID" value="${ not empty recruitDetail.r_ID?  recruitDetail.r_ID : ''}" />

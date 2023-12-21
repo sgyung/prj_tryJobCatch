@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko"><head>
     
-                <title>문의·신고 : 잡코리아 - NEW JOB, NEW ME JOBKOREA.CO.KR</title>
+                <title>문의·신고 : tryJobCatch</title>
 
 
 <meta charset="utf-8">
@@ -166,17 +166,17 @@ $(function(){
 
 <section class="secLnb" style="height: 500px;
     border-bottom: 1px solid #dce1eb;">
-    <h1><span class="skip">고객센터 메뉴 - </span><a class="lnbTit" href="http://localhost/prj_tryJobCatch/noticeList.do">고객센터</a></h1>
+    <h1><span class="skip">고객센터 메뉴 - </span><a class="lnbTit" href="http://211.63.89.133/prj_tryJobCatch/noticeList.do">고객센터</a></h1>
     
     <div class="lnbGroup">
         <ul>
-            <li><a href="http://localhost/prj_tryJobCatch/noticeList.do" class="">공지사항</a></li>
+            <li><a href="http://211.63.89.133/prj_tryJobCatch/noticeList.do" class="">공지사항</a></li>
             
         </ul>
     </div>
     <div class="lnbGroup">
         <ul>
-            <li><a href="http://localhost/prj_tryJobCatch/member/questionFrm.do" class="on">문의∙신고</a></li>
+            <li><a href="http://211.63.89.133/prj_tryJobCatch/member/questionFrm.do" class="on">문의∙신고</a></li>
             
         </ul>
     </div>
@@ -199,13 +199,13 @@ $(function(){
 <!--// tap menu -->
 <div class="mtcTplTab">
 	<ul class="tabItems">
-		<li class="on"><a href="http://localhost/prj_tryJobCatch/member/questionFrm.do">문의·신고</a></li>
-		<li class=""><a href="http://localhost/prj_tryJobCatch/member/qnaList.do">문의·신고 내역</a></li>
+		<li class="on"><a href="http://211.63.89.133/prj_tryJobCatch/member/questionFrm.do">문의·신고</a></li>
+		<li class=""><a href="http://211.63.89.133/prj_tryJobCatch/member/qnaList.do">문의·신고 내역</a></li>
 	</ul>
 </div>
 <!-- tap menu //-->
                 <div class="inquiryForm">
-                    <form id="form" action="http://localhost/prj_tryJobCatch/member/registQuestion.do" method="post">
+                    <form id="form" action="http://211.63.89.133/prj_tryJobCatch/member/registQuestion.do" method="post">
                         <input name="__RequestVerificationToken" type="hidden" value="FxmtQkxsSik3PtqWkeQCB1ISZ5Uosd8Elyv7uEHPfYfz-YMbgBYDHaWfeQ--X0Xk19Qs08Sx63pNzy2JsM29V8O6yzShwYFuTLjdXVASCiI1">
                         <fieldset>
                             <legend>문의하기 입력</legend>

@@ -131,7 +131,7 @@ public class ReviewService {
 	}
 	
 	public int pageScale() {
-		int pageScale = 1;
+		int pageScale = 5;
 		
 		return pageScale;
 	}
@@ -187,7 +187,7 @@ public class ReviewService {
 	public int endPage(int startPage, int pageNumber, int totalPage) {
 	    int endPage = (((startPage - 1) + pageNumber) / pageNumber) * pageNumber;
 
-	    // °è»êµÈ ³¡ ÆäÀÌÁö°¡ ÃÑ ÆäÀÌÁöº¸´Ù Å©´Ù¸é ÃÑ ÆäÀÌÁö ¼ö¸¦ ³¡ ÆäÀÌÁö·Î ÁöÁ¤
+	    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½Ù¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	    if (totalPage <= endPage) {
 	        endPage = totalPage;
 	    }
@@ -209,16 +209,16 @@ public class ReviewService {
 	    if (currentPage > pageNumber) {
 	        movePage = startPage - 1;
 	        sb.append("<p><a class='tplBtn btnPgnPrev' href='#void' onclick='reviewList(\"")
-	        .append(movePage).append("\")'><i class=\"ico\"></i>ÀÌÀü</a></p>");
+	        .append(movePage).append("\")'><i class=\"ico\"></i>ï¿½ï¿½ï¿½ï¿½</a></p>");
 	    } /*else {
-	    	sb.append("<p><a class='tplBtn btnPgnPrev' href='#void'><i class=\"ico\"></i>ÀÌÀü</a></p>");
+	    	sb.append("<p><a class='tplBtn btnPgnPrev' href='#void'><i class=\"ico\"></i>ï¿½ï¿½ï¿½ï¿½</a></p>");
 	    }*/
 
 	    sb.append("<ul>");
 	    movePage = startPage;
 	    while (movePage <= endPage) {
 	        if (movePage == currentPage) {
-	            // ÇöÀçÆäÀÌÁö¿Í ÀÌµ¿ÇÒ ÆäÀÌÁö°¡ °°´Ù¸é ¸µÅ©¾øÀÌ ÀÎµ¦½º¸®½ºÆ® Á¦°ø
+	            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 	            sb.append("<li><span class='now'>").append(movePage).append("</span></li>");
 	        } else {
 	            sb.append("<li><a href='#void' onclick='reviewList(\"")
@@ -231,16 +231,16 @@ public class ReviewService {
 	    if (totalPage > endPage) {
 	        movePage = endPage + 1;
 	        sb.append("<p><a class='tplBtn btnPgnNext' href='#void' onclick='reviewList(\"")
-	        .append(movePage).append("\")'>´ÙÀ½<i class=\"ico\"></i></a></p>");
+	        .append(movePage).append("\")'>ï¿½ï¿½ï¿½ï¿½<i class=\"ico\"></i></a></p>");
 	    } /*else {
-	    	sb.append("<p><a class='tplBtn btnPgnNext' href='#void'>´ÙÀ½<i class=\"ico\"></i></a></p>");
+	    	sb.append("<p><a class='tplBtn btnPgnNext' href='#void'>ï¿½ï¿½ï¿½ï¿½<i class=\"ico\"></i></a></p>");
 	    }*/
 
 
 	    return sb.toString(); // [<<] ... [1]23 ..[>>]
 	}
 	
-	// ¸®ºä »ó¼¼ - salary ¸®ºä È¯»ê °ª
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ - salary ï¿½ï¿½ï¿½ï¿½ È¯ï¿½ï¿½ ï¿½ï¿½
 	public SalaryDomain selectSalaryNum(String id) {
 		SalaryDomain sd = null;
 		
@@ -256,7 +256,7 @@ public class ReviewService {
 		return sd;
 	}
 	
-	// ¸®ºä »ó¼¼ - balance ¸®ºä È¯»ê °ª
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ - balance ï¿½ï¿½ï¿½ï¿½ È¯ï¿½ï¿½ ï¿½ï¿½
 		public BalanceDomain selectBalanceNum(String id) {
 			BalanceDomain bd = null;
 			
@@ -272,7 +272,7 @@ public class ReviewService {
 			return bd;
 		}
 		
-		// ¸®ºä »ó¼¼ - culture ¸®ºä È¯»ê °ª
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ - culture ï¿½ï¿½ï¿½ï¿½ È¯ï¿½ï¿½ ï¿½ï¿½
 		public CultureDomain selectCultureNum(String id) {
 			CultureDomain cd = null;
 			
@@ -288,7 +288,7 @@ public class ReviewService {
 			return cd;
 		}
 		
-		// ¸®ºä »ó¼¼ - welfare ¸®ºä È¯»ê °ª
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ - welfare ï¿½ï¿½ï¿½ï¿½ È¯ï¿½ï¿½ ï¿½ï¿½
 		public WelfareDomain selectWelfareNum(String id) {
 			WelfareDomain wd = null;
 			
@@ -304,7 +304,7 @@ public class ReviewService {
 			return wd;
 		}
 		
-		// ¸®ºä »ó¼¼ - stability ¸®ºä È¯»ê °ª
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ - stability ï¿½ï¿½ï¿½ï¿½ È¯ï¿½ï¿½ ï¿½ï¿½
 		public StabilityDomain selectStabilityNum(String id) {
 			StabilityDomain sd = null;
 			
@@ -320,7 +320,7 @@ public class ReviewService {
 			return sd;
 		}
 		
-		// ¸®ºä »ó¼¼ - career ¸®ºä È¯»ê °ª
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ - career ï¿½ï¿½ï¿½ï¿½ È¯ï¿½ï¿½ ï¿½ï¿½
 		public ReviewCareerDomain selectCareerNum(String id) {
 			ReviewCareerDomain rcd = null;
 			
@@ -336,7 +336,7 @@ public class ReviewService {
 			return rcd;
 		}
 		
-		// ¸®ºä »ó¼¼ - ±â¾÷Á¤º¸
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		public CorperationDomain corperationInfo(String id) {
 			CorperationDomain cd = null;
 			
@@ -349,7 +349,7 @@ public class ReviewService {
 			return cd;		
 		}
 		
-		// ¸®ºä »ó¼¼ - Ã¤¿ëÁ¤º¸
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ - Ã¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		public List<CorperationDomain> recruitmentInfo(String id) {
 			List<CorperationDomain> list = null;
 			
@@ -576,7 +576,7 @@ public class ReviewService {
 			return flag;
 		}
 		
-		// Ã¼Å©µÈ ¿¬ºÀÅ°¿öµå Á¶È¸
+		// Ã¼Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 		public SalaryDomain checkedSalary(String id) {
 			SalaryDomain salary = null;
 			try {
@@ -592,7 +592,7 @@ public class ReviewService {
 			return salary;
 		}
 		
-		// Ã¼Å©µÈ ¿ö¶óº§ Å°¿öµå Á¶È¸
+		// Ã¼Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 		public BalanceDomain checkedBalance(String id) {
 			BalanceDomain balance = null;
 			
@@ -607,7 +607,7 @@ public class ReviewService {
 			return balance;
 		}
 		
-		// Ã¼Å©µÈ Á¶Á÷¹®È­ Å°¿öµå Á¶È¸
+		// Ã¼Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È­ Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 		public CultureDomain checkedCulture(String id) {
 			CultureDomain culture = null;
 			
@@ -622,7 +622,7 @@ public class ReviewService {
 			return culture;
 		}
 		
-		// Ã¼Å©µÈ ¿¬ºÀÅ°¿öµå Á¶È¸
+		// Ã¼Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 		public WelfareDomain checkedWelfare(String id) {
 			WelfareDomain welfare = null;
 			
@@ -637,7 +637,7 @@ public class ReviewService {
 			return welfare;
 		}
 		
-		// Ã¼Å©µÈ °í¿ë¾ÈÁ¤¼º Å°¿öµå Á¶È¸
+		// Ã¼Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 		public StabilityDomain checkedStability(String id) {
 			StabilityDomain stability = null;
 			
@@ -652,7 +652,7 @@ public class ReviewService {
 			return stability;
 		}
 		
-		// Ã¼Å©µÈ Ä¿¸®¾î Å°¿öµå Á¶È¸
+		// Ã¼Å©ï¿½ï¿½ Ä¿ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 		public ReviewCareerDomain checkedCareer(String id) {
 			ReviewCareerDomain career = null;
 			
@@ -667,7 +667,7 @@ public class ReviewService {
 			return career;
 		}
 		
-		// °ü½É±â¾÷ Á¶È¸
+		// ï¿½ï¿½ï¿½É±ï¿½ï¿½ ï¿½ï¿½È¸
 		public LikeDomain likeState(LikeVO lVO) {
 			LikeDomain ld = null;
 			
@@ -682,7 +682,7 @@ public class ReviewService {
 			return ld; 
 		}
 		
-		// °ü½É±â¾÷ insert
+		// ï¿½ï¿½ï¿½É±ï¿½ï¿½ insert
 		public boolean addLike(LikeVO lVO) {
 			boolean flag = false;
 			int cnt = 0;
@@ -701,7 +701,7 @@ public class ReviewService {
 			return flag;
 		}
 		
-		// °ü½É ±â¾÷ delete
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ delete
 		public boolean cancelLike(LikeVO lVO) {
 			boolean flag = false;
 			int cnt = 0;
@@ -720,7 +720,7 @@ public class ReviewService {
 			return flag;
 		}
 		
-		// °ü½É±â¾÷ ·©Å·
+		// ï¿½ï¿½ï¿½É±ï¿½ï¿½ ï¿½ï¿½Å·
 		public List<LikeDomain> likeRankList(){
 			List<LikeDomain> list = null;
 			

@@ -8,9 +8,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>tryJobCatch</title>
 <link rel="icon"
-	href="http://192.168.10.133/mvc_prj/common/main/favicon.png">
+	href="http://211.63.89.133/mvc_prj/common/main/favicon.png">
 
 <style type="text/css">
 </style>
@@ -374,19 +374,19 @@ $(function(){
 		var leftPosition = (window.screen.width / 2) - (700 / 2);
 		var topPosition = (window.screen.height / 2) - (500 / 2);
 			
-		var uploadImgWindow = window.open('http://localhost/prj_tryJobCatch/member/uploadImgFrm.do', '이미지 등록', 'width=700,height=500,left=' + leftPosition + ',top=' + topPosition);
+		var uploadImgWindow = window.open('http://211.63.89.133/prj_tryJobCatch/member/uploadImgFrm.do', '이미지 등록', 'width=700,height=500,left=' + leftPosition + ',top=' + topPosition);
 		
 		//사진 추가,수정 완료
 		$(uploadImgWindow).on("beforeunload", function(){
 			var imgPath 
 			$.ajax({
-				url : "http://localhost/prj_tryJobCatch/member/refreshImage.do",
+				url : "http://211.63.89.133/prj_tryJobCatch/member/refreshImage.do",
 				type : "POST",
 				error : function(xhr){
 					alert(xhr.status)
 				},
 				success : function( img ){
-					imgPath = "http://localhost/prj_tryJobCatch/common/images/mbrImages/" + img
+					imgPath = "http://211.63.89.133/prj_tryJobCatch/common/images/mbrImages/" + img
 					checkImg(imgPath);
 				},
 			})//ajax
@@ -1126,17 +1126,17 @@ function dropdown(button){
 	<div class="resumePage">
 		<div class="resumeHeader">
 			<div class="container">
-				<a href="http://localhost/prj_tryJobCatch/main.do"
+				<a href="http://211.63.89.133/prj_tryJobCatch/main.do"
 					class="logo linkLogo"><img
 					src="https://i.jobkorea.kr/content/images/text_user/resume/logo-jobkorea.png?20230704"
 					alt="JOBKOREA"></a>
 				<div class="links">
-					<a href="http://localhost/prj_tryJobCatch/member/mypageHome.do"
+					<a href="http://211.63.89.133/prj_tryJobCatch/member/mypageHome.do"
 						class="link linkHome">개인회원 홈</a>
 				</div>
 			</div>
 		</div>
-		<form action="http://localhost/prj_tryJobCatch/member/registResume.do"
+		<form action="http://211.63.89.133/prj_tryJobCatch/member/registResume.do"
 			method="post" id="resumeFrm">
 			<input type="hidden" id="MR_ID" name="MR_ID" value="${ not empty MR_ID ? MR_ID : '' }" />
 			<input type="hidden" id="prevItemCnt" name="prevItemCnt" value="" />
@@ -1263,11 +1263,11 @@ function dropdown(button){
 									<c:choose>
 										<c:when test="${ not empty mbrInfo.m_pic }">
 											<c:set var="imgPath"
-												value="http://localhost/prj_tryJobCatch/common/images/mbrImages/${mbrInfo.m_pic}" />
+												value="http://211.63.89.133/prj_tryJobCatch/common/images/mbrImages/${mbrInfo.m_pic}" />
 										</c:when>
 										<c:otherwise>
 											<c:set var="imgPath"
-												value="http://localhost/prj_tryJobCatch/common/images/mbrImages/default_img.png" />
+												value="http://211.63.89.133/prj_tryJobCatch/common/images/mbrImages/default_img.png" />
 										</c:otherwise>
 									</c:choose>
 									<img id="mbrImg" src="${imgPath}">
@@ -3399,12 +3399,6 @@ function dropdown(button){
 							</ul>
 						</div>
 
-						<div class="buttons">
-							<button type="button" class="button buttonPreview">
-								<span>미리보기</span>
-							</button>
-
-						</div>
 
 						<button type="button" class="button buttonComplete">
 							<span>이력서저장</span>

@@ -18,7 +18,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>관리자 | 게시판관리</title>
 <link rel="stylesheet" type="text/css"
-	href="http://localhost/html_prj/common/css/main_v20230906"> 
+	href="http://211.63.89.133/prj_tryJobCatch/html_prj/common/css/main_v20230906"> 
 <style type="text/css">
 
 </style>
@@ -45,7 +45,7 @@ $(function() {
 	 
 	
 	 $("#logout").click(function() {
-			location.href = "http://localhost/prj_tryJobCatch/logout.do";
+			location.href = "http://211.63.89.133/prj_tryJobCatch/logout.do";
 		});//click    
 	 
 })//ready
@@ -75,7 +75,7 @@ function modifyProccess( id ) {
 	    <!-- Left navbar links -->
 	    <ul class="navbar-nav">
 	      <li class="nav-item d-none d-sm-inline-block">
-	        <a href="http://localhost/prj_tryJobCatch/dashboard.do">Home</a>
+	        <a href="http://211.63.89.133/prj_tryJobCatch/dashboard.do">Home</a>
 	      </li>
 	    </ul>
 
@@ -96,7 +96,7 @@ function modifyProccess( id ) {
 	  <!-- Main Sidebar Container -->
 	  <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	    <!-- Brand Logo -->
-	    <a href="http://localhost/prj_tryJobCatch/dashboard.do">
+	    <a href="http://211.63.89.133/prj_tryJobCatch/dashboard.do">
 	            <span class="brand-text font-weight-light">tryJOBcatch</span>
 	    </a>
 
@@ -107,7 +107,7 @@ function modifyProccess( id ) {
 	          <!-- Add icons to the links using the .nav-icon class
 	               with font-awesome or any other icon font library -->
 	          <li class="nav-item">
-	            <a href="http://localhost/prj_tryJobCatch/dashboard.do">
+	            <a href="http://211.63.89.133/prj_tryJobCatch/dashboard.do">
 	               <i class="bi bi-speedometer"></i>
 	              <p>
 	                 Dashboard
@@ -116,7 +116,7 @@ function modifyProccess( id ) {
 	          </li>
 	          
 	          <li class="nav-item">
-	          <a href="http://localhost/prj_tryJobCatch/userlist.do" class="nav-link">
+	          <a href="http://211.63.89.133/prj_tryJobCatch/userlist.do" class="nav-link">
 	               <i class="bi-people-fill"></i>
 	              <p> 회원관리</p>
 	            </a>
@@ -131,19 +131,19 @@ function modifyProccess( id ) {
 	            </a>
 	            <ul class="nav nav-treeview">
 	              <li class="nav-item ">
-	                <a href="http://localhost/prj_tryJobCatch/companylist.do" class="nav-link">
+	                <a href="http://211.63.89.133/prj_tryJobCatch/companylist.do" class="nav-link">
 	                  <i class="far fa-circle nav-icon"></i>
 	                  <p>기업 목록</p>
 	                </a>
 	              </li>
 	              <li class="nav-item">
-	                <a href="http://localhost/prj_tryJobCatch/recruitmentlist.do" class="nav-link">
+	                <a href="http://211.63.89.133/prj_tryJobCatch/recruitmentlist.do" class="nav-link">
 	                  <i class="far fa-circle nav-icon"></i>
 	                  <p>채용 공고</p>
 	                </a>
 	              </li>
 	              <li class="nav-item">
-	                <a href="http://localhost/prj_tryJobCatch/reviewlist.do" class="nav-link">
+	                <a href="http://211.63.89.133/prj_tryJobCatch/reviewlist.do" class="nav-link">
 	                  <i class="far fa-circle nav-icon"></i>
 	                  <p>리뷰 현황</p>
 	                </a>
@@ -157,11 +157,11 @@ function modifyProccess( id ) {
 								<p>게시판 관리</p>
 						</a>
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="http://localhost/prj_tryJobCatch/noticelist.do" class="nav-link active">
+								<li class="nav-item"><a href="http://211.63.89.133/prj_tryJobCatch/noticelist.do" class="nav-link active">
 										<i class="far fa-circle nav-icon"></i>
 										<p>공지사항 관리</p>
 								</a></li>
-								<li class="nav-item"><a href="http://localhost/prj_tryJobCatch/qnalist.do" class="nav-link">
+								<li class="nav-item"><a href="http://211.63.89.133/prj_tryJobCatch/qnalist.do" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>문의사항 관리</p>
 								</a></li>
@@ -185,7 +185,7 @@ function modifyProccess( id ) {
 						</div>
 									<div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="http://localhost/prj_tryJobCatch/dashboard.do">>Home</a></li>
+              <li class="breadcrumb-item"><a href="http://211.63.89.133/prj_tryJobCatch/dashboard.do">>Home</a></li>
               <li class="breadcrumb-item active">공지사항 관리</li>
             </ol>
           </div>
@@ -205,7 +205,7 @@ function modifyProccess( id ) {
                 <h3 class="card-title">공지사항 관리</h3>
               </div>
               
-              <form action="http://localhost/prj_tryJobCatch/notice_modify.do" method="post" name="modifyFrm" id="modifyFrm">
+              <form action="http://211.63.89.133/prj_tryJobCatch/notice_modify.do" method="post" name="modifyFrm" id="modifyFrm">
               	<input type="hidden" id="modifyId" name="n_id"/>
               	<input type="hidden" id="modifyTitle" name="n_title"/>
               	<input type="hidden" id="modifyContent" name="n_content"/>

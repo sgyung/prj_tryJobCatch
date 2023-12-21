@@ -80,7 +80,7 @@
 $(function(){
 	// 고객센터 및 공지사항 버튼 클릭 시 리스트 출력 
 	$.ajax({
-		url : "http://localhost/prj_tryJobCatch/noticeList_process.do",
+		url : "http://211.63.89.133/prj_tryJobCatch/noticeList_process.do",
 		data : { currentPage : 1 },
 		type : "GET",
 		dataType : "JSON",
@@ -123,7 +123,7 @@ function noticeList(num) {
     }
 	
 	$.ajax({
-		url : "http://localhost/prj_tryJobCatch/noticeList_process.do",
+		url : "http://211.63.89.133/prj_tryJobCatch/noticeList_process.do",
 		data : param,
 		type : "GET",
 		dataType : "JSON",
@@ -154,7 +154,7 @@ function noticeList(num) {
 	});//ajax
 }
 function noticeDetail(id) {
-	location.href="http://localhost/prj_tryJobCatch/noticeDetail.do?n_id=" + id;
+	location.href="http://211.63.89.133/prj_tryJobCatch/noticeDetail.do?n_id=" + id;
 }
 
 </script>
@@ -187,11 +187,11 @@ function noticeDetail(id) {
 
 
 <section class="secLnb">
-    <h1><span class="skip">고객센터 메뉴 - </span><a class="lnbTit" href="http://localhost/prj_tryJobCatch/noticeList.do">고객센터</a></h1>
+    <h1><span class="skip">고객센터 메뉴 - </span><a class="lnbTit" href="http://211.63.89.133/prj_tryJobCatch/noticeList.do">고객센터</a></h1>
     
     <div class="lnbGroup">
         <ul>
-            <li><a href="http://localhost/prj_tryJobCatch/noticeList.do" class="on">공지사항</a></li>
+            <li><a href="http://211.63.89.133/prj_tryJobCatch/noticeList.do" class="on">공지사항</a></li>
             
         </ul>
     </div>

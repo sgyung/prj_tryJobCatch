@@ -49,7 +49,7 @@
 <script type="text/javascript">
 
 function noticeDetail(id) {
-	location.href="http://localhost/prj_tryJobCatch/noticeDetail.do?n_id="+id;
+	location.href="http://211.63.89.133/prj_tryJobCatch/noticeDetail.do?n_id="+id;
 }
 
 </script>

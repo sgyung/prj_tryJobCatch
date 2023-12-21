@@ -8,7 +8,7 @@
 <html lang="ko"><head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>회원정보 수정 ㅣ 잡코리아 - NEW JOB, NEW ME JOBKOREA.CO.KR</title>
+<title>tryJobCatch</title>
 <link rel="SHORTCUT ICON" href="//www.jobkorea.co.kr/favicon.ico?20230519">
 <meta name="verify-v1" content="wfOOCE9Vtx+Z5etOXJnS9LU03yGpBxkK74T/yU63Xqs=">
 <meta name="Robots" content="noindex,nofollow">
@@ -149,18 +149,18 @@ $(function(){
 	
 			<!--// 개인회원 -->
 			
-				<h1><a class="logo" href="http://localhost/prj_tryJobCatch/main.do"><img alt="tryJobCatch" src="//i.jobkorea.kr/content/images/2023/common/gnb/h_logo.png"></a>
+				<h1><a class="logo" href="http://211.63.89.133/prj_tryJobCatch/main.do"><img alt="tryJobCatch" src="//i.jobkorea.kr/content/images/2023/common/gnb/h_logo.png"></a>
 				<span class="bar"><span class="title"><img src="https://www.jobkorea.co.kr/img/member/h_mng_gg.gif" width="117" height="23" alt="회원정보 관리"></span></span>
 				</h1>
 			
 			<h2 class="skip">주요링크</h2>
 			<ul class="lnb">
-				<li><a href="http://localhost/prj_tryJobCatch/member/mypageHome.do">개인회원 홈</a></li>
+				<li><a href="http://211.63.89.133/prj_tryJobCatch/member/mypageHome.do">개인회원 홈</a></li>
 			</ul>
 			<div class="secNav">
 				<ol>
-					<li class="mn1"><a href="http://localhost/prj_tryJobCatch/member/mbrModifyInfo.do"><span></span>개인정보 수정</a></li>
-					<li class="mn2"><a href="http://localhost/prj_tryJobCatch/member/passModifyFrm.do"><span></span>비밀번호변경</a></li>
+					<li class="mn1"><a href="http://211.63.89.133/prj_tryJobCatch/member/mbrModifyInfo.do"><span></span>개인정보 수정</a></li>
+					<li class="mn2"><a href="http://211.63.89.133/prj_tryJobCatch/member/passModifyFrm.do"><span></span>비밀번호변경</a></li>
 					
 					<!-- <li class="mn3 end"><a href="/Customer_C/ETC/CC_leave.asp?Customer_C_Oem_No=1" target="_blank"><span></span>회원탈퇴</a></li> -->
 				</ol>
@@ -179,7 +179,7 @@ $(function(){
 
 		<div id="content">
 			<h1 class="skip">회원정보 수정</h1>
-			<form id="mbrInfoFrm" name="form" method="post" action="http://localhost/prj_tryJobCatch/member/mbrModifyInfo.do">
+			<form id="mbrInfoFrm" name="form" method="post" action="http://211.63.89.133/prj_tryJobCatch/member/mbrModifyInfo.do">
 				<fieldset>
 				<legend>회원정보 수정 입력폼</legend>
 				<div class="mbrSec mbrMngInfo">

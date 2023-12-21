@@ -35,6 +35,23 @@
 		select cm_co_name, cm_co_pic, cm_co_logo from company_member
 		where cm_id=#{CM_ID}
 	</select>
+	
+	<!-- 이미지 업데이트 -->
+	<update id="updateCoImg"
+		parameterType="kr.co.sist.user.mypage.vo.UploadImgVO">
+		
+		update company_member
+		set CM_CO_LOGO = #{ M_PIC }
+		where CM_ID = #{ M_ID }
+	</update>
+	
+	<!-- 이미지 선택 -->
+	<select id="selectImg"
+		parameterType="String" 
+		resultType="String">
+		select cm_co_logo from company_member
+		where cm_id = #{CM_ID}
+	</select>
 		
 		
 </mapper>

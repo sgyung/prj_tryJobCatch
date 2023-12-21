@@ -5,8 +5,7 @@
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="icon" href="http://192.168.10.133/jsp_prj/common/main/favicon.png">
+<title>tryJobCatch</title>
 <!-- bootstrap CDN -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <!-- bootstrap CDN-->
@@ -97,14 +96,16 @@ $(function(){
 
 	<div id="container">
 		<div class="logtop logtop_login">
-			<p class="lnb"><a href="http://localhost/prj_tryJobCatch/main.do">tryjobcatch홈</a>
+			<p class="lnb"><a href="http://211.63.89.133/prj_tryJobCatch/main.do">tryjobcatch홈</a>
 		</div>
 
 		<div class="secLogin">
-			<h1 class="hd"><span class=""></span></h1>
+			<h1 class="hd" style="font-size:large; color:#0057FF">
+				<img src="http://211.63.89.133/prj_tryJobCatch/common/images/main/main_logo.png" />
+			</h1>
 			<div class="logWrap" id="loginFormWrite" style="padding-right: 0;">
 				<h2 class="blind">로그인</h2>
-				<form name="form" id="loginFrm" method="post" action="http://localhost/prj_tryJobCatch/member/login.do" >
+				<form name="form" id="loginFrm" method="post" action="http://211.63.89.133/prj_tryJobCatch/member/login.do" >
 				<fieldset class="login_form"><legend class="blind">로그인 입력폼</legend>
 					<!-- 회원선택-->
 					<input type="hidden" id="login_type" name="login_type" value="M" />
@@ -127,12 +128,6 @@ $(function(){
 						</div>
 					</div>
 					<div class="check_row">
-						<div class="group-checkbox">
-							<div class="lb_idSave">
-                                <input type="checkbox" name="lb_idSave" id="lb_idSave" value="Y" class="skip">
-                                <label for="lb_idSave">로그인 유지</label>
-                            </div>
-						</div>
 						
 					</div>
 				
@@ -141,13 +136,17 @@ $(function(){
 
 					<div class="join">
 						<p class="sch">
-							<a href="http://localhost/prj_tryJobCatch/member/searchIdFrm.do" target="_self">아이디 찾기</a> 
-							<a href="http://localhost/prj_tryJobCatch/member/searchPassFrm.do" target="_self">비밀번호 찾기</a>
-							<a id=joinLink href="http://localhost/prj_tryJobCatch/member/memberJoinFrm.do" target="_self">회원가입</a>
+							<a href="http://211.63.89.133/prj_tryJobCatch/member/searchIdFrm.do" target="_self">아이디 찾기</a> 
+							<a href="http://211.63.89.133/prj_tryJobCatch/member/searchPassFrm.do" target="_self">비밀번호 찾기</a>
+							<a id=joinLink href="http://211.63.89.133/prj_tryJobCatch/member/memberJoinFrm.do" target="_self">회원가입</a>
 						</p>
 					</div>
 				</fieldset>
 				</form>
+			</div>
+			
+			<div class="">
+				<img src="http://211.63.89.133/prj_tryJobCatch/common/images/main/main_login_logo.gif" alt="" />
 			</div>
 			
 		</div><!-- // content -->

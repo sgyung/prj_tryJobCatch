@@ -1,11 +1,15 @@
 package kr.co.sist.user.company.service;
 
+import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import kr.co.sist.dao.MyBatisHandler;
 import kr.co.sist.user.company.dao.CoMypageDAO;
 import kr.co.sist.user.company.domain.CoLatestRecruitDomain;
 import kr.co.sist.user.company.domain.CoProfileDomain;
+import kr.co.sist.user.mypage.vo.UploadImgVO;
 
 @Component
 public class CoMypageService {
@@ -36,4 +40,27 @@ public class CoMypageService {
 		
 		return result;
 	}//getAllApplyCnt
+	
+	public JSONObject uploadImg(UploadImgVO uploadImgVO) {
+		
+		int result = coMypageDAO.updateCoImg(uploadImgVO);
+		JSONObject json = new JSONObject();
+		String msg = "파일 업로드에 실패하였습니다.";
+		if( result == 1 ) {
+			msg = "파일이 업로드 되었습니다.";
+			json.put("msg", msg);
+		}//end if
+		
+		return json;
+	}//uploadImg
+	
+	public String getImg(String id) {
+		String img = coMypageDAO.selectImg(id);
+		
+		return img;
+	}//getImg
+	
+	
+	
+	
 }

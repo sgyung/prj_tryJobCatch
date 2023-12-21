@@ -79,19 +79,19 @@ $(function(){
 		var leftPosition = (window.screen.width / 2) - (700 / 2);
 		var topPosition = (window.screen.height / 2) - (500 / 2);
 			
-		var uploadImgWindow = window.open('http://localhost/prj_tryJobCatch/member/uploadImgFrm.do', '이미지 등록', 'width=700,height=500,left=' + leftPosition + ',top=' + topPosition);
+		var uploadImgWindow = window.open('http://211.63.89.133/prj_tryJobCatch/member/uploadImgFrm.do', '이미지 등록', 'width=700,height=500,left=' + leftPosition + ',top=' + topPosition);
 		
 		//사진 추가,수정 완료
 		$(uploadImgWindow).on("beforeunload", function(){
 			var imgPath 
 			$.ajax({
-				url : "http://localhost/prj_tryJobCatch/member/refreshImage.do",
+				url : "http://211.63.89.133/prj_tryJobCatch/member/refreshImage.do",
 				type : "POST",
 				error : function(xhr){
 					alert(xhr.status)
 				},
 				success : function( img ){
-					imgPath = "http://localhost/prj_tryJobCatch/common/images/mbrImages/" + img
+					imgPath = "http://211.63.89.133/prj_tryJobCatch/common/images/mbrImages/" + img
 					checkImg(imgPath);
 				},
 			})//ajax
@@ -171,7 +171,7 @@ $(function(){
                     <div class="pie-chart" style="background: conic-gradient(rgb(0, 42, 255) 100%, rgb(0, 42, 255) 60%, rgb(244, 244, 244) 100%, rgb(244, 244, 244) 100%);">
                         <div class="profile-img"><p class="img">
                         	<c:if test="${ not empty mbrProfile.m_PIC }">
-		                        <img id="mbrImg" src="http://localhost/prj_tryJobCatch/common/images/mbrImages/${mbrProfile.m_PIC}" alt="회원사진" style="width:100%">
+		                        <img id="mbrImg" src="http://211.63.89.133/prj_tryJobCatch/common/images/mbrImages/${mbrProfile.m_PIC}" alt="회원사진" style="width:100%">
                         	</c:if>
                         </p>
                         </div>
@@ -207,12 +207,12 @@ $(function(){
                                 <p class="status">
                                 	<c:choose>
                                 		<c:when test="${ not empty mbrProfile.MR_REGISTRATION_DATE }">
-		                                    <a href="http://localhost/prj_tryJobCatch/member/resumeList.do" target="_blank">
+		                                    <a href="http://211.63.89.133/prj_tryJobCatch/member/resumeList.do" target="_blank">
 		                                        최근 이력서 작성일 : ${mbrProfile.MR_REGISTRATION_DATE}
 		                                    </a>
 	                                    </c:when>
 	                                    <c:otherwise>
-		                                    <a href="http://localhost/prj_tryJobCatch/member/resumeRegistFrm.do" target="_blank">
+		                                    <a href="http://211.63.89.133/prj_tryJobCatch/member/resumeRegistFrm.do" target="_blank">
 		                                        이력서 등록하기
 		                                    </a>
 	                                    </c:otherwise>
@@ -229,7 +229,7 @@ $(function(){
             <h2 class="skip">주요활동내역</h2>
             <ul class="my-active-list">
                 <li class="list">
-                    <a class="box" href="http://localhost/prj_tryJobCatch/member/applyList.do" >
+                    <a class="box" href="http://211.63.89.133/prj_tryJobCatch/member/applyList.do" >
                         <p class="title">
                             지원현황
                             <strong class="count"><c:out value="${ requestScope.applyCnt }" /></strong>
@@ -238,7 +238,7 @@ $(function(){
                 </li>
 
                 <li class="list">
-                    <a class="box" href="http://localhost/prj_tryJobCatch/member/resumeList.do" >
+                    <a class="box" href="http://211.63.89.133/prj_tryJobCatch/member/resumeList.do" >
                         <p class="title">
                             이력서 현황
                             <strong class="count"><c:out value="${ requestScope.resumeCnt }" /></strong>
@@ -247,7 +247,7 @@ $(function(){
                 </li>
 
                 <li class="list">
-                    <a class="box" href="http://localhost/prj_tryJobCatch/myReview.do">
+                    <a class="box" href="http://211.63.89.133/prj_tryJobCatch/myReview.do">
                         <p class="title">
                             MY 기업리뷰
                             <strong class="count"><c:out value="${ requestScope.reviewCnt }" /></strong>
@@ -257,7 +257,7 @@ $(function(){
                 </li>
 
                 <li class="list">
-                    <a class="box" href="http://localhost/prj_tryJobCatch/member/qnaList.do" >
+                    <a class="box" href="http://211.63.89.133/prj_tryJobCatch/member/qnaList.do" >
                         <p class="title">
                             MY 문의
                             <strong class="count"><c:out value="${ requestScope.inquireCnt }" /></strong>
@@ -267,7 +267,7 @@ $(function(){
                 </li>
 
                 <li class="list">
-                    <a class="box" href="http://localhost/prj_tryJobCatch/member/resumeRegistFrm.do" >
+                    <a class="box" href="http://211.63.89.133/prj_tryJobCatch/member/resumeRegistFrm.do" >
                         <p class="title">
                             이력서 등록하기 &gt;
                             
@@ -302,7 +302,7 @@ $(function(){
 
 <!--// Lnb Area -->
 <!-- [개발] 메뉴 선택시 a.on 추가 -->
-<c:import url="http://localhost/prj_tryJobCatch/common/include/sidebar.jsp" />
+<c:import url="http://211.63.89.133/prj_tryJobCatch/common/include/sidebar.jsp" />
 
 <hr>
 <!-- Lnb Area //-->

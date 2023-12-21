@@ -88,7 +88,7 @@
 <script type="text/javascript">
 $(function(){
 	$.ajax({
-		url : "http://localhost/prj_tryJobCatch/reviewList_process.do",
+		url : "http://211.63.89.133/prj_tryJobCatch/reviewList_process.do",
 		data : { currentPage : 1, keyword : "${param.keyword}" },
 		type : "GET",
 		dataType : "JSON",
@@ -109,7 +109,7 @@ $(function(){
 		            output += '<div>';
 		            output += '<a href="#void" onclick="reviewDetail(\'' + jsonList.cm_id + '\')" class="result-list_left co">';
 		            output += '<div class="co-logo">';
-		            output += '<img src="http://localhost/prj_tryJobCatch/common/images/company_logo/' + jsonList.cm_co_logo + '" alt="' + jsonList.cm_co_name + '" style="width: 100%; height: 100%">';
+		            output += '<img src="http://211.63.89.133/prj_tryJobCatch/common/images/company_logo/' + jsonList.cm_co_logo + '" alt="' + jsonList.cm_co_name + '" style="width: 100%; height: 100%">';
 		            output += '<span>' + jsonList.cm_co_name + '</span>';
 		            output += '</div>';
 		            output += '<div class="co-info">';
@@ -148,7 +148,7 @@ function reviewList(num){
 	
 
 	$.ajax({
-		url : "http://localhost/prj_tryJobCatch/reviewList_process.do",
+		url : "http://211.63.89.133/prj_tryJobCatch/reviewList_process.do",
 		data : { currentPage : num, keyword : "${param.keyword}" },
 		type : "GET",
 		dataType : "JSON",
@@ -165,7 +165,7 @@ function reviewList(num){
 					    output += '<div>';
 					    output += '<a href="#void" onclick="reviewDetail(\'' + jsonList.cm_id + '\')" class="result-list_left co">';
 					    output += '<div class="co-logo">';
-					    output += '<img src="http://localhost/prj_tryJobCatch/common/images/company_logo/' + jsonList.cm_co_logo + '" alt="' + jsonList.cm_co_name + '"style="width: 100%; height: 100%">';
+					    output += '<img src="http://211.63.89.133/prj_tryJobCatch/common/images/company_logo/' + jsonList.cm_co_logo + '" alt="' + jsonList.cm_co_name + '"style="width: 100%; height: 100%">';
 					    output += '<span>' + jsonList.cm_co_name + '</span>';
 					    output += '</div>';
 					    output += '<div class="co-info">';
@@ -203,7 +203,7 @@ function reviewList(num){
 }
 
 function reviewDetail(id) {
-	location.href="http://localhost/prj_tryJobCatch/reviewDetail.do?cm_id=" + id;
+	location.href="http://211.63.89.133/prj_tryJobCatch/reviewDetail.do?cm_id=" + id;
 			
 }
 </script>
@@ -284,7 +284,7 @@ function reviewDetail(id) {
         </section>
     </div> <!-- contWrap //-->
     <div class="btns-bottom">
-        <a href="http://localhost/prj_tryJobCatch/review_home.do" class="prev btn">
+        <a href="http://211.63.89.133/prj_tryJobCatch/review_home.do" class="prev btn">
             홈으로
         </a>
         <button class="btn-top btn" onclick="window.scrollTo(0,0);">TOP</button>
@@ -299,7 +299,7 @@ function reviewDetail(id) {
         <h2 class="lnbTit">기업리뷰</h2>
         <ul>
             <!-- [개발] 메뉴 선택시 a.on 추가 -->
-            <li><a href="http://localhost/prj_tryJobCatch/review_home.do" class="on">기업리뷰 홈</a></li>
+            <li><a href="http://211.63.89.133/prj_tryJobCatch/review_home.do" class="on">기업리뷰 홈</a></li>
                    <!-- 레이어 팝업 호출 -->
             <li><a href="javascript:GA_Event('기업리뷰_PC', '사이드메뉴', '기업리뷰_My기업리뷰'); btnMyReviewLink();">My 기업리뷰<span class="ico">새창</span></a></li>
         </ul>

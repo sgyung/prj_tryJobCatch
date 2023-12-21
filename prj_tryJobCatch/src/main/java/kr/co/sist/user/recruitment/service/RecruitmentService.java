@@ -45,10 +45,14 @@ public class RecruitmentService {
 	public RecruitmentDomain OneRecruitment(String id) {
 		RecruitmentDomain rd = null;
 		
+		System.out.println("----------r_id----------" +  id);
 		try {
+			System.out.println("----------in---------------");
 			rd = urDAO.selectOneRecruitment(id);
+			System.out.println(rd.toString());
 			
 		}catch(PersistenceException pe) {
+			System.out.println("----------out---------------");
 			pe.printStackTrace();
 		}
 		
@@ -139,7 +143,7 @@ public class RecruitmentService {
 		return list;
 	}
 	
-	// È¸¿øÀÌ Æ¯Á¤ Ã¤¿ë¿¡ Áö¿øÇÑ Áö¿ø»óÅÂ Á¶È¸
+	// È¸ï¿½ï¿½ï¿½ï¿½ Æ¯ï¿½ï¿½ Ã¤ï¿½ë¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	public String applyCondition(ApplyVO aVO) {
 		String condition = "";
 		UserRecruitmentDAO urDAO = new UserRecruitmentDAO();
@@ -162,7 +166,7 @@ public class RecruitmentService {
 		return condition;
 	}
 	
-	// Áö¿øÇÏ±â insert
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ insert
 	public boolean applyComplete(ApplyVO aVO) {
 		boolean flag = false;
 		
@@ -177,7 +181,7 @@ public class RecruitmentService {
 		return flag;
 	}
 	
-	// ÀÌ·Â¼­ Á¶È¸
+	// ï¿½Ì·Â¼ï¿½ ï¿½ï¿½È¸
 	public List<ResumeDomain> resumeList(String id){
 		List<ResumeDomain> list = null;
 		
@@ -190,7 +194,7 @@ public class RecruitmentService {
 		return list;
 	}
 	
-	// È¸¿ø ÀÌ¸ÞÀÏ,¹øÈ£ Á¶È¸
+	// È¸ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½,ï¿½ï¿½È£ ï¿½ï¿½È¸
 	public MemberDomain searchMember(String id) {
 		MemberDomain md = null;
 		
@@ -220,7 +224,7 @@ public class RecruitmentService {
 	}
 	
 	public int pageScale() {
-		int pageScale = 1;
+		int pageScale = 5;
 		
 		return pageScale;
 	}
@@ -276,7 +280,7 @@ public class RecruitmentService {
 	public int endPage(int startPage, int pageNumber, int totalPage) {
 	    int endPage = (((startPage - 1) + pageNumber) / pageNumber) * pageNumber;
 
-	    // °è»êµÈ ³¡ ÆäÀÌÁö°¡ ÃÑ ÆäÀÌÁöº¸´Ù Å©´Ù¸é ÃÑ ÆäÀÌÁö ¼ö¸¦ ³¡ ÆäÀÌÁö·Î ÁöÁ¤
+	    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½Ù¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	    if (totalPage <= endPage) {
 	        endPage = totalPage;
 	    }
@@ -298,16 +302,16 @@ public class RecruitmentService {
 	    if (currentPage > pageNumber) {
 	        movePage = startPage - 1;
 	        sb.append("<p><a class='tplBtn btnPgnPrev' href='#void' onclick='recruitmentList(\"")
-	        .append(movePage).append("\")'><i class=\"ico\"></i>ÀÌÀü</a></p>");
+	        .append(movePage).append("\")'><i class=\"ico\"></i>ï¿½ï¿½ï¿½ï¿½</a></p>");
 	    } /*else {
-	    	sb.append("<p><a class='tplBtn btnPgnPrev' href='#void'><i class=\"ico\"></i>ÀÌÀü</a></p>");
+	    	sb.append("<p><a class='tplBtn btnPgnPrev' href='#void'><i class=\"ico\"></i>ï¿½ï¿½ï¿½ï¿½</a></p>");
 	    }*/
 
 	    sb.append("<ul>");
 	    movePage = startPage;
 	    while (movePage <= endPage) {
 	        if (movePage == currentPage) {
-	            // ÇöÀçÆäÀÌÁö¿Í ÀÌµ¿ÇÒ ÆäÀÌÁö°¡ °°´Ù¸é ¸µÅ©¾øÀÌ ÀÎµ¦½º¸®½ºÆ® Á¦°ø
+	            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 	            sb.append("<li><span class='now'>").append(movePage).append("</span></li>");
 	        } else {
 	            sb.append("<li><a href='#void' onclick='recruitmentList(\"")
@@ -320,9 +324,9 @@ public class RecruitmentService {
 	    if (totalPage > endPage) {
 	        movePage = endPage + 1;
 	        sb.append("<p><a class='tplBtn btnPgnNext' href='#void' onclick='recruitmentList(\"")
-	        .append(movePage).append("\")'>´ÙÀ½<i class=\"ico\"></i></a></p>");
+	        .append(movePage).append("\")'>ï¿½ï¿½ï¿½ï¿½<i class=\"ico\"></i></a></p>");
 	    } /*else {
-	    	sb.append("<p><a class='tplBtn btnPgnNext' href='#void'>´ÙÀ½<i class=\"ico\"></i></a></p>");
+	    	sb.append("<p><a class='tplBtn btnPgnNext' href='#void'>ï¿½ï¿½ï¿½ï¿½<i class=\"ico\"></i></a></p>");
 	    }*/
 
 

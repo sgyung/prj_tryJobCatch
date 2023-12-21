@@ -6,7 +6,7 @@
 <html lang="ko"><head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>잡코리아 통합 회원가입 : 개인회원 가입 ㅣ 잡코리아 - 좋은 일이 생긴다</title>
+    <title> 회원가입 : tryJobCatch</title>
     <meta name="description" content="구인 구인 검색 엔진, 취업 정보, 채용 정보, 구직 정보, 구인 정보, 취업 가이드, 원 클릭 취업 검색, 경력 관리,잡코리아, JOKOREA, 헤드헌팅, 파견·대행, 아웃소싱, 인재파견, 채용대행, 위탁도급, 파견임시, 교육, 교육과정, 교육정보, 교육기관, 취업박람회, 채용박람회">
     <meta name="keywords" content="jobkorea, 구인, 구직, 취업, 등록, 신문기사, 고용, 대기업, 채용, 기업, 검색, 컴퓨터, 정보통신, 웹마스터, 네트웍, 서버관리, 웹 디자인, 웹 마케팅, 컨텐트개발, 정보검색/사서직, 인터넷영업, 서버구축, 데이터베이스, 디자인, 편집디자인, MAC 편집, 제품 디자인, 산업 디자인, CAD, CAM, 캐릭터, 애니메이션, 프로그래머, 정보제공(IP/CP), 기술 영업, 통신 기술, 시스템 분석/설계, 정보통신강사, 하드웨어, 관리직, 경리, 회계, 재무, 마케팅, 영업, 무역, 해외영업, 사무직, 기획, 총무, 인사, 홍보, 비서직, 프리랜서/아르바이트, 장애인, 외국인업체, 자원봉사, 노무직,잡코리아, JOKOREA, 헤드헌팅, 파견·대행, 아웃소싱, 인재파견, 채용대행, 위탁도급, 파견임시, 교육, 교육과정, 교육정보, 교육기관, 취업박람회, 채용박람회, 공채, 대기업공채, 그룹사공채, 맞춤법검사기, 롯데채용, 삼성채용, 포스코채용,글자수세기, 현대자동차채용, 이력서양식, 이력서, 기아자동차채용, 자기소개서, 신한은행채용, LF채용, 이력서양식다운, 자기소개서양식, 자기소개서샘플, 자기소개서잘쓴예, 글자수세기프로그램, 취업사이트, 취업, 구인구직사이트, 학점계산기, 구인구직, 이력서양식HWP, 한화채용, 학점계산, 지원동기, 자기소개서성장과정, 삼성고졸채용, CJ채용, 적성검사, SK채용,LG전자채용, 자소서, 기본이력서양식, 자소서잘쓴예, 취업성공패키지, 농협채용, 한글글자수세기, 삼성전자채용, 자기소개서예문, 채용, 맞춤법검사, 구직사이트, 취업정보사이트, 영문이력서, 이력서쓰는법, 직업적성검사, 일자리사이트, 면접자기소개, 자기소개서예시, 이력서다운, 취업박람회, 이력서자기소개서">
 
@@ -144,18 +144,6 @@
 <script type="text/javascript">
 $(function(){
 	//test 값 설정
-	
-	$("#M_Name").val("장용석")
-	$("#idcheck").val("zxc8294")
-	$("#M_Pwd").val("zxc8294!@")
-	$("#M_Email").val("zxc8294@zxc.com")
-	$("#M_Phone").val("010-8777-8888")
-	$("#M_birth").val("20000101")
-	$("#M_zipcode").val("02578")
-	$("#M_addr1").val("서울 동대문구 용두동 722-3")
-	$("#M_addr2").val("test상세주소")
-	
-	
 	
 	
 	$(".chk_all").click(function(){
@@ -308,7 +296,7 @@ $(function(){
 		
 		var param = { "id" : id };
 		$.ajax({
-			url : "http://localhost/prj_tryJobCatch/member/mbrIdDupCheck.do",
+			url : "http://211.63.89.133/prj_tryJobCatch/member/mbrIdDupCheck.do",
 			data : param,
 			dataType : "JSON",
 			type : "POST",
@@ -349,16 +337,18 @@ function spreadPolicy( target ){
     <div id="wrap">
         
 <div id="header">
-    <h1><a href="https://www.jobkorea.co.kr"><img src="https://i.jobkorea.kr/content/images/member/gnb/h_logo_jobkorea.png" alt="JOBKOREA x albamon"></a></h1>
+    <h2><a href="#void"><img src="" alt=""></a></h2>
     <div class="joinTop">
         <h2>
-            <span class="slogun_1">JOBKOREA x albamon</span>
+            <a href="http://211.63.89.133/prj_tryJobCatch/main.do">
+                 <img height="50%" src="http://211.63.89.133/prj_tryJobCatch/common/images/logo/logo.gif" width= 30% alt="tryJobCatch">
+                </a>
         </h2>
     </div>
 
     <h3 class="skip">글로벌 메뉴</h3>
     <ul class="gnb f_clear">
-        <li><a href="../main.do">홈</a></li>
+        <li><a href="http://211.63.89.133/prj_tryJobCatch/main.do">홈</a></li>
         <li><a href="#">고객센터</a></li>
     </ul>
 
@@ -376,7 +366,7 @@ function spreadPolicy( target ){
     <h3 class="skip">개인회원 가입 정보</h3>
     <fieldset>
         <legend>개인회원 가입</legend>
-<form action="http://localhost/prj_tryJobCatch/member/memberJoin.do" id="joinFrm" method="post" name="frm">            <!-- 약관 동의 -->
+<form action="http://211.63.89.133/prj_tryJobCatch/member/memberJoin.do" id="joinFrm" method="post" name="frm">            <!-- 약관 동의 -->
 <input data-val="true" data-val-required="<p class=&quot;failure&quot;>필수 정보입니다.</p>" id="M_Id" name="M_Id" type="hidden" value=""><input id="OEM_No" name="OEM_No" type="hidden" value="1"><input id="DI_Code" name="DI_Code" type="hidden" value=""><input id="getCertifynum" name="getCertifynum" type="hidden" value=""><input id="CertifyReCall" name="CertifyReCall" type="hidden" value=""><input id="ReSubmit" name="ReSubmit" type="hidden" value=""><input id="CertifyCode" name="CertifyCode" type="hidden" value=""><input id="Aptitute_Stat" name="Aptitute_Stat" type="hidden" value=""><input id="CheckParamString" name="CheckParamString" type="hidden" value="8d3bc0d8e98202294a311db74c5eb05d"><input id="Re_Url" name="Re_Url" type="hidden" value="">            <!-- 소셜 로그인 -->
             
             <div class="row_group mbr_info">

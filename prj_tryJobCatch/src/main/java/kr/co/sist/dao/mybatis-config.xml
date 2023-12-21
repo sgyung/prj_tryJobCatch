@@ -60,6 +60,8 @@
   <mapper resource="kr/co/sist/admin/mapper/userMapper.xml"/>
   <mapper resource="kr/co/sist/admin/mapper/companyMapper.xml"/>
   <mapper resource="kr/co/sist/admin/mapper/noticeMapper.xml"/>
+  <mapper resource="kr/co/sist/admin/mapper/dashboardMapper.xml"/>
+
    
   </mappers>
 </configuration>

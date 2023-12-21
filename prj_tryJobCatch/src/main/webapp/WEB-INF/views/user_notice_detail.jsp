@@ -97,11 +97,11 @@
 
 
 <section class="secLnb">
-    <h1><span class="skip">고객센터 메뉴 - </span><a class="lnbTit" href="http://localhost/prj_tryJobCatch/noticeList.do">고객센터</a></h1>
+    <h1><span class="skip">고객센터 메뉴 - </span><a class="lnbTit" href="http://211.63.89.133/prj_tryJobCatch/noticeList.do">고객센터</a></h1>
     
     <div class="lnbGroup">
         <ul>
-            <li><a href="http://localhost/prj_tryJobCatch/noticeList.do" class="on">공지사항</a></li>
+            <li><a href="http://211.63.89.133/prj_tryJobCatch/noticeList.do" class="on">공지사항</a></li>
         </ul>
     </div>
     <div class="lnbGroup">

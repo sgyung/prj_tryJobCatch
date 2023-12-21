@@ -78,6 +78,47 @@
 <script type="text/javascript">
 $(function(){
 	
+	//사진 추가/수정
+	$(".btnModify").click(function(){
+		var leftPosition = (window.screen.width / 2) - (700 / 2);
+		var topPosition = (window.screen.height / 2) - (500 / 2);
+			
+		var uploadImgWindow = window.open('http://211.63.89.133/prj_tryJobCatch/company/uploadImgFrm.do', '이미지 등록', 'width=700,height=500,left=' + leftPosition + ',top=' + topPosition);
+		
+		//사진 추가,수정 완료
+		$(uploadImgWindow).on("beforeunload", function(){
+			var imgPath 
+			$.ajax({
+				url : "http://211.63.89.133/prj_tryJobCatch/company/refreshImage.do",
+				type : "POST",
+				error : function(xhr){
+					alert(xhr.status)
+				},
+				success : function( img ){
+					imgPath = "http://211.63.89.133/prj_tryJobCatch/common/images/company_logo/" + img
+					checkImg(imgPath);
+				},
+			})//ajax
+		})
+	})//click
+	//이미지 파일 업로드 완료 체크
+	function checkImg(imgPath){
+		
+		 $('<img>', {
+	        src: imgPath,
+	        error: function (jqXHR) {
+	        	if(jqXHR.status == undefined){
+	        		 setTimeout(function () {
+	                     checkImg(imgPath);
+	                 }, 1000);
+	        	}
+	        },
+	        load: function () {
+				$("#mbrImg").attr("src", imgPath)
+	        }
+	    });
+	}
+	
 })//ready
 </script>
     
@@ -402,9 +443,15 @@ $(function(){
                 <div class="my-profile devPhotoBtns btns">
                     <div class="pie-chart" style="background: conic-gradient(rgb(0, 42, 255) 100%, rgb(0, 42, 255) 60%, rgb(244, 244, 244) 100%, rgb(244, 244, 244) 100%);">
                         <div class="profile-img"><p class="img">
-                        <c:if test="${ not empty coProfile.CM_CO_LOGO }">
-	                        <img src="http://localhost/prj_tryJobCatch/common/images/company_logo/${ coProfile.CM_CO_LOGO }" alt="" style="width:100%; height:90px">
-                         </c:if>
+						<c:choose>
+							<c:when test="${ not empty coProfile.CM_CO_LOGO }">
+	                        <img id="mbrImg" src="http://211.63.89.133/prj_tryJobCatch/common/images/company_logo/${ coProfile.CM_CO_LOGO }" alt="" style="width:100%; height:90px">
+							</c:when>
+							<c:otherwise>
+	                        <img id="mbrImg" src="" alt="로고" style="width:100%; height:90px">
+							
+							</c:otherwise>
+						</c:choose>                        
                         </p></div>
                     </div>
                     <button class="profile-btn btnModify" type="button"><span class="skip">사진편집</span></button>
@@ -429,7 +476,7 @@ $(function(){
                 </div>
                 <div class="my-status-box">
                                 <p class="status">
-                                    <a href="${ not empty latestRecruitment? 'http://localhost/prj_tryJobCatch/company/recruitmentList.do' : 'http://localhost/prj_tryJobCatch/company/coRegistRecruitmentFrm.do'  }" target="_blank" ><c:out value="${ not empty latestRecruitment? latestRecruitment.r_TITLE  : '채용등록' }" /><c:out value=" ${latestRecruitment.r_REGISTRATION_DATE }" /></a>
+                                    <a href="${ not empty latestRecruitment? 'http://211.63.89.133/prj_tryJobCatch/company/recruitmentList.do' : 'http://211.63.89.133/prj_tryJobCatch/company/coRegistRecruitmentFrm.do'  }" target="_blank" ><c:out value="${ not empty latestRecruitment? latestRecruitment.r_TITLE  : '채용등록' }" /><c:out value=" ${latestRecruitment.r_REGISTRATION_DATE }" /></a>
                                 </p>
                                 
                                     
@@ -445,20 +492,14 @@ $(function(){
             <h2 class="skip">주요활동내역</h2>
             <ul class="my-active-list">
                 <li class="list">
-                    <a class="box" href="http://localhost/prj_tryJobCatch/company/coRecruitmentList.do" >
+                    <a class="box" href="http://211.63.89.133/prj_tryJobCatch/company/coRecruitmentList.do" >
                         <p class="title">채용공고 현황 <strong class="count"><c:out value="${ not empty recruitmentCnt? recruitmentCnt : 0 }" /></strong>
-                        </p>
-                    </a>
-                </li>
-                 <li class="list">
-                    <a class="box" href="/User/ApplyMng" >
-                        <p class="title">지원자 관리 <strong class="count"><c:out value="${ not empty applyCnt? applyCnt : 0 }" /></strong>
                         </p>
                     </a>
                 </li>
 
                 <li class="list">
-                    <a class="box" href="http://localhost/prj_tryJobCatch/company/coRegistRecruitmentFrm.do" >
+                    <a class="box" href="http://211.63.89.133/prj_tryJobCatch/company/coRegistRecruitmentFrm.do" >
                         <p class="title">
                             채용 등록하기 &gt;
                             

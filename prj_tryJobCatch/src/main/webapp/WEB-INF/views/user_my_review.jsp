@@ -228,7 +228,7 @@ $(function(){
     		$("#companyName span").html("<span>" + companyName + "</span>")
     		
     		$.ajax({
-    			url : "http://localhost/prj_tryJobCatch/modify_process.do",
+    			url : "http://211.63.89.133/prj_tryJobCatch/modify_process.do",
     			data : { rv_id : id },
     			type : "GET",
     			dataType : "JSON",
@@ -242,7 +242,7 @@ $(function(){
     				$("#output1").hide();
     				$("#btnOutput").empty();
     				
-    				output += '<form id="modifyFrm" action="http://localhost/prj_tryJobCatch/review_modify.do" method="get">';
+    				output += '<form id="modifyFrm" action="http://211.63.89.133/prj_tryJobCatch/review_modify.do" method="get">';
     				// 첫 번째 박스: 연봉·급여
     				output += '<div class="box-keyword">';
     				output += '    <h3><div class="icon salary"></div>연봉·급여</h3>';
@@ -586,7 +586,7 @@ function submitModifyForm() {
                     </div>
                  <div id= "output1">
                     
-                <form id="reviewFrm" action="http://localhost/prj_tryJobCatch/review_registration.do" method="get">
+                <form id="reviewFrm" action="http://211.63.89.133/prj_tryJobCatch/review_registration.do" method="get">
                     <div class="box-keyword">
                         <h3><div class="icon salary"></div>연봉·급여</h3>
                         <div class="list-checkbox-common">
@@ -823,9 +823,9 @@ function submitModifyForm() {
         <h2 class="lnbTit">기업리뷰</h2>
         <ul>
             <!-- [개발] 메뉴 선택시 a.on 추가 -->
-            <li><a href="http://localhost/prj_tryJobCatch/review_home.do" onclick="GA_Event('기업리뷰_PC', '사이드메뉴', '기업리뷰_기업리뷰홈');">기업리뷰 홈</a></li>
+            <li><a href="http://211.63.89.133/prj_tryJobCatch/review_home.do" onclick="GA_Event('기업리뷰_PC', '사이드메뉴', '기업리뷰_기업리뷰홈');">기업리뷰 홈</a></li>
                    <!-- 레이어 팝업 호출 -->
-            <li><a href="http://localhost/prj_tryJobCatch/myReview.do" class="on" >My 기업리뷰</a></li>
+            <li><a href="http://211.63.89.133/prj_tryJobCatch/myReview.do" class="on" >My 기업리뷰</a></li>
         </ul>
     </div>
     

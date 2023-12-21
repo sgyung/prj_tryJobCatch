@@ -8,7 +8,7 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title></title>
+<title>tryJobCatch</title>
 <link rel="SHORTCUT ICON" href="//www.jobkorea.co.kr/favicon.ico?20230519">
 
 <link rel="stylesheet" type="text/css" href="https://www.jobkorea.co.kr/include/css/ver_2/common.css?201909051400">
@@ -53,7 +53,7 @@ $(function(){
 		<!-- Include virtual = "/Include/Menu/Sub/Gnb_Bar.asp" //-->
 		<div id="gnb">
 			
-				<h1><a class="logo" href="http://localhost/prj_tryJobCatch/main.do"><img alt="잡코리아" src="//i.jobkorea.kr/content/images/2023/common/gnb/h_logo.png"></a>
+				<h1><a class="logo" href="http://211.63.89.133/prj_tryJobCatch/main.do"><img alt="잡코리아" src="//i.jobkorea.kr/content/images/2023/common/gnb/h_logo.png"></a>
 					<span class="bar">
 						<span class="title">
 							<img src="	https://www.jobkorea.co.kr/img/member/h_cc_schid.gif" alt="아이디 찾기">
@@ -63,8 +63,8 @@ $(function(){
 				
 			<div class="secNav">
 				<ol>
-					<li class="mn1"><a href="http://localhost/prj_tryJobCatch/member/searchIdFrm.do"><span></span>아이디 찾기</a></li>
-					<li class="mn2"><a href="http://localhost/prj_tryJobCatch/member/searchPassFrm.do"><span></span>비밀번호 찾기</a></li>
+					<li class="mn1"><a href="http://211.63.89.133/prj_tryJobCatch/member/searchIdFrm.do"><span></span>아이디 찾기</a></li>
+					<li class="mn2"><a href="http://211.63.89.133/prj_tryJobCatch/member/searchPassFrm.do"><span></span>비밀번호 찾기</a></li>
 					<!-- <li class="mn3"><a href="/Customer_C/ETC/CC_Inquiry.asp?OEM_No=1"><span></span>고객상담</a></li>
 					<li class="mn4 end"><a href="https://talk.naver.com/ct/wcb8l5" target="_blank" title="새창"><span></span>톡톡상담</a></li> -->
 				</ol>
@@ -100,8 +100,8 @@ $(function(){
 				</div>
 				
 				<p class="mbrBtnFunc">
-				<span class="mbrBtn mbrBtnLogin_1"><a href="http://localhost/prj_tryJobCatch/member/loginFrm.do">로그인</a></span>
-				<span class="mbrBtn mbrBtnSearch_2"><a href="http://localhost/prj_tryJobCatch/member/searchPassFrm.do">비밀번호 찾기</a></span></p>
+				<span class="mbrBtn mbrBtnLogin_1"><a href="http://211.63.89.133/prj_tryJobCatch/member/loginFrm.do">로그인</a></span>
+				<span class="mbrBtn mbrBtnSearch_2"><a href="http://211.63.89.133/prj_tryJobCatch/member/searchPassFrm.do">비밀번호 찾기</a></span></p>
 			</div>
 	
 			

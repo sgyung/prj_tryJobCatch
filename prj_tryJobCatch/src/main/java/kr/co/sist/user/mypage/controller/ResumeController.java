@@ -88,7 +88,6 @@ public class ResumeController {
 			String imgPath = uploadDir + "/" + imgName;
 			// 저장 전 기존 파일 삭제
 			String preImgName = resumeService.getImg(m_id);
-			System.out.println("img : " + preImgName );
 			
 			if( preImgName != null) {
 				System.out.println("preImgName != null ");

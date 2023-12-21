@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge; chrome=1">
-    <title>이력서 미리보기</title>
+    <title>이력서</title>
 
 <link href="https://i.jobkorea.kr/content/css/ver_2/common-sv-202311091305.css" rel="stylesheet" type="text/css">
 <link href="https://i.jobkorea.kr/content/css/ver_2/text_user/resume/header-sv-202307041411.css" rel="stylesheet" type="text/css">
@@ -49,7 +49,7 @@ $(function(){
 		if( confirm("채용 하시겠습니까?") ){
 			var a_id = $("#a_id").val();
 			var r_id = $("#r_id").val();
-			location.href="http://localhost/prj_tryJobCatch/company/hire.do?a_id="+a_id+"&r_id="+r_id
+			location.href="http://211.63.89.133/prj_tryJobCatch/company/hire.do?a_id="+a_id+"&r_id="+r_id
 		}
 	})
 	
@@ -76,7 +76,7 @@ $(function(){
             <div class="photo">
             	<c:if test="${ not empty mbrInfo.m_pic}" >
             	<img name="user_photo"
-            	src="http://http://localhost/prj_tryJobCatch/common/images/mbrImages/${mbrInfo.m_pic  }">
+            	src="http://211.63.89.133/prj_tryJobCatch/common/images/mbrImages/${mbrInfo.m_pic  }">
             	</c:if>
             </div>
         <div class="info-container">
@@ -226,7 +226,7 @@ $(function(){
     	
             <div class="item">
                 <div class="date">
-                    <div class="term">${ item.IIAE_START_DATE } ~ ${ item.IIAE_END_DATE }</div>
+                    <div class="term"><fmt:formatDate pattern="yyyy-MM" value="${ item.IIAE_START_DATE }" /> ~ <fmt:formatDate pattern="yyyy-MM" value="${ item.IIAE_END_DATE }"/></div>
                     <div class="term-calculator"></div>
                 </div>
 
@@ -281,15 +281,15 @@ $(function(){
     <c:forEach var="item" items="${ resume.award }">
             <div class="item">
                 <div class="date">
-                    ${ itme.a_DATE }
+                    ${ item.a_DATE }
             </div>
             <div class="content">
                 <div class="content-header">
-                    <div class="name">${ itme.a_NAME }</div>
-                    <div class="agency">${ itme.a_INST }</div>
+                    <div class="name">${ item.a_NAME }</div>
+                    <div class="agency">${ item.a_INST }</div>
                 </div>
                 <div class="content-body">
-                ${ itme.a_CONTENT }
+                ${ item.a_CONTENT }
                 </div>
             </div>
         </div>
@@ -376,7 +376,6 @@ $(function(){
                                             <th>URL</th>
                         <td colspan="3">
                             <a href="${ item  }" target="_blank">
-                                <i class="icon url" aria-hidden="true"></i>
                                 <div class="name">${ item  }</div>
                             </a>
                         </td>
