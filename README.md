@@ -30,7 +30,7 @@
 
 # 시연 영상
 
-
+![ezgif com-video-to-gif-converter](https://github.com/sgyung/prj_tryJobCatch/assets/98216156/35eb03de-1ccb-4811-bd18-213e2a229a21)
 
 
 
