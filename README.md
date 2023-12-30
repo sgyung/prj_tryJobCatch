@@ -30,28 +30,19 @@
 
 # 시연 영상
  
+| 일반회원 주요기능 | 시연 영상 |
+|:---------:|:--------:|
+| 이력서 등록 | <img src="https://github.com/sgyung/prj_tryJobCatch/assets/98216156/afe1d841-6c6a-4dff-8df0-d30c9bac8243" style="width:90%; height:90%"/>|
+| 이력서 수정&삭제 |<img src="https://github.com/sgyung/prj_tryJobCatch/assets/98216156/86dca512-8b4f-4db6-adc6-c8ee7cac2d09" style="width:90%; height:90%" /> |
+| 기업지원&취소 | <img src="https://github.com/sgyung/prj_tryJobCatch/assets/98216156/9801ae8e-038a-46e9-8440-79c21abbc7ff" style="width:90%; height:90%" /> |
 
-<table>
- <thead>
-  <th colspan="2">사용자 주요 기능</th>
- </thead>
- <tr>
-  <td>이력서 등록</td>
-  <td><img src="https://github.com/sgyung/prj_tryJobCatch/assets/98216156/afe1d841-6c6a-4dff-8df0-d30c9bac8243" /></td>
- </tr>
-  <tr>
-  <td>이력서 수정&삭제</td>
-  <td><img src="https://github.com/sgyung/prj_tryJobCatch/assets/98216156/86dca512-8b4f-4db6-adc6-c8ee7cac2d09" /></td>
- </tr>
- <tr>
-  <td>기업지원&취소</td>
-  <td><img src="https://github.com/sgyung/prj_tryJobCatch/assets/98216156/9801ae8e-038a-46e9-8440-79c21abbc7ff" /></td>
- </tr>
- 
-</table>
+| 기업회원 주요 기능 | 시연 영상 |
+|:---------:|:--------:|
+| 채용등록&수정&삭제 | <img src="https://github.com/sgyung/prj_tryJobCatch/assets/98216156/13b5b155-7d95-4219-9f8c-7c1ff44e910b" style="width:90%; height:90%" /> |
+| 채용관리 | <img src="https://github.com/sgyung/prj_tryJobCatch/assets/98216156/8deeff5c-78ff-4561-96ab-a9afef933bfc" style="width:90%; height:90%" /> |
+
+
    
-
-
 
 
 
