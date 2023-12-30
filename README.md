@@ -29,12 +29,27 @@
 <br>
 
 # 시연 영상
+ 
 
-![ezgif com-video-to-gif-converter](https://github.com/sgyung/prj_tryJobCatch/assets/98216156/35eb03de-1ccb-4811-bd18-213e2a229a21)
-
-
-
-
+<table>
+ <thead>
+  <th colspan="2">사용자 주요 기능</th>
+ </thead>
+ <tr>
+  <td>이력서 등록</td>
+  <td><img src="https://github.com/sgyung/prj_tryJobCatch/assets/98216156/afe1d841-6c6a-4dff-8df0-d30c9bac8243" /></td>
+ </tr>
+  <tr>
+  <td>이력서 수정&삭제</td>
+  <td><img src="https://github.com/sgyung/prj_tryJobCatch/assets/98216156/86dca512-8b4f-4db6-adc6-c8ee7cac2d09" /></td>
+ </tr>
+ <tr>
+  <td>기업지원&취소</td>
+  <td><img src="https://github.com/sgyung/prj_tryJobCatch/assets/98216156/9801ae8e-038a-46e9-8440-79c21abbc7ff" /></td>
+ </tr>
+ 
+</table>
+   
 
 
 
